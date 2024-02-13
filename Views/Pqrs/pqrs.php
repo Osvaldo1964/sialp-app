@@ -39,11 +39,13 @@
     </style>
   </head>
   <body>
-    <gmp-map center="11.24604320526123,-74.2092514038086" zoom="14" map-id="DEMO_MAP_ID">
-      <gmp-advanced-marker position="11.24604320526123,-74.2092514038086" title="My location"></gmp-advanced-marker>
-    </gmp-map>
+	<div class="map col-md-6" id="map" style="height: 100px; width: 100px"></div>
+		<gmp-map center="11.24604320526123,-74.2092514038086" zoom="14" map-id="DEMO_MAP_ID">
+		<gmp-advanced-marker position="11.24604320526123,-74.2092514038086" title="My location"></gmp-advanced-marker>
+		</gmp-map>
+	</div>
   </body>
-</html>
+ <html>
 
 
 <?php
