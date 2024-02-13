@@ -27,5 +27,5 @@
 	</div>
 <?php
 	}
-	footerTienda($data);
+	footerSite($data);
 ?>

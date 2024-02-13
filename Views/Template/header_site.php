@@ -1,45 +1,15 @@
 <?php
-$cantCarrito = 0;
-if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0) {
-	foreach ($_SESSION['arrCarrito'] as $product) {
-		$cantCarrito += $product['cantidad'];
-	}
-}
-$tituloPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['titulo'] : "";
-$infoPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['contenido'] : "";
+	$tituloPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['titulo'] : "";
+	$infoPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['contenido'] : "";
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 	<title><?= $data['page_tag'] ?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-	<?php
-	$nombreSitio = NOMBRE_EMPRESA;
-	$descripcion = DESCRIPCION;
-	$nombreProducto = NOMBRE_EMPRESA;
-	$urlWeb = base_url();
-	$urlImg = media() . "/images/portada.png";
-	if (!empty($data['producto'])) {
-		//$descripcion = $data['producto']['descripcion'];
-		$descripcion = DESCRIPCION;
-		$nombreProducto = $data['producto']['nomProducto'];
-		$urlWeb = base_url() . "/tienda/producto/" . $data['producto']['idProducto'] . "/" . $data['producto']['rutProducto'];
-		$urlImg = $data['producto']['imagenes'][0]['url_imagen'];
-	}
-	?>
-	<meta property="og:locale" content='es_ES' />
-	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content="<?= $nombreSitio; ?>" />
-	<meta property="og:description" content="<?= $descripcion; ?>" />
-	<meta property="og:title" content="<?= $nombreProducto; ?>" />
-	<meta property="og:url" content="<?= $urlWeb; ?>" />
-	<meta property="og:image" content="<?= $urlImg; ?>" />
-
 
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="<?= media() ?>/tienda/images/icons/favicon.png" />
@@ -145,7 +115,7 @@ $infoPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['cont
 
 					<!-- Logo desktop -->
 					<a href="<?= base_url() ?>" class="logo">
-						<img src="<?= media() ?>/tienda/images/icons/logo_vital3.png" alt="Vitalfood">
+						<img src="<?= media() ?>/images/uploads/logo_icaruscol.jpg" alt="Icaruscol">
 					</a>
 
 					<!-- Menu desktop -->
@@ -156,37 +126,17 @@ $infoPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['cont
 							</li>
 
 							<li>
-								<a href="<?= base_url() ?>/tienda">Tienda</a>
-							</li>
-
-							<li>
-								<a href="<?= base_url() ?>/carrito">Carrito</a>
-							</li>
-
-							<li>
 								<a href="<?= base_url() ?>/nosotros">Nosotros</a>
 							</li>
 
 							<li>
-								<a href="<?= base_url() ?>/sucursales">Sucursales</a>
+								<a href="<?= base_url() ?>/pqrs">Registro PQRs</a>
 							</li>
 
 							<li>
 								<a href="<?= base_url() ?>/contacto">Contacto</a>
 							</li>
 						</ul>
-					</div>
-
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
-						<?php if ($data['page_name'] != 'carrito' and $data['page_name'] != 'procesarpago') { ?>
-							<div class="cantCarrito icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?= $cantCarrito; ?>">
-								<i class="zmdi zmdi-shopping-cart"></i>
-							</div>
-						<?php } ?>
 					</div>
 				</nav>
 			</div>
@@ -196,20 +146,9 @@ $infoPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['cont
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="<?= base_url() ?>"><img src="<?= media() ?>/tienda/images/icons/logo_vital3.png" alt="Vitalfoof"></a>
+				<a href="<?= base_url() ?>"><img src="<?= media() ?>/images/uploads/logo_icaruscol.jpg" alt="Icaruscol"></a>
 			</div>
 
-			<!-- Icon header -->
-			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-					<i class="zmdi zmdi-search"></i>
-				</div>
-				<?php if ($data['page_name'] != 'carrito' and $data['page_name'] != 'procesarpago') { ?>
-					<div class="cantCarrito icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?= $cantCarrito; ?>">
-						<i class="zmdi zmdi-shopping-cart"></i>
-					</div>
-				<?php } ?>
-			</div>
 
 			<!-- Button show menu -->
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -259,19 +198,11 @@ $infoPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['cont
 				</li>
 
 				<li>
-					<a href="<?= base_url() ?>/tienda">Tienda</a>
-				</li>
-
-				<li>
-					<a href="<?= base_url() ?>/carrito">Carrito</a>
-				</li>
-
-				<li>
 					<a href="<?= base_url() ?>/nosotros">Nosotros</a>
 				</li>
 
 				<li>
-					<a href="<?= base_url() ?>/sucursales">Sucursales</a>
+					<a href="<?= base_url() ?>/pqrs">Registro PQRs</a>
 				</li>
 
 				<li>
@@ -279,40 +210,4 @@ $infoPreguntas = !empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['cont
 				</li>
 			</ul>
 		</div>
-
-		<!-- Modal Search -->
-		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-			<div class="container-search-header">
-				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-					<img src="<?= media() ?>/tienda/images/icons/icon-close2.png" alt="CLOSE">
-				</button>
-
-				<form class="wrap-search-header flex-w p-l-15" method="get" action="<?= base_url() ?>/tienda/search">
-					<button class="flex-c-m trans-04">
-						<i class="zmdi zmdi-search"></i>
-					</button>
-					<input type="hidden" name="p" value="1">
-					<input class="plh3" type="text" name="s" placeholder="Buscar...">
-				</form>
-			</div>
-		</div>
 	</header>
-
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Tu carrito
-				</span>
-
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-			<div id="productosCarrito" class="header-cart-content flex-w js-pscroll">
-				<?php getModal('modalCarrito', $data); ?>
-			</div>
-		</div>
-	</div>

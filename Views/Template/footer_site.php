@@ -1,6 +1,3 @@
-<?php
-	//$catFooter = getCatFooter();
-?>
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
@@ -59,33 +56,10 @@
 			</div>
 
 			<div class="p-t-40">
-				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1">
-						<img src="<?= media() ?>/tienda/images/icons/icon-pay-01.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="<?= media() ?>/tienda/images/icons/icon-pay-02.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="<?= media() ?>/tienda/images/icons/icon-pay-03.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="<?= media() ?>/tienda/images/icons/icon-pay-04.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="<?= media() ?>/tienda/images/icons/icon-pay-05.png" alt="ICON-PAY">
-					</a>
-				</div>
-
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					<?= NOMBRE_EMPRESA; ?> | <?= WEB_EMPRESA; ?> | <a href="https://colorlib.com" target="_blank">Colorlib</a>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
 				</p>
 			</div>
 		</div>
@@ -102,38 +76,38 @@
 		const smony = "<?= SMONEY; ?>";
 	</script>
 
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/bootstrap/js/popper.js"></script>
 	<script src="<?= media() ?>/tienda/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/daterangepicker/moment.min.js"></script>
 	<script src="<?= media() ?>/tienda/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/slick/slick.min.js"></script>
 	<script src="<?= media() ?>/tienda/js/slick-custom.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/parallax100/parallax100.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/sweetalert/sweetalert.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script type="text/javascript" src="<?= media(); ?>/js/tinymce/tinymce.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media() ?>/tienda/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="<?= media(); ?>/js/fontawesome.js"></script>
 	<script src="<?= media() ?>/tienda/js/main.js"></script>
 	<script src="<?= media() ?>/js/functions_admin.js"></script>
 	<script src="<?= media() ?>/js/functions_login.js"></script>
-	<script src="<?= media() ?>/tienda/js/functions.js"></script>
-</body>
-</html>
+	</body>
+
+	</html>

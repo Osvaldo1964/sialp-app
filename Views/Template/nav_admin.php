@@ -37,16 +37,19 @@
                 </li>
             <?php } ?>
             <!-- Aqui debo validar 7 y 8 que son Empresas y CLientes y luego en empresas validar con 7 y en clientes validar con 8-->
-            <?php if (!empty($_SESSION['permisos'][2]['reaPermiso'])) { ?>
+            <?php if (!empty($_SESSION['permisos'][MESTRUCTURA]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">Terceros</span>
+                        <span class="app-menu__label">Estructura Modelo</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/empresas"><i class="icon fa fa-circle-o"></i> Empresas</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/clientes"><i class="icon fa fa-circle-o"></i> Clientes</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/capitulos"><i class="icon fa fa-circle-o"></i> Capítulos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupos"><i class="icon fa fa-circle-o"></i> Grupos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/subgrupos"><i class="icon fa fa-circle-o"></i> SubGrupos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/conceptos"><i class="icon fa fa-circle-o"></i> Conceptos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/auxiliares"><i class="icon fa fa-circle-o"></i> Auxiliares</a></li>
                     </ul>
                 </li>
             <?php } ?>

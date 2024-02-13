@@ -74,6 +74,7 @@
 	// Modulos
 	const MDASHBOARD = 1;
 	const MGENERALES = 2;
+	const MESTRUCTURA = 3;
 
 	const MCLIENTES = 8;
 	const MCARTERA = 13;

@@ -1,11 +1,9 @@
 <?php
     headerSite($data);
-//$arrProductos = $data['productos'];
 ?>
 <br><br><br>
 <hr>
-
-<h1>Pribvando</h1>
+<h1>Probando</h1>
 <!-- Product -->
 <div class="bg0 m-t-23 p-b-140">
     <div class="container">
@@ -14,9 +12,8 @@
 
         <div class="row isotope-grid">
         </div>
-
     </div>
 </div>
 <?php
-footerSite($data);
+    footerSite($data);
 ?>

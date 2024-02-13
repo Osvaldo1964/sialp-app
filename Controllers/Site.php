@@ -1,12 +1,8 @@
 <?php
-	require_once("Models/TCategoria.php");
-	require_once("Models/TProducto.php");
-	require_once("Models/TCliente.php");
 	require_once("Models/LoginModel.php");
 
 class Site extends Controllers
 {
-    use TCategoria, TProducto, TCliente;
     public $login;
     public function __construct()
     {
@@ -22,38 +18,6 @@ class Site extends Controllers
         $data['page_name']  = "sialp";
         $data['page_content']  = "Loremsaslaslaslasl";
         $this->views->getView($this, "site", $data);
-    }
-
-    public function categoria($params)
-    {
-        if (empty($params)) {
-            header("Location:" . base_url());
-        } else {
-            $arrParams = explode(",", $params);
-			//dep($arrParams);exit;
-            $idCategoria = intval($arrParams[0]);
-            $ruta = strClean($arrParams[1]);
-			$pagina = 1;
-			if(count($arrParams) > 2 AND is_numeric($arrParams[2])){
-				$pagina = $arrParams[2];
-			}
-			$cantProductos = $this->cantProductos($idCategoria);
-			$total_registro = $cantProductos['total_registro'];
-			$desde = ($pagina-1) * PROCATEGORIA;
-			$total_paginas = ceil($total_registro / PROCATEGORIA);
-            $infoCategoria = $this->getProductosCategoriaT($idCategoria, $ruta, $desde, PROCATEGORIA);
-            $categoria = strClean($params);
-            $data['page_tag']   = NOMBRE_EMPRESA .  " | " . $infoCategoria['nomCategoria'];
-            $data['page_title'] = $infoCategoria['nomCategoria'];
-            $data['page_name']  = "categoria";
-            $data['page_content']  = "Loremsaslaslaslasl";
-            $data['productos'] = $infoCategoria['productos'];
-			$data['infoCategoria'] = $infoCategoria;
-			$data['pagina'] = $pagina;
-			$data['total_paginas'] = $total_paginas;
-			$data['categorias'] = $this->getCategorias();
-            $this->views->getView($this, "categoria", $data);
-        }
     }
 
 		public function suscripcion(){

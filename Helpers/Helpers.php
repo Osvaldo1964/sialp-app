@@ -425,12 +425,12 @@
 			return $meses;
 		}
 
-		function getCatFooter(){
+/* 		function getCatFooter(){
 			require_once ("Models/CategoriasModel.php");
 			$objCategoria = new CategoriasModel();
 			$request = $objCategoria->getCategoriasFooter();
 			return $request;
-		}
+		} */
 
 		function getInfoPage(int $idpagina){
 			require_once("Libraries/Core/Mysql.php");
