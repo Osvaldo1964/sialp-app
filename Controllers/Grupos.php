@@ -27,12 +27,12 @@ class Grupos extends Controllers
     public function setGrupo()
     {
         if ($_POST) {
-            if (empty($_POST['intcapGrupo']) || empty($_POST['txtdesGrupo']) || empty($_POST['listestGrupo']))
+            if (empty($_POST['listCapitulo']) || empty($_POST['txtdesGrupo']) || empty($_POST['listestGrupo']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idGrupo = intval($_POST['idGrupo']);
-                $intcapGrupo  = strClean($_POST['intcapGrupo']);
+                $intcapGrupo  = strClean($_POST['listCapitulo']);
                 $strdesGrupo  = ucwords(strClean($_POST['txtdesGrupo']));
                 $intestGrupo  = intval(strClean($_POST['listestGrupo']));
                 $request_user   = "";
@@ -67,7 +67,6 @@ class Grupos extends Controllers
     public function getGrupos()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            dep('asasasdASDasd');exit;
             $arrData = $this->model->selectGrupos();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';

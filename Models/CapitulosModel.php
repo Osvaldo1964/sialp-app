@@ -23,7 +23,7 @@ class CapitulosModel extends Mysql
 
     public function selectCapitulos()
     {
-        $sql = "SELECT idCapitulo, nomCapitulo, tipCapitulo FROM capitulos ORDER BY idCapitulo DESC";
+        $sql = "SELECT * FROM capitulos";
         $request = $this->select_all($sql);
         return $request;
     }

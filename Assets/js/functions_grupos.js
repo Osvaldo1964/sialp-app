@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
             { "data": "estGrupo" },
             { "data": "options" }
         ],
+        "columnDefs": [
+            { 'className': "textleft", "targets": [ 1,2 ] },
+            { 'className': "textright", "targets": [ 0 ] }
+          ],   
         'dom': 'lBfrtip',
         'buttons': [
             {
@@ -57,10 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let formGrupo = document.querySelector('#formGrupo');
         formGrupo.onsubmit = function (e) {
             e.preventDefault();
-            let strnomCapitulo = document.querySelector('#listcapGrupo').value;
+            let intcapGrupo = document.querySelector('#listCapitulo').value;
             let strdesGrupo    = document.querySelector('#txtdesGrupo').value;
             let intestGrupo    = document.querySelector('#listestGrupo').value;
-            if (strnomCapitulo == '' || strdesGrupo == '') {
+            if (intcapGrupo == '' || strdesGrupo == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -87,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             htmlStatus = intestGrupo == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
                             '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = strnomCapitulo;
+                            rowTable.cells[1].textContent = intcapGrupo;
                             rowTable.cells[2].textContent = strdesGrupo;
                             rowTable.cells[6].innerHTML = htmlStatus;
                             rowTable = "";
@@ -102,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+    fntCapitulos();
 }, false);
 
 function fntViewInfo(idgrupo) {
@@ -190,6 +195,20 @@ function fntDelInfo(idGrupo) {
     });
 }
 
+function fntCapitulos() {
+    if (document.querySelector('#listCapitulo')) {
+        let ajaxUrl = base_url + '/Capitulos/getSelectCapitulos';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listCapitulo').innerHTML = request.responseText;
+                $('#listCapitulo').selectpicker('render');
+            }
+        }
+    }
+}
 function openModal() {
     rowTable = "";
     document.querySelector('#idGrupo').value = "";

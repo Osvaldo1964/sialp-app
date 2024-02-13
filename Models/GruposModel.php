@@ -17,7 +17,7 @@ class GruposModel extends Mysql
         $this->strdesGrupo = $nombre;
         $this->intestGrupo = $estado;
         $return = 0;
-        $query_insert = "INSERT INTO grupos (capGrupo, desGrupo, estEmpresa) VALUES (?,?,?)";
+        $query_insert = "INSERT INTO grupos (capGrupo, desGrupo, estGrupo) VALUES (?,?,?)";
         $arrData = array($this->intcapGrupo, $this->strdesGrupo, $this->intestGrupo);
         $request_insert = $this->insert($query_insert, $arrData);
         $return = $request_insert;
@@ -26,7 +26,7 @@ class GruposModel extends Mysql
 
     public function selectGrupos()
     {
-        $sql = "SELECT g.idGrupo, g.capGrupo, c.nomCapitulo as nomCapitulo, g.desGrupo, g.estEmpresa
+        $sql = "SELECT g.idGrupo, g.capGrupo, c.nomCapitulo as nomCapitulo, g.desGrupo, g.estGrupo
                 FROM grupos g
                 INNER JOIN capitulos c ON g.capGrupo = c.idCapitulo
                 WHERE g.estGrupo != 0";

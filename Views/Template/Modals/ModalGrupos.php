@@ -14,11 +14,11 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="listcapGrupo">Capítulo <span class="required">*</span></label>
-                            <select class="form-control" data-live-search="true" id="listcapGrupo" name="listcapGrupo" required=""></select>
+                            <label for="listCapitulo">Capítulo <span class="required">*</span></label>
+                            <select class="form-control" data-live-search="true" id="listCapitulo" name="listCapitulo" required=""></select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="txtdesGrupo">Descripción</label>
+                            <label for="txtdesGrupo">Descripción <span class="required">*</span></label>
                             <input type="text" class="form-control valid validText" id="txtdesGrupo" name="txtdesGrupo" required="">
                         </div>
                     </div>
