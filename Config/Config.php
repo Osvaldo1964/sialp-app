@@ -75,6 +75,7 @@
 	const MDASHBOARD = 1;
 	const MGENERALES = 2;
 	const MESTRUCTURA = 3;
+	const MCOMPONENTES = 4;
 
 	const MCLIENTES = 8;
 	const MCARTERA = 13;
@@ -91,7 +92,8 @@
 	const PPREGUNTAS = 6;
 	const PTERMINOS = 7;
 	const PSUCURSALES = 8;
-	const PERROR = 8;
+	const PERROR = 9;
+	const PPQRS = 10;
 
 	// Constantes Cartera
 	const IDCARTERA = 5;

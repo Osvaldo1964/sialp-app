@@ -65,19 +65,24 @@
                     <span class="app-menu__label">Productos</span>
                 </a>
             </li> -->
-            <?php if (!empty($_SESSION['permisos'][3]['reaPermiso'])) { ?>
+            <!-- Aqui debo validar Componentes del SALP-->
+            <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">Inventarios</span>
+                        <span class="app-menu__label">Componentes SALP</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-circle-o"></i> Categorías</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/productos"><i class="icon fa fa-circle-o"></i> Productos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/capitulos"><i class="icon fa fa-circle-o"></i> Variables</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"><i class="icon fa fa-circle-o"></i> Grupos UCAPs</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"><i class="icon fa fa-circle-o"></i> Elementos UCAPs</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/conceptos"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
                     </ul>
                 </li>
             <?php } ?>
+
+
             <li>
                 <a class="app-menu__item" href="<?= base_url(); ?>/pedidos">
                     <i class="app-menu__icon fa fa-shopping-cart" aria-hidden="true"></i>

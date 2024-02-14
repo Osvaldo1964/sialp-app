@@ -19,8 +19,6 @@
 				$data['page'] = $pageContent;
 				$this->views->getView($this,"pqrs",$data);  
 			}
-
 		}
-
 	}
  ?>

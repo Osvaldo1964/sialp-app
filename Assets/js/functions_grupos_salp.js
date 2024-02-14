@@ -1,29 +1,30 @@
-let tableGrupos;
+let tableGrupossalp;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
 document.addEventListener('DOMContentLoaded', function () {
     // Tabla de Grupos
-    tableGrupos = $('#tableGrupos').dataTable({
+    tableGrupossalp = $('#tableGrupossalp').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Grupos/getGrupos",
+            "url": " " + base_url + "/Grupossalp/getGrupossalp",
             "dataSrc": ""
         },
         "columns": [
-            { "data": "idGrupo" },
-            { "data": "nomCapitulo" },
-            { "data": "desGrupo" },
-            { "data": "estGrupo" },
+            { "data": "idGruposalp" },
+            { "data": "codGruposalp" },
+            { "data": "desGruposalp" },
+            { "data": "vidGruposalp" },
+            { "data": "estGruposalp" },
             { "data": "options" }
         ],
         "columnDefs": [
-            { 'className': "textleft", "targets": [ 1,2 ] },
-            { 'className': "textright", "targets": [ 0 ] }
+            { 'className': "textleft", "targets": [ 0,1,2 ] },
+            { 'className': "textright", "targets": [ 3 ] }
           ],   
         'dom': 'lBfrtip',
         'buttons': [
@@ -57,14 +58,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     //Crear Empresa
-    if (document.querySelector('#formGrupo')) {
-        let formGrupo = document.querySelector('#formGrupo');
-        formGrupo.onsubmit = function (e) {
+    if (document.querySelector('#formGruposalp')) {
+        let formGruposalp = document.querySelector('#formGruposalp');
+        formGruposalp.onsubmit = function (e) {
             e.preventDefault();
-            let intcapGrupo = document.querySelector('#listCapitulo').value;
-            let strdesGrupo    = document.querySelector('#txtdesGrupo').value;
-            let intestGrupo    = document.querySelector('#listestGrupo').value;
-            if (intcapGrupo == '' || strdesGrupo == '') {
+            let strcodGruposalp = document.querySelector('#txtcodGruposalp').value;
+            let strdesGruposalp = document.querySelector('#txtdesGruposalp').value;
+            let fltvidGruposalp = document.querySelector('#fltvidGruposalp').value;
+            let intestGruposalp = document.querySelector('#listestGruposalp').value;
+            if (strcodGruposalp == '' || strdesGruposalp == '' || fltvidGruposalp == 0.00) {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -77,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupos/setGrupo';
-            let formData = new FormData(formGrupo);
+            let ajaxUrl = base_url + '/Grupossalp/setGruposalp';
+            let formData = new FormData(formGruposalp);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
             request.onreadystatechange = function () {
@@ -86,19 +88,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         if (rowTable == ""){
-                            tableGrupos.api().ajax.reload();    
+                            tableGrupossalp.api().ajax.reload();    
                         }else{
-                            htmlStatus = intestGrupo == 1 ? 
+                            htmlStatus = intestGruposalp == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
                             '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = intcapGrupo;
-                            rowTable.cells[2].textContent = strdesGrupo;
-                            rowTable.cells[3].innerHTML = htmlStatus;
+                            rowTable.cells[1].textContent = strcodGruposalp;
+                            rowTable.cells[2].textContent = strdesGruposalp;
+                            rowTable.cells[3].textContent = strdesGruposalp;
+                            rowTable.cells[4].innerHTML = htmlStatus;
                             rowTable = "";
                         }
-                        $('#modalFormGrupo').modal("hide");
-                        formGrupo.reset();
-                        swal("Grupos", objData.msg, "success");
+                        $('#modalFormGruposalp').modal("hide");
+                        formGruposalp.reset();
+                        swal("Grupos SALP", objData.msg, "success");
                     }
                 }
                 divLoading.style.display = "none";
@@ -106,26 +109,27 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-    fntCapitulos();
+    //fntCapitulos();
 }, false);
 
-function fntViewInfo(idgrupo) {
+function fntViewInfo(idgruposalp) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupos/getGrupo/' + idgrupo;
+    let ajaxUrl = base_url + '/Grupossalp/getGruposalp/' + idgruposalp;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                let estGrupo = objData.data[0].estGrupo == 1 ?
+                let estGruposalp = objData.data[0].estGruposalp == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector("#celnomCapitulo").innerHTML = objData.data[0].nomCapitulo;
-                document.querySelector("#celdesGrupo").innerHTML = objData.data[0].desGrupo;
-                document.querySelector("#celestGrupo").innerHTML = estGrupo;
+                document.querySelector("#celcodGruposalp").innerHTML = objData.data[0].codGruposalp;
+                document.querySelector("#celdesGruposalp").innerHTML = objData.data[0].desGruposalp;
+                document.querySelector("#celvidGruposalp").innerHTML = objData.data[0].vidGruposalp;
+                document.querySelector("#celestGruposalp").innerHTML = estGruposalp;
                 //document.querySelector("#celregGrupo").innerHTML = objData.data[0].regGrupo;
-                $('#modalViewGrupo').modal('show');
+                $('#modalViewGruposalp').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
@@ -133,36 +137,37 @@ function fntViewInfo(idgrupo) {
     }
 }
 
-function fntEditInfo(element, idGrupo) {
+function fntEditInfo(element, idGruposalp) {
     rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML = "Actualizar Grupo";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupos/getGrupo/' + idGrupo;
+    let ajaxUrl = base_url + '/Grupossalp/getGruposalp/' + idGruposalp;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                document.querySelector("#idGrupo").value = objData.data[0].idGrupo;
-                document.querySelector("#txtnomCapitulo").value = objData.data[0].nomCapitulo;
-                document.querySelector("#txtdesGrupo").value = objData.data[0].desGrupo;
-                if (objData.data[0].estGrupo == 1) {
-                    document.querySelector("#listestGrupo").value = 1;
+                document.querySelector("#idGruposalp").value = objData.data[0].idGruposalp;
+                document.querySelector("#txtcodGruposalp").value = objData.data[0].codGruposalp;
+                document.querySelector("#txtdesGruposalp").value = objData.data[0].desGruposalp;
+                document.querySelector("#fltvidGruposalp").value = objData.data[0].vidGruposalp;
+                if (objData.data[0].estGruposalp == 1) {
+                    document.querySelector("#listestGruposalp").value = 1;
                 } else {
-                    document.querySelector("#listestGrupo").value = 2;
+                    document.querySelector("#listestGruposalp").value = 2;
                 }
-                $('#listestGrupo').selectpicker('render');
+                $('#listestGruposalp').selectpicker('render');
             }
         }
-        $('#modalFormGrupo').modal('show');
+        $('#modalFormGruposalp').modal('show');
     }
 }
 
-function fntDelInfo(idGrupo) {
+function fntDelInfo(idGruposalp) {
     swal({
         title: "Eliminar Grupo",
         text: "¿Realmente quiere eliminar el Grupo?",
@@ -175,8 +180,8 @@ function fntDelInfo(idGrupo) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupos/delGrupo/';
-            let strData = "idGrupo=" + idGrupo;
+            let ajaxUrl = base_url + '/Grupossalp/delGruposalp/';
+            let strData = "idGruposalp=" + idGruposalp;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -195,7 +200,7 @@ function fntDelInfo(idGrupo) {
     });
 }
 
-function fntCapitulos() {
+/* function fntCapitulos() {
     if (document.querySelector('#listCapitulo')) {
         let ajaxUrl = base_url + '/Capitulos/getSelectCapitulos';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -204,18 +209,18 @@ function fntCapitulos() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 document.querySelector('#listCapitulo').innerHTML = request.responseText;
-                $('#listCapitulo').selectpicker('render'); 
+                $('#listCapitulo').selectpicker('render');
             }
         }
     }
-}
+} */
 function openModal() {
     rowTable = "";
-    document.querySelector('#idGrupo').value = "";
+    document.querySelector('#idGruposalp').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nueva Grupo";
-    document.querySelector("#formGrupo").reset();
-    $('#modalFormGrupo').modal('show');
+    document.querySelector('#titleModal').innerHTML = "Nuevo Grupo";
+    document.querySelector("#formGruposalp").reset();
+    $('#modalFormGruposalp').modal('show');
 }
