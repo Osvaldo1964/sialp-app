@@ -119,7 +119,7 @@ window.addEventListener('load', function () {
                             rowTable = "";
                         }
                     } else {
-                        swal("Error", objData.msg, "error");
+                        swal("Errorxcxcxc", objData.msg, "error");
                     }
                 }
                 divLoading.style.display = "none";
@@ -303,10 +303,13 @@ function fntEditInfo(element, idElemento) {
                 let htmlImage = "";
                 let objElemento = objData.data;
                 document.querySelector("#idElemento").value = objElemento[0].idElemento;
-                document.querySelector("#listGrupos").value = objElemento[0].idGrupo;
+                document.querySelector("#listGrupos").value = objElemento[0].gruElemento;
                 document.querySelector("#txtcodElemento").value = objElemento[0].codElemento;
                 document.querySelector("#txtnomElemento").value = objElemento[0].nomElemento;
                 document.querySelector("#txtdesElemento").value = objElemento[0].desElemento;
+                document.querySelector("#txtdirElemento").value = objElemento[0].dirElemento;
+                document.querySelector("#fltlatElemento").value = objElemento[0].latElemento;
+                document.querySelector("#fltlonElemento").value = objElemento[0].lonElemento;
                 document.querySelector("#listestElemento").value = objElemento[0].estElemento;
                 tinymce.activeEditor.setContent(objElemento[0].desElemento);
                 $('#listGrupos').selectpicker('render');

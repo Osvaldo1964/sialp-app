@@ -27,14 +27,13 @@ class Elementos extends Controllers
     public function setElemento()
     {
         if ($_POST) {
-            if (
-                empty($_POST['txtnomElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listgruElemento']) ||
-                empty($_POST['listestElemento'])
-            ) {
+            if (empty($_POST['txtnomElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listGrupos']) 
+            || empty($_POST['listestElemento']))
+            {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idElemento     = intval($_POST['idElemento']);
-                $intgruElemento = intval($_POST['listgruElemento']);
+                $intgruElemento = intval($_POST['listGrupos']);
                 $strcodElemento = strClean($_POST['txtcodElemento']);
                 $strnomElemento = strClean($_POST['txtnomElemento']);
                 $strdesElemento = strClean($_POST['txtdesElemento']);
@@ -50,7 +49,7 @@ class Elementos extends Controllers
                 if ($idElemento == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        echo $request_Elemento = $this->model->insertElemento($intgruElemento, $strcodElemento, $strnomElemento, $strdesElemento,
+                        $request_Elemento = $this->model->insertElemento($intgruElemento, $strcodElemento, $strnomElemento, $strdesElemento,
                             $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $intestElemento);
                     }
                 } else {
@@ -91,7 +90,6 @@ class Elementos extends Controllers
                 } else {
                     $arrData[$i]['estElemento'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
-                $arrData[$i]['vtaElemento'] = SMONEY . ' ' . formatMoney($arrData[$i]['vtaElemento']);
                 if ($_SESSION['permisosMod']['reaPermiso']) {
                     $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idElemento'] . ')" title="Ver Elemento"><i class="far fa-eye"></i></button>';
                 }

@@ -32,6 +32,7 @@ class ElementosModel extends Mysql
         $this->intestElemento = $estado;
 
         $sql = "SELECT * FROM elementos WHERE codElemento = '{$this->strcodElemento}'";
+        $this->select_all($sql);
         $request = $this->select_all($sql);
         if (empty($request)) {
             $query_insert = "INSERT INTO elementos (gruElemento, codElemento, nomElemento, desElemento, dirElemento, latElemento, lonElemento,
@@ -41,6 +42,8 @@ class ElementosModel extends Mysql
                 $this->intgruElemento, $this->strcodElemento, $this->strnomElemento, $this->strdesElemento,
                 $this->strdirElemento, $this->fltlatElemento, $this->fltlonElemento, $this->strrutElemento, $this->intestElemento
             );
+            echo $this->insert($query_insert, $arrData); 
+            exit; 
             $request_insert = $this->insert($query_insert, $arrData);
             $return = $request_insert;
         } else {
@@ -52,9 +55,9 @@ class ElementosModel extends Mysql
     public function selectElementos()
     {
         $sql = "SELECT e.idElemento, e.gruElemento, e.codElemento, e.nomElemento, e.desElemento,
-                g.desGrupo as desGrupo, e.dirElemento, e.latElemento, e.lonElemento, e.estElemento
+                g.desGruposalp as desGrupo, e.dirElemento, e.latElemento, e.lonElemento, e.estElemento
                 FROM elementos e
-                INNER JOIN grupos g ON e.gruElemento = g.idGrupo
+                INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
                 WHERE estElemento != 0";
         $request = $this->select_all($sql);
         return $request;
@@ -64,9 +67,9 @@ class ElementosModel extends Mysql
     {
         $this->intidElemento = $idElemento;
         $sql = "SELECT e.idElemento, e.gruElemento, e.codElemento, e.nomElemento, e.desElemento,
-                g.desGrupo as desGrupo, e.dirElemento, e.latElemento, e.lonElemento, e.estElemento
+                g.desGruposalp as desGrupo, e.dirElemento, e.latElemento, e.lonElemento, e.estElemento
                 FROM elementos e
-                INNER JOIN grupos g ON e.gruElemento = g.idGrupo
+                INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
                 WHERE idElemento = $this->intidElemento";
         $request = $this->select_all($sql);
         return $request;
