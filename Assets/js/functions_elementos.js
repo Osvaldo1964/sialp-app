@@ -113,9 +113,9 @@ window.addEventListener('load', function () {
                             htmlStatus = intestElemento == 1 ?
                                 '<span class="badge badge-success">Activo</span>' :
                                 '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[2].textContent = strcodElemento;
-                            rowTable.cells[3].textContent = strnomElemento;
-                            rowTable.cells[4].innerHTML = htmlStatus;
+                            rowTable.cells[1].textContent = strcodElemento;
+                            rowTable.cells[2].textContent = strnomElemento;
+                            rowTable.cells[3].innerHTML = htmlStatus;
                             rowTable = "";
                         }
                     } else {
@@ -163,7 +163,7 @@ if (document.querySelector("#txtcodElemento")) {
 tinymce.init({
     selector: '#txtdesElemento',
     width: '100%',
-    height: 400,
+    height: 300,
     language: 'es',
     plugins: [
         'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
