@@ -56,7 +56,8 @@
 	const TELEMPRESA = "+(57)3023898254";
 	const WHATSAPP = "+573023898254";
 	const EMAIL_EMPRESA = "correspondencia@sialp-app.com";
-	//const EMAIL_PEDIDOS = "ventas@vitalfood.com.co";
+	const EMAIL_PEDIDOS = "ventas@vitalfood.com.co";
+	const EMAIL_CONTACTO = "ventas@vitalfood.com.co";
 	const EMAIL_PQR = "pqrs@sialp-app.com";
 	const EMAIL_SUSCRIPCION = "suscripciones@sialp-app.com";
 
