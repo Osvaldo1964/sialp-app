@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 15-02-2024 a las 11:39:53
+-- Tiempo de generación: 16-02-2024 a las 12:52:00
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -63,7 +63,12 @@ CREATE TABLE `contacto` (
 --
 
 INSERT INTO `contacto` (`idContacto`, `nomContacto`, `emaContacto`, `msgContacto`, `ipdContacto`, `disContacto`, `ageContacto`, `creContacto`) VALUES
-(1, 'Fernando Herrera', 'toolsfordeveloper@gmail.com', 'Mensaje del primer suscriptor!', '127.0.0.1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0', '2021-08-20 04:06:18');
+(1, 'Fernando Herrera', 'toolsfordeveloper@gmail.com', 'Mensaje del primer suscriptor!', '127.0.0.1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0', '2021-08-20 04:06:18'),
+(2, 'Osvaldo', 'osvicor@hotmail.com', 'prueba', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:51:13'),
+(3, 'Osvaldo', 'osvicor@hotmail.com', 'prueba', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:52:51'),
+(4, 'Osvaldo', 'osvicor@hotmail.com', 'prueba', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:54:30'),
+(5, 'Osvaldo', 'osvicor@hotmail.com', 'prueba de contacto', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:57:26'),
+(6, 'Osvaldo', 'osvicor@hotmail.com', 'dfgsdfgdsf', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:58:58');
 
 -- --------------------------------------------------------
 
@@ -313,6 +318,51 @@ INSERT INTO `post` (`idpost`, `titulo`, `contenido`, `portada`, `datecreate`, `r
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pqrs`
+--
+
+CREATE TABLE `pqrs` (
+  `idPqrs` bigint NOT NULL,
+  `nomPqrs` varchar(120) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `emaPqrs` varchar(200) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `dirPqrs` varchar(200) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `msgPqrs` text COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pqrs`
+--
+
+INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`) VALUES
+(1, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fgsdfgsdf'),
+(2, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'vzxcvzxcv'),
+(3, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fbxcvbxcvb'),
+(4, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfsfasdsd'),
+(5, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfsfasdsd'),
+(6, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fzcvzxcv'),
+(7, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfdfgsd'),
+(8, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfdfgsd'),
+(9, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'vbxv'),
+(10, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fdfdf'),
+(11, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfdssd'),
+(12, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta colombia', 'dfdssd'),
+(13, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17a, santa marta colombia', 'dfdssd'),
+(14, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sadcvasdasd'),
+(15, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsadsfv'),
+(16, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsadsfv'),
+(17, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'asdaSDA'),
+(18, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 7 calle 7, santa marta, colombia', 'asdaSDA'),
+(19, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 1 calle 15, santa marta, colombia', 'asdaSDA'),
+(20, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dsfgada'),
+(21, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsad'),
+(22, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'bxfbxbvv'),
+(23, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dsfsfdgs'),
+(24, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'xcv<x<xzc'),
+(25, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'scsdc<sxc');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `roles`
 --
 
@@ -466,6 +516,12 @@ ALTER TABLE `post`
   ADD PRIMARY KEY (`idpost`);
 
 --
+-- Indices de la tabla `pqrs`
+--
+ALTER TABLE `pqrs`
+  ADD PRIMARY KEY (`idPqrs`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -504,7 +560,7 @@ ALTER TABLE `capitulos`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `idContacto` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idContacto` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `elementos`
@@ -553,6 +609,12 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `post`
   MODIFY `idpost` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `pqrs`
+--
+ALTER TABLE `pqrs`
+  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
