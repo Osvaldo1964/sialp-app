@@ -90,34 +90,9 @@ class Site extends Controllers
 				$latitud = $coordenadas[0];
 				$longitud = $coordenadas[1];
 				$newdireccion = $coordenadas[2];
-				//dep($coordenadas);exit;
-				?>
-				<!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo"></script>  -->
-				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo&callback=initMap"
-						type="text/javascript">
-				</script>
-				<script type="text/javascript">
-					let santamarta = { lat: <?php echo $latitud; ?>, lng: <?php echo $longitud; ?> };
-					alert(santamarta);
-					var options = {
-						zoom: 14,
-						center: new google.maps.LatLng(<?php echo $latitud; ?>, <?php echo $longitud; ?>),
-						mapTypeId: google.maps.MapTypeId.ROADMAP
-					};
-					var map = new google.maps.Map($("#map")[0], options);
-					//map = new google.maps.Map(document.getElementById("map"), options);
-					marker = new google.maps.Marker({
-						map: map,
-						position: new google.maps.LatLng(<?php echo $latitud; ?>, <?php echo $longitud; ?>)
-					});
-					infowindow = new google.maps.InfoWindow({ content: "<?php echo $newdireccion; ?>" });
-					marker.setMap(map);
-					google.maps.event.addListener(marker, "click", function () { infowindow.open(map, marker); });
-				</script>
-			<?php
 				$userContact = $this->setPqr($nombre,$email,$direccion, $mensaje);
  				if($userContact > 0){
-					$arrResponse = array('status' => true, 'msg' => "Su mensaje fue enviado correctamente.");
+					$arrResponse = array('status' => true, 'lat' => $latitud, 'lon' => $longitud, 'msg' => "Su mensaje fue enviado correctamente.");
 				}else{
 					$arrResponse = array('status' => false, 'msg' => "No es posible enviar el mensaje.");
 				}
@@ -126,30 +101,27 @@ class Site extends Controllers
 			die();
 		}
 
-		function getGeocodeData($address) {
-			$address = urlencode($address);
-			$googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo";
-			$geocodeResponseData = file_get_contents($googleMapUrl);
-			$responseData = json_decode($geocodeResponseData, true);
-			if($responseData['status']=='OK') {
+	function getGeocodeData($address) {
+		$address = urlencode($address);
+		$googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo";
+		$geocodeResponseData = file_get_contents($googleMapUrl);
+		$responseData = json_decode($geocodeResponseData, true);
+		if($responseData['status']=='OK')
+		{
 			$latitude = isset($responseData['results'][0]['geometry']['location']['lat']) ? $responseData['results'][0]['geometry']['location']['lat'] : "";
 			$longitude = isset($responseData['results'][0]['geometry']['location']['lng']) ? $responseData['results'][0]['geometry']['location']['lng'] : "";
 			$formattedAddress = isset($responseData['results'][0]['formatted_address']) ? $responseData['results'][0]['formatted_address'] : "";
-			if($latitude && $longitude && $formattedAddress) {
-			$geocodeData = array();
-			array_push(
-			$geocodeData,
-			$latitude,
-			$longitude,
-			$formattedAddress
-			);
-			return $geocodeData;
+			if($latitude && $longitude && $formattedAddress)
+			{
+				$geocodeData = array();
+				array_push($geocodeData, $latitude, $longitude, $formattedAddress );
+				return $geocodeData;
 			} else {
-			return false;
+				return false;
 			}
-			} else {
+		} else {
 			echo "ERROR: {$responseData['status']}";
 			return false;
-			}
-			}
+		}
+	}
 }

@@ -36,15 +36,18 @@ document.addEventListener('DOMContentLoaded', function () {
             request.onreadystatechange = function(){
                 if(request.readyState != 4) return;
                 if(request.status == 200){
-                    console.log(request.responseText);
-/*                     let objData = JSON.parse(request.responseText);
+                    let objData = JSON.parse(request.responseText);
                     if(objData.status){
-                        swal("", objData.msg , "success");
-                        document.querySelector("#frmPqrs").reset();
+                        //swal("", objData.msg , "success");
+                        let coord = { lat: objData.lat, lng: objData.lng };
+                        initMap(coord.lat, coord.lng);
+                        //document.querySelector("#frmPqrs").reset();
+                        
+	
                     }else{
                         swal("", objData.msg , "error");
                     }
- */                }
+                }
                 divLoading.style.display = "none";
                 return false;
             }
@@ -52,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 }, false);
-/* 
-function initMap(){
+ 
+/* function initMap(){
     let santamarta = { lat: 11.2084292, lng: -74.2237886 };
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
@@ -67,10 +70,10 @@ function repMap($latitude, $longitude){
         zoom: 15,
         center: santamarta,
     })
-}; */
-
-function initMap() {
-    const myLatLng = { lat: 11.2084292, lng: -74.2237886 };
+}; 
+ */
+function initMap(float latitude, float longitude) {
+    const myLatLng = { lat: latitude, lng: longitude };
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 4,
       center: myLatLng,
