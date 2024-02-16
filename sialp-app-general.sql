@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 16-02-2024 a las 12:52:00
+-- Tiempo de generación: 16-02-2024 a las 19:37:01
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `capitulos` (
   `idCapitulo` bigint NOT NULL,
-  `nomCapitulo` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nomCapitulo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `tipCapitulo` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -63,12 +63,7 @@ CREATE TABLE `contacto` (
 --
 
 INSERT INTO `contacto` (`idContacto`, `nomContacto`, `emaContacto`, `msgContacto`, `ipdContacto`, `disContacto`, `ageContacto`, `creContacto`) VALUES
-(1, 'Fernando Herrera', 'toolsfordeveloper@gmail.com', 'Mensaje del primer suscriptor!', '127.0.0.1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0', '2021-08-20 04:06:18'),
-(2, 'Osvaldo', 'osvicor@hotmail.com', 'prueba', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:51:13'),
-(3, 'Osvaldo', 'osvicor@hotmail.com', 'prueba', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:52:51'),
-(4, 'Osvaldo', 'osvicor@hotmail.com', 'prueba', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:54:30'),
-(5, 'Osvaldo', 'osvicor@hotmail.com', 'prueba de contacto', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:57:26'),
-(6, 'Osvaldo', 'osvicor@hotmail.com', 'dfgsdfgdsf', '::1', 'Movil', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', '2024-02-15 14:58:58');
+(1, 'Fernando Herrera', 'toolsfordeveloper@gmail.com', 'Mensaje del primer suscriptor!', '127.0.0.1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0', '2021-08-20 04:06:18');
 
 -- --------------------------------------------------------
 
@@ -79,13 +74,13 @@ INSERT INTO `contacto` (`idContacto`, `nomContacto`, `emaContacto`, `msgContacto
 CREATE TABLE `elementos` (
   `idElemento` bigint NOT NULL,
   `gruElemento` bigint NOT NULL,
-  `codElemento` varchar(15) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `nomElemento` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `desElemento` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `dirElemento` varchar(200) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `codElemento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nomElemento` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desElemento` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `dirElemento` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `latElemento` float(15,2) NOT NULL,
   `lonElemento` float(15,2) NOT NULL,
-  `rutElemento` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `rutElemento` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estElemento` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -94,7 +89,13 @@ CREATE TABLE `elementos` (
 --
 
 INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElemento`, `desElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `estElemento`) VALUES
-(1, 2, '01002100', 'Luminaria LED 30w', '<p>Esta es una prueba de la hoja de vida</p> <ul> <li>Fecha Mayo 1 de 2024 - Se instala la luminaria</li> <li>Fecha Junio 15 de 2024 - Se cambia el sticker del poste</li> <li>Fecha Agosto 30 de 2024 - Se reemplaza la luminaria por robo</li> </ul>', 'Esta es la direccion de la luminaria', 15.25, 14.23, '01002100', 1);
+(1, 2, '01002100', 'Luminaria LED 30w', '<p>Esta es una prueba de la hoja de vida</p> <ul> <li>Fecha Mayo 1 de 2024 - Se instala la luminaria</li> <li>Fecha Junio 15 de 2024 - Se cambia el sticker del poste</li> <li>Fecha Agosto 30 de 2024 - Se reemplaza la luminaria por robo</li> </ul>', 'Esta es la direccion de la luminaria', 15.25, 14.23, '01002100', 1),
+(2, 2, '01002101', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002101', 1),
+(3, 2, '01002102', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002102', 1),
+(4, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', 1),
+(5, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', 1),
+(6, 1, '001542523', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542523', 1),
+(7, 1, '001542527', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542527', 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +106,7 @@ INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElement
 CREATE TABLE `grupos` (
   `idGrupo` bigint NOT NULL,
   `capGrupo` bigint NOT NULL,
-  `desGrupo` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desGrupo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `creGrupo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estGrupo` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
@@ -125,8 +126,8 @@ INSERT INTO `grupos` (`idGrupo`, `capGrupo`, `desGrupo`, `creGrupo`, `estGrupo`)
 
 CREATE TABLE `gruposalp` (
   `idGruposalp` bigint NOT NULL,
-  `codGruposalp` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `desGruposalp` varchar(150) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `codGruposalp` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desGruposalp` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `vidGruposalp` float(6,2) NOT NULL,
   `estGruposalp` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
@@ -161,6 +162,32 @@ INSERT INTO `imagenes` (`idImagen`, `idElemento`, `nomImagen`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `itemsacta`
+--
+
+CREATE TABLE `itemsacta` (
+  `idItemacta` bigint NOT NULL,
+  `codItemacta` varchar(10) NOT NULL,
+  `desItemacta` varchar(60) NOT NULL,
+  `actItemacta` bigint NOT NULL,
+  `estItemacta` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `itemsacta`
+--
+
+INSERT INTO `itemsacta` (`idItemacta`, `codItemacta`, `desItemacta`, `actItemacta`, `estItemacta`) VALUES
+(1, '01', 'EXPANSION', 2, 1),
+(2, '02', 'MODERNIZACION', 2, 1),
+(3, '03', 'REPOSICION', 2, 1),
+(4, '04', 'HURTO', 4, 1),
+(5, '05', 'DAÑO', 4, 1),
+(6, '06', 'OBSOLESCENCIA  ', 4, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `modulos`
 --
 
@@ -180,7 +207,7 @@ INSERT INTO `modulos` (`idModulo`, `titModulo`, `desModulo`, `estModulo`) VALUES
 (2, 'Configuración', '- C.R.U.D. Usuarios\r\n- C.R.U.D. Permisos\r\n- Parámetros Generales', 1),
 (3, 'Estructura', '- C.R.U.D. Capitulos\r\n- C.R.U.D. Grupos\r\n- C.R.U.D. Subgrupos\r\n- C.R.U.D. Rubros\r\n- C.R.U.D. Auxiliares', 1),
 (4, 'Componentes', '- C.R.U.D. Variables SALP\r\n- C.R.U.D. Grupos\r\n- C.R.U.D. UCAPs\r\n- C.R.U.D. Tipos de Actas', 1),
-(5, 'Movimientos', '- Registro Modelo Contractual\r\n- Regristro Ejecución Real\r\n- Registro de Actas\r\n- Registro consumo y costos Energía\r\n- Registro Valores Variables\r\n- Registro Valores Variables Costos Máximos\r\n- Registro Porcentajes Tasas de Retorno', 1),
+(5, 'Movimientos', '- Registro Modelo Contractual\n- Regristro Ejecución Real\n- Registro de Actas\n- Registro consumo y costos Energía\n- Registro Valores Variables\n- Registro Valores Variables Costos Máximos\n- Registro Porcentajes Tasas de Retorno', 1),
 (6, 'Gestion Documental', 'Registro Documentos', 1),
 (16, 'Informes', 'Informes de Cartera', 1),
 (17, 'Suscriptores', 'Registro Suscriptores', 1),
@@ -323,10 +350,10 @@ INSERT INTO `post` (`idpost`, `titulo`, `contenido`, `portada`, `datecreate`, `r
 
 CREATE TABLE `pqrs` (
   `idPqrs` bigint NOT NULL,
-  `nomPqrs` varchar(120) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `emaPqrs` varchar(200) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `dirPqrs` varchar(200) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `msgPqrs` text COLLATE utf8mb4_spanish_ci NOT NULL
+  `nomPqrs` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `emaPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `dirPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `msgPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
@@ -358,7 +385,29 @@ INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`) VALUES
 (22, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'bxfbxbvv'),
 (23, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dsfsfdgs'),
 (24, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'xcv<x<xzc'),
-(25, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'scsdc<sxc');
+(25, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'scsdc<sxc'),
+(26, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sdfdsfd'),
+(27, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fhsfg'),
+(28, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fgsdfgdf'),
+(29, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fgdsfg'),
+(30, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 calle 15, santa marta, colombia', 'fgdsfg'),
+(31, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'ghdfhdfg'),
+(32, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15, santa marta, colombia', 'ghdfhdfg'),
+(33, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 15-20, santa marta, colombia', 'ghdfhdfg'),
+(34, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'ghdfhdfg'),
+(35, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dfdfdf'),
+(36, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'gfghfgh'),
+(37, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fgfg'),
+(38, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dfgdf'),
+(39, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sdfsdfsdf'),
+(40, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 15-20, santa marta colombia', 'sdfsdfsdf'),
+(41, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf'),
+(42, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf'),
+(43, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fghfghg'),
+(44, 'Osvaldo', 'osvicor@hotmail.com', 'calle 11 carrera 5', 'fghfghg'),
+(45, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 calle 14 santa marta colombia', 'gdfghdfg'),
+(46, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 22 santa marta, colombia', 'gdfghdfg'),
+(47, 'Osvaldo', 'osvicor@hotmail.com', 'taganga magdalena', 'dfsdsdf');
 
 -- --------------------------------------------------------
 
@@ -393,7 +442,7 @@ INSERT INTO `roles` (`idRol`, `nomRol`, `desRol`, `estRol`) VALUES
 CREATE TABLE `subgrupos` (
   `idSubgrupo` bigint NOT NULL,
   `gruSubgrupo` bigint NOT NULL,
-  `desSubgrupo` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desSubgrupo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `creSubgrupo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estSubgrupo` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
@@ -410,6 +459,30 @@ CREATE TABLE `suscripciones` (
   `emaSuscripcion` varchar(120) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `creSuscripcion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipoactas`
+--
+
+CREATE TABLE `tipoactas` (
+  `idTipoacta` bigint NOT NULL,
+  `codTipoacta` varchar(10) NOT NULL,
+  `desTipoacta` varchar(120) NOT NULL,
+  `selTipoacta` int DEFAULT '0',
+  `estTipoacta` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `tipoactas`
+--
+
+INSERT INTO `tipoactas` (`idTipoacta`, `codTipoacta`, `desTipoacta`, `selTipoacta`, `estTipoacta`) VALUES
+(1, '01', 'INVENTARIO INICIAL', 0, 1),
+(2, '02', 'ACTAS DE INVERSION', 1, 1),
+(3, '03', 'RECIBO INFRAESTRUCTURA DE TERCEROS   ', 0, 1),
+(4, '04', 'BAJA DE INVENTARIO       ', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -444,6 +517,48 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`idUsuario`, `tdoUsuario`, `docUsuario`, `nomUsuario`, `apeUsuario`, `dirUsuario`, `telUsuario`, `emaUsuario`, `pasUsuario`, `tokUsuario`, `rolUsuario`, `tipUsuario`, `razUsuario`, `actUsuario`, `repUsuario`, `efaUsuario`, `estUsuario`, `regUsuario`) VALUES
 (1, '2', '73111404', 'Osvaldo Jose', 'Villalobos Cortina', 'UBR SAN LORENZO MZ J CS 34', '3023898254', 'osvicor@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'c843fdc31a9e01699e60-cceb97b6236fe3cbe753-3874c2094c24925ca604-c3f50f44e0e511aae429', 1, 1, 'EMPRESA DE PRUEBA', 'HOTEL', 'PEDRO HOTEL', 'EMAFACT@EMA.COM', 1, '2022-11-18 09:28:04');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `valorvariablesalp`
+--
+
+CREATE TABLE `valorvariablesalp` (
+  `idValorvar` bigint NOT NULL,
+  `codValorvar` varchar(10) NOT NULL,
+  `iniValorvar` varchar(6) NOT NULL,
+  `finValorvar` varchar(6) NOT NULL,
+  `tipValorvar` int NOT NULL,
+  `valValorvar` float(15,2) NOT NULL,
+  `estValorvar` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `varsalp`
+--
+
+CREATE TABLE `varsalp` (
+  `idVarsalp` bigint NOT NULL,
+  `codVarsalp` varchar(10) NOT NULL,
+  `desVarsalp` varchar(120) NOT NULL,
+  `estVarsalp` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `varsalp`
+--
+
+INSERT INTO `varsalp` (`idVarsalp`, `codVarsalp`, `desVarsalp`, `estVarsalp`) VALUES
+(1, '01', 'C.R.T.A.', 1),
+(2, '02', 'T.I.R.', 1),
+(3, '03', 'F.A.O.M.', 1),
+(4, '04', 'F.A.O.M.S.', 1),
+(5, '05', 'I.D.', 1),
+(6, '06', 'C.A.E.E.n.', 1),
+(7, '07', 'V.C.E.E.i', 1);
 
 --
 -- Índices para tablas volcadas
@@ -488,6 +603,13 @@ ALTER TABLE `gruposalp`
 ALTER TABLE `imagenes`
   ADD PRIMARY KEY (`idImagen`),
   ADD KEY `idProducto` (`idElemento`);
+
+--
+-- Indices de la tabla `itemsacta`
+--
+ALTER TABLE `itemsacta`
+  ADD PRIMARY KEY (`idItemacta`),
+  ADD KEY `actItemacta` (`actItemacta`);
 
 --
 -- Indices de la tabla `modulos`
@@ -541,10 +663,29 @@ ALTER TABLE `suscripciones`
   ADD PRIMARY KEY (`idSuscripcion`);
 
 --
+-- Indices de la tabla `tipoactas`
+--
+ALTER TABLE `tipoactas`
+  ADD PRIMARY KEY (`idTipoacta`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`idUsuario`);
+
+--
+-- Indices de la tabla `valorvariablesalp`
+--
+ALTER TABLE `valorvariablesalp`
+  ADD PRIMARY KEY (`idValorvar`),
+  ADD KEY `codValorvar` (`codValorvar`);
+
+--
+-- Indices de la tabla `varsalp`
+--
+ALTER TABLE `varsalp`
+  ADD PRIMARY KEY (`idVarsalp`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -560,13 +701,13 @@ ALTER TABLE `capitulos`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `idContacto` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idContacto` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
@@ -585,6 +726,12 @@ ALTER TABLE `gruposalp`
 --
 ALTER TABLE `imagenes`
   MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `itemsacta`
+--
+ALTER TABLE `itemsacta`
+  MODIFY `idItemacta` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `modulos`
@@ -614,7 +761,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT de la tabla `pqrs`
 --
 ALTER TABLE `pqrs`
-  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -635,10 +782,28 @@ ALTER TABLE `suscripciones`
   MODIFY `idSuscripcion` bigint NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tipoactas`
+--
+ALTER TABLE `tipoactas`
+  MODIFY `idTipoacta` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `idUsuario` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `valorvariablesalp`
+--
+ALTER TABLE `valorvariablesalp`
+  MODIFY `idValorvar` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `varsalp`
+--
+ALTER TABLE `varsalp`
+  MODIFY `idVarsalp` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

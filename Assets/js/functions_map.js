@@ -39,8 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     let objData = JSON.parse(request.responseText);
                     if(objData.status){
                         //swal("", objData.msg , "success");
-                        let coord = { lat: objData.lat, lng: objData.lng };
-                        initMap(coord.lat, coord.lng);
+                        latitude = objData.lat;
+                        longitude = objData.lon;
+                        initMap(latitude, longitude);
                         //document.querySelector("#frmPqrs").reset();
                         
 	
@@ -72,15 +73,26 @@ function repMap($latitude, $longitude){
     })
 }; 
  */
-function initMap(float latitude, float longitude) {
+function initMap(latitude, longitude) {
+    //alert('asasasaasas');
+    if(latitude === undefined || longitude === undefined)
+    {
+        latitude = 11.2084292;
+        longitude = -74.2237886;
+    }
+    alert(latitude);
+    alert(longitude);
     const myLatLng = { lat: latitude, lng: longitude };
+    console.log(myLatLng);
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: myLatLng,
+      zoom: 18,
+      center: new google.maps.LatLng(latitude, longitude),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+      //center: myLatLng,
     });
   
     new google.maps.Marker({
-      position: myLatLng,
+      position: new google.maps.LatLng(latitude, longitude),
       map,
       title: "Hello World!",
     });

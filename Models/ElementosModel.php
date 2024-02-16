@@ -42,8 +42,7 @@ class ElementosModel extends Mysql
                 $this->intgruElemento, $this->strcodElemento, $this->strnomElemento, $this->strdesElemento,
                 $this->strdirElemento, $this->fltlatElemento, $this->fltlonElemento, $this->strrutElemento, $this->intestElemento
             );
-            echo $this->insert($query_insert, $arrData); 
-            exit; 
+            $this->insert($query_insert, $arrData); 
             $request_insert = $this->insert($query_insert, $arrData);
             $return = $request_insert;
         } else {

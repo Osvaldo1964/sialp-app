@@ -20,6 +20,8 @@
             $data['page_name']  = "dashboard";
             $data['page_functions_js'] = "functions_dashboard.js";
 			$data['usuarios'] = $this->model->cantUsuarios();
+			$data['elementos'] = $this->model->cantElementos();
+			$data['grupos'] = $this->model->cantElementosGrupo();
 			/*
 			$data['clientes'] = $this->model->cantClientes();
 			$data['productos'] = $this->model->cantProductos();

@@ -74,55 +74,28 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/capitulos"><i class="icon fa fa-circle-o"></i> Variables</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"><i class="icon fa fa-circle-o"></i> Grupos UCAPs</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"><i class="icon fa fa-circle-o"></i> Elementos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/conceptos"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
                     </ul>
                 </li>
             <?php } ?>
 
+            <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
+                <li class="treeview">
+                    <a class="app-menu__item" href="#" data-toggle="treeview">
+                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+                        <span class="app-menu__label">Movimientos</span>
+                        <i class="treeview-indicator fa fa-angle-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/valorvrsalp"><i class="icon fa fa-circle-o"></i> Registo de Valores de variables</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"><i class="icon fa fa-circle-o"></i> Elementos UCAPs</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
+                    </ul>
+                </li>
+            <?php } ?>
 
-            <li>
-                <a class="app-menu__item" href="<?= base_url(); ?>/pedidos">
-                    <i class="app-menu__icon fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span class="app-menu__label">Pedidos</span>
-                </a>
-            </li>
-            <li>
-                <a class="app-menu__item" href="<?= base_url(); ?>/ventas">
-                    <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
-                    <span class="app-menu__label">Ventas</span>
-                </a>
-            </li>
-            <?php if (!empty($_SESSION['permisos'][13]['reaPermiso'])) { ?>
-                <li class="treeview">
-                    <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">Cartera</span>
-                        <i class="treeview-indicator fa fa-angle-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/notas"><i class="icon fa fa-circle-o"></i> Notas</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/reciboscaja"><i class="icon fa fa-circle-o"></i> Recibos de Caja</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/informes"><i class="icon fa fa-circle-o"></i> Informes</a></li>
-                    </ul>
-                </li>
-            <?php } ?>
-            <?php if (!empty($_SESSION['permisos'][11]['reaPermiso'])) { ?>
-                <li class="treeview">
-                    <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">Tesorería</span>
-                        <i class="treeview-indicator fa fa-angle-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/cajas"><i class="icon fa fa-circle-o"></i> Cajas</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/conceptogastos"><i class="icon fa fa-circle-o"></i> Conceptos de Gastos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/registrogastos"><i class="icon fa fa-circle-o"></i> Registro de Gastos</a></li>
-                    </ul>
-                </li>
-            <?php } ?>
             <?php if (!empty($_SESSION['permisos'][3]['reaPermiso'])) { ?>
                 <li>
                     <a class="app-menu__item" href="<?= base_url(); ?>/suscriptores">

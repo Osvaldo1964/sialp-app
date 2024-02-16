@@ -18,6 +18,26 @@
 			$total = $request['total']; 
 			return $total;
 		}
+
+		public function cantElementos(){
+			$sql = "SELECT COUNT(*) as total
+			FROM elementos 
+			WHERE estElemento != 0";
+			$request = $this->select($sql);
+			$total = $request['total']; 
+			return $total;
+		}
+
+		public function cantElementosGrupo(){
+			$sql = "SELECT e.gruElemento, g.desGruposalp, COUNT(e.gruElemento) as total
+			FROM elementos e
+			INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
+			WHERE estElemento != 0 GROUP BY e.gruElemento, g.desGruposalp";
+			$ucaps = $this->select_all($sql);
+			//$arrData = array('grafica' => 'ucapsGrupo', 'grupos' => $ucaps);
+			return $ucaps;
+		}
+
 		public function cantProductos(){
 			$sql = "SELECT COUNT(*) as total FROM productos WHERE estProducto != 0 ";
 			$request = $this->select($sql);
