@@ -92,7 +92,10 @@ class Site extends Controllers
 				$newdireccion = $coordenadas[2];
 				//dep($coordenadas);exit;
 				?>
-				<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo"></script> 
+				<!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo"></script>  -->
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo&callback=initMap"
+						type="text/javascript">
+				</script>
 				<script type="text/javascript">
 					let santamarta = { lat: <?php echo $latitud; ?>, lng: <?php echo $longitud; ?> };
 					alert(santamarta);
