@@ -385,21 +385,17 @@ if(document.querySelector("#frmContacto")){
 	let frmContacto = document.querySelector("#frmContacto");
 	frmContacto.addEventListener('submit',function(e) { 
 		e.preventDefault();
-
 		let nombre = document.querySelector("#nombreContacto").value;
 		let email = document.querySelector("#emailContacto").value;
 		let mensaje = document.querySelector("#mensaje").value;
-
 		if(nombre == ""){
 			swal("", "El nombre es obligatorio" ,"error");
 			return false;
 		}
-
 		if(!fntEmailValidate(email)){
 			swal("", "El email no es válido." ,"error");
 			return false;
 		}
-
 		if(mensaje == ""){
 			swal("", "Por favor escribe el mensaje." ,"error");
 			return false;
@@ -409,7 +405,7 @@ if(document.querySelector("#frmContacto")){
 		let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
                     new ActiveXObject('Microsoft.XMLHTTP');
-		let ajaxUrl = base_url+'/Tienda/contacto';
+		let ajaxUrl = base_url+'/Site/contacto';
 		let formData = new FormData(frmContacto);
 	   	request.open("POST",ajaxUrl,true);
 	    request.send(formData);

@@ -146,5 +146,33 @@ trait TCliente
 		}
 		return $return;
 	}
+
+    public function setContacto(string $nombre, string $email, string $mensaje, string $ip, string $dispositivo, string $useragent){
+		$this->con = new Mysql();
+		$nombre  	 = $nombre != "" ? $nombre : ""; 
+		$email 		 = $email != "" ? $email : ""; 
+		$mensaje	 = $mensaje != "" ? $mensaje : ""; 
+		$ip 		 = $ip != "" ? $ip : ""; 
+		$dispositivo = $dispositivo != "" ? $dispositivo : ""; 
+		$useragent 	 = $useragent != "" ? $useragent : ""; 
+		$query_insert  = "INSERT INTO contacto(nomContacto, emaContacto, msgContacto, ipdContacto, disContacto, ageContacto) 
+						  VALUES(?,?,?,?,?,?)";
+		$arrData = array($nombre,$email,$mensaje,$ip,$dispositivo,$useragent);
+		$request_insert = $this->con->insert($query_insert,$arrData);
+		return $request_insert;
+	}
+
+    public function setPqr(string $nombre, string $email, string $direccion, string $mensaje){
+		$this->con = new Mysql();
+		$nombre  	 = $nombre != "" ? $nombre : ""; 
+		$email 		 = $email != "" ? $email : ""; 
+        $direccion 	 = $direccion != "" ? $direccion : ""; 
+		$mensaje	 = $mensaje != "" ? $mensaje : ""; 
+		$query_insert  = "INSERT INTO pqrs (nomPqrs, emaPqrs, dirPqrs, msgPqrs) 
+						  VALUES(?,?,?,?)";
+		$arrData = array($nombre, $email, $direccion, $mensaje);
+		$request_insert = $this->con->insert($query_insert,$arrData);
+		return $request_insert;
+	}
 }
 ?>

@@ -19,19 +19,19 @@
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "Contactos";
-			$data['page_title'] = "CONTACTOS <small>Tienda Virtual</small>";
+			$data['page_title'] = "CONTACTOS <small>SALP APP</small>";
 			$data['page_name'] = "contactos";
 			$data['page_functions_js'] = "functions_contactos.js";
 			$this->views->getView($this,"contactos",$data);
 		}
 
 		public function getContactos(){
-			if($_SESSION['permisosMod']['r']){
+			if($_SESSION['permisosMod']['reaPermiso']){
 				$arrData = $this->model->selectContactos();
 				for ($i=0; $i < count($arrData) ; $i++) { 
 					$btnView = '';
-					if($_SESSION['permisosMod']['r']){
-						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['id'].')" title="Ver mensaje"><i class="far fa-eye"></i></button>';
+					if($_SESSION['permisosMod']['reaPermiso']){
+						$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idContacto'].')" title="Ver mensaje"><i class="far fa-eye"></i></button>';
 					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.'</div>';
 				}
@@ -41,7 +41,7 @@
 		}
 
 		public function getMensaje($idmensaje){
-			if($_SESSION['permisosMod']['r']){
+			if($_SESSION['permisosMod']['reaPermiso']){
 				$idmensaje = intval($idmensaje);
 				if($idmensaje > 0){
 					$arrData = $this->model->selectMensaje($idmensaje);

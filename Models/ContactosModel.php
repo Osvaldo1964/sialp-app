@@ -12,7 +12,7 @@ class ContactosModel extends Mysql{
 
 	public function selectMensaje(int $idmensaje){
 		$sql = "SELECT idContacto, nomContacto, emaContacto, DATE_FORMAT(creContacto, '%d/%m/%Y') as creContacto, msgContacto
-				FROM contacto WHERE id = {$idmensaje}";
+				FROM contacto WHERE idContacto = {$idmensaje}";
 		$request = $this->select($sql);
 		return $request;
 	}

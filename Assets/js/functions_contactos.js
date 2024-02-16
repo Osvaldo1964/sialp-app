@@ -60,11 +60,11 @@ function fntViewInfo(idmensaje){
             if(objData.status)
             {
                 let objMesaje = objData.data;
-                document.querySelector("#celCodigo").innerHTML = objMesaje.id;
-                document.querySelector("#celNombre").innerHTML = objMesaje.nombre;
-                document.querySelector("#celEmail").innerHTML = objMesaje.email;
-                document.querySelector("#celFecha").innerHTML = objMesaje.fecha;
-                document.querySelector("#celMensaje").innerHTML = objMesaje.mensaje;
+                document.querySelector("#celCodigo").innerHTML = objMesaje.idContacto;
+                document.querySelector("#celNombre").innerHTML = objMesaje.nomContacto;
+                document.querySelector("#celEmail").innerHTML = objMesaje.emaContacto;
+                document.querySelector("#celFecha").innerHTML = objMesaje.creContacto;
+                document.querySelector("#celMensaje").innerHTML = objMesaje.msgContacto;
                 $('#modalViewMensaje').modal('show');
             }else{
                 swal("Error", objData.msg , "error");

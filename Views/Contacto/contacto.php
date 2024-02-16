@@ -29,12 +29,12 @@ $idpagina = $data['page']['idpost'];
 
 					<div class="bor8 m-b-20 how-pos4-parent">
 						<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="nombreContacto" name="nombreContacto" placeholder="Nombre completo">
-						<img class="how-pos4 pointer-none" src="<?= media() ?>/tienda/images/icons/icon-name.png" alt="ICON" style="width: 28px;">
+						<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-name.png" alt="ICON" style="width: 28px;">
 					</div>
 
 					<div class="bor8 m-b-20 how-pos4-parent">
 						<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="emailContacto" name="emailContacto" placeholder="Correo electrónico">
-						<img class="how-pos4 pointer-none" src="<?= media() ?>/tienda/images/icons/icon-email.png" alt="ICON">
+						<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-email.png" alt="ICON">
 					</div>
 
 					<div class="bor8 m-b-30">
@@ -42,7 +42,7 @@ $idpagina = $data['page']['idpost'];
 					</div>
 
 					<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-						Eviar
+						Enviar
 					</button>
 				</form>
 			</div>
