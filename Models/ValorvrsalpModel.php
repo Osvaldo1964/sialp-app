@@ -12,7 +12,7 @@ class ValorvrsalpModel extends Mysql
         parent::__construct();
     }
 
-    public function insertGrupo( int $capGrupo, string $nombre, int $estado) {
+    public function insertValores( int $capGrupo, string $nombre, int $estado) {
         $this->intcapGrupo = $capGrupo;
         $this->strdesGrupo = $nombre;
         $this->intestGrupo = $estado;
@@ -24,17 +24,18 @@ class ValorvrsalpModel extends Mysql
         return $return;
     }
 
-    public function selectGrupos()
+    public function selectValores()
     {
-        $sql = "SELECT g.idGrupo, g.capGrupo, c.nomCapitulo as nomCapitulo, g.desGrupo, g.estGrupo
-                FROM grupos g
-                INNER JOIN capitulos c ON g.capGrupo = c.idCapitulo
-                WHERE g.estGrupo != 0";
+        $sql = "SELECT a.idValorvar, a.codValorvar, a.varValorvar, v.desVarsalp as desVarsalp, a.iniValorvar, a.finValorvar, a.tipValorvar,
+                a.valValorvar, a.estValorvar
+                FROM valorvariablesalp a
+                INNER JOIN varsalp v ON a.varValorvar = v.codVarsalp
+                WHERE a.estValorvar != 0";
         $request = $this->select_all($sql);
         return $request;
     }
 
-    public function selectGrupo(int $idGrupo)
+    public function selectValor(int $idGrupo)
     {
         $this->intidGrupo = $idGrupo;
         $sql = "SELECT idGrupo, capGrupo, desGrupo, estEmpresa, DATE_FORMAT(creGrupo, '%Y-%m-%d') as creGrupo

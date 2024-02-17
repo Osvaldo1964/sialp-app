@@ -77,27 +77,27 @@ class Valorvrsalp extends Controllers
         die();
     }
 
-    public function getElementos()
+    public function getValores()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectElementos();
+            $arrData = $this->model->selectValores();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
-                if ($arrData[$i]['estElemento'] == 1) {
-                    $arrData[$i]['estElemento'] = '<span class="badge badge-success">Activo</span>';
+                if ($arrData[$i]['estValorvar'] == 1) {
+                    $arrData[$i]['estValorvar'] = '<span class="badge badge-success">Activo</span>';
                 } else {
-                    $arrData[$i]['estElemento'] = '<span class="badge badge-danger">Inactivo</span>';
+                    $arrData[$i]['estValorvar'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
                 if ($_SESSION['permisosMod']['reaPermiso']) {
-                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idElemento'] . ')" title="Ver Elemento"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idValorvar'] . ')" title="Ver Elemento"><i class="far fa-eye"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idElemento'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idValorvar'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['delPermiso']) {
-                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idElemento'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idValorvar'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
