@@ -27,24 +27,24 @@ class Varsalp extends Controllers
     public function setVarsalp()
     {
         if ($_POST) {
-            if (empty($_POST['listCapitulo']) || empty($_POST['txtdesGrupo']) || empty($_POST['listestGrupo']))
+            if (empty($_POST['txtcodVarsalp']) || empty($_POST['txtdesVarsalp']) || empty($_POST['listestVarsalp']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idGrupo = intval($_POST['idGrupo']);
-                $intcapGrupo  = strClean($_POST['listCapitulo']);
-                $strdesGrupo  = ucwords(strClean($_POST['txtdesGrupo']));
-                $intestGrupo  = intval(strClean($_POST['listestGrupo']));
+                $idVarsalp = intval($_POST['idVarsalp']);
+                $strcodVarsalp  = strClean($_POST['txtcodVarsalp']);
+                $strdesVarsalp  = ucwords(strClean($_POST['txtdesVarsalp']));
+                $intestVarsalp  = intval(strClean($_POST['listestVarsalp']));
                 $request_user   = "";
-                if ($idGrupo == 0) {
+                if ($idVarsalp == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_user = $this->model->insertGrupo($intcapGrupo, $strdesGrupo, $intestGrupo);
+                        $request_user = $this->model->insertVarsalp($strcodVarsalp, $strdesVarsalp, $intestVarsalp);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_user = $this->model->updateGrupo($idGrupo, $intcapGrupo, $strdesGrupo, $intestGrupo);
+                        $request_user = $this->model->updateVarsalp($idVarsalp, $strcodVarsalp, $strdesVarsalp, $intestVarsalp);
                     }
                 }
                 if ($request_user > 0) {
@@ -114,8 +114,8 @@ class Varsalp extends Controllers
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['delPermiso']) {
-                $intidGrupo = intval($_POST['idGrupo']);
-                $requestDelete = $this->model->deleteVarsalp($intidVarsalp);
+                $strcodVarsalp = intval($_POST['idVarsalp']);
+                $requestDelete = $this->model->deleteVarsalp($strcodVarsalp);
                 if ($requestDelete) {
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Grupo.');
                 } else {

@@ -3,7 +3,7 @@ let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Tabla de Grupos
+    // Tabla de Variables
     tableVarsalp = $('#tableVarsalp').dataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', function () {
     //Crear Empresa
     if (document.querySelector('#formVarsalp')) {
         let formVarsalp = document.querySelector('#formVarsalp');
-        formGrupo.onsubmit = function (e) {
+        formVarsalp.onsubmit = function (e) {
             e.preventDefault();
             let intcodVarsalp = document.querySelector('#txtcodVarsalp').value;
             let strdesVarsalp = document.querySelector('#txtdesVarsalp').value;
             let intestVarsalp = document.querySelector('#listestVarsalp').value;
-            if (intcapGrupo == '' || strdesGrupo == '') {
+            if (intcodVarsalp == '' || strdesVarsalp == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         if (rowTable == ""){
-                            tableGVarsalp.api().ajax.reload();    
+                            tableVarsalp.api().ajax.reload();    
                         }else{
                             htmlStatus = intestVarsalp == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
@@ -124,7 +124,6 @@ function fntViewInfo(idvarsalp) {
                 document.querySelector("#celcodVarsalp").innerHTML = objData.data[0].codVarsalp;
                 document.querySelector("#celdesVarsalp").innerHTML = objData.data[0].desVarsalp;
                 document.querySelector("#celestVarsalp").innerHTML = estVarsalp;
-                //document.querySelector("#celregGrupo").innerHTML = objData.data[0].regGrupo;
                 $('#modalViewVarsalp').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
@@ -133,39 +132,39 @@ function fntViewInfo(idvarsalp) {
     }
 }
 
-function fntEditInfo(element, idGrupo) {
+function fntEditInfo(element, idVarsalp) {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Actualizar Grupo";
+    document.querySelector('#titleModal').innerHTML = "Actualizar Varible";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupos/getGrupo/' + idGrupo;
+    let ajaxUrl = base_url + '/Varsalp/getVarsalp/' + idVarsalp;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                document.querySelector("#idGrupo").value = objData.data[0].idGrupo;
-                document.querySelector("#txtnomCapitulo").value = objData.data[0].nomCapitulo;
-                document.querySelector("#txtdesGrupo").value = objData.data[0].desGrupo;
-                if (objData.data[0].estGrupo == 1) {
-                    document.querySelector("#listestGrupo").value = 1;
+                document.querySelector("#idVarsalp").value = objData.data[0].idVarsalp;
+                document.querySelector("#txtcodVarsalp").value = objData.data[0].codVarsalp;
+                document.querySelector("#txtdesVarsalp").value = objData.data[0].desVarsalp;
+                if (objData.data[0].estVarsalp == 1) {
+                    document.querySelector("#listestVarsalp").value = 1;
                 } else {
-                    document.querySelector("#listestGrupo").value = 2;
+                    document.querySelector("#listestVarsalp").value = 2;
                 }
-                $('#listestGrupo').selectpicker('render');
+                $('#listestVarsalp').selectpicker('render');
             }
         }
-        $('#modalFormGrupo').modal('show');
+        $('#modalFormVarsalp').modal('show');
     }
 }
 
-function fntDelInfo(idGrupo) {
+function fntDelInfo(idVarsalp) {
     swal({
-        title: "Eliminar Grupo",
-        text: "¿Realmente quiere eliminar el Grupo?",
+        title: "Eliminar Variable",
+        text: "¿Realmente quiere eliminar la Variable?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
@@ -175,8 +174,8 @@ function fntDelInfo(idGrupo) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupos/delGrupo/';
-            let strData = "idGrupo=" + idGrupo;
+            let ajaxUrl = base_url + '/Varsalp/delVarsalp/';
+            let strData = "idVarsalp=" + idVarsalp;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -185,7 +184,7 @@ function fntDelInfo(idGrupo) {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal("Eliminar!", objData.msg, "success");
-                        tableGrupos.api().ajax.reload();
+                        tableVarsalp.api().ajax.reload();
                     } else {
                         swal("Atención!", objData.msg, "error");
                     }
@@ -195,7 +194,7 @@ function fntDelInfo(idGrupo) {
     });
 }
 
-function fntCapitulos() {
+/* function fntCapitulos() {
     if (document.querySelector('#listCapitulo')) {
         let ajaxUrl = base_url + '/Capitulos/getSelectCapitulos';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -208,14 +207,14 @@ function fntCapitulos() {
             }
         }
     }
-}
+} */
 function openModal() {
     rowTable = "";
-    document.querySelector('#idGrupo').value = "";
+    document.querySelector('#idVarsalp').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nueva Grupo";
-    document.querySelector("#formGrupo").reset();
-    $('#modalFormGrupo').modal('show');
+    document.querySelector('#titleModal').innerHTML = "Nueva Variable";
+    document.querySelector("#formVarsalp").reset();
+    $('#modalFormVarsalp').modal('show');
 }
