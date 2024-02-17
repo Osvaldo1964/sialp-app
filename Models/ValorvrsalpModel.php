@@ -1,10 +1,13 @@
 <?php
 class ValorvrsalpModel extends Mysql
 {
-    private $intidGrupo;
-    private $intcapGrupo;
-    private $strdesGrupo;
-    private $intestGrupo;
+    private $intidValorvar;
+    private $strcodValorvar;
+    private $striniValorvar;
+    private $strfinValorvar;
+    private $strtipValorvar;
+    private $strvalValorvar;
+    private $intestValorvar;
 
 
     public function __construct()
@@ -12,34 +15,44 @@ class ValorvrsalpModel extends Mysql
         parent::__construct();
     }
 
-    public function insertValorvar( int $capGrupo, string $nombre, int $estado) {
-        $this->intcapGrupo = $capGrupo;
-        $this->strdesGrupo = $nombre;
-        $this->intestGrupo = $estado;
-        $return = 0;
-        $query_insert = "INSERT INTO grupos (capGrupo, desGrupo, estGrupo) VALUES (?,?,?)";
-        $arrData = array($this->intcapGrupo, $this->strdesGrupo, $this->intestGrupo);
+    public function insertValorvar(int $strcodValorvar,   int $iniValorvar, int $finValorvar,
+                                 int $tipValorvar, string $valValorvar, int $estValorvar)
+    {
+        $this->strcodValorvar = $strcodValorvar;
+        $this->striniValorvar = $iniValorvar;
+        $this->strfinValorvar = $finValorvar;
+        $this->strtipValorvar = $tipValorvar;
+        $this->strvalValorvar = $valValorvar;
+        $this->intestValorvar = $estValorvar;
+        $return= 0;
+        $query_insert = "INSERT INTO grupos (codValorvar, iniValorvar, finValorvar, tipValorvar, valValorvar,
+                        estValorval) VALUES (?,?,?,?,?,?)";
+        $arrData = array($this->strcodValorvar, $this->striniValorvar, $this->strfinValorvar, 
+                        $this->strtipValorvar, $this->strvalValorvar, $this->intestValorvar);
         $request_insert = $this->insert($query_insert, $arrData);
         $return = $request_insert;
         return $return;
     }
 
-    public function selectValorvar()
+    public function selectValorvars()
     {
-        $sql = "SELECT a.idValorvar, a.codValorvar, a.varValorvar, v.desVarsalp as desVarsalp, a.iniValorvar, a.finValorvar, a.tipValorvar,
-                a.valValorvar, a.estValorvar
+        $sql = "SELECT a.idValorvar, a.codValorvar, v.desVarsalp as desVarsalp,
+                a.iniValorvar, a.finValorvar, a.tipValorvar, a.valValorvar, a.estValorvar
                 FROM valorvariablesalp a
-                INNER JOIN varsalp v ON a.varValorvar = v.codVarsalp
+                INNER JOIN varsalp v ON a.codValorvar = v.codVarsalp
                 WHERE a.estValorvar != 0";
         $request = $this->select_all($sql);
         return $request;
     }
 
-    public function selectValor(int $idGrupo)
+    public function selectValorvar(int $idValorvar)
     {
-        $this->intidGrupo = $idGrupo;
-        $sql = "SELECT idGrupo, capGrupo, desGrupo, estEmpresa, DATE_FORMAT(creGrupo, '%Y-%m-%d') as creGrupo
-                            FROM grupos WHERE idGrupo = $this->intidGrupo";
+        $this->intidValorvar = $idValorvar;
+        $sql = "SELECT a.idValorvar, a.codValorvar, v.desVarsalp as desVarsalp,
+                a.iniValorvar, a.finValorvar, a.tipValorvar, a.valValorvar, a.estValorvar
+                FROM valorvariablesalp a
+                INNER JOIN varsalp v ON a.codValorvar = v.codVarsalp
+                WHERE idValorvar = $this->intidValorvar";
         $request = $this->select_all($sql);
         return $request;
     }

@@ -114,24 +114,26 @@ document.addEventListener('DOMContentLoaded', function () {
     fntVariables();
 }, false);
 
-function fntViewInfo(idgruposalp) {
+function fntViewInfo(idvalorvar) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupossalp/getGruposalp/' + idgruposalp;
+    let ajaxUrl = base_url + '/Valorvrsalp/getValorvar/' + idvalorvar;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                let estGruposalp = objData.data[0].estGruposalp == 1 ?
+                let estValorvar = objData.data[0].estValorvar == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector("#celcodGruposalp").innerHTML = objData.data[0].codGruposalp;
-                document.querySelector("#celdesGruposalp").innerHTML = objData.data[0].desGruposalp;
-                document.querySelector("#celvidGruposalp").innerHTML = objData.data[0].vidGruposalp;
-                document.querySelector("#celestGruposalp").innerHTML = estGruposalp;
-                //document.querySelector("#celregGrupo").innerHTML = objData.data[0].regGrupo;
-                $('#modalViewGruposalp').modal('show');
+                document.querySelector("#celcodValorvar").innerHTML = objData.data[0].codValorvar;
+                document.querySelector("#celdesVarsalp").innerHTML = objData.data[0].desVarsalp;
+                document.querySelector("#celiniVarsalp").innerHTML = objData.data[0].iniVarsalp;
+                document.querySelector("#celfinVarsalp").innerHTML = objData.data[0].finVarsalp;
+                document.querySelector("#celtipVarsalp").innerHTML = objData.data[0].tipVarsalp;
+                document.querySelector("#celvalVarsalp").innerHTML = objData.data[0].valVarsalp;
+                document.querySelector("#celestVarsalp").innerHTML = estValorvar;
+                $('#modalViewValorvar').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
@@ -218,11 +220,11 @@ function fntDelInfo(idGruposalp) {
 } 
 function openModal() {
     rowTable = "";
-    document.querySelector('#idGruposalp').value = "";
+    document.querySelector('#idValorvar').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nuevo Grupo";
-    document.querySelector("#formGruposalp").reset();
-    $('#modalFormGruposalp').modal('show');
+    document.querySelector('#titleModal').innerHTML = "Nuevo Registro";
+    document.querySelector("#formValorvar").reset();
+    $('#modalFormValorvar').modal('show');
 }

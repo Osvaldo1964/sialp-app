@@ -76,7 +76,7 @@ class Valorvrsalp extends Controllers
     public function getValores()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectValores();
+            $arrData = $this->model->selectValorvars();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
