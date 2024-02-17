@@ -12,7 +12,7 @@ class ValorvrsalpModel extends Mysql
         parent::__construct();
     }
 
-    public function insertValores( int $capGrupo, string $nombre, int $estado) {
+    public function insertValorvar( int $capGrupo, string $nombre, int $estado) {
         $this->intcapGrupo = $capGrupo;
         $this->strdesGrupo = $nombre;
         $this->intestGrupo = $estado;
@@ -24,7 +24,7 @@ class ValorvrsalpModel extends Mysql
         return $return;
     }
 
-    public function selectValores()
+    public function selectValorvar()
     {
         $sql = "SELECT a.idValorvar, a.codValorvar, a.varValorvar, v.desVarsalp as desVarsalp, a.iniValorvar, a.finValorvar, a.tipValorvar,
                 a.valValorvar, a.estValorvar

@@ -126,5 +126,19 @@ class Varsalp extends Controllers
         }
         die();
     }
+
+    public function getSelectVarsalp()
+    {
+        $htmlOptions = "";
+        $arrData = $this->model->selectVarsalp();
+        if (count($arrData) > 0) {
+            for ($i = 0; $i < count($arrData); $i++) {
+                $htmlOptions .= '<option value="' . $arrData[$i]['idVarsalp'] . '">' .
+                                $arrData[$i]['nomVarsalp'] . '</option>';
+            }
+        }
+        echo $htmlOptions;
+        die();
+    }
 }
 ?>

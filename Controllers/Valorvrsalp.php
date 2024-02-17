@@ -24,50 +24,46 @@ class Valorvrsalp extends Controllers
         $this->views->getView($this, "valorvrsalp", $data);
     }
 
-    public function setElemento()
+    public function setValorvrsalp()
     {
         if ($_POST) {
-            if (empty($_POST['txtnomElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listGrupos']) 
-            || empty($_POST['listestElemento']))
+            if (empty($_POST['txtcodValorvar']) || empty($_POST['txtiniValorvar']) || empty($_POST['listVariables']) 
+            || empty($_POST['listestValorvar']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idElemento     = intval($_POST['idElemento']);
-                $intgruElemento = intval($_POST['listGrupos']);
-                $strcodElemento = strClean($_POST['txtcodElemento']);
-                $strnomElemento = strClean($_POST['txtnomElemento']);
-                $strdesElemento = strClean($_POST['txtdesElemento']);
-                $strdirElemento = strClean($_POST['txtdirElemento']);
-                $fltlatElemento = $_POST['fltlatElemento'];
-                $fltlonElemento = $_POST['fltlonElemento'];
-                $intestElemento = intval($_POST['listestElemento']);
-                $request_Elemento = "";
+                $idValorvar     = intval($_POST['idValorvar']);
+                $strcodValorvar = strClean($_POST['txtcodValorvar']);
+                $intvarValorvar = intval($_POST['listVariables']);
+                $striniValorvar = strClean($_POST['txtiniValorvar']);
+                $strfinValorvar = strClean($_POST['txtfinValorvar']);
+                $strtipValorvar = strClean($_POST['txttipValorvar']);
+                $fltvalValorvar = $_POST['fltvalValorvar'];
+                $intestValorvar = intval($_POST['listestValorvar']);
+                $request_Valorvar = "";
 
-                $ruta = strtolower(clear_cadena($strcodElemento));
-                $ruta = str_replace(" ", "-", $ruta);
-
-                if ($idElemento == 0) {
+                if ($idValorvar == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_Elemento = $this->model->insertElemento($intgruElemento, $strcodElemento, $strnomElemento, $strdesElemento,
-                            $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $intestElemento);
+                        $request_Elemento = $this->model->insertValorvar($strcodValorvar, $intvarValorvar,  $striniValorvar, $strfinValorvar,
+                            $strtipValorvar, $fltvalValorvar, $intestValorvar);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_Elemento = $this->model->updateElemento($idElemento, $intgruElemento, $strcodElemento, $strnomElemento, $strdesElemento,
-                        $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $intestElemento);
+                        $request_Valorvar = $this->model->updateValorvar($idValorvar, $strcodValorvar, $intvarValorvar,  $striniValorvar, $strfinValorvar,
+                        $strtipValorvar, $fltvalValorvar, $intestValorvar);
                     }
                 }
-                if($request_Elemento == 1 || $request_Elemento != 'exist')
+                if($request_Valorvar == 1 || $request_Valorvar != 'exist')
                 {
                     if($option == 1){
-                        $arrResponse = array('status' => true, 'idElemento' => $request_Elemento, 'msg' => 'Datos guardados correctamente.');
+                        $arrResponse = array('status' => true, 'idValorvar' => $request_Elemento, 'msg' => 'Datos guardados correctamente.');
                     }else{
-                        $arrResponse = array('status' => true, 'idElemento' => $idElemento, 'msg' => 'Datos Actualizados correctamente.');
+                        $arrResponse = array('status' => true, 'idValorvar' => $idElemento, 'msg' => 'Datos Actualizados correctamente.');
                     }
-                }else if($request_Elemento == 'exist'){
-                    $arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un Elemento con el Código Ingresado.');		
+                }else if($request_Valorvar == 'exist'){
+                    $arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un Registro con el Código Ingresado.');		
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -106,22 +102,15 @@ class Valorvrsalp extends Controllers
         die();
     }
 
-    public function getElemento($idElemento)
+    public function getValorvar($idValorvar)
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $idElemento = intval($idElemento);
-            if ($idElemento > 0) {
-                $arrData = $this->model->selectElemento($idElemento);
+            $idValorvar = intval($idValorvar);
+            if ($idValorvar > 0) {
+                $arrData = $this->model->selectValorvar($idValorvar);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
-                    $arrImg = $this->model->selectImages($idElemento);
-                    if (count($arrImg) > 0) {
-                        for ($i = 0; $i < count($arrImg); $i++) {
-                            $arrImg[$i]['url_image'] = media() . '/images/uploads/' . $arrImg[$i]['nomImagen'];
-                        }
-                    }
-                    $arrData['images'] = $arrImg;
                     $arrResponse = array('status' => true, 'data' => $arrData);
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -131,12 +120,12 @@ class Valorvrsalp extends Controllers
         die();
     }
 
-    public function delElemento()
+    public function delValorvar()
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['delPermiso']) {
-                $intidElemento = intval($_POST['idElemento']);
-                $requestDelete = $this->model->deleteElemento($intidElemento);
+                $intidValorvar = intval($_POST['idValorvar']);
+                $requestDelete = $this->model->deleteValorvar($intidValorvar);
                 if ($requestDelete) {
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Elemento.');
                 } else {
@@ -144,50 +133,6 @@ class Valorvrsalp extends Controllers
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             }
-        }
-        die();
-    }
-
-    public function setImage()
-    {
-        if ($_POST) {
-            if (empty($_POST['idElemento'])) {
-                $arrResponse = array('status' => false, 'msg' => 'Error de datos.');
-            } else {
-                $idElemento = intval($_POST['idElemento']);
-                $foto = $_FILES['foto'];
-                $imgNombre = 'pro_' . md5(date('Y-m-d H:m:s')) . '.jpg';
-                $request_image = $this->model->insertImage($idElemento, $imgNombre);
-                if ($request_image) {
-                    $uploadImage = uploadImage($foto, $imgNombre);
-                    $arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
-                } else {
-                    $arrResponse = array('status' => false, 'msg' => 'Error de carga.');
-                }
-            }
-            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
-        }
-        die();
-    }
-
-    public function delFile()
-    {
-        if ($_POST) {
-            if (empty($_POST['idElemento']) || empty($_POST['file'])) {
-                $arrResponse = array('status' => false, 'msg' => 'Datos incorrectos.');
-            } else {
-                //Eliminar el registro de la tabla imagenes
-                $idElemento = intval($_POST['idElemento']);
-                $imgNombre = strClean($_POST['file']);
-                $request_image = $this->model->deleteImage($idElemento, $imgNombre);
-                if ($request_image) {
-                    $deleteFile = deleteFile($imgNombre);
-                    $arrResponse = array('status' => true, 'msg' => 'Archivo eliminado.');
-                } else {
-                    $arrResponse = array('status' => false, 'msg' => 'No se pudo eliminar el archivo.');
-                }
-            }
-            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }
         die();
     }

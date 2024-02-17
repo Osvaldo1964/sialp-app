@@ -204,7 +204,7 @@ function fntDelInfo(idGruposalp) {
 
  function fntVariables() {
     if (document.querySelector('#listVariable')) {
-        let ajaxUrl = base_url + '/Capitulos/getSelectCapitulos';
+        let ajaxUrl = base_url + '/Varsalp/getSelectVarsalp'; 
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
