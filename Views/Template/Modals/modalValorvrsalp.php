@@ -13,19 +13,33 @@
                     <p class="text-primary">Todos los campos son obligatorios</p>
 
                     <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="listVariable">Variable <span class="required">*</span></label>
+                            <select class="form-control" data-live-search="true" id="listVariable" name="listVariable" required=""></select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="txtiniValorvar">Desde (AAAAMM) <span class="required">*</span></label>
+                            <input type="text" class="form-control valid validText" id="txtiniValorvar" name="txtiniValorvar" required="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="txtfinValorvar">Hasta (AAAAMM) <span class="required">*</span></label>
+                            <input type="text" class="form-control valid validText" id="txtfinValorvar" name="txtfinValorvar" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group">
-                            <label class="control-label">Variable<span class="required">*</span></label>
-                            <input type="text" class="form-control" id="txtcodValorvar" name="txtcodValorvar" required="">
+                            <label for="txttipValorvar" class="control-label">Tipo (V/P)<span class="required">*</span></label>
+                            <input type="text" class="form-control" id="txttipValorvar" name="txttipValorvar" required="">
                         </div>>
                         <div class="form-group col-md-6">
-                            <label for="txtdesVarsalp">Descripción <span class="required">*</span></label>
-                            <input type="text" class="form-control valid validText" id="txtdesVarsalp" name="txtdesVarsalp" required="">
+                            <label for="fltvalValorvar">Valor <span class="required">*</span></label>
+                            <input type="text" class="form-control valid validText" id="fltvalValorvar" name="fltvalValorvar" required="">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="listestVarsalp">Estado</label>
-                            <select class="form-control selectpicker" id="listestVarsalp" name="listestVarsalp" required>
+                            <label for="listestValorvar">Estado</label>
+                            <select class="form-control selectpicker" id="listestValorvar" name="listestValorvar" required>
                                 <option value="1">Activo</option>
                                 <option value="2">Inactivo</option>
                             </select>
@@ -64,19 +78,19 @@
                         </tr>
                         <tr>
                             <td>Desde:</td>
-                            <td id="celiniVarsalp">73111404</td>
+                            <td id="celiniValorvar">73111404</td>
                         </tr>
                         <tr>
                             <td>Hasta:</td>
-                            <td id="celfinVarsalp">73111404</td>
+                            <td id="celfinValorvar">73111404</td>
                         </tr>
                         <tr>
                             <td>Tipo (Valor/Porcentaje):</td>
-                            <td id="celtipVarsalp">73111404</td>
+                            <td id="celtipValorvar">73111404</td>
                         </tr>
                         <tr>
                             <td>Valor:</td>
-                            <td id="celvalVarsalp">73111404</td>
+                            <td id="celvalValorvar">73111404</td>
                         </tr>
                         <tr>
                             <td>Estado:</td>

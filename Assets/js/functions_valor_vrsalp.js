@@ -123,16 +123,16 @@ function fntViewInfo(idvalorvar) {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                let estValorvar = objData.data[0].estValorvar == 1 ?
+                let estado = objData.data[0].estValorvar == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
                 document.querySelector("#celcodValorvar").innerHTML = objData.data[0].codValorvar;
                 document.querySelector("#celdesVarsalp").innerHTML = objData.data[0].desVarsalp;
-                document.querySelector("#celiniVarsalp").innerHTML = objData.data[0].iniVarsalp;
-                document.querySelector("#celfinVarsalp").innerHTML = objData.data[0].finVarsalp;
-                document.querySelector("#celtipVarsalp").innerHTML = objData.data[0].tipVarsalp;
-                document.querySelector("#celvalVarsalp").innerHTML = objData.data[0].valVarsalp;
-                document.querySelector("#celestVarsalp").innerHTML = estValorvar;
+                document.querySelector("#celiniValorvar").innerHTML = objData.data[0].iniValorvar;
+                document.querySelector("#celfinValorvar").innerHTML = objData.data[0].finValorvar;
+                document.querySelector("#celtipValorvar").innerHTML = objData.data[0].tipValorvar;
+                document.querySelector("#celvalValorvar").innerHTML = objData.data[0].valValorvar;
+                document.querySelector("#celestValorvar").innerHTML = estado;
                 $('#modalViewValorvar').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
@@ -141,33 +141,35 @@ function fntViewInfo(idvalorvar) {
     }
 }
 
-function fntEditInfo(element, idGruposalp) {
+function fntEditInfo(element, idValorvar) {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Actualizar Grupo";
+    document.querySelector('#titleModal').innerHTML = "Actualizar Registro";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupossalp/getGruposalp/' + idGruposalp;
+    let ajaxUrl = base_url + '/Valorvrsalp/getValorvar/' + idValorvar;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                document.querySelector("#idGruposalp").value = objData.data[0].idGruposalp;
-                document.querySelector("#txtcodGruposalp").value = objData.data[0].codGruposalp;
-                document.querySelector("#txtdesGruposalp").value = objData.data[0].desGruposalp;
-                document.querySelector("#fltvidGruposalp").value = objData.data[0].vidGruposalp;
-                if (objData.data[0].estGruposalp == 1) {
-                    document.querySelector("#listestGruposalp").value = 1;
+                document.querySelector("#idValorvar").value = objData.data[0].idValorvar;
+                document.querySelector("#txtiniValorvar").value = objData.data[0].iniValorvar;
+                document.querySelector("#txtfinValorvar").value = objData.data[0].finValorvar;
+                document.querySelector("#txttipValorvar").value = objData.data[0].tipValorvar;
+                document.querySelector("#fltvalValorvar").value = objData.data[0].valValorvar;
+                document.querySelector("#listVariable").value = objData.data[0].codValorvar;
+                if (objData.data[0].estValorvar == 1) {
+                    document.querySelector("#listestValorvar").value = 1;
                 } else {
-                    document.querySelector("#listestGruposalp").value = 2;
+                    document.querySelector("#listestValorvar").value = 2;
                 }
-                $('#listestGruposalp').selectpicker('render');
+                $('#listestValorvar').selectpicker('render');
             }
         }
-        $('#modalFormGruposalp').modal('show');
+        $('#modalFormValorvar').modal('show');
     }
 }
 
