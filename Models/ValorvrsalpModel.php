@@ -2,33 +2,31 @@
 class ValorvrsalpModel extends Mysql
 {
     private $intidValorvar;
-    private $strcodValorvar;
+    private $intvarValorvar;
     private $striniValorvar;
     private $strfinValorvar;
     private $strtipValorvar;
-    private $strvalValorvar;
+    private $fltvalValorvar;
     private $intestValorvar;
-
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function insertValorvar(int $strcodValorvar,   int $iniValorvar, int $finValorvar,
-                                 int $tipValorvar, string $valValorvar, int $estValorvar)
+    public function insertValorvar(int $varValorvar,   string $iniValorvar, string $finValorvar,
+                                 string $tipValorvar, float $valValorvar)
     {
-        $this->strcodValorvar = $strcodValorvar;
+        $this->intvarValorvar = $varValorvar;
         $this->striniValorvar = $iniValorvar;
         $this->strfinValorvar = $finValorvar;
         $this->strtipValorvar = $tipValorvar;
-        $this->strvalValorvar = $valValorvar;
-        $this->intestValorvar = $estValorvar;
+        $this->fltvalValorvar = $valValorvar;
+        //$this->intestValorvar = $estValorvar;
         $return= 0;
-        $query_insert = "INSERT INTO grupos (codValorvar, iniValorvar, finValorvar, tipValorvar, valValorvar,
-                        estValorval) VALUES (?,?,?,?,?,?)";
-        $arrData = array($this->strcodValorvar, $this->striniValorvar, $this->strfinValorvar, 
-                        $this->strtipValorvar, $this->strvalValorvar, $this->intestValorvar);
+        $query_insert = "INSERT INTO valorvariablesalp (varValorvar, iniValorvar, finValorvar, tipValorvar, valValorvar) VALUES (?,?,?,?,?)";
+        $arrData = array($this->intvarValorvar, $this->striniValorvar, $this->strfinValorvar, 
+                        $this->strtipValorvar, $this->fltvalValorvar);
         $request_insert = $this->insert($query_insert, $arrData);
         $return = $request_insert;
         return $return;
@@ -36,10 +34,10 @@ class ValorvrsalpModel extends Mysql
 
     public function selectValorvars()
     {
-        $sql = "SELECT a.idValorvar, a.codValorvar, v.desVarsalp as desVarsalp,
+        $sql = "SELECT a.idValorvar, a.varValorvar, v.desVarsalp as desVarsalp,
                 a.iniValorvar, a.finValorvar, a.tipValorvar, a.valValorvar, a.estValorvar
                 FROM valorvariablesalp a
-                INNER JOIN varsalp v ON a.codValorvar = v.codVarsalp
+                INNER JOIN varsalp v ON a.varValorvar = v.codVarsalp
                 WHERE a.estValorvar != 0";
         $request = $this->select_all($sql);
         return $request;
@@ -48,33 +46,36 @@ class ValorvrsalpModel extends Mysql
     public function selectValorvar(int $idValorvar)
     {
         $this->intidValorvar = $idValorvar;
-        $sql = "SELECT a.idValorvar, a.codValorvar, v.desVarsalp as desVarsalp,
+        $sql = "SELECT a.idValorvar, a.varValorvar, v.desVarsalp as desVarsalp,
                 a.iniValorvar, a.finValorvar, a.tipValorvar, a.valValorvar, a.estValorvar
                 FROM valorvariablesalp a
-                INNER JOIN varsalp v ON a.codValorvar = v.codVarsalp
+                INNER JOIN varsalp v ON a.varValorvar = v.codVarsalp
                 WHERE idValorvar = $this->intidValorvar";
         $request = $this->select_all($sql);
         return $request;
     }
 
-    public function updateGrupo(int $idGrupo, int $capGrupo, string $nombre, int $estado)
+    public function updateValorvar(int $idValorvar, string $varValorvar, string $iniValorvar, string $finValorvar, string $tipValorvar, string $valValorvar, int $estValorvar)
     {
-        $this->intidGrupo     = $idGrupo;
-        $this->intcapGrupo    = $capGrupo;
-        $this->strdesGrupo    = $nombre;
-        $this->intestGrupo    = $estado;
-        $sql = "UPDATE grupos SET capGrupo = ?, desGrupo = ?, estEmpresa = ?
-                WHERE idGrupo = $this->intidGrupo";
-        $arrData = array(
-            $this->intcapGrupo, $this->strdesGrupo, $this->intestGrupo);
+        $this->intidValorvar  = $idValorvar;
+        $this->intvarValorvar = $varValorvar;
+        $this->striniValorvar = $iniValorvar;
+        $this->strfinValorvar = $finValorvar;
+        $this->strtipValorvar = $tipValorvar;
+        $this->fltvalValorvar = $valValorvar;
+        $this->intestValorvar = $estValorvar;
+        $sql = "UPDATE valorvariablesalp SET varValorvar = ?, iniValorvar = ?, finValorvar = ?, tipValorvar = ?, valValorvar = ?, estValorvar = ?
+                WHERE idValorvar = $this->intidValorvar";
+        $arrData = array($this->intvarValorvar, $this->striniValorvar, $this->strfinValorvar, $this->strtipValorvar,
+                        $this->fltvalValorvar, $this->intestValorvar);
         $request = $this->update($sql, $arrData);
         return $request;
     }
 
-    public function deleteGrupo(int $idGrupo)
+    public function deleteValorvar(int $idValorvar)
     {
-        $this->intidGrupo = $idGrupo;
-        $sql = "UPDATE grupos SET estGrupo = ? WHERE idGrupo = $this->intidGrupo ";
+        $this->intidValorvar = $idValorvar;
+        $sql = "UPDATE valorvariablesalp SET estValorvar = ? WHERE idValorvar = $this->intidValorvar ";
         $arrData = array(0);
         $request = $this->update($sql, $arrData);
         return $request;

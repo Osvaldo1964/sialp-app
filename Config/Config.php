@@ -83,6 +83,7 @@
 	const MSUSCRIPTORES = 17;
 	const MDCONTACTOS = 18;
 	const MDPAGINAS = 19;
+	const MPQRS = 20;
 
 	// PAGINAS
 	const PINICIO = 1;

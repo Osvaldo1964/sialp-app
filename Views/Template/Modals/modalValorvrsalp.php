@@ -11,7 +11,6 @@
                 <form id="formValorvar" name="formValorvar" class="form-horizontal">
                     <input type="hidden" id="idValorvar" name="idValorvar" value="">
                     <p class="text-primary">Todos los campos son obligatorios</p>
-
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="listVariable">Variable <span class="required">*</span></label>
@@ -19,21 +18,21 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="txtiniValorvar">Desde (AAAAMM) <span class="required">*</span></label>
-                            <input type="text" class="form-control valid validText" id="txtiniValorvar" name="txtiniValorvar" required="">
+                            <input type="text" class="form-control valid validNumber" id="txtiniValorvar" name="txtiniValorvar" required="">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="txtfinValorvar">Hasta (AAAAMM) <span class="required">*</span></label>
-                            <input type="text" class="form-control valid validText" id="txtfinValorvar" name="txtfinValorvar" required="">
+                            <input type="text" class="form-control valid validNumber" id="txtfinValorvar" name="txtfinValorvar" required="">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="txttipValorvar" class="control-label">Tipo (V/P)<span class="required">*</span></label>
                             <input type="text" class="form-control" id="txttipValorvar" name="txttipValorvar" required="">
-                        </div>>
+                        </div>
                         <div class="form-group col-md-6">
                             <label for="fltvalValorvar">Valor <span class="required">*</span></label>
-                            <input type="text" class="form-control valid validText" id="fltvalValorvar" name="fltvalValorvar" required="">
+                            <input type="float" class="form-control valid validNumber" id="fltvalValorvar" name="fltvalValorvar" required="">
                         </div>
                     </div>
                     <div class="form-row">
@@ -70,7 +69,7 @@
                     <tbody style="text-align: left;">
                         <tr>
                             <td>Código:</td>
-                            <td id="celcodValorvar">3</td>
+                            <td id="celvarValorvar">3</td>
                         </tr>
                         <tr>
                             <td>Descripción:</td>

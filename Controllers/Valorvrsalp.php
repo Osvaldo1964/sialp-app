@@ -24,43 +24,43 @@ class Valorvrsalp extends Controllers
         $this->views->getView($this, "valorvrsalp", $data);
     }
 
-    public function setValorvrsalp()
+    public function setValorvar()
     {
         if ($_POST) {
-            if (empty($_POST['txtcodValorvar']) || empty($_POST['txtiniValorvar']) || empty($_POST['listVariables']) 
+            if (empty($_POST['txtiniValorvar']) || empty($_POST['txtfinValorvar']) || empty($_POST['listVariable']) 
             || empty($_POST['listestValorvar']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idValorvar     = intval($_POST['idValorvar']);
-                $strcodValorvar = strClean($_POST['txtcodValorvar']);
-                $intvarValorvar = intval($_POST['listVariables']);
+                //$strcodValorvar = strClean($_POST['txtcodValorvar']);
+                $intvarValorvar = intval($_POST['listVariable']);
                 $striniValorvar = strClean($_POST['txtiniValorvar']);
                 $strfinValorvar = strClean($_POST['txtfinValorvar']);
                 $strtipValorvar = strClean($_POST['txttipValorvar']);
-                $fltvalValorvar = $_POST['fltvalValorvar'];
+                $fltvalValorvar = floatval($_POST['fltvalValorvar']);
                 $intestValorvar = intval($_POST['listestValorvar']);
                 $request_Valorvar = "";
 
                 if ($idValorvar == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_Elemento = $this->model->insertValorvar($strcodValorvar, $intvarValorvar,  $striniValorvar, $strfinValorvar,
+                        $request_Valorvar = $this->model->insertValorvar($intvarValorvar, $striniValorvar, $strfinValorvar,
                             $strtipValorvar, $fltvalValorvar, $intestValorvar);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_Valorvar = $this->model->updateValorvar($idValorvar, $strcodValorvar, $intvarValorvar,  $striniValorvar, $strfinValorvar,
+                        $request_Valorvar = $this->model->updateValorvar($idValorvar, $intvarValorvar, $striniValorvar, $strfinValorvar,
                         $strtipValorvar, $fltvalValorvar, $intestValorvar);
                     }
                 }
                 if($request_Valorvar == 1 || $request_Valorvar != 'exist')
                 {
                     if($option == 1){
-                        $arrResponse = array('status' => true, 'idValorvar' => $request_Elemento, 'msg' => 'Datos guardados correctamente.');
+                        $arrResponse = array('status' => true, 'idValorvar' => $request_Valorvar, 'msg' => 'Datos guardados correctamente.');
                     }else{
-                        $arrResponse = array('status' => true, 'idValorvar' => $idElemento, 'msg' => 'Datos Actualizados correctamente.');
+                        $arrResponse = array('status' => true, 'idValorvar' => $idValorvar, 'msg' => 'Datos Actualizados correctamente.');
                     }
                 }else if($request_Valorvar == 'exist'){
                     $arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un Registro con el Código Ingresado.');		

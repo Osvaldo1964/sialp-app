@@ -124,6 +124,14 @@
                 </li>
             <?php } ?>
 
+            <?php if (!empty($_SESSION['permisos'][MPQRS]['reaPermiso'])) { ?>
+                <li>
+                    <a class="app-menu__item" href="<?= base_url(); ?>/controlpqr">
+                        <i class="app-menu__icon fas fa-envelope" aria-hidden="true"></i>
+                        <span class="app-menu__label">Seguimiento PQRs</span>
+                    </a>
+                </li>
+            <?php } ?>
 
             <li>
                 <a class="app-menu__item" href="<?= base_url(); ?>/logout">

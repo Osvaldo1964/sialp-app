@@ -59,16 +59,19 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "desc"]]
     });
 
-    //Crear Empresa
-    if (document.querySelector('#formGruposalp')) {
-        let formGruposalp = document.querySelector('#formGruposalp');
-        formGruposalp.onsubmit = function (e) {
+    //Crear Valor
+    if (document.querySelector('#formValorvar')) {
+        let formValorvar = document.querySelector('#formValorvar');
+        formValorvar.onsubmit = function (e) {
             e.preventDefault();
-            let strcodGruposalp = document.querySelector('#txtcodGruposalp').value;
-            let strdesGruposalp = document.querySelector('#txtdesGruposalp').value;
-            let fltvidGruposalp = document.querySelector('#fltvidGruposalp').value;
-            let intestGruposalp = document.querySelector('#listestGruposalp').value;
-            if (strcodGruposalp == '' || strdesGruposalp == '' || fltvidGruposalp == 0.00) {
+            //let intvarValorvar = document.querySelector('#tlistVariable').value;
+            //let strdesValorvar = document.querySelector('#txtdesValorvar').value;
+            let striniValorvar = document.querySelector("#txtiniValorvar").value;
+            let strfinValorvar = document.querySelector("#txtfinValorvar").value;
+            let strtipValorvar = document.querySelector("#txttipValorvar").value;
+            let fltvalValorvar = document.querySelector("#fltvalValorvar").value;
+            let intestValorvar = document.querySelector('#listestValorvar').value;
+            if (striniValorvar == '' || strfinValorvar == '' || strtipValorvar == "") {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -81,29 +84,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupossalp/setGruposalp';
-            let formData = new FormData(formGruposalp);
+            let ajaxUrl = base_url + '/Valorvrsalp/setValorvar';
+            let formData = new FormData(formValorvar);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
             request.onreadystatechange = function () {
                 if (request.readyState == 4 && request.status == 200) {
                     let objData = JSON.parse(request.responseText);
+                    console.log(objData);
                     if (objData.status) {
                         if (rowTable == ""){
-                            tableGrupossalp.api().ajax.reload();    
+                            tableValorvrsalp.api().ajax.reload();    
                         }else{
-                            htmlStatus = intestGruposalp == 1 ? 
+                            htmlStatus = intestValorvar == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
                             '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = strcodGruposalp;
-                            rowTable.cells[2].textContent = strdesGruposalp;
-                            rowTable.cells[3].textContent = strdesGruposalp;
-                            rowTable.cells[4].innerHTML = htmlStatus;
+                            rowTable.cells[1].textContent = document.querySelector("#listVariable").selectedOptions[0].text;;
+                            rowTable.cells[2].textContent = striniValorvar;
+                            rowTable.cells[3].textContent = strfinValorvar;
+                            rowTable.cells[4].textContent = strtipValorvar;
+                            rowTable.cells[5].textContent = fltvalValorvar;
+                            rowTable.cells[6].innerHTML = htmlStatus;
                             rowTable = "";
                         }
-                        $('#modalFormGruposalp').modal("hide");
-                        formGruposalp.reset();
-                        swal("Grupos SALP", objData.msg, "success");
+                        $('#modalFormValorvar').modal("hide");
+                        formValorvar.reset();
+                        swal("Registro Movimiento", objData.msg, "success");
                     }
                 }
                 divLoading.style.display = "none";
@@ -126,7 +132,7 @@ function fntViewInfo(idvalorvar) {
                 let estado = objData.data[0].estValorvar == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector("#celcodValorvar").innerHTML = objData.data[0].codValorvar;
+                document.querySelector("#celvarValorvar").innerHTML = objData.data[0].varValorvar;
                 document.querySelector("#celdesVarsalp").innerHTML = objData.data[0].desVarsalp;
                 document.querySelector("#celiniValorvar").innerHTML = objData.data[0].iniValorvar;
                 document.querySelector("#celfinValorvar").innerHTML = objData.data[0].finValorvar;
@@ -160,12 +166,13 @@ function fntEditInfo(element, idValorvar) {
                 document.querySelector("#txtfinValorvar").value = objData.data[0].finValorvar;
                 document.querySelector("#txttipValorvar").value = objData.data[0].tipValorvar;
                 document.querySelector("#fltvalValorvar").value = objData.data[0].valValorvar;
-                document.querySelector("#listVariable").value = objData.data[0].codValorvar;
+                document.querySelector("#listVariable").value = objData.data[0].varValorvar;
                 if (objData.data[0].estValorvar == 1) {
                     document.querySelector("#listestValorvar").value = 1;
                 } else {
                     document.querySelector("#listestValorvar").value = 2;
                 }
+                $('#listVariable').selectpicker('render');
                 $('#listestValorvar').selectpicker('render');
             }
         }
@@ -173,7 +180,7 @@ function fntEditInfo(element, idValorvar) {
     }
 }
 
-function fntDelInfo(idGruposalp) {
+function fntDelInfo(idValorvar) {
     swal({
         title: "Eliminar Grupo",
         text: "¿Realmente quiere eliminar el Grupo?",
@@ -186,8 +193,8 @@ function fntDelInfo(idGruposalp) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupossalp/delGruposalp/';
-            let strData = "idGruposalp=" + idGruposalp;
+            let ajaxUrl = base_url + '/Valorvrsalp/delValorvar/';
+            let strData = "idValorvar=" + idValorvar;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -196,7 +203,7 @@ function fntDelInfo(idGruposalp) {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal("Eliminar!", objData.msg, "success");
-                        tableGrupos.api().ajax.reload();
+                        tableValorvrsalp.api().ajax.reload();
                     } else {
                         swal("Atención!", objData.msg, "error");
                     }

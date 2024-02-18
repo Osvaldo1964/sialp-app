@@ -1,25 +1,31 @@
-let tableCapìtulos;
+let tableControlPqr;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Tabla de Capítulos
-    tableCapitulos = $('#tableCapitulos').dataTable({
+    // Tabla de Grupos
+    tableControlPqr = $('#tableControlPqr').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Capitulos/getCapitulos",
+            "url": " " + base_url + "/Controlpqr/getPqrs",
             "dataSrc": ""
         },
         "columns": [
-            { "data": "idCapitulo" },
-            { "data": "nomCapitulo" },
-            { "data": "tipCapitulo" },
+            { "data": "idPqrs" },
+            { "data": "nomPqrs" },
+            { "data": "dirPqrs" },
+            { "data": "frePqrs" },
+            { "data": "estPqrs" },
             { "data": "options" }
         ],
+        "columnDefs": [
+            { 'className': "textleft", "targets": [ 1,2 ] },
+            { 'className': "textright", "targets": [ 0 ] }
+          ],   
         'dom': 'lBfrtip',
         'buttons': [
             {
@@ -51,14 +57,16 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "desc"]]
     });
 
-    //NUEVO CAPITULO
-    if (document.querySelector('#formCapitulo')) {
-        let formCapitulo = document.querySelector('#formCapitulo');
-        formCapitulo.onsubmit = function (e) {
+    //Crear Empresa
+    if (document.querySelector('#formPqrs')) {
+        let formPqrs = document.querySelector('#formPqrs');
+        formPqrs.onsubmit = function (e) {
             e.preventDefault();
-            let strnomCapitulo = document.querySelector('#txtnomCapitulo').value;
-            let inttipCapitulo = document.querySelector('#listtipCapitulo').value;
-            if (strnomCapitulo == '' || inttipCapitulo == '') {
+            let strnomPqrs = document.querySelector('#txtnomPqrs').value;
+            let strdirPqrs = document.querySelector('#txtdirPqrs').value;
+            let strfrePqrs = document.querySelector('#txtfrePqrs').value;
+            let intestPqrs = document.querySelector('#listestGrupo').value;
+            if (strnomPqrs == '' || strdirPqrs == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -71,27 +79,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Capitulos/setCapitulo';
-            let formData = new FormData(formCapitulo);
+            let ajaxUrl = base_url + '/Controlpqr/setPqrs';
+            let formData = new FormData(formPqrs);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
             request.onreadystatechange = function () {
                 if (request.readyState == 4 && request.status == 200) {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
-                        if (rowTable == "") {
-                            tableCapitulos.api().ajax.reload();
-                        } else {
-                            htmlTipo = inttipCapitulo == 1 ?
-                                '<span class="badge badge-success">Ingreso</span>' :
-                                '<span class="badge badge-danger">Gasto</span>';
-                            rowTable.cells[1].textContent = strnomCapitulo;
-                            rowTable.cells[3].innerHTML = htmlTipo;
+                        if (rowTable == ""){
+                            tableControlPqr.api().ajax.reload();    
+                        }else{
+                            htmlStatus = intestPqrs == 1 ? 
+                            '<span class="badge badge-success">Activo</span>' :
+                            '<span class="badge badge-danger">Inactivo</span>';
+                            rowTable.cells[1].textContent = strnomPqrs;
+                            rowTable.cells[2].textContent = strdirPqrs;
+                            rowTable.cells[3].textContent = strfrePqrs;
+                            rowTable.cells[4].innerHTML = htmlStatus;
                             rowTable = "";
                         }
-                        $('#modalFormCapitulo').modal("hide");
-                        formCapitulo.reset();
-                        swal("Capitulos", objData.msg, "success");
+                        $('#modalFormPqrs').modal("hide");
+                        formPqrs.reset();
+                        swal("Pqrs", objData.msg, "success");
                     }
                 }
                 divLoading.style.display = "none";
@@ -99,62 +109,70 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+    //fntCapitulos();
 }, false);
-function fntViewInfo(idcapitulo) {
+
+function fntViewInfo(idpqrs) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Capitulos/getCapitulo/' + idcapitulo;
+    let ajaxUrl = base_url + '/Controlpqr/getPqr/' + idpqrs;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
-            console.log(objData);
             if (objData.status) {
-                let tipCapitulo = objData.data[0].tipCapitulo == 1 ?
-                    '<span class="badge badge-success">Ingreso</span>' :
-                    '<span class="badge badge-danger">Gasto</span>';
-                document.querySelector("#celnomCapitulo").innerHTML = objData.data[0].nomCapitulo;
-                document.querySelector("#celtipCapitulo").innerHTML = tipCapitulo;
-                $('#modalViewCapitulo').modal('show');
+                let estPqrs = objData.data[0].estPqrs == 1 ?
+                    '<span class="badge badge-success">Activo</span>' :
+                    '<span class="badge badge-danger">Inactivo</span>';
+                document.querySelector("#celidPqrs").innerHTML = objData.data[0].idPqrs;
+                document.querySelector("#celnomPqrs").innerHTML = objData.data[0].nomPqrs;
+                document.querySelector("#celemaPqrs").innerHTML = objData.data[0].emaPqrs;
+                document.querySelector("#celdirPqrs").innerHTML = objData.data[0].dirPqrs;
+                document.querySelector("#celfrePqrs").innerHTML = objData.data[0].frePqrs;
+                document.querySelector("#celmsgPqrs").innerHTML = objData.data[0].msgPqrs;
+                document.querySelector("#celfsoPqrs").innerHTML = objData.data[0].fsoPqrs;
+                document.querySelector("#celdsoPqrs").innerHTML = objData.data[0].dsoPqrs;
+                document.querySelector("#celestPqrs").innerHTML = estPqrs;
+                $('#modalViewPqrs').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
         }
     }
 }
-
-function fntEditInfo(element, idCapitulo) {
+function fntEditInfo(element, idPqrs) {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Actualizar Capitulo";
+    document.querySelector('#titleModal').innerHTML = "Actualizar PQR";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Capitulos/getCapitulo/' + idCapitulo;
+    let ajaxUrl = base_url + '/Controlpqr/getPqr/' + idPqrs;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                document.querySelector("#idCapitulo").value = objData.data[0].idCapitulo;
+                document.querySelector("#idGrupo").value = objData.data[0].idGrupo;
                 document.querySelector("#txtnomCapitulo").value = objData.data[0].nomCapitulo;
-                if (objData.data[0].tipCapitulo == 1) {
-                    document.querySelector("#listtipCapitulo").value = 1;
+                document.querySelector("#txtdesGrupo").value = objData.data[0].desGrupo;
+                if (objData.data[0].estPqrs == 1) {
+                    document.querySelector("#listestPqrs").value = 1;
                 } else {
-                    document.querySelector("#listtipCapitulo").value = 2;
+                    document.querySelector("#listestPqrs").value = 2;
                 }
-                $('#listtipCapitulo').selectpicker('render');
+                $('#listestPqrs').selectpicker('render');
             }
         }
-        $('#modalFormCapitulo').modal('show');
+        $('#modalFormPqrs').modal('show');
     }
 }
 
-function fntDelInfo(idCapitulo) {
+function fntDelInfo(idPqrs) {
     swal({
-        title: "Eliminar Capitulo",
-        text: "¿Realmente quiere eliminar el Capitulo?",
+        title: "Eliminar PQR",
+        text: "¿Realmente quiere eliminar esta PQR?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
@@ -164,8 +182,8 @@ function fntDelInfo(idCapitulo) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Capitulos/delCapitulo/';
-            let strData = "idCapitulo=" + idCapitulo;
+            let ajaxUrl = base_url + '/Controlpqr/delPqr/';
+            let strData = "idPqrs=" + idPqrs;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -174,7 +192,7 @@ function fntDelInfo(idCapitulo) {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal("Eliminar!", objData.msg, "success");
-                        tableCapitulos.api().ajax.reload();
+                        tableControlPqr.api().ajax.reload();
                     } else {
                         swal("Atención!", objData.msg, "error");
                     }
@@ -183,13 +201,14 @@ function fntDelInfo(idCapitulo) {
         }
     });
 }
+
 function openModal() {
     rowTable = "";
-    document.querySelector('#idCapitulo').value = "";
+    document.querySelector('#idPqrs').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nuevo Capitulo";
-    document.querySelector("#formCapitulo").reset();
-    $('#modalFormCapitulo').modal('show');
+    document.querySelector('#titleModal').innerHTML = "Nueva PQR";
+    document.querySelector("#formPqrs").reset();
+    $('#modalFormPqrs').modal('show');
 }
