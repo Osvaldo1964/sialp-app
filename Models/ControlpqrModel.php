@@ -52,25 +52,17 @@ class ControlpqrModel extends Mysql
         return $request;
     }
 
-    public function updateCategoria(int $idCategoria, string $nombre, string $descripcion, string $portada, string $ruta, int $estado)
+    public function updatePqrs(int $idPqrs, string $fecha, string $descripcion, int $estado)
     {
-        $this->intidCategoria   = $idCategoria;
-        $this->strnomCategoria  = $nombre;
-        $this->strdesCategoria  = $descripcion;
-        $this->strimgCategoria  = $portada;
-        $this->strrutCategoria  = $ruta;
-        $this->intestCategoria  = $estado;
+        $this->intidPqrs  = $idPqrs;
+        $this->strfsoPqrs = $fecha;
+        $this->strdsoPqrs = $descripcion;
+        $this->intestPqrs = $estado;
 
-        $sql = "SELECT * FROM categorias WHERE nomCategoria = '{$this->strnomCategoria}' AND idCategoria != $this->intidCategoria";
-        $request = $this->select_all($sql);
-        if (empty($request)) {
-            $sql = "UPDATE categorias SET nomCategoria = ?, desCategoria = ?, imgCategoria = ?, rutCategoria = ?, estCategoria = ?
-                    WHERE idCategoria = $this->intidCategoria";
-            $arrData = array($this->strnomCategoria, $this->strdesCategoria, $this->strimgCategoria, $this->strrutCategoria, $this->intestCategoria);
-            $request = $this->update($sql, $arrData);
-        } else {
-            $request = "exist";
-        }
+        $sql = "UPDATE pqrs SET fsoPqrs = ?, dsoPqrs = ?, estPqrs = ?
+                WHERE idPqrs = $this->intidPqrs";
+        $arrData = array($this->strfsoPqrs, $this->strdsoPqrs, $this->intestPqrs);
+        $request = $this->update($sql, $arrData);
         return $request;
     }
 

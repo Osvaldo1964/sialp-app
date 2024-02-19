@@ -62,11 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let formPqrs = document.querySelector('#formPqrs');
         formPqrs.onsubmit = function (e) {
             e.preventDefault();
-            let strnomPqrs = document.querySelector('#txtnomPqrs').value;
-            let strdirPqrs = document.querySelector('#txtdirPqrs').value;
-            let strfrePqrs = document.querySelector('#txtfrePqrs').value;
-            let intestPqrs = document.querySelector('#listestGrupo').value;
-            if (strnomPqrs == '' || strdirPqrs == '') {
+            let strfsoPqrs = document.querySelector('#txtfsoPqrs').value;
+            let strdsoPqrs = document.querySelector('#txtdsoPqrs').value;
+            let intestPqrs = document.querySelector('#listestPqrs').value;
+            if (strfsoPqrs == '' || strdsoPqrs == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -87,18 +86,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (request.readyState == 4 && request.status == 200) {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
-                        if (rowTable == ""){
+                        tableControlPqr.api().ajax.reload();    
+/*                         if (rowTable == ""){
                             tableControlPqr.api().ajax.reload();    
                         }else{
-                            htmlStatus = intestPqrs == 1 ? 
+                             htmlStatus = intestPqrs == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
                             '<span class="badge badge-danger">Inactivo</span>';
                             rowTable.cells[1].textContent = strnomPqrs;
                             rowTable.cells[2].textContent = strdirPqrs;
                             rowTable.cells[3].textContent = strfrePqrs;
                             rowTable.cells[4].innerHTML = htmlStatus;
-                            rowTable = "";
-                        }
+                            rowTable = ""; 
+                        } */
                         $('#modalFormPqrs').modal("hide");
                         formPqrs.reset();
                         swal("Pqrs", objData.msg, "success");
@@ -154,9 +154,12 @@ function fntEditInfo(element, idPqrs) {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                document.querySelector("#idGrupo").value = objData.data[0].idGrupo;
-                document.querySelector("#txtnomCapitulo").value = objData.data[0].nomCapitulo;
-                document.querySelector("#txtdesGrupo").value = objData.data[0].desGrupo;
+                document.querySelector("#idPqrs").value = objData.data[0].idPqrs;
+                document.querySelector("#txtnomPqrs").value = objData.data[0].nomPqrs;
+                document.querySelector("#txtemaPqrs").value = objData.data[0].emaPqrs;
+                document.querySelector("#txtdirPqrs").value = objData.data[0].dirPqrs;
+                document.querySelector("#txtmsgPqrs").value = objData.data[0].msgPqrs;
+                document.querySelector("#txtfsoPqrs").value = objData.data[0].fsoPqrs;
                 if (objData.data[0].estPqrs == 1) {
                     document.querySelector("#listestPqrs").value = 1;
                 } else {

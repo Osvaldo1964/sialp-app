@@ -15,7 +15,7 @@ $('.date-picker').datepicker( {
     }
 });
 
-function fntSearchPagos(){
+function fntSearchPqprs(){
     let fecha = document.querySelector(".pagoMes").value;
     if(fecha == ""){
         swal("", "Seleccione mes y año" , "error");

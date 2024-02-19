@@ -13,16 +13,40 @@
           <p class="text-primary">Todos los campos son obligatorios</p>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="txtnomCapitulo">Descripción</label>
-              <input type="text" class="form-control valid validText" id="txtnomCapitulo" name="txtnomCapitulo" required="">
+              <label for="txtnomPqrs">Nombre</label>
+              <input type="text" class="form-control valid validText" id="txtnomPqrs" name="txtnomPqrs" required="">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="txtemaPqrs">Correo</label>
+              <input type="text" class="form-control valid validText" id="txtemaPqrs" name="txtemaPqrs" required="">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="listtipCapitulo">Tipo</label>
-              <select class="form-control selectpicker" id="listtipCapitulo" name="listtipCapitulo" required>
-                <option value="1">Ingreso</option>
-                <option value="2">Gasto</option>
+              <label for="txtdirPqrs">Dirección</label>
+              <input type="text" class="form-control valid validText" id="txtdirPqrs" name="txtdirPqrs" required="">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="txtmsgPqrs">Mensaje</label>
+              <input type="text" class="form-control valid validText" id="txtmsgPqrs" name="txtmsgPqrs" required="">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="txtfsoPqrs">Fecha Solucionado:</label>
+              <input type="date" class="date-picker form-control" id="txtfsoPqrs" name="txtfsoPqrs" required="">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="txtdsoPqrs">Observaciones</label>
+              <input type="text" class="form-control valid validText" id="txtdsoPqrs" name="txtdsoPqrs" required="">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="listestPqrs">Estado</label>
+              <select class="form-control selectpicker" id="listestPqrs" name="listestPqrs" required>
+                <option value="1">Activo</option>
+                <option value="2">Inactivo</option>
               </select>
             </div>
           </div>
@@ -82,7 +106,7 @@
               <td id="celdsoPqrs">73111404</td>
             </tr>
             <tr>
-            <td>Estado:</td>
+              <td>Estado:</td>
               <td id="celestPqrs">73111404</td>
             </tr>
 

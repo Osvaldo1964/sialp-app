@@ -26,30 +26,17 @@ class Controlpqr extends Controllers
     public function setPqrs()
     {
         if ($_POST) {
-            if (empty($_POST['txtnomCategoria']) || empty($_POST['txtdesCategoria']) ||
-                empty($_POST['listestCategoria']))
+            if (empty($_POST['txtfsoPqrs']) || empty($_POST['txtdsoPqrs']) ||
+                empty($_POST['listestPqrs']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idCategoria = intval($_POST['idPqrs']);
-                $strnomCategoria  = strClean($_POST['txtnomCategoria']);
-                $strdesCategoria  = strClean($_POST['txtdesCategoria']);
-                $intestCategoria  = intval($_POST['listestCategoria']);
+                $idPqrs = intval($_POST['idPqrs']);
+                $strfsoPqrs  = $_POST['txtfsoPqrs'];
+                $strdsoPqrs  = strClean($_POST['txtdsoPqrs']);
+                $intestPqrs  = intval($_POST['listestPqrs']);
 
-                $ruta = strtolower(clear_cadena($strnomCategoria));
-                $ruta = str_replace(" ", "-", $ruta);
-
-                //DATOS IMAGEN
-                $img_foto   =   $_FILES['foto'];
-                $nom_foto   =   $img_foto['name'];
-                $tip_foto   =   $img_foto['type'];
-                $url_foto   =   $img_foto['tmp_name'];
-                $por_foto   =   'portada_categoria.jpg';
-
-                if ($nom_foto != '') {
-                    $por_foto = 'img_' . md5(date('Y-m-d H:m:s')) . '.jpg';
-                }
-                if ($idCategoria == 0) {
+                if ($idPqrs == 0) {
                     //CREAR
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
@@ -59,27 +46,16 @@ class Controlpqr extends Controllers
                     //ACTUALIZAR
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        if ($nom_foto == ''){
-                            if ($_POST['foto_actual'] != 'portada_categoria.png' && $_POST['foto_remove'] == 0){
-                                $por_foto = $_POST['foto_actual'];
-                            }
-                        }
-                        $request_categoria = $this->model->updateCategoria($idCategoria, $strnomCategoria, $strdesCategoria, $por_foto,  $ruta, $intestCategoria);
+                        $request_pqrs = $this->model->updatePqrs($idPqrs, $strfsoPqrs, $strdsoPqrs, $intestPqrs);
                     }
                 }
-                if ($request_categoria > 0) {
+                if ($request_pqrs > 0) {
                     if ($option == 1) {
                         $arrResponse = array("status" => true, "msg" => 'Datos guardados correctamente.');
-                        if($nom_foto != ''){ uploadImage($img_foto, $por_foto); }
                     }else{
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
-                        if($nom_foto != ''){ uploadImage($img_foto, $por_foto); }
-                        if (($nom_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_categoria.png') ||
-                            ($nom_foto != '' && $_POST['foto_actual'] != 'portada_categoria.png')){
-                            deleteFile($_POST['foto_actual']);
-                        }
                     }
-                }else if ($request_categoria == 'exist') {
+                }else if ($request_pqrs == 'exist') {
                     $arrResponse = array("status" => false, "msg" => '¡Atención! la Categoría ya existe, ingrese otro.');
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
