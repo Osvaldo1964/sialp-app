@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 16-02-2024 a las 19:37:01
+-- Tiempo de generación: 19-02-2024 a las 02:49:49
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -81,6 +81,10 @@ CREATE TABLE `elementos` (
   `latElemento` float(15,2) NOT NULL,
   `lonElemento` float(15,2) NOT NULL,
   `rutElemento` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ainElemento` varchar(15) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `finElemento` date DEFAULT NULL,
+  `abaElemento` varchar(15) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `fbaElemento` date DEFAULT NULL,
   `estElemento` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -88,14 +92,14 @@ CREATE TABLE `elementos` (
 -- Volcado de datos para la tabla `elementos`
 --
 
-INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElemento`, `desElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `estElemento`) VALUES
-(1, 2, '01002100', 'Luminaria LED 30w', '<p>Esta es una prueba de la hoja de vida</p> <ul> <li>Fecha Mayo 1 de 2024 - Se instala la luminaria</li> <li>Fecha Junio 15 de 2024 - Se cambia el sticker del poste</li> <li>Fecha Agosto 30 de 2024 - Se reemplaza la luminaria por robo</li> </ul>', 'Esta es la direccion de la luminaria', 15.25, 14.23, '01002100', 1),
-(2, 2, '01002101', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002101', 1),
-(3, 2, '01002102', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002102', 1),
-(4, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', 1),
-(5, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', 1),
-(6, 1, '001542523', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542523', 1),
-(7, 1, '001542527', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542527', 1);
+INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElemento`, `desElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `finElemento`, `abaElemento`, `fbaElemento`, `estElemento`) VALUES
+(1, 2, '01002100', 'Luminaria LED 30w', '<p>Esta es una prueba de la hoja de vida</p> <ul> <li>Fecha Mayo 1 de 2024 - Se instala la luminaria</li> <li>Fecha Junio 15 de 2024 - Se cambia el sticker del poste</li> <li>Fecha Agosto 30 de 2024 - Se reemplaza la luminaria por robo</li> </ul>', 'Esta es la direccion de la luminaria', 15.25, 14.23, '01002100', NULL, NULL, NULL, NULL, 1),
+(2, 2, '01002101', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002101', NULL, NULL, NULL, NULL, 1),
+(3, 2, '01002102', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002102', NULL, NULL, NULL, NULL, 1),
+(4, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', NULL, NULL, NULL, NULL, 1),
+(5, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', NULL, NULL, NULL, NULL, 1),
+(6, 1, '001542523', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542523', NULL, NULL, NULL, NULL, 1),
+(7, 1, '001542527', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542527', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -212,7 +216,8 @@ INSERT INTO `modulos` (`idModulo`, `titModulo`, `desModulo`, `estModulo`) VALUES
 (16, 'Informes', 'Informes de Cartera', 1),
 (17, 'Suscriptores', 'Registro Suscriptores', 1),
 (18, 'Contactos', 'Registro de Contactos', 1),
-(19, 'Páginas', 'Páginas del Sitio WEB', 1);
+(19, 'Páginas', 'Páginas del Sitio WEB', 1),
+(20, 'Pqrs', 'Control y Seguimiento PQRs', 1);
 
 -- --------------------------------------------------------
 
@@ -271,25 +276,6 @@ INSERT INTO `permisos` (`idPermiso`, `idRol`, `idModulo`, `reaPermiso`, `wriPerm
 (167, 3, 6, 0, 0, 0, 0),
 (168, 3, 7, 0, 0, 0, 0),
 (169, 3, 8, 1, 1, 1, 1),
-(415, 1, 1, 1, 1, 1, 1),
-(416, 1, 2, 1, 1, 1, 1),
-(417, 1, 3, 1, 1, 1, 1),
-(418, 1, 4, 1, 1, 1, 1),
-(419, 1, 5, 1, 1, 1, 1),
-(420, 1, 6, 1, 1, 1, 1),
-(421, 1, 7, 1, 1, 1, 1),
-(422, 1, 8, 1, 1, 1, 1),
-(423, 1, 9, 1, 1, 1, 1),
-(424, 1, 10, 1, 1, 1, 1),
-(425, 1, 11, 1, 1, 1, 1),
-(426, 1, 12, 1, 1, 1, 1),
-(427, 1, 13, 1, 1, 1, 1),
-(428, 1, 14, 1, 1, 1, 1),
-(429, 1, 15, 1, 1, 1, 1),
-(430, 1, 16, 1, 1, 1, 1),
-(431, 1, 17, 1, 1, 1, 1),
-(432, 1, 18, 1, 1, 1, 1),
-(433, 1, 19, 1, 1, 1, 1),
 (434, 5, 1, 1, 0, 0, 0),
 (435, 5, 2, 1, 1, 0, 0),
 (436, 5, 3, 0, 0, 0, 0),
@@ -308,7 +294,18 @@ INSERT INTO `permisos` (`idPermiso`, `idRol`, `idModulo`, `reaPermiso`, `wriPerm
 (449, 5, 16, 0, 0, 0, 0),
 (450, 5, 17, 0, 0, 0, 0),
 (451, 5, 18, 0, 0, 0, 0),
-(452, 5, 19, 1, 0, 0, 0);
+(452, 5, 19, 1, 0, 0, 0),
+(453, 1, 1, 1, 1, 1, 1),
+(454, 1, 2, 1, 1, 1, 1),
+(455, 1, 3, 1, 1, 1, 1),
+(456, 1, 4, 1, 1, 1, 1),
+(457, 1, 5, 1, 1, 1, 1),
+(458, 1, 6, 1, 1, 1, 1),
+(459, 1, 16, 1, 1, 1, 1),
+(460, 1, 17, 1, 1, 1, 1),
+(461, 1, 18, 1, 1, 1, 1),
+(462, 1, 19, 1, 1, 1, 1),
+(463, 1, 20, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -353,61 +350,31 @@ CREATE TABLE `pqrs` (
   `nomPqrs` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `emaPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `dirPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `msgPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
+  `msgPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `frePqrs` date DEFAULT NULL,
+  `fsoPqrs` date DEFAULT NULL,
+  `dsoPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `estPqrs` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `pqrs`
 --
 
-INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`) VALUES
-(1, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fgsdfgsdf'),
-(2, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'vzxcvzxcv'),
-(3, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fbxcvbxcvb'),
-(4, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfsfasdsd'),
-(5, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfsfasdsd'),
-(6, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fzcvzxcv'),
-(7, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfdfgsd'),
-(8, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfdfgsd'),
-(9, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'vbxv'),
-(10, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fdfdf'),
-(11, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'dfdssd'),
-(12, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta colombia', 'dfdssd'),
-(13, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17a, santa marta colombia', 'dfdssd'),
-(14, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sadcvasdasd'),
-(15, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsadsfv'),
-(16, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsadsfv'),
-(17, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'asdaSDA'),
-(18, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 7 calle 7, santa marta, colombia', 'asdaSDA'),
-(19, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 1 calle 15, santa marta, colombia', 'asdaSDA'),
-(20, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dsfgada'),
-(21, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsad'),
-(22, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'bxfbxbvv'),
-(23, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dsfsfdgs'),
-(24, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'xcv<x<xzc'),
-(25, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'scsdc<sxc'),
-(26, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sdfdsfd'),
-(27, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fhsfg'),
-(28, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fgsdfgdf'),
-(29, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fgdsfg'),
-(30, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 calle 15, santa marta, colombia', 'fgdsfg'),
-(31, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'ghdfhdfg'),
-(32, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15, santa marta, colombia', 'ghdfhdfg'),
-(33, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 15-20, santa marta, colombia', 'ghdfhdfg'),
-(34, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'ghdfhdfg'),
-(35, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dfdfdf'),
-(36, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'gfghfgh'),
-(37, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fgfg'),
-(38, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'dfgdf'),
-(39, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sdfsdfsdf'),
-(40, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 15-20, santa marta colombia', 'sdfsdfsdf'),
-(41, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf'),
-(42, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf'),
-(43, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fghfghg'),
-(44, 'Osvaldo', 'osvicor@hotmail.com', 'calle 11 carrera 5', 'fghfghg'),
-(45, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 calle 14 santa marta colombia', 'gdfghdfg'),
-(46, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 22 santa marta, colombia', 'gdfghdfg'),
-(47, 'Osvaldo', 'osvicor@hotmail.com', 'taganga magdalena', 'dfsdsdf');
+INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `frePqrs`, `fsoPqrs`, `dsoPqrs`, `estPqrs`) VALUES
+(1, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fgsdfgsdf', NULL, NULL, '', 1),
+(12, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta colombia', 'dfdssd', NULL, NULL, '', 1),
+(13, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17a, santa marta colombia', 'dfdssd', NULL, NULL, '', 1),
+(14, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sadcvasdasd', NULL, NULL, '', 1),
+(15, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsadsfv', NULL, NULL, '', 1),
+(40, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 15-20, santa marta colombia', 'sdfsdfsdf', NULL, NULL, '', 1),
+(41, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf', NULL, NULL, '', 1),
+(42, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf', NULL, NULL, '', 1),
+(43, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fghfghg', NULL, NULL, '', 1),
+(44, 'Osvaldo', 'osvicor@hotmail.com', 'calle 11 carrera 5', 'fghfghg', NULL, NULL, '', 1),
+(45, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 calle 14 santa marta colombia', 'gdfghdfg', NULL, NULL, '', 1),
+(46, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 22 santa marta, colombia', 'gdfghdfg', NULL, NULL, '', 1),
+(47, 'Osvaldo', 'osvicor@hotmail.com', 'taganga magdalena', 'dfsdsdf', '2024-02-10', '2024-02-18', 'Prueba', 2);
 
 -- --------------------------------------------------------
 
@@ -526,13 +493,23 @@ INSERT INTO `usuarios` (`idUsuario`, `tdoUsuario`, `docUsuario`, `nomUsuario`, `
 
 CREATE TABLE `valorvariablesalp` (
   `idValorvar` bigint NOT NULL,
-  `codValorvar` varchar(10) NOT NULL,
+  `varValorvar` bigint NOT NULL,
   `iniValorvar` varchar(6) NOT NULL,
   `finValorvar` varchar(6) NOT NULL,
-  `tipValorvar` int NOT NULL,
+  `tipValorvar` varchar(1) NOT NULL,
   `valValorvar` float(15,2) NOT NULL,
   `estValorvar` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `valorvariablesalp`
+--
+
+INSERT INTO `valorvariablesalp` (`idValorvar`, `varValorvar`, `iniValorvar`, `finValorvar`, `tipValorvar`, `valValorvar`, `estValorvar`) VALUES
+(1, 1, '202402', '202412', 'P', 2500.00, 1),
+(2, 2, '202401', '202412', 'p', 34500.00, 0),
+(3, 3, '202402', '202412', 'V', 4800.00, 0),
+(4, 5, '202401', '202402', 'V', 1250000.00, 0);
 
 -- --------------------------------------------------------
 
@@ -558,7 +535,8 @@ INSERT INTO `varsalp` (`idVarsalp`, `codVarsalp`, `desVarsalp`, `estVarsalp`) VA
 (4, '04', 'F.A.O.M.S.', 1),
 (5, '05', 'I.D.', 1),
 (6, '06', 'C.A.E.E.n.', 1),
-(7, '07', 'V.C.E.E.i', 1);
+(7, '07', 'V.C.E.E.i', 1),
+(8, '08', 'PRUEBA', 0);
 
 --
 -- Índices para tablas volcadas
@@ -679,7 +657,7 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `valorvariablesalp`
   ADD PRIMARY KEY (`idValorvar`),
-  ADD KEY `codValorvar` (`codValorvar`);
+  ADD KEY `varValorvar` (`varValorvar`);
 
 --
 -- Indices de la tabla `varsalp`
@@ -737,7 +715,7 @@ ALTER TABLE `itemsacta`
 -- AUTO_INCREMENT de la tabla `modulos`
 --
 ALTER TABLE `modulos`
-  MODIFY `idModulo` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idModulo` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `parametros`
@@ -749,7 +727,7 @@ ALTER TABLE `parametros`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idPermiso` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=453;
+  MODIFY `idPermiso` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=464;
 
 --
 -- AUTO_INCREMENT de la tabla `post`
@@ -797,13 +775,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `valorvariablesalp`
 --
 ALTER TABLE `valorvariablesalp`
-  MODIFY `idValorvar` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `idValorvar` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `varsalp`
 --
 ALTER TABLE `varsalp`
-  MODIFY `idVarsalp` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idVarsalp` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
