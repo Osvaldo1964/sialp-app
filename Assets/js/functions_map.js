@@ -80,8 +80,8 @@ function initMap(latitude, longitude) {
         latitude = 11.2084292;
         longitude = -74.2237886;
     }
-    alert(latitude);
-    alert(longitude);
+    //alert(latitude);
+    //alert(longitude);
     const myLatLng = { lat: latitude, lng: longitude };
     console.log(myLatLng);
     const map = new google.maps.Map(document.getElementById("map"), {

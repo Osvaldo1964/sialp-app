@@ -72,6 +72,47 @@ headerAdmin($data);
 
 <script>
 
+Highcharts.chart('cantPqrs', {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Ventas por tipo pago'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
+    },
+    series: [{
+      name: 'Brands',
+      colorByPoint: true,
+      data: [
+        <?php
+        foreach ($data['pqrs']['pqrs'] as $pagos) {
+          $nombre = $pagos['estPqrs'] == 1 ? 'Pendiente' : 'Resuelta';
+          echo "{name:'" . $nombre . "',y:" . $pagos['total'] . "},";
+        }
+        ?>
+      ]
+    }]
+  });
 
   Highcharts.chart('ucapsGrupo', {
     chart: {
@@ -81,7 +122,7 @@ headerAdmin($data);
       type: 'pie'
     },
     title: {
-      text: 'Ventas por tipo pago'
+      text: 'PQRs por Estado'
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

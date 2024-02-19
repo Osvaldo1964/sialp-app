@@ -10,7 +10,7 @@
 
     //Datos de Conexion Base de Datos
     const DB_HOST = "localhost";
-    const DB_NAME = "sialp-app-general";
+    const DB_NAME = "salp_app_general";
     const DB_USER = "root";
     const DB_PASSWORD = "";
     	//const DB_USER = "Osval_001";
