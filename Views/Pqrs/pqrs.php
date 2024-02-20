@@ -7,9 +7,15 @@
 	document.querySelector('header').classList.add('header-v4');
 </script>
 <!-- Title page -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo&callback=initMap"
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDTJ5uq4WEhP4noQ6DKM7aFVUYwGabdu8&callback=initMap"
 		type="text/javascript">
 </script>
+ -->
+ <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDTJ5uq4WEhP4noQ6DKM7aFVUYwGabdu8&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1"
+      defer
+    ></script>
+
 <script src="<?= media() ?>/js/functions_map.js"></script>
 <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url(<?= $banner ?>);">
 	<h2 class="ltext-105 cl0 txt-center">

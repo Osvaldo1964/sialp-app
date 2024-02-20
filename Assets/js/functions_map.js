@@ -43,8 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         longitude = objData.lon;
                         initMap(latitude, longitude);
                         //document.querySelector("#frmPqrs").reset();
-                        
-	
                     }else{
                         swal("", objData.msg , "error");
                     }
@@ -73,7 +71,7 @@ function repMap($latitude, $longitude){
     })
 }; 
  */
-function initMap(latitude, longitude) {
+ function initMap(latitude, longitude) {
     //alert('asasasaasas');
     if(latitude === undefined || longitude === undefined)
     {
@@ -83,7 +81,6 @@ function initMap(latitude, longitude) {
     //alert(latitude);
     //alert(longitude);
     const myLatLng = { lat: latitude, lng: longitude };
-    console.log(myLatLng);
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 18,
       center: new google.maps.LatLng(latitude, longitude),
@@ -98,4 +95,31 @@ function initMap(latitude, longitude) {
     });
   }
   
-  window.initMap = initMap;
+  /* window.initMap = initMap;  */
+
+  // Initialize and add the map
+
+/* async function initMap() {
+  // The location of Uluru
+  const position = { lat: 11.2084292, lng: -74.2237886 };
+  // Request needed libraries.
+  //@ts-ignore
+  const { Map } = await google.maps.importLibrary("maps");
+  const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+
+  // The map, centered at Uluru
+  map = new Map(document.getElementById("map"), {
+    zoom: 18,
+    center: position,
+    mapId: "DEMO_MAP_ID",
+  });
+
+  // The marker, positioned at Uluru
+  const marker = new AdvancedMarkerView({
+    map: map,
+    position: position,
+    title: "Uluru",
+  });
+}
+ */
+//initMap();

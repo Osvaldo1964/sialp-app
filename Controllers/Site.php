@@ -1,10 +1,10 @@
 <?php
-	require_once("Models/TCliente.php");
+	require_once("Models/TSite.php");
 	require_once("Models/LoginModel.php");
 
 class Site extends Controllers
 {
-	use TCliente;
+	use TSite;
     public $login;
     public function __construct()
     {
@@ -90,7 +90,7 @@ class Site extends Controllers
 				$latitud = $coordenadas[0];
 				$longitud = $coordenadas[1];
 				$newdireccion = $coordenadas[2];
-				$userContact = $this->setPqr($nombre,$email,$direccion, $mensaje);
+				$userContact = $this->setPqr($nombre,$email,$direccion, $mensaje, $latitud, $longitud, $newdireccion);
  				if($userContact > 0){
 					$arrResponse = array('status' => true, 'lat' => $latitud, 'lon' => $longitud, 'msg' => "Su mensaje fue enviado correctamente.");
 				}else{
@@ -103,7 +103,7 @@ class Site extends Controllers
 
 	function getGeocodeData($address) {
 		$address = urlencode($address);
-		$googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyCSCrHOuiMHc2IXhjopcMni6uVPmC2rAKo";
+		$googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyDDTJ5uq4WEhP4noQ6DKM7aFVUYwGabdu8";
 		$geocodeResponseData = file_get_contents($googleMapUrl);
 		$responseData = json_decode($geocodeResponseData, true);
 		if($responseData['status']=='OK')
