@@ -106,7 +106,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a class="treeview-item" href="<?= base_url(); ?>/facturacion"><i class="icon fa fa-circle-o"></i> Facturación/Recaudos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/costoconsumo"><i class="icon fa fa-circle-o"></i> Consumos/Costo</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/cstenergia"><i class="icon fa fa-circle-o"></i> Consumos/Costo</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> ****</a></li>
                     </ul>
                 </li>

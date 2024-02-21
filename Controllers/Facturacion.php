@@ -9,7 +9,7 @@ class Facturacion extends Controllers
         if (empty($_SESSION['login'])) {
             header('location: ' . base_url() . '/login');
         }
-        getPermisos(MESTRUCTURA);
+        getPermisos(MCOMPONENTES);
     }
 
     public function facturacion()
