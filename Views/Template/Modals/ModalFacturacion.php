@@ -9,23 +9,36 @@
             </div>
             <div class="modal-body">
                 <form id="formFacturacion" name="formFacturacion" class="form-horizontal">
-                    <input type="hidden" id="idGrupo" name="idGrupo" value="">
+                    <input type="hidden" id="idFactura" name="idFactura" value="">
                     <p class="text-primary">Todos los campos son obligatorios</p>
-
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="listCapitulo">Capítulo <span class="required">*</span></label>
-                            <select class="form-control" data-live-search="true" id="listCapitulo" name="listCapitulo" required=""></select>
+                            <label for="intperFactura">Período <span class="required">*</span></label>
+                            <input type="text" class="form-control valid validNumber" id="intperFactura" name="intperFactura" required="">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="txtdesGrupo">Descripción <span class="required">*</span></label>
-                            <input type="text" class="form-control valid validText" id="txtdesGrupo" name="txtdesGrupo" required="">
+                            <label for="listEstrato">Estrato <span class="required">*</span></label>
+                            <select class="form-control" data-live-search="true" id="listEstrato" name="listEstrato" required=""></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="intcanFactura">Cantidad <span class="required">*</span></label>
+                            <input type="number" class="form-control valid validNumber" id="intcanFactura" name="intcanFactura" required="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="intfacFactura">Facturado <span class="required">*</span></label>
+                            <input type="number" class="form-control valid validNumber" id="intfacFactura" name="intfacFactura" required="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="intrecFactura">Recaudo <span class="required">*</span></label>
+                            <input type="number" class="form-control valid validNumber" id="intrecFactura" name="intrecFactura" required="">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="listestGrupo">Estado</label>
-                            <select class="form-control selectpicker" id="listestGrupo" name="listestGrupo" required>
+                            <label for="listestFactura">Estado</label>
+                            <select class="form-control selectpicker" id="listestFactura" name="listestFactura" required>
                                 <option value="1">Activo</option>
                                 <option value="2">Inactivo</option>
                             </select>
@@ -46,7 +59,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-primary">
-                <h5 class="modal-title" id="titleModal">Datos del Grupo</h5>
+                <h5 class="modal-title" id="titleModal">Datos del Registro</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -55,20 +68,28 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <td>Capitulo:</td>
-                            <td id="celnomCapitulo">3</td>
+                            <td style="text-align: left;">Período:</td>
+                            <td id="celperFactura" style="text-align: left;">3</td>
                         </tr>
                         <tr>
-                            <td>Descripción:</td>
-                            <td id="celestGrupo">73111404</td>
+                            <td style="text-align: left;">Estrato:</td>
+                            <td id="celdesEstrato" style="text-align: left;">3</td>
                         </tr>
                         <tr>
-                            <td>Estado:</td>
-                            <td id="celestEmpresa">73111404</td>
+                            <td style="text-align: left;">Cantidad Facturas:</td>
+                            <td id="celcanFactura" style="text-align: right;">73111404</td>
                         </tr>
                         <tr>
-                            <td>Fecha de Creación:</td>
-                            <td id="celcreGrupo">73111404</td>
+                            <td style="text-align: left;">Valor Facturado:</td>
+                            <td id="celfacFactura" style="text-align: right;">73111404</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">Valor Recaudado:</td>
+                            <td id="celrecFactura" style="text-align: right;">73111404</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">Estado:</td>
+                            <td id="celestFactura">73111404</td>
                         </tr>
                     </tbody>
                 </table>

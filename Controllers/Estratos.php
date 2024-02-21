@@ -1,5 +1,5 @@
 <?php
-class Facturacion extends Controllers
+class Estratos extends Controllers
 {
     public function __construct()
     {
@@ -12,43 +12,39 @@ class Facturacion extends Controllers
         getPermisos(MESTRUCTURA);
     }
 
-    public function facturacion()
+    public function estratos()
     {
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "Facturacion";
-        $data['page_title'] = "FACTURACION <small> SALP - APP </small>";
-        $data['page_name']  = "facturacion";
-        $data['page_functions_js'] = "functions_facturacion.js";
-        $this->views->getView($this, "facturacion", $data);
+        $data['page_tag']   = "Estratos";
+        $data['page_title'] = "ESTRATOS <small> SALP - APP </small>";
+        $data['page_name']  = "estratos";
+        $data['page_functions_js'] = "functions_estratos.js";
+        $this->views->getView($this, "estratos", $data);
     }
 
-    public function setFactura()
+    public function setGrupo()
     {
         if ($_POST) {
-            if (empty($_POST['intperFactura']) || empty($_POST['listEstrato']) || empty($_POST['intcanFactura']) || 
-            empty($_POST['intfacFactura']) || empty($_POST['intrecFactura']) || empty($_POST['listestFactura']))
+            if (empty($_POST['listCapitulo']) || empty($_POST['txtdesGrupo']) || empty($_POST['listestGrupo']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idFactura = intval($_POST['idFactura']);
-                $intperFactura = intval(strClean($_POST['intperFactura'])); 
-                $intrelFactura = strClean($_POST['listEstrato']);
-                $intcanFactura = strClean($_POST['intcanFactura']);
-                $intfacFactura = strClean($_POST['intfacFactura']);
-                $intrecFactura = strClean($_POST['intrecFactura']);
-                $intestFactura = intval(strClean($_POST['listestFactura']));
+                $idGrupo = intval($_POST['idGrupo']);
+                $intcapGrupo  = strClean($_POST['listCapitulo']);
+                $strdesGrupo  = ucwords(strClean($_POST['txtdesGrupo']));
+                $intestGrupo  = intval(strClean($_POST['listestGrupo']));
                 $request_user   = "";
-                if ($idFactura == 0) {
+                if ($idGrupo == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_user = $this->model->insertFactura($intperFactura, $intrelFactura, $intcanFactura, $intfacFactura, $intrecFactura, $intestFactura);
+                        $request_user = $this->model->insertGrupo($intcapGrupo, $strdesGrupo, $intestGrupo);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_user = $this->model->updateFactura($idFactura, $intperFactura, $intrelFactura, $intcanFactura, $intfacFactura, $intrecFactura, $intestFactura);
+                        $request_user = $this->model->updateGrupo($idGrupo, $intcapGrupo, $strdesGrupo, $intestGrupo);
                     }
                 }
                 if ($request_user > 0) {
@@ -58,7 +54,7 @@ class Facturacion extends Controllers
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
                     }
                 }else if ($request_user == 'exist') {
-                    $arrResponse = array("status" => false, "msg" => '¡Atención! el Registro ya existe, ingrese otro.');
+                    $arrResponse = array("status" => false, "msg" => '¡Atención! el grupo ya existe, ingrese otro.');
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -128,6 +124,21 @@ class Facturacion extends Controllers
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             }
         }
+        die();
+    }
+
+    public function getSelectEstratos(){
+        $htmlOptions = "";
+        $arrData = $this->model->selectEstratos();
+        if (count($arrData) > 0){
+            for ($i=0; $i < count($arrData); $i++){
+                if ($arrData[$i]['estEstrato'] == 1){
+                    $htmlOptions .= '<option value="' . $arrData[$i]['idEstrato'] . '">' .
+                                    $arrData[$i]['desEstrato'] . '</option>';
+                }
+            }
+        }
+        echo $htmlOptions;
         die();
     }
 }

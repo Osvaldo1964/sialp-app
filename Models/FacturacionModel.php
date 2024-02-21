@@ -1,10 +1,13 @@
 <?php
 class FacturacionModel extends Mysql
 {
-    private $intidGrupo;
-    private $intcapGrupo;
-    private $strdesGrupo;
-    private $intestGrupo;
+    private $intidFactura;
+    private $intperFactura;
+    private $intrelFactura;
+    private $intcanFactura;
+    private $intfacFactura;
+    private $intrecFactura;
+    private $intestFactura;
 
 
     public function __construct()
@@ -12,55 +15,69 @@ class FacturacionModel extends Mysql
         parent::__construct();
     }
 
-    public function insertGrupo( int $capGrupo, string $nombre, int $estado) {
-        $this->intcapGrupo = $capGrupo;
-        $this->strdesGrupo = $nombre;
-        $this->intestGrupo = $estado;
+    public function insertFactura(int $periodo, int $estrato, int $cantidad, int $facturado, int $recaudo, int $estado) {
+        $this->intperFactura = $periodo;
+        $this->intrelFactura = $estrato;
+        $this->intcanFactura = $cantidad;
+        $this->intfacFactura = $facturado;
+        $this->intrecFactura = $recaudo;
+        $this->intestFactura = $estado;
         $return = 0;
-        $query_insert = "INSERT INTO grupos (capGrupo, desGrupo, estGrupo) VALUES (?,?,?)";
-        $arrData = array($this->intcapGrupo, $this->strdesGrupo, $this->intestGrupo);
-        $request_insert = $this->insert($query_insert, $arrData);
-        $return = $request_insert;
+        $sql = "SELECT * FROM facturacion WHERE idFactura = $this->intrelFactura AND estFactura = 1 AND perFactura = $this->intperFactura";
+        $request = $this->select_all($sql);
+        if (empty($request)){
+            $query_insert = "INSERT INTO facturacion (perFactura, relFactura, canFactura, facFactura, recFactura, estFactura) VALUES (?,?,?,?,?,?)";
+            $arrData = array($this->intperFactura, $this->intrelFactura, $this->intcanFactura, $this->intfacFactura, $this->intrecFactura, $this->intestFactura);
+            $request_insert = $this->insert($query_insert, $arrData);
+            $return = $request_insert;
+        } else {
+            $return = 'exist';
+        }
         return $return;
     }
 
     public function selectFacturas()
     {
-        $sql = "SELECT g.idGrupo, g.capGrupo, c.nomCapitulo as nomCapitulo, g.desGrupo, g.estGrupo
-                FROM grupos g
-                INNER JOIN capitulos c ON g.capGrupo = c.idCapitulo
-                WHERE g.estGrupo != 0";
+        $sql = "SELECT f.idFactura, f.perFactura, f.relFactura, e.desEstrato as desEstrato, f.canFactura, f.facFactura, f.recFactura, f.estFactura
+                FROM facturacion f
+                INNER JOIN estratos e ON f.relFactura = e.idEstrato
+                WHERE f.estFactura != 0";
         $request = $this->select_all($sql);
         return $request;
     }
 
-    public function selectFactura(int $idGrupo)
+    public function selectFactura(int $idFactura)
     {
-        $this->intidGrupo = $idGrupo;
-        $sql = "SELECT idGrupo, capGrupo, desGrupo, estEmpresa, DATE_FORMAT(creGrupo, '%Y-%m-%d') as creGrupo
-                            FROM grupos WHERE idGrupo = $this->intidGrupo";
+        $this->intidFactura = $idFactura;
+        $sql = "SELECT f.idFactura, f.perFactura, f.relFactura, e.desEstrato as desEstrato, f.canFactura, f.facFactura, f.recFactura, f.estFactura
+        FROM facturacion f
+        INNER JOIN estratos e ON f.relFactura = e.idEstrato
+        WHERE idFactura = $this->intidFactura";
         $request = $this->select_all($sql);
         return $request;
     }
 
-    public function updateFactura(int $idGrupo, int $capGrupo, string $nombre, int $estado)
+    public function updateFactura(int $idFactura,int $periodo, int $estrato, int $cantidad, int $facturado, int $recaudo, int $estado)
     {
-        $this->intidGrupo     = $idGrupo;
-        $this->intcapGrupo    = $capGrupo;
-        $this->strdesGrupo    = $nombre;
-        $this->intestGrupo    = $estado;
-        $sql = "UPDATE grupos SET capGrupo = ?, desGrupo = ?, estEmpresa = ?
-                WHERE idGrupo = $this->intidGrupo";
-        $arrData = array(
-            $this->intcapGrupo, $this->strdesGrupo, $this->intestGrupo);
+        $this->intidFactura = $idFactura;
+        $this->intperFactura = $periodo;
+        $this->intrelFactura = $estrato;
+        $this->intcanFactura = $cantidad;
+        $this->intfacFactura = $facturado;
+        $this->intrecFactura = $recaudo;
+        $this->intestFactura = $estado;
+        $sql = "UPDATE facturacion SET perFactura = ?, relFactura = ?, canFactura = ?, facFactura = ?, recFactura = ?, estFactura = ?
+                WHERE idFactura = $this->intidFactura";
+        $arrData = array($this->intperFactura, $this->intrelFactura, $this->intcanFactura, $this->intfacFactura, $this->intrecFactura, $this->intestFactura);
         $request = $this->update($sql, $arrData);
+
         return $request;
     }
 
-    public function deleteFactura(int $idGrupo)
+    public function deleteFactura(int $idFactura)
     {
-        $this->intidGrupo = $idGrupo;
-        $sql = "UPDATE grupos SET estGrupo = ? WHERE idGrupo = $this->intidGrupo ";
+        $this->intidFactura = $idFactura;
+        $sql = "UPDATE facturacion SET estFactura = ? WHERE idFactura = $this->intidFactura";
         $arrData = array(0);
         $request = $this->update($sql, $arrData);
         return $request;

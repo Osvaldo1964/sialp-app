@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Factura/getFacturas",
+            "url": " " + base_url + "/Facturacion/getFacturas",
             "dataSrc": ""
         },
         "columns": [
@@ -59,15 +59,20 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "desc"]]
     });
 
-    //Crear Empresa
-    if (document.querySelector('#formFactura')) {
-        let formGrupo = document.querySelector('#formFactura');
+    //Crear Registro
+    if (document.querySelector('#formFacturacion')) {
+        let formGrupo = document.querySelector('#formFacturacion');
         formGrupo.onsubmit = function (e) {
             e.preventDefault();
-            let intcapGrupo = document.querySelector('#listCapitulo').value;
-            let strdesGrupo    = document.querySelector('#txtdesGrupo').value;
-            let intestGrupo    = document.querySelector('#listestGrupo').value;
-            if (intcapGrupo == '' || strdesGrupo == '') {
+            let idFactura = document.querySelector('#idFactura').value;
+            let intperFactura = document.querySelector('#intperFactura').value;
+            let intrelFactura = document.querySelector('#listEstrato').value;
+            let intcanFactura = document.querySelector('#intcanFactura').value;
+            let intfacFactura = document.querySelector('#intfacFactura').value;
+            let intrecFactura = document.querySelector('#intrecFactura').value;
+            let intestFactura    = document.querySelector('#listestFactura').value;
+            if (intperFactura == '' || intrelFactura == '' || intcanFactura == '' || intfacFactura == '' ||
+                intrecFactura == '' || intestFactura == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -80,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupos/setGrupo';
-            let formData = new FormData(formGrupo);
+            let ajaxUrl = base_url + '/Facturacion/setFactura';
+            let formData = new FormData(formFacturacion);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
             request.onreadystatechange = function () {
@@ -91,17 +96,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (rowTable == ""){
                             tableFacturacion.api().ajax.reload();    
                         }else{
-                            htmlStatus = intestGrupo == 1 ? 
+                            htmlStatus = intestFactura == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
                             '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = intcapGrupo;
-                            rowTable.cells[2].textContent = strdesGrupo;
-                            rowTable.cells[3].innerHTML = htmlStatus;
+                            rowTable.cells[1].textContent = intperFactura;
+                            rowTable.cells[2].textContent = document.querySelector('#listEstrato').selectedOptions[0].text;
+                            rowTable.cells[3].textContent = intcanFactura;
+                            rowTable.cells[4].textContent = intfacFactura;
+                            rowTable.cells[5].textContent = intrecFactura;
+                            rowTable.cells[6].innerHTML = htmlStatus;
                             rowTable = "";
                         }
-                        $('#modalFormGrupo').modal("hide");
-                        formGrupo.reset();
-                        swal("Grupos", objData.msg, "success");
+                        $('#modalFormFacturacion').modal("hide");
+                        formFacturacion.reset();
+                        swal("Facturas", objData.msg, "success");
                     }
                 }
                 divLoading.style.display = "none";
@@ -109,26 +117,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-    fntCapitulos();
+    fntEstratos();
 }, false);
 
-function fntViewInfo(idgrupo) {
+function fntViewInfo(idfactura) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupos/getGrupo/' + idgrupo;
+    let ajaxUrl = base_url + '/Facturacion/getFactura/' + idfactura;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                let estGrupo = objData.data[0].estGrupo == 1 ?
+                let estFactura = objData.data[0].estFactura == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector("#celnomCapitulo").innerHTML = objData.data[0].nomCapitulo;
-                document.querySelector("#celdesGrupo").innerHTML = objData.data[0].desGrupo;
-                document.querySelector("#celestGrupo").innerHTML = estGrupo;
+                document.querySelector("#celperFactura").innerHTML = objData.data[0].perFactura;                
+                document.querySelector("#celdesEstrato").innerHTML = objData.data[0].desEstrato;
+                document.querySelector("#celcanFactura").innerHTML = objData.data[0].canFactura.toLocaleString("es");
+                document.querySelector("#celfacFactura").innerHTML = objData.data[0].facFactura.toLocaleString("es",{style: 'currency', minimumFractionDigits: 2,currency: 'COP'});;
+                document.querySelector("#celrecFactura").innerHTML = objData.data[0].recFactura.toLocaleString("es",{style: 'currency', minimumFractionDigits: 2,currency: 'COP'});;
+                document.querySelector("#celestFactura").innerHTML = estFactura;
                 //document.querySelector("#celregGrupo").innerHTML = objData.data[0].regGrupo;
-                $('#modalViewGrupo').modal('show');
+                $('#modalViewFacturacion').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
@@ -136,39 +147,42 @@ function fntViewInfo(idgrupo) {
     }
 }
 
-function fntEditInfo(element, idGrupo) {
+function fntEditInfo(element, idFactura) {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Actualizar Grupo";
+    document.querySelector('#titleModal').innerHTML = "Actualizar Registro";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupos/getGrupo/' + idGrupo;
+    let ajaxUrl = base_url + '/Facturacion/getFactura/' + idFactura;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                document.querySelector("#idGrupo").value = objData.data[0].idGrupo;
-                document.querySelector("#txtnomCapitulo").value = objData.data[0].nomCapitulo;
-                document.querySelector("#txtdesGrupo").value = objData.data[0].desGrupo;
-                if (objData.data[0].estGrupo == 1) {
-                    document.querySelector("#listestGrupo").value = 1;
+                document.querySelector("#idFactura").value = objData.data[0].idFactura;
+                document.querySelector("#intperFactura").value = objData.data[0].perFactura;                
+                document.querySelector("#listEstrato").value = objData.data[0].relFactura;
+                document.querySelector("#intcanFactura").value = objData.data[0].canFactura;
+                document.querySelector("#intfacFactura").value = objData.data[0].facFactura;
+                document.querySelector("#intrecFactura").value = objData.data[0].recFactura;
+                if (objData.data[0].estFactura == 1) {
+                    document.querySelector("#listestFactura").value = 1;
                 } else {
-                    document.querySelector("#listestGrupo").value = 2;
+                    document.querySelector("#listestFactura").value = 2;
                 }
-                $('#listestGrupo').selectpicker('render');
+                $('#listEstrato').selectpicker('render');
             }
         }
-        $('#modalFormGrupo').modal('show');
+        $('#modalFormFacturacion').modal('show');
     }
 }
 
-function fntDelInfo(idGrupo) {
+function fntDelInfo(idFactura) {
     swal({
-        title: "Eliminar Grupo",
-        text: "¿Realmente quiere eliminar el Grupo?",
+        title: "Eliminar Registro",
+        text: "¿Realmente quiere eliminar el Registro?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
@@ -178,8 +192,8 @@ function fntDelInfo(idGrupo) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupos/delGrupo/';
-            let strData = "idGrupo=" + idGrupo;
+            let ajaxUrl = base_url + '/Facturacion/delFactura/';
+            let strData = "idFactura=" + idFactura;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -199,7 +213,7 @@ function fntDelInfo(idGrupo) {
 }
 
 function fntEstratos() {
-    if (document.querySelector('#listCapitulo')) {
+    if (document.querySelector('#listEstrato')) {
         let ajaxUrl = base_url + '/Estratos/getSelectEstratos';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
