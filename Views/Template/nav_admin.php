@@ -76,6 +76,7 @@
                     <ul class="treeview-menu">
                         <li><a class="treeview-item" href="<?= base_url(); ?>/varsalp"><i class="icon fa fa-circle-o"></i> Variables SALP</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"><i class="icon fa fa-circle-o"></i> Grupos UCAPs</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/subgruposalp"><i class="icon fa fa-circle-o"></i> Subgrupos UCAPs</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"><i class="icon fa fa-circle-o"></i> Elementos UCAPs</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
                     </ul>

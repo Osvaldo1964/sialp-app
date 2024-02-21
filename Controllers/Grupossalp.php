@@ -27,7 +27,7 @@ class Grupossalp extends Controllers
     {
         if ($_POST) {
             if (empty($_POST['txtcodGruposalp']) || empty($_POST['txtdesGruposalp']) ||
-                empty($_POST['fltvidGruposalp']) || empty($_POST['listestGruposalp']))
+                empty($_POST['fltvidGruposalp']) || empty($_POST['listestGruposalp'] || empty($_POST['listtipGruposalp']) )
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
@@ -35,18 +35,21 @@ class Grupossalp extends Controllers
                 $strcodGruposalp  = strClean($_POST['txtcodGruposalp']);
                 $strdesGruposalp  = strClean($_POST['txtdesGruposalp']);
                 $fltvidGruposalp  = strClean($_POST['fltvidGruposalp']);
+                $inttipGruposalp  = intval($_POST['listtipGruposalp']);
                 $intestGruposalp  = intval($_POST['listestGruposalp']);
                 if ($idGruposalp == 0) {
                     //CREAR
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_gruposalp = $this->model->insertGruposalp($strcodGruposalp, $strdesGruposalp, $fltvidGruposalp, $intestGruposalp);
+                        $request_gruposalp = $this->model->insertGruposalp($strcodGruposalp, $strdesGruposalp,
+                        $inttipGruposalp, $fltvidGruposalp, $intestGruposalp);
                     }
                 } else {
                     //ACTUALIZAR
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_gruposalp = $this->model->updateGruposalp($idGruposalp, $strcodGruposalp, $strdesGruposalp, $fltvidGruposalp, $intestGruposalp);
+                        $request_gruposalp = $this->model->updateGruposalp($idGruposalp, $strcodGruposalp, $strdesGruposalp,
+                        $fltvidGruposalp, $inttipGruposalp, $intestGruposalp);
                     }
                 }
                 if ($request_gruposalp > 0) {
@@ -74,6 +77,11 @@ class Grupossalp extends Controllers
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
+                if ($arrData[$i]['tipGruposalp'] == 1) {
+                    $arrData[$i]['tipGruposalp'] = '<span class="badge badge-success">Eléctrico</span>';
+                } else {
+                    $arrData[$i]['tipGruposalp'] = '<span class="badge badge-danger">No Eléctrico</span>';
+                }
                 if ($arrData[$i]['estGruposalp'] == 1) {
                     $arrData[$i]['estGruposalp'] = '<span class="badge badge-success">Activo</span>';
                 } else {

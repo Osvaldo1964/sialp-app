@@ -28,6 +28,7 @@
                                     <th>Código</th>
                                     <th>Descripción</th>
                                     <th>Vida Util</th>
+                                    <th>Tipo Grupo</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>

@@ -19,13 +19,14 @@ document.addEventListener('DOMContentLoaded', function () {
             { "data": "codGruposalp" },
             { "data": "desGruposalp" },
             { "data": "vidGruposalp" },
+            { "data": "tipGruposalp" },
             { "data": "estGruposalp" },
             { "data": "options" }
         ],
         "columnDefs": [
-            { 'className': "textleft", "targets": [ 0,1,2 ] },
-            { 'className': "textright", "targets": [ 3 ] }
-          ],   
+            { 'className': "textleft", "targets": [0, 1, 2] },
+            { 'className': "textright", "targets": [3] }
+        ],
         'dom': 'lBfrtip',
         'buttons': [
             {
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let strcodGruposalp = document.querySelector('#txtcodGruposalp').value;
             let strdesGruposalp = document.querySelector('#txtdesGruposalp').value;
             let fltvidGruposalp = document.querySelector('#fltvidGruposalp').value;
+            let inttipGruposalp = document.querySelector('#listtipGruposalp').value;
             let intestGruposalp = document.querySelector('#listestGruposalp').value;
             if (strcodGruposalp == '' || strdesGruposalp == '' || fltvidGruposalp == 0.00) {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
@@ -87,16 +89,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (request.readyState == 4 && request.status == 200) {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
-                        if (rowTable == ""){
-                            tableGrupossalp.api().ajax.reload();    
-                        }else{
-                            htmlStatus = intestGruposalp == 1 ? 
-                            '<span class="badge badge-success">Activo</span>' :
-                            '<span class="badge badge-danger">Inactivo</span>';
+                        if (rowTable == "") {
+                            tableGrupossalp.api().ajax.reload();
+                        } else {
+                            htmlStatus = intestGruposalp == 1 ?
+                                '<span class="badge badge-success">Activo</span>' :
+                                '<span class="badge badge-danger">Inactivo</span>';
+                            htmlTipo = inttipGruposalp == 1 ?
+                                '<span class="badge badge-success">Eléctrico</span>' :
+                                '<span class="badge badge-danger">No Eléctrico</span>';
                             rowTable.cells[1].textContent = strcodGruposalp;
                             rowTable.cells[2].textContent = strdesGruposalp;
                             rowTable.cells[3].textContent = strdesGruposalp;
-                            rowTable.cells[4].innerHTML = htmlStatus;
+                            rowTable.cells[4].innerHTML = htmlTipo;
+                            rowTable.cells[5].innerHTML = htmlStatus;
                             rowTable = "";
                         }
                         $('#modalFormGruposalp').modal("hide");
@@ -124,11 +130,15 @@ function fntViewInfo(idgruposalp) {
                 let estGruposalp = objData.data[0].estGruposalp == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
+                let tipGruposalp = objData.data[0].tipGruposalp == 1 ?
+                    '<span class="badge badge-success">Eléctrico</span>' :
+                    '<span class="badge badge-danger">No Eléctrico</span>';
                 document.querySelector("#celcodGruposalp").innerHTML = objData.data[0].codGruposalp;
                 document.querySelector("#celdesGruposalp").innerHTML = objData.data[0].desGruposalp;
                 document.querySelector("#celvidGruposalp").innerHTML = objData.data[0].vidGruposalp;
+                document.querySelector("#celestGruposalp").innerHTML = tipGruposalp;
                 document.querySelector("#celestGruposalp").innerHTML = estGruposalp;
-                //document.querySelector("#celregGrupo").innerHTML = objData.data[0].regGrupo;
+
                 $('#modalViewGruposalp').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
@@ -160,7 +170,13 @@ function fntEditInfo(element, idGruposalp) {
                 } else {
                     document.querySelector("#listestGruposalp").value = 2;
                 }
+                if (objData.data[0].tipGruposalp == 1) {
+                    document.querySelector("#listtipGruposalp").value = 1;
+                } else {
+                    document.querySelector("#listtipGruposalp").value = 2;
+                }
                 $('#listestGruposalp').selectpicker('render');
+                $('#listtipGruposalp').selectpicker('render');
             }
         }
         $('#modalFormGruposalp').modal('show');
@@ -200,20 +216,6 @@ function fntDelInfo(idGruposalp) {
     });
 }
 
-/* function fntCapitulos() {
-    if (document.querySelector('#listCapitulo')) {
-        let ajaxUrl = base_url + '/Capitulos/getSelectCapitulos';
-        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        request.open("GET", ajaxUrl, true);
-        request.send();
-        request.onreadystatechange = function () {
-            if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listCapitulo').innerHTML = request.responseText;
-                $('#listCapitulo').selectpicker('render');
-            }
-        }
-    }
-} */
 function openModal() {
     rowTable = "";
     document.querySelector('#idGruposalp').value = "";

@@ -72,6 +72,7 @@ class Facturacion extends Controllers
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
             $arrData = $this->model->selectFacturas();
+            dep($arrData);exit;
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';

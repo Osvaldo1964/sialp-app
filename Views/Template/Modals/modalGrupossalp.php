@@ -26,6 +26,13 @@
                 <textarea class="form-control" id="fltvidGruposalp" name="fltvidGruposalp" required=""></textarea>
               </div>
               <div class="form-group">
+                <label for="listtipGruposalp">Tipo Grupo<span class="required">*</span></label>
+                <select class="form-control selectpicker" id="listtipGruposalp" name="listtipGruposalp" required>
+                  <option value="1">Eléctrico</option>
+                  <option value="2">No Eléctrico</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="listestGruposalp">Estado<span class="required">*</span></label>
                 <select class="form-control selectpicker" id="listestGruposalp" name="listestGruposalp" required>
                   <option value="1">Activo</option>
@@ -68,6 +75,10 @@
             <tr>
               <td>Vida Util:</td>
               <td id="celvidGruposalp">73111404</td>
+            </tr>
+            <tr>
+              <td>Tipo:</td>
+              <td id="celtipGruposalp">73111404</td>
             </tr>
             <tr>
               <td>Estado:</td>
