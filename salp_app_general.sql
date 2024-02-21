@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 20-02-2024 a las 18:41:20
+-- Tiempo de generación: 21-02-2024 a las 03:33:02
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -124,7 +124,7 @@ INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElement
 
 CREATE TABLE `estratos` (
   `idEstrato` bigint NOT NULL,
-  `desEstrato` varchar(60) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desEstrato` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `estEstrato` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -158,13 +158,20 @@ INSERT INTO `estratos` (`idEstrato`, `desEstrato`, `estEstrato`) VALUES
 
 CREATE TABLE `facturacion` (
   `idFactura` bigint NOT NULL,
-  `perFactura` varchar(6) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `perFactura` int NOT NULL,
   `relFactura` bigint NOT NULL,
   `canFactura` int NOT NULL,
   `facFactura` float(15,2) NOT NULL,
   `recFactura` float(15,2) NOT NULL,
   `estFactura` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `facturacion`
+--
+
+INSERT INTO `facturacion` (`idFactura`, `perFactura`, `relFactura`, `canFactura`, `facFactura`, `recFactura`, `estFactura`) VALUES
+(1, 202401, 7, 2200, 5500.00, 5000.00, 1);
 
 -- --------------------------------------------------------
 
@@ -207,7 +214,7 @@ CREATE TABLE `gruposalp` (
 
 INSERT INTO `gruposalp` (`idGruposalp`, `codGruposalp`, `desGruposalp`, `vidGruposalp`, `estGruposalp`) VALUES
 (1, '01', 'Bombillas de Sodio', 3.50, 1),
-(2, '02', 'Luminarias LED 30w', 15.00, 1);
+(2, '02', 'Luminarias LED', 15.00, 1);
 
 -- --------------------------------------------------------
 
@@ -421,7 +428,7 @@ CREATE TABLE `pqrs` (
   `dsoPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci,
   `latPqrs` float(15,8) DEFAULT NULL,
   `lonPqrs` float(15,8) DEFAULT NULL,
-  `ndiPqrs` varchar(200) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `ndiPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `estPqrs` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -793,7 +800,7 @@ ALTER TABLE `estratos`
 -- AUTO_INCREMENT de la tabla `facturacion`
 --
 ALTER TABLE `facturacion`
-  MODIFY `idFactura` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `idFactura` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
