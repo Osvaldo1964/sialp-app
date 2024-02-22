@@ -11,35 +11,35 @@
         <form id="formGruposalp" name="formGruposalp" class="form-horizontal">
           <input type="hidden" id="idGruposalp" name="idGruposalp" value="">
           <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
+          <div class="row col-md-12">
+              <div class="form-group col-md-4">
                 <label class="control-label">Código<span class="required">*</span></label>
                 <input type="text" class="form-control" id="txtcodGruposalp" name="txtcodGruposalp" required="">
               </div>
-              <div class="form-group">
+              <div class="form-group col-md-8">
                 <label class="control-label">Descripción<span class="required">*</span></label>
-                <textarea class="form-control" id="txtdesGruposalp" name="txtdesGruposalp" required=""></textarea>
+                <input type="text" class="form-control" id="txtdesGruposalp" name="txtdesGruposalp" required=""></textarea>
               </div>
-              <div class="form-group">
+          </div>
+          <div class="row col-md-12">
+              <div class="form-group col-md-3">
                 <label class="control-label">Vida Util<span class="required">*</span></label>
-                <textarea class="form-control" id="fltvidGruposalp" name="fltvidGruposalp" required=""></textarea>
+                <input type="text" class="form-control" id="fltvidGruposalp" name="fltvidGruposalp" required=""></textarea>
               </div>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="listtipGruposalp">Tipo Grupo<span class="required">*</span></label>
                 <select class="form-control selectpicker" id="listtipGruposalp" name="listtipGruposalp" required>
                   <option value="1">Eléctrico</option>
                   <option value="2">No Eléctrico</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="listestGruposalp">Estado<span class="required">*</span></label>
                 <select class="form-control selectpicker" id="listestGruposalp" name="listestGruposalp" required>
                   <option value="1">Activo</option>
                   <option value="2">Inactivo</option>
                 </select>
               </div>
-            </div>
           </div>
           <div class="tile-footer">
             <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;

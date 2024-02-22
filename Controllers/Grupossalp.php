@@ -27,7 +27,7 @@ class Grupossalp extends Controllers
     {
         if ($_POST) {
             if (empty($_POST['txtcodGruposalp']) || empty($_POST['txtdesGruposalp']) ||
-                empty($_POST['fltvidGruposalp']) || empty($_POST['listestGruposalp'] || empty($_POST['listtipGruposalp']) )
+                empty($_POST['fltvidGruposalp']) || empty($_POST['listestGruposalp']) || empty($_POST['listtipGruposalp']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {

@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 '<span class="badge badge-danger">No Eléctrico</span>';
                             rowTable.cells[1].textContent = strcodGruposalp;
                             rowTable.cells[2].textContent = strdesGruposalp;
-                            rowTable.cells[3].textContent = strdesGruposalp;
+                            rowTable.cells[3].textContent = fltvidGruposalp;
                             rowTable.cells[4].innerHTML = htmlTipo;
                             rowTable.cells[5].innerHTML = htmlStatus;
                             rowTable = "";
@@ -136,7 +136,7 @@ function fntViewInfo(idgruposalp) {
                 document.querySelector("#celcodGruposalp").innerHTML = objData.data[0].codGruposalp;
                 document.querySelector("#celdesGruposalp").innerHTML = objData.data[0].desGruposalp;
                 document.querySelector("#celvidGruposalp").innerHTML = objData.data[0].vidGruposalp;
-                document.querySelector("#celestGruposalp").innerHTML = tipGruposalp;
+                document.querySelector("#celtipGruposalp").innerHTML = tipGruposalp;
                 document.querySelector("#celestGruposalp").innerHTML = estGruposalp;
 
                 $('#modalViewGruposalp').modal('show');
