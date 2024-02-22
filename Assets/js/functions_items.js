@@ -1,24 +1,25 @@
-let tableGrupos;
+let tableItems;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
 document.addEventListener('DOMContentLoaded', function () {
     // Tabla de Grupos
-    tableGrupos = $('#tableGrupos').dataTable({
+    tableItems = $('#tableItems').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Grupos/getGrupos",
+            "url": " " + base_url + "/Items/getItems",
             "dataSrc": ""
         },
         "columns": [
-            { "data": "idGrupo" },
-            { "data": "nomCapitulo" },
-            { "data": "desGrupo" },
-            { "data": "estGrupo" },
+            { "data": "idItem" },
+            { "data": "desGruposalp" },
+            { "data": "desItem" },
+            { "data": "csmItem" },
+            { "data": "estItem" },
             { "data": "options" }
         ],
         "columnDefs": [
@@ -56,15 +57,16 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "desc"]]
     });
 
-    //Crear Grupos
-    if (document.querySelector('#formGrupo')) {
-        let formGrupo = document.querySelector('#formGrupo');
-        formGrupo.onsubmit = function (e) {
+    //Crear Items
+    if (document.querySelector('#formItems')) {
+        let formItems = document.querySelector('#formItems');
+        formItems.onsubmit = function (e) {
             e.preventDefault();
-            let intcapGrupo = document.querySelector('#listCapitulo').value;
-            let strdesGrupo    = document.querySelector('#txtdesGrupo').value;
-            let intestGrupo    = document.querySelector('#listestGrupo').value;
-            if (intcapGrupo == '' || strdesGrupo == '') {
+            let intgruItem = document.querySelector('#listGrupos').value;
+            let strdesItem = document.querySelector('#txtdesItem').value;
+            let intcsmItem = document.querySelector('#intcsmItem').value;
+            let intestItem = document.querySelector('#listestItem').value;
+            if (intgruItem == '' || strdesItem == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -77,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupos/setGrupo';
-            let formData = new FormData(formGrupo);
+            let ajaxUrl = base_url + '/Items/setItem';
+            let formData = new FormData(formItems);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
             request.onreadystatechange = function () {
@@ -86,19 +88,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         if (rowTable == ""){
-                            tableGrupos.api().ajax.reload();    
+                            tableItems.api().ajax.reload();    
                         }else{
-                            htmlStatus = intestGrupo == 1 ? 
+                            htmlStatus = intestItem == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
                             '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = intcapGrupo;
-                            rowTable.cells[2].textContent = strdesGrupo;
-                            rowTable.cells[3].innerHTML = htmlStatus;
+                            rowTable.cells[1].textContent = document.querySelector("#listGrupos").selectedOptions[0].text;;;
+                            rowTable.cells[2].textContent = strdesItem;
+                            rowTable.cells[3].textContent = intcsmItem;
+                            rowTable.cells[4].innerHTML = htmlStatus;
                             rowTable = "";
                         }
-                        $('#modalFormGrupo').modal("hide");
-                        formGrupo.reset();
-                        swal("Grupos", objData.msg, "success");
+                        $('#modalFormItems').modal("hide");
+                        formItems.reset();
+                        swal("Items", objData.msg, "success");
                     }
                 }
                 divLoading.style.display = "none";
@@ -106,26 +109,26 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-    fntCapitulos();
+    fntGrupossalp();
 }, false);
 
-function fntViewInfo(idgrupo) {
+function fntViewInfo(iditem) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupos/getGrupo/' + idgrupo;
+    let ajaxUrl = base_url + '/Items/getItem/' + iditem;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                let estGrupo = objData.data[0].estGrupo == 1 ?
+                let estItem = objData.data[0].estItem == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector("#celnomCapitulo").innerHTML = objData.data[0].nomCapitulo;
-                document.querySelector("#celdesGrupo").innerHTML = objData.data[0].desGrupo;
-                document.querySelector("#celestGrupo").innerHTML = estGrupo;
-                //document.querySelector("#celregGrupo").innerHTML = objData.data[0].regGrupo;
-                $('#modalViewGrupo').modal('show');
+                document.querySelector("#celnomGrupo").innerHTML = objData.data[0].desGruposalp;
+                document.querySelector("#celdesItem").innerHTML = objData.data[0].desItem;
+                document.querySelector("#celcsmItem").innerHTML = objData.data[0].csmItem;
+                document.querySelector("#celestItem").innerHTML = estItem;
+                $('#modalViewItems').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
@@ -133,39 +136,40 @@ function fntViewInfo(idgrupo) {
     }
 }
 
-function fntEditInfo(element, idGrupo) {
+function fntEditInfo(element, idItem) {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Actualizar Grupo";
+    document.querySelector('#titleModal').innerHTML = "Actualizar Items";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Grupos/getGrupo/' + idGrupo;
+    let ajaxUrl = base_url + '/Items/getItem/' + idItem;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                document.querySelector("#idGrupo").value = objData.data[0].idGrupo;
-                document.querySelector("#listCapitulo").value = objData.data[0].nomCapitulo;
-                document.querySelector("#txtdesGrupo").value = objData.data[0].desGrupo;
-                if (objData.data[0].estGrupo == 1) {
-                    document.querySelector("#listestGrupo").value = 1;
+                document.querySelector("#idItem").value = objData.data[0].idItem;
+                document.querySelector("#listGrupos").value = objData.data[0].gruItem;
+                document.querySelector("#txtdesItem").value = objData.data[0].desItem;
+                document.querySelector("#intcsmItem").value = objData.data[0].csmItem;
+                if (objData.data[0].estItem == 1) {
+                    document.querySelector("#listestItem").value = 1;
                 } else {
-                    document.querySelector("#listestGrupo").value = 2;
+                    document.querySelector("#listestItem").value = 2;
                 }
-                $('#listestGrupo').selectpicker('render');
+                $('#listestItem').selectpicker('render');
             }
         }
-        $('#modalFormGrupo').modal('show');
+        $('#modalFormItems').modal('show');
     }
 }
 
-function fntDelInfo(idGrupo) {
+function fntDelInfo(idItem) {
     swal({
-        title: "Eliminar Grupo",
-        text: "¿Realmente quiere eliminar el Grupo?",
+        title: "Eliminar Item",
+        text: "¿Realmente quiere eliminar el Item?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
@@ -175,8 +179,8 @@ function fntDelInfo(idGrupo) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Grupos/delGrupo/';
-            let strData = "idGrupo=" + idGrupo;
+            let ajaxUrl = base_url + '/Items/delItem/';
+            let strData = "idItem = " + idItem;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -195,27 +199,27 @@ function fntDelInfo(idGrupo) {
     });
 }
 
-function fntCapitulos() {
-    if (document.querySelector('#listCapitulo')) {
-        let ajaxUrl = base_url + '/Capitulos/getSelectCapitulos';
+function fntGrupossalp() {
+    if (document.querySelector('#listGrupos')) {
+        let ajaxUrl = base_url + '/Grupossalp/getSelectGruposalp';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listCapitulo').innerHTML = request.responseText;
-                $('#listCapitulo').selectpicker('render'); 
+                document.querySelector('#listGrupos').innerHTML = request.responseText;
+                $('#listGrupos').selectpicker('render'); 
             }
         }
     }
 }
 function openModal() {
     rowTable = "";
-    document.querySelector('#idGrupo').value = "";
+    document.querySelector('#idItem').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nueva Grupo";
-    document.querySelector("#formGrupo").reset();
-    $('#modalFormGrupo').modal('show');
+    document.querySelector('#titleModal').innerHTML = "Nuevo Item";
+    document.querySelector("#formItems").reset();
+    $('#modalFormItems').modal('show');
 }

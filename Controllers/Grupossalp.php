@@ -139,7 +139,7 @@ class Grupossalp extends Controllers
         die();
     }
 
-    public function getSelectGrupossalp(){
+    public function getSelectGruposalp(){
         $htmlOptions = "";
         $arrData = $this->model->selectGrupossalp();
         if (count($arrData) > 0){

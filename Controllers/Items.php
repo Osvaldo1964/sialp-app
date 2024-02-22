@@ -1,5 +1,5 @@
 <?php
-class Grupos extends Controllers
+class Items extends Controllers
 {
     public function __construct()
     {
@@ -9,42 +9,46 @@ class Grupos extends Controllers
         if (empty($_SESSION['login'])) {
             header('location: ' . base_url() . '/login');
         }
-        getPermisos(MESTRUCTURA);
+        getPermisos(MCOMPONENTES);
     }
 
-    public function grupos()
+    public function items()
     {
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "Grupos";
-        $data['page_title'] = "GRUPOS <small> SIALP - APP </small>";
-        $data['page_name']  = "grupos";
-        $data['page_functions_js'] = "functions_grupos.js";
-        $this->views->getView($this, "grupos", $data);
+        $data['page_tag']   = "items";
+        $data['page_title'] = "ITEMS <small> SIALP - APP </small>";
+        $data['page_name']  = "items";
+        $data['page_functions_js'] = "functions_items.js";
+        $this->views->getView($this, "items", $data);
     }
 
-    public function setGrupo()
+    public function setItem()
     {
         if ($_POST) {
-            if (empty($_POST['listCapitulo']) || empty($_POST['txtdesGrupo']) || empty($_POST['listestGrupo']))
+            if (empty($_POST['listGrupos']) || empty($_POST['txtdesItem']) ||
+                empty($_POST['intcsmItem']) || empty($_POST['listestItem']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idGrupo = intval($_POST['idGrupo']);
-                $intcapGrupo  = strClean($_POST['listCapitulo']);
-                $strdesGrupo  = ucwords(strClean($_POST['txtdesGrupo']));
-                $intestGrupo  = intval(strClean($_POST['listestGrupo']));
+                $idItem = intval($_POST['idItem']);
+                $intgruItem  = strClean($_POST['listGrupos']);
+                $strdesItem  = ucwords(strClean($_POST['txtdesItem']));
+                $intcsmItem  = intval(strClean($_POST['intcsmItem']));
+                $intestItem  = intval(strClean($_POST['listestItem']));
                 $request_user   = "";
-                if ($idGrupo == 0) {
+                if ($idItem == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_user = $this->model->insertGrupo($intcapGrupo, $strdesGrupo, $intestGrupo);
+                        $request_user = $this->model->insertItem($intgruItem, $strdesItem,
+                                                                $intcsmItem, $intestItem);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_user = $this->model->updateGrupo($idGrupo, $intcapGrupo, $strdesGrupo, $intestGrupo);
+                        $request_user = $this->model->updateItem($idItem,$intgruItem, $strdesItem,
+                                                                $intcsmItem, $intestItem);
                     }
                 }
                 if ($request_user > 0) {
@@ -54,7 +58,7 @@ class Grupos extends Controllers
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
                     }
                 }else if ($request_user == 'exist') {
-                    $arrResponse = array("status" => false, "msg" => '¡Atención! el grupo ya existe, ingrese otro.');
+                    $arrResponse = array("status" => false, "msg" => '¡Atención! el item ya existe, ingrese otro.');
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -64,27 +68,27 @@ class Grupos extends Controllers
         die();
     }
 
-    public function getGrupos()
+    public function getItems()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectGrupos();
+            $arrData = $this->model->selectItems();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
-                if ($arrData[$i]['estGrupo'] == 1) {
-                    $arrData[$i]['estGrupo'] = '<span class="badge badge-success">Activo</span>';
+                if ($arrData[$i]['estItem'] == 1) {
+                    $arrData[$i]['estItem'] = '<span class="badge badge-success">Activo</span>';
                 } else {
-                    $arrData[$i]['estGrupo'] = '<span class="badge badge-danger">Inactivo</span>';
+                    $arrData[$i]['estItem'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
                 if ($_SESSION['permisosMod']['reaPermiso']) {
-                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idGrupo'] . ')" title="Ver Grupo"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idItem'] . ')" title="Ver Item"><i class="far fa-eye"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idGrupo'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idItem'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['delPermiso']) {
-                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idGrupo'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idItem'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
@@ -93,12 +97,12 @@ class Grupos extends Controllers
         die();
     }
 
-    public function getGrupo($idgrupo)
+    public function getItem($iditem)
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $idgrupo = intval($idgrupo);
-            if ($idgrupo > 0) {
-                $arrData = $this->model->selectGrupo($idgrupo);
+            $iditem = intval($iditem);
+            if ($iditem > 0) {
+                $arrData = $this->model->selectItem($iditem);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
@@ -110,7 +114,7 @@ class Grupos extends Controllers
         die();
     }
 
-    public function delGrupo()
+    public function delItem()
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['delPermiso']) {

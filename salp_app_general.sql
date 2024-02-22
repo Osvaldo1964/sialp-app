@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 21-02-2024 a las 03:33:02
+-- Tiempo de generación: 22-02-2024 a las 20:01:03
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `salp_app_general`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `actas`
+--
+
+CREATE TABLE `actas` (
+  `idActa` bigint NOT NULL,
+  `tipActa` bigint NOT NULL,
+  `claActa` varchar(30) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `fecActa` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `proActa` bigint NOT NULL,
+  `estActa` int DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -80,6 +95,28 @@ CREATE TABLE `costoconsumo` (
   `estCosto` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `costoconsumo`
+--
+
+INSERT INTO `costoconsumo` (`idCosto`, `perCosto`, `csmCosto`, `vlrCosto`, `totCosto`, `estCosto`) VALUES
+(1, 202403, 3000.00, 200.00, 7000.00, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleacta`
+--
+
+CREATE TABLE `detalleacta` (
+  `idDetalle` bigint NOT NULL,
+  `actDetalle` bigint NOT NULL,
+  `eleDetalle` bigint NOT NULL,
+  `fecDetalle` date NOT NULL,
+  `vlrDetalle` float(15,2) NOT NULL,
+  `estDetalle` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 -- --------------------------------------------------------
 
 --
@@ -124,7 +161,7 @@ INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElement
 
 CREATE TABLE `estratos` (
   `idEstrato` bigint NOT NULL,
-  `desEstrato` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desEstrato` varchar(60) COLLATE utf8mb3_spanish_ci NOT NULL,
   `estEstrato` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -158,7 +195,7 @@ INSERT INTO `estratos` (`idEstrato`, `desEstrato`, `estEstrato`) VALUES
 
 CREATE TABLE `facturacion` (
   `idFactura` bigint NOT NULL,
-  `perFactura` int NOT NULL,
+  `perFactura` varchar(6) COLLATE utf8mb3_spanish_ci NOT NULL,
   `relFactura` bigint NOT NULL,
   `canFactura` int NOT NULL,
   `facFactura` float(15,2) NOT NULL,
@@ -171,7 +208,7 @@ CREATE TABLE `facturacion` (
 --
 
 INSERT INTO `facturacion` (`idFactura`, `perFactura`, `relFactura`, `canFactura`, `facFactura`, `recFactura`, `estFactura`) VALUES
-(1, 202401, 7, 2200, 5500.00, 5000.00, 1);
+(1, '202401', 2, 1500, 5000.00, 4500.00, 1);
 
 -- --------------------------------------------------------
 
@@ -205,6 +242,7 @@ CREATE TABLE `gruposalp` (
   `codGruposalp` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `desGruposalp` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `vidGruposalp` float(6,2) NOT NULL,
+  `tipGruposalp` bigint NOT NULL,
   `estGruposalp` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -212,9 +250,9 @@ CREATE TABLE `gruposalp` (
 -- Volcado de datos para la tabla `gruposalp`
 --
 
-INSERT INTO `gruposalp` (`idGruposalp`, `codGruposalp`, `desGruposalp`, `vidGruposalp`, `estGruposalp`) VALUES
-(1, '01', 'Bombillas de Sodio', 3.50, 1),
-(2, '02', 'Luminarias LED', 15.00, 1);
+INSERT INTO `gruposalp` (`idGruposalp`, `codGruposalp`, `desGruposalp`, `vidGruposalp`, `tipGruposalp`, `estGruposalp`) VALUES
+(1, '01', 'Bombillas de Sodio', 3.50, 2, 1),
+(2, '02', 'Luminarias LED', 10.00, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -260,6 +298,27 @@ INSERT INTO `itemsacta` (`idItemacta`, `codItemacta`, `desItemacta`, `actItemact
 (4, '04', 'HURTO', 4, 1),
 (5, '05', 'DAÑO', 4, 1),
 (6, '06', 'OBSOLESCENCIA  ', 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `itemsalp`
+--
+
+CREATE TABLE `itemsalp` (
+  `idItem` bigint NOT NULL,
+  `gruItem` bigint NOT NULL,
+  `desItem` varchar(150) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `csmItem` int NOT NULL,
+  `estItem` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `itemsalp`
+--
+
+INSERT INTO `itemsalp` (`idItem`, `gruItem`, `desItem`, `csmItem`, `estItem`) VALUES
+(1, 1, '40w', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -428,7 +487,7 @@ CREATE TABLE `pqrs` (
   `dsoPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci,
   `latPqrs` float(15,8) DEFAULT NULL,
   `lonPqrs` float(15,8) DEFAULT NULL,
-  `ndiPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `ndiPqrs` varchar(200) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `estPqrs` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -453,6 +512,27 @@ INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `frePq
 (48, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'asdasdsd', '2024-02-14', '2024-02-19', NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
 (49, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-18', '2024-02-21', 'listo', 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 2),
 (50, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-20', NULL, NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recursos`
+--
+
+CREATE TABLE `recursos` (
+  `idRecurso` bigint NOT NULL,
+  `desRecurso` varchar(60) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `estRecurso` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `recursos`
+--
+
+INSERT INTO `recursos` (`idRecurso`, `desRecurso`, `estRecurso`) VALUES
+(1, 'INVERSIONISTA', 1),
+(2, 'RECURSOS PROPIOS EJECUCION', 1),
+(3, 'PARTICULARES', 1);
 
 -- --------------------------------------------------------
 
@@ -528,6 +608,44 @@ INSERT INTO `tipoactas` (`idTipoacta`, `codTipoacta`, `desTipoacta`, `selTipoact
 (2, '02', 'ACTAS DE INVERSION', 1, 1),
 (3, '03', 'RECIBO INFRAESTRUCTURA DE TERCEROS   ', 0, 1),
 (4, '04', 'BAJA DE INVENTARIO       ', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tiposuso`
+--
+
+CREATE TABLE `tiposuso` (
+  `idTipouso` bigint NOT NULL,
+  `claTipouso` varchar(5) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desTipouso` varchar(120) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `estTipouso` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tiposuso`
+--
+
+INSERT INTO `tiposuso` (`idTipouso`, `claTipouso`, `desTipouso`, `estTipouso`) VALUES
+(1, 'M1', 'AUTOPISTAS Y CARRETERAS', 1),
+(2, 'M2', 'VIAS DE ACCESO CONTROLADO Y VIAS RAPIDAS', 1),
+(3, 'M3', 'VIAS PRINCIPALES Y EJES VIALES', 1),
+(4, 'M4', 'VIAS PRIMARIAS O COLECTORAS', 1),
+(5, 'M5', 'VIAS SECUNDARIAS', 1),
+(6, 'P1', 'VIAS DE MUY ELEVADO PRESTIGIO URBANO', 1),
+(7, 'P2', 'UTILIZACION NOCTURNA INTENSA POR PEATONES Y CICLISTAS', 1),
+(10, 'P4', 'UTILIZACION NOCTURNA INTENSA POR PEATONES Y CICLISTAS. ASOCIADA A PROPIEDADES ADYACENTES', 1),
+(11, 'P5', 'UTILIZACION NOCTURNA INTENSA POR PEATONES Y CICLISTAS. ASOCIADA A PROPIDADES ADYACENTES', 1),
+(12, 'P6', 'UTILIZACION NOCTURNA INTENSA POR PEATONES Y CICLISTAS. ASOCIADA A PROPIDADES ADYACENTES', 1),
+(13, 'P7', 'VIAS DONDE SOLO SE REQUIERE GUIA VISUAL POR LUZ DIRECTA DE LUMINARIAS', 1),
+(14, 'C0', 'CANCHAS MULTIPLES RECREATIVAS', 1),
+(15, 'C1', 'PLAZAS Y PLAZOLETAS', 1),
+(16, 'C1.1', 'PASOS PEATONALES SUBTERRANEOS', 1),
+(17, 'C2', 'PUENTES PEATONALES', 1),
+(18, 'C2.1', 'ZONAS PEATONALES BAJAS Y ALEDAÑAS A PUENTES PEATONALES Y VEHICULARES', 1),
+(19, 'C3', 'ANDENES, SENDEROS, PASEOS Y ALAMEDAS PEATONALES EN PARQUES', 1),
+(20, 'C.2.2', 'CICLO RUTAS EN PARQUES', 1),
+(21, 'C4', 'CICLO RUTAS, SENDEROS, PASEOS, ALAMEDAS Y DEMAS AREAS PEATONALES ADYACENTES A RONDAS DE RIOS Y OTROS', 1);
 
 -- --------------------------------------------------------
 
@@ -621,6 +739,14 @@ INSERT INTO `varsalp` (`idVarsalp`, `codVarsalp`, `desVarsalp`, `estVarsalp`) VA
 --
 
 --
+-- Indices de la tabla `actas`
+--
+ALTER TABLE `actas`
+  ADD PRIMARY KEY (`idActa`),
+  ADD KEY `tipActa` (`tipActa`),
+  ADD KEY `proActa` (`proActa`);
+
+--
 -- Indices de la tabla `capitulos`
 --
 ALTER TABLE `capitulos`
@@ -637,6 +763,14 @@ ALTER TABLE `contacto`
 --
 ALTER TABLE `costoconsumo`
   ADD PRIMARY KEY (`idCosto`);
+
+--
+-- Indices de la tabla `detalleacta`
+--
+ALTER TABLE `detalleacta`
+  ADD PRIMARY KEY (`idDetalle`),
+  ADD KEY `actDetalle` (`actDetalle`),
+  ADD KEY `eleDetalle` (`eleDetalle`);
 
 --
 -- Indices de la tabla `elementos`
@@ -670,7 +804,8 @@ ALTER TABLE `grupos`
 --
 ALTER TABLE `gruposalp`
   ADD PRIMARY KEY (`idGruposalp`),
-  ADD UNIQUE KEY `codGruposalp` (`codGruposalp`);
+  ADD UNIQUE KEY `codGruposalp` (`codGruposalp`),
+  ADD KEY `tipGruposalp` (`tipGruposalp`);
 
 --
 -- Indices de la tabla `imagenes`
@@ -685,6 +820,13 @@ ALTER TABLE `imagenes`
 ALTER TABLE `itemsacta`
   ADD PRIMARY KEY (`idItemacta`),
   ADD KEY `actItemacta` (`actItemacta`);
+
+--
+-- Indices de la tabla `itemsalp`
+--
+ALTER TABLE `itemsalp`
+  ADD PRIMARY KEY (`idItem`),
+  ADD KEY `gruItem` (`gruItem`);
 
 --
 -- Indices de la tabla `modulos`
@@ -719,6 +861,12 @@ ALTER TABLE `pqrs`
   ADD PRIMARY KEY (`idPqrs`);
 
 --
+-- Indices de la tabla `recursos`
+--
+ALTER TABLE `recursos`
+  ADD PRIMARY KEY (`idRecurso`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -744,6 +892,12 @@ ALTER TABLE `tipoactas`
   ADD PRIMARY KEY (`idTipoacta`);
 
 --
+-- Indices de la tabla `tiposuso`
+--
+ALTER TABLE `tiposuso`
+  ADD PRIMARY KEY (`idTipouso`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -767,6 +921,12 @@ ALTER TABLE `varsalp`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `actas`
+--
+ALTER TABLE `actas`
+  MODIFY `idActa` bigint NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `capitulos`
 --
 ALTER TABLE `capitulos`
@@ -782,7 +942,13 @@ ALTER TABLE `contacto`
 -- AUTO_INCREMENT de la tabla `costoconsumo`
 --
 ALTER TABLE `costoconsumo`
-  MODIFY `idCosto` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `idCosto` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `detalleacta`
+--
+ALTER TABLE `detalleacta`
+  MODIFY `idDetalle` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `elementos`
@@ -827,6 +993,12 @@ ALTER TABLE `itemsacta`
   MODIFY `idItemacta` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `itemsalp`
+--
+ALTER TABLE `itemsalp`
+  MODIFY `idItem` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `modulos`
 --
 ALTER TABLE `modulos`
@@ -857,6 +1029,12 @@ ALTER TABLE `pqrs`
   MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
+-- AUTO_INCREMENT de la tabla `recursos`
+--
+ALTER TABLE `recursos`
+  MODIFY `idRecurso` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -879,6 +1057,12 @@ ALTER TABLE `suscripciones`
 --
 ALTER TABLE `tipoactas`
   MODIFY `idTipoacta` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tiposuso`
+--
+ALTER TABLE `tiposuso`
+  MODIFY `idTipouso` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
