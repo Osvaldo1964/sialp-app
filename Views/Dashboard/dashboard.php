@@ -80,7 +80,7 @@ Highcharts.chart('cantPqrs', {
       type: 'pie'
     },
     title: {
-      text: 'Ventas por tipo pago'
+      text: 'PQRs POR CONCEPTOS'
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

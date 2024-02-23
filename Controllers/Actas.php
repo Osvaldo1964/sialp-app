@@ -1,5 +1,5 @@
 <?php
-class Elementos extends Controllers
+class Actas extends Controllers
 {
     public function __construct()
     {
@@ -12,16 +12,16 @@ class Elementos extends Controllers
         getPermisos(MCOMPONENTES);
     }
 
-    public function elementos()
+    public function actas()
     {
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "Elementos";
-        $data['page_title'] = "ELEMENTOS <small> Cmr Pos Facturación </small>";
-        $data['page_name']  = "elementos";
-        $data['page_functions_js'] = "functions_elementos.js";
-        $this->views->getView($this, "elementos", $data);
+        $data['page_tag']   = "Actas";
+        $data['page_title'] = "ACTAS <small> SALP - APP</small>";
+        $data['page_name']  = "actas";
+        $data['page_functions_js'] = "functions_actas.js";
+        $this->views->getView($this, "actas", $data);
     }
 
     public function setElemento()
@@ -87,27 +87,27 @@ class Elementos extends Controllers
         die();
     }
 
-    public function getElementos()
+    public function getActas()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectElementos();
+            $arrData = $this->model->selectActas();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
-                if ($arrData[$i]['estElemento'] == 1) {
-                    $arrData[$i]['estElemento'] = '<span class="badge badge-success">Activo</span>';
+                if ($arrData[$i]['estActa'] == 1) {
+                    $arrData[$i]['estActa'] = '<span class="badge badge-success">Activo</span>';
                 } else {
-                    $arrData[$i]['estElemento'] = '<span class="badge badge-danger">Inactivo</span>';
+                    $arrData[$i]['estActa'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
                 if ($_SESSION['permisosMod']['reaPermiso']) {
-                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idElemento'] . ')" title="Ver Elemento"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idActa'] . ')" title="Ver Acta"><i class="far fa-eye"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idElemento'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idActa'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['delPermiso']) {
-                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idElemento'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idActa'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
@@ -116,22 +116,22 @@ class Elementos extends Controllers
         die();
     }
 
-    public function getElemento($idElemento)
+    public function getActa($idActa)
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $idElemento = intval($idElemento);
-            if ($idElemento > 0) {
-                $arrData = $this->model->selectElemento($idElemento);
+            $idActa = intval($idActa);
+            if ($idActa > 0) {
+                $arrData = $this->model->selectActa($idACta);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
-                    $arrImg = $this->model->selectImages($idElemento);
+/*                     $arrImg = $this->model->selectImages($idElemento);
                     if (count($arrImg) > 0) {
                         for ($i = 0; $i < count($arrImg); $i++) {
                             $arrImg[$i]['url_image'] = media() . '/images/uploads/' . $arrImg[$i]['nomImagen'];
                         }
                     }
-                    $arrData['images'] = $arrImg;
+                    $arrData['images'] = $arrImg; */
                     $arrResponse = array('status' => true, 'data' => $arrData);
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -141,16 +141,16 @@ class Elementos extends Controllers
         die();
     }
 
-    public function delElemento()
+    public function delActa()
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['delPermiso']) {
-                $intidElemento = intval($_POST['idElemento']);
-                $requestDelete = $this->model->deleteElemento($intidElemento);
+                $intidActa = intval($_POST['idActa']);
+                $requestDelete = $this->model->deleteActa($intidActa);
                 if ($requestDelete) {
-                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Elemento.');
+                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Acta.');
                 } else {
-                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el Elemento.');
+                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el Acta.');
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             }

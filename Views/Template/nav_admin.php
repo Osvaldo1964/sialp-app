@@ -121,8 +121,7 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/inversiones"><i class="icon fa fa-circle-o"></i> Inversiones</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/registro"><i class="icon fa fa-circle-o"></i> Registro de Actas Inversión</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/actas"><i class="icon fa fa-circle-o"></i> Actas Inversión</a></li>1
                         <li><a class="treeview-item" href="<?= base_url(); ?>/"><i class="icon fa fa-circle-o"></i> ****</a></li>
                     </ul>
                 </li>

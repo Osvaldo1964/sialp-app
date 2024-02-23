@@ -1,5 +1,4 @@
-document.write(`<script src="${base_url}/Assets/js/plugins/JsBarcode.all.min.js"></script>`);
-let tableElementos;
+let tableActas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -10,22 +9,24 @@ $(document).on('focusin', function (e) {
 });
 
 window.addEventListener('load', function () {
-    tableElementos = $('#tableElementos').dataTable({
+
+    tableACtas = $('#tableActas').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Elementos/getElementos",
+            "url": " " + base_url + "/Actas/getActas",
             "dataSrc": ""
         },
         "columns": [
-            { "data": "idElemento" },
-            { "data": "desGrupo" },
-            { "data": "desItem" },
-            { "data": "codElemento" },
-            { "data": "estElemento" },
+            { "data": "idACta" },
+            { "data": "desTipoacta" },
+            { "data": "desItemacta" },
+            { "data": "fecActa" },
+            { "data": "desRecurso" },
+            { "data": "estActa" },
             { "data": "options" }
         ],
         "columnDefs": [
@@ -41,7 +42,7 @@ window.addEventListener('load', function () {
                 "titleAttr": "Copiar",
                 "className": "btn btn-secondary",
                 "exportOptions": {
-                    "columns": [0, 1, 2, 3]
+                    "columns": [0, 1, 2, 3, 4, 5]
                 }
             }, {
                 "extend": "excelHtml5",
@@ -49,7 +50,7 @@ window.addEventListener('load', function () {
                 "titleAttr": "Exportar a Excel",
                 "className": "btn btn-success",
                 "exportOptions": {
-                    "columns": [0, 1, 2, 3]
+                    "columns": [0, 1, 2, 3, 4, 5]
                 }
             }, {
                 "extend": "pdfHtml5",
@@ -57,7 +58,7 @@ window.addEventListener('load', function () {
                 "titleAttr": "Exportar a PDF",
                 "className": "btn btn-danger",
                 "exportOptions": {
-                    "columns": [0, 1, 2, 3]
+                    "columns": [0, 1, 2, 3, 4, 5]
                 }
             }, {
                 "extend": "csvHtml5",
@@ -65,7 +66,7 @@ window.addEventListener('load', function () {
                 "titleAttr": "Exportar a CSV",
                 "className": "btn btn-info",
                 "exportOptions": {
-                    "columns": [0, 1, 2, 3]
+                    "columns": [0, 1, 2, 3, 4, 5]
                 }
             }
         ],
@@ -75,9 +76,9 @@ window.addEventListener('load', function () {
         "order": [[0, "desc"]]
     });
 
-    if (document.querySelector("#formElemento")) {
-        let formElemento = document.querySelector("#formElemento");
-        formElemento.onsubmit = function (e) {
+    if (document.querySelector("#formActa")) {
+        let formActa = document.querySelector("#formActa");
+        formActa.onsubmit = function (e) {
             e.preventDefault();
             let strcodElemento = document.querySelector('#txtcodElemento').value;
             let strdesElemento = document.querySelector('#txtdesElemento').value;
@@ -149,40 +150,9 @@ window.addEventListener('load', function () {
     fntGrupos();
     fntItems();
     fntUsos();
+    fntItemactas()
     fntRecursos();
 })
-
-if (document.querySelector("#txtcodElemento")) {
-    let inputCodigo = document.querySelector("#txtcodElemento");
-    inputCodigo.onkeyup = function () {
-        if (inputCodigo.value.length >= 5) {
-            document.querySelector("#divBarCode").classList.remove("notblock");
-            fntBarcode();
-        } else {
-            document.querySelector("#divBarCode").classList.add("notblock");
-        }
-    }
-}
-
-tinymce.init({
-    selector: '#txtdesElemento',
-    width: '100%',
-    height: 300,
-    language: 'es',
-    plugins: [
-        'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-        'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
-        'media', 'table', 'emoticons', 'template', 'help'
-    ],
-    toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
-        'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
-        'forecolor backcolor emoticons | help',
-    menu: {
-        favs: { title: 'Favoritos', items: 'code visualaid | searchreplace | emoticons' }
-    },
-    menubar: 'favs file edit view insert format tools table',
-    content_css: 'css/content.css'
-});
 
 function fntInputFile() {
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
@@ -428,6 +398,22 @@ function fntUsos() {
         }
     }
 }
+
+function fntItemactas() {
+    if (document.querySelector('#listClases')) {
+        let ajaxUrl = base_url + '/Itemsactas/getSelectItemsactas';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listClases').innerHTML = request.responseText;
+                $('#listClases').selectpicker('render');
+            }
+        }
+    }
+}
+
 function fntRecursos() {
     if (document.querySelector('#listRecursos')) {
         let ajaxUrl = base_url + '/Recursos/getSelectRecursos';
@@ -437,35 +423,20 @@ function fntRecursos() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 document.querySelector('#listRecursos').innerHTML = request.responseText;
-                $('#listReceursos').selectpicker('render');
+                $('#listRecursos').selectpicker('render');
             }
         }
     }
 }
 
-function fntBarcode(e) {
-    let codigo = document.querySelector("#txtcodElemento").value;
-    JsBarcode("#barcode", codigo);
-}
-
-function fntPrintBarcode(area) {
-    let elemntArea = document.querySelector(area);
-    let vprint = window.open(' ', 'popimpr', 'height=400, width=600');
-    vprint.document.write(elemntArea.innerHTML);
-    vprint.document.close();
-    vprint.print();
-    vprint.close();
-}
-
 function openModal() {
     rowTable = "";
-    document.querySelector('#idElemento').value = "";
+    document.querySelector('#idActa').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nuevo Elemento";
-    document.querySelector("#formElemento").reset();
-    document.querySelector("#divBarCode").classList.add("notblock");
+    document.querySelector('#titleModal').innerHTML = "Nueva Acta";
+    document.querySelector("#formActa").reset();
     document.querySelector("#containerImages").innerHTML = "";
-    $('#modalFormElemento').modal('show');
+    $('#modalFormActas').modal('show');
 }

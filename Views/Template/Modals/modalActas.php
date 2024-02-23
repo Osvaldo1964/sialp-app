@@ -1,59 +1,39 @@
-<div class="modal fade" id="modalFormElemento" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+<!-- Modal para Cabecera de Actas -->
+<div class="modal fade" id="modalFormActas" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header headerRegister">
-                <h5 class="modal-title" id="titleModal">Nuevo Elemento</h5>
+                <h5 class="modal-title" id="titleModal">Nueva Acta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formElemento" name="formElemento" class="form-horizontal">
-                    <input type="hidden" id="idElemento" name="idElemento" value="">
-                    <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>
+                <form id="formActa" name="formActa" class="form-horizontal">
+                    <input type="hidden" id="idActa" name="idActa" value="">
+                    <input type="hidden" id="foto_actual" name="foto_actual" value="">
+                    <input type="hidden" id="foto_remove" name="foto_remove" value="0">
+                    <p class="text-primary">Todos los campos son obligatorios</p>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label">Código </label>
-                                <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código de barra" required="">
-                                <br>
-                                <div id="divBarCode" class="notblock textcenter">
-                                    <div id="printCode">
-                                        <svg id="barcode"></svg>
-                                    </div>
-                                    <button class="btn btn-success btn-sm" type="button" onClick="fntPrintBarcode('#printCode')"><i class="fas fa-print"></i> Imprimir</button>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="listClases">Clase de Acta </label>
+                                    <select class="form-control" data-live-search="true" id="listClases" name="listClases" required=""></select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Número Acta </label>
+                                    <input class="form-control" id="txtnumActa" name="txtnumActa" type="text" placeholder="" required="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Latitud </label>
-                                    <input class="form-control" id="fltlatElemento" name="fltlatElemento" type="text" placeholder="" required="">
+                                    <label class="control-label">Fecha </label>
+                                    <input class="form-control" id="txtfecActa" name="txtfecActa" type="text" placeholder="" required="">
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Longitud </label>
-                                    <input class="form-control" id="fltlonElemento" name="fltlonElemento" type="text" placeholder="" required="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-8">
                                     <label for="listRecursos">Origen Recurso </label>
                                     <select class="form-control" data-live-search="true" id="listRecursos" name="listRecursos" required=""></select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label for="listUsos">Clase de Iluminación </label>
-                                    <select class="form-control" data-live-search="true" id="listUsos" name="listUsos" required=""></select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="listGrupos">Grupo </label>
-                                    <select class="form-control" data-live-search="true" id="listGrupos" name="listGrupos" required=""></select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="listItems">SubGrupo </label>
-                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
                                 </div>
                             </div>
                             <div class="row">
@@ -71,38 +51,6 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <button class="btn btn-danger btn-lg btn-block" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label">Descripción Elemento</label>
-                                    <textarea class="form-control" id="txtdesElemento" name="txtdesElemento"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label">Dirección</label>
-                                    <input type="text" class="form-control" id="txtdirElemento" name="txtdirElemento"></textarea>
-                                </div>
-                                <hr>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Acta Ingreso</label>
-                                    <input type="text" class="form-control" id="txtainElemento" name="txtainElemento"></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Fecha Ingreso</label>
-                                    <input type="text" class="form-control" id="txtfinElemento" name="txtfinElemento"></textarea>
-                                </div>
-                                <hr>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Acta de Baja</label>
-                                    <input type="text" class="form-control" id="txtabaElemento" name="txtabaElemento"></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Fecha de Baja</label>
-                                    <input type="text" class="form-control" id="txtfbaElemento" name="txtfbaElemento"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +91,8 @@
     </div>
 </div>
 
-<!-- Modal para Ver información de Categorías -->
-<div class="modal fade" id="modalViewElemento" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Modal para Ver información de Actas -->
+<div class="modal fade" id="modalViewActa" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header header-primary">
