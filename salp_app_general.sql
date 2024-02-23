@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 22-02-2024 a las 20:01:03
+-- Tiempo de generación: 23-02-2024 a las 03:15:21
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `actas` (
   `idActa` bigint NOT NULL,
   `tipActa` bigint NOT NULL,
-  `claActa` varchar(30) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `claActa` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecActa` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `proActa` bigint NOT NULL,
   `estActa` int DEFAULT '1'
@@ -126,8 +126,10 @@ CREATE TABLE `detalleacta` (
 CREATE TABLE `elementos` (
   `idElemento` bigint NOT NULL,
   `gruElemento` bigint NOT NULL,
+  `iteElemento` bigint NOT NULL,
   `codElemento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `nomElemento` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `oriElemento` bigint NOT NULL,
+  `ubiElemento` bigint NOT NULL,
   `desElemento` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `dirElemento` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `latElemento` float(15,2) NOT NULL,
@@ -140,19 +142,6 @@ CREATE TABLE `elementos` (
   `estElemento` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `elementos`
---
-
-INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElemento`, `desElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `finElemento`, `abaElemento`, `fbaElemento`, `estElemento`) VALUES
-(1, 2, '01002100', 'Luminaria LED 30w', '<p>Esta es una prueba de la hoja de vida</p> <ul> <li>Fecha Mayo 1 de 2024 - Se instala la luminaria</li> <li>Fecha Junio 15 de 2024 - Se cambia el sticker del poste</li> <li>Fecha Agosto 30 de 2024 - Se reemplaza la luminaria por robo</li> </ul>', 'Esta es la direccion de la luminaria', 15.25, 14.23, '01002100', NULL, NULL, NULL, NULL, 1),
-(2, 2, '01002101', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002101', NULL, NULL, NULL, NULL, 1),
-(3, 2, '01002102', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002102', NULL, NULL, NULL, NULL, 1),
-(4, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', NULL, NULL, NULL, NULL, 1),
-(5, 2, '01002105', 'Luminaria LED 30w', '<p>una</p>', 'centro', 11.35, -74.15, '01002105', NULL, NULL, NULL, NULL, 1),
-(6, 1, '001542523', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542523', NULL, NULL, NULL, NULL, 1),
-(7, 1, '001542527', 'Bombilla de Sodio 30w', '<p>una</p>', 'ascascas', 15.25, 14.23, '001542527', NULL, NULL, NULL, NULL, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -161,7 +150,7 @@ INSERT INTO `elementos` (`idElemento`, `gruElemento`, `codElemento`, `nomElement
 
 CREATE TABLE `estratos` (
   `idEstrato` bigint NOT NULL,
-  `desEstrato` varchar(60) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desEstrato` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `estEstrato` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -195,7 +184,7 @@ INSERT INTO `estratos` (`idEstrato`, `desEstrato`, `estEstrato`) VALUES
 
 CREATE TABLE `facturacion` (
   `idFactura` bigint NOT NULL,
-  `perFactura` varchar(6) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `perFactura` varchar(6) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `relFactura` bigint NOT NULL,
   `canFactura` int NOT NULL,
   `facFactura` float(15,2) NOT NULL,
@@ -308,7 +297,7 @@ INSERT INTO `itemsacta` (`idItemacta`, `codItemacta`, `desItemacta`, `actItemact
 CREATE TABLE `itemsalp` (
   `idItem` bigint NOT NULL,
   `gruItem` bigint NOT NULL,
-  `desItem` varchar(150) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desItem` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `csmItem` int NOT NULL,
   `estItem` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
@@ -487,7 +476,7 @@ CREATE TABLE `pqrs` (
   `dsoPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci,
   `latPqrs` float(15,8) DEFAULT NULL,
   `lonPqrs` float(15,8) DEFAULT NULL,
-  `ndiPqrs` varchar(200) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `ndiPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `estPqrs` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -521,7 +510,7 @@ INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `frePq
 
 CREATE TABLE `recursos` (
   `idRecurso` bigint NOT NULL,
-  `desRecurso` varchar(60) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desRecurso` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `estRecurso` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -617,7 +606,7 @@ INSERT INTO `tipoactas` (`idTipoacta`, `codTipoacta`, `desTipoacta`, `selTipoact
 
 CREATE TABLE `tiposuso` (
   `idTipouso` bigint NOT NULL,
-  `claTipouso` varchar(5) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `claTipouso` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `desTipouso` varchar(120) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `estTipouso` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
@@ -777,7 +766,10 @@ ALTER TABLE `detalleacta`
 --
 ALTER TABLE `elementos`
   ADD PRIMARY KEY (`idElemento`),
-  ADD KEY `gruElemento` (`gruElemento`);
+  ADD KEY `gruElemento` (`gruElemento`),
+  ADD KEY `oriElemento` (`oriElemento`),
+  ADD KEY `ubiElemento` (`ubiElemento`),
+  ADD KEY `iteElemento` (`iteElemento`);
 
 --
 -- Indices de la tabla `estratos`
