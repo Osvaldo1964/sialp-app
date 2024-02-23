@@ -146,6 +146,7 @@ window.addEventListener('load', function () {
     }
     fntInputFile();
     fntGrupos();
+    fntItems();
 })
 
 if (document.querySelector("#txtcodElemento")) {
@@ -304,8 +305,8 @@ function fntEditInfo(element, idElemento) {
                 let objElemento = objData.data;
                 document.querySelector("#idElemento").value = objElemento[0].idElemento;
                 document.querySelector("#listGrupos").value = objElemento[0].gruElemento;
+                document.querySelector("#listItems").value = objElemento[0].iteElemento;
                 document.querySelector("#txtcodElemento").value = objElemento[0].codElemento;
-                document.querySelector("#txtnomElemento").value = objElemento[0].nomElemento;
                 document.querySelector("#txtdesElemento").value = objElemento[0].desElemento;
                 document.querySelector("#txtdirElemento").value = objElemento[0].dirElemento;
                 document.querySelector("#fltlatElemento").value = objElemento[0].latElemento;
@@ -313,6 +314,7 @@ function fntEditInfo(element, idElemento) {
                 document.querySelector("#listestElemento").value = objElemento[0].estElemento;
                 tinymce.activeEditor.setContent(objElemento[0].desElemento);
                 $('#listGrupos').selectpicker('render');
+                $('#listItems').selectpicker('render');
                 $('#listestElemento').selectpicker('render'); 
                 fntBarcode();
                 if (objElemento.images.length > 0) {
@@ -373,7 +375,7 @@ function fntDelInfo(idElemento) {
 
 function fntGrupos() {
     if (document.querySelector('#listGrupos')) {
-        let ajaxUrl = base_url + '/Grupossalp/getSelectGrupossalp';
+        let ajaxUrl = base_url + '/Grupossalp/getSelectGruposalp';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
@@ -386,6 +388,20 @@ function fntGrupos() {
     }
 }
 
+function fntItems() {
+    if (document.querySelector('#listItems')) {
+        let ajaxUrl = base_url + '/Items/getSelectItems';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listItems').innerHTML = request.responseText;
+                $('#listItems').selectpicker('render');
+            }
+        }
+    }
+}
 function fntBarcode(e) {
     let codigo = document.querySelector("#txtcodElemento").value;
     JsBarcode("#barcode", codigo);

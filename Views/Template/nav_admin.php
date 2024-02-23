@@ -113,6 +113,22 @@
                 </li>
             <?php } ?>
 
+            <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
+                <li class="treeview">
+                    <a class="app-menu__item" href="#" data-toggle="treeview">
+                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+                        <span class="app-menu__label">Inversiones</span>
+                        <i class="treeview-indicator fa fa-angle-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/inversiones"><i class="icon fa fa-circle-o"></i> Inversiones</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/registro"><i class="icon fa fa-circle-o"></i> Registro de Actas Inversión</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/"><i class="icon fa fa-circle-o"></i> ****</a></li>
+                    </ul>
+                </li>
+            <?php } ?>
+
+            
             <?php if (!empty($_SESSION['permisos'][3]['reaPermiso'])) { ?>
                 <li>
                     <a class="app-menu__item" href="<?= base_url(); ?>/suscriptores">

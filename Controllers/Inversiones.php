@@ -1,5 +1,5 @@
 <?php
-class Items extends Controllers
+class Inversiones extends Controllers
 {
     public function __construct()
     {
@@ -17,11 +17,11 @@ class Items extends Controllers
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "items";
-        $data['page_title'] = "ITEMS <small> SIALP - APP </small>";
-        $data['page_name']  = "items";
-        $data['page_functions_js'] = "functions_items.js";
-        $this->views->getView($this, "items", $data);
+        $data['page_tag']   = "inversiones";
+        $data['page_title'] = "INVERSIONES <small> SALP - APP </small>";
+        $data['page_name']  = "inversiones";
+        $data['page_functions_js'] = "functions_inversiones.js";
+        $this->views->getView($this, "inversiones", $data);
     }
 
     public function setItem()

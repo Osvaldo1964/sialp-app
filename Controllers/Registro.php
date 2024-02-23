@@ -1,5 +1,5 @@
 <?php
-class Items extends Controllers
+class Registro extends Controllers
 {
     public function __construct()
     {
@@ -12,16 +12,16 @@ class Items extends Controllers
         getPermisos(MCOMPONENTES);
     }
 
-    public function items()
+    public function registro()
     {
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "items";
-        $data['page_title'] = "ITEMS <small> SIALP - APP </small>";
-        $data['page_name']  = "items";
-        $data['page_functions_js'] = "functions_items.js";
-        $this->views->getView($this, "items", $data);
+        $data['page_tag']   = "registro";
+        $data['page_title'] = "REGISTRO ACTAS <small> SALP - APP </small>";
+        $data['page_name']  = "registro";
+        $data['page_functions_js'] = "functions_registro.js";
+        $this->views->getView($this, "registro", $data);
     }
 
     public function setItem()

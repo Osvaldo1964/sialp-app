@@ -12,23 +12,9 @@
                     <input type="hidden" id="idElemento" name="idElemento" value="">
                     <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label class="control-label">Nombre Elemento<span class="required">*</span></label>
-                                <input type="text" class="form-control" id="txtnomElemento" name="txtnomElemento" required="">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Descripción Elemento</label>
-                                <textarea class="form-control" id="txtdesElemento" name="txtdesElemento"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Dirección</label>
-                                <textarea class="form-control" id="txtdirElemento" name="txtdirElemento"></textarea>
-                            </div>
-                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="control-label">Código <span class="required">*</span></label>
+                                <label class="control-label">Código </label>
                                 <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código de barra" required="">
                                 <br>
                                 <div id="divBarCode" class="notblock textcenter">
@@ -40,21 +26,39 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Latitud <span class="required">*</span></label>
+                                    <label class="control-label">Latitud </label>
                                     <input class="form-control" id="fltlatElemento" name="fltlatElemento" type="text" placeholder="" required="">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Longitud <span class="required">*</span></label>
+                                    <label class="control-label">Longitud </label>
                                     <input class="form-control" id="fltlonElemento" name="fltlonElemento" type="text" placeholder="" required="">
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="form-group col-md-8">
+                                    <label for="listOrigen">Origen Recurso </label>
+                                    <select class="form-control" data-live-search="true" id="listOrigen" name="listOrigen" required=""></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-10">
+                                    <label for="listClase">Clase de Iluminación </label>
+                                    <select class="form-control" data-live-search="true" id="listClase" name="listClase" required=""></select>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="listGrupos">Grupo <span class="required">*</span></label>
+                                    <label for="listGrupos">Grupo </label>
                                     <select class="form-control" data-live-search="true" id="listGrupos" name="listGrupos" required=""></select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="listestElemento">Estado<span class="required">*</span></label>
+                                    <label for="listItems">SubGrupo </label>
+                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="listestElemento">Estado</label>
                                     <select class="form-control selectpicker" id="listestElemento" name="listestElemento" required>
                                         <option value="1">Activo</option>
                                         <option value="2">Inactivo</option>
@@ -70,6 +74,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label">Descripción Elemento</label>
+                                    <textarea class="form-control" id="txtdesElemento" name="txtdesElemento"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label">Dirección</label>
+                                    <input type="text" class="form-control" id="txtdirElemento" name="txtdirElemento"></textarea>
+                                </div>
+                                <hr>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Acta Ingreso</label>
+                                    <input type="text" class="form-control" id="txtainElemento" name="txtainElemento"></textarea>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Fecha Ingreso</label>
+                                    <input type="text" class="form-control" id="txtfinElemento" name="txtfinElemento"></textarea>
+                                </div>
+                                <hr>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Acta de Baja</label>
+                                    <input type="text" class="form-control" id="txtabaElemento" name="txtabaElemento"></textarea>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Fecha de Baja</label>
+                                    <input type="text" class="form-control" id="txtfbaElemento" name="txtfbaElemento"></textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tile-footer">
                         <div class="form-group col-md-12">
@@ -81,7 +117,7 @@
                             </div>
                             <hr>
                             <div id="containerImages">
-<!--                                 <div id="div24">
+                                <!--                                 <div id="div24">
                                     <div class="prevImage">
                                         <img class="loading" src="<?= media(); ?>/images/loading.svg">
                                     </div>
@@ -97,7 +133,8 @@
                                     <label for="img1" class="btnUploadfile"><i class="fas fa-upload"></i></label>
                                     <button class="btnDeleteImage" type="button" onclick="fntDelItem('div24')"><i class="fas fa-trash-alt"></i></button>
                                 </div>
- -->                            </div>
+ -->
+                            </div>
                         </div>
                     </div>
                 </form>

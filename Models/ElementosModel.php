@@ -53,10 +53,12 @@ class ElementosModel extends Mysql
 
     public function selectElementos()
     {
-        $sql = "SELECT e.idElemento, e.gruElemento, e.codElemento, e.nomElemento, e.desElemento,
-                g.desGruposalp as desGrupo, e.dirElemento, e.latElemento, e.lonElemento, e.estElemento
+        $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento, e.codElemento, e.oriElemento, e.ubiElemento, e.desElemento,
+                g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.latElemento, e.lonElemento, e.ainElemento, e.finElemento,
+                e.abaElemento, e.fbaElemento, e.estElemento
                 FROM elementos e
                 INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
+                INNER JOIN itemsalp i ON e.iteElemento = i.idItem
                 WHERE estElemento != 0";
         $request = $this->select_all($sql);
         return $request;
@@ -65,10 +67,12 @@ class ElementosModel extends Mysql
     public function selectElemento(int $idElemento)
     {
         $this->intidElemento = $idElemento;
-        $sql = "SELECT e.idElemento, e.gruElemento, e.codElemento, e.nomElemento, e.desElemento,
-                g.desGruposalp as desGrupo, e.dirElemento, e.latElemento, e.lonElemento, e.estElemento
+        $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento,  e.codElemento, e.oriElemento, e.ubiElemento, e.desElemento,
+                g.desGruposalp as desGrupo, i.desItem as desGrupo, e.dirElemento, e.latElemento, e.lonElemento, , e.ainElemento, e.finElemento,
+                e.abaElemento, e.fbaElemento, e.estElemento
                 FROM elementos e
                 INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
+                INNER JOIN itemsalp i ON e.gruElemento = i.idItem
                 WHERE idElemento = $this->intidElemento";
         $request = $this->select_all($sql);
         return $request;
