@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 23-02-2024 a las 03:15:21
+-- Tiempo de generación: 23-02-2024 a las 19:56:49
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -30,9 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `actas` (
   `idActa` bigint NOT NULL,
   `tipActa` bigint NOT NULL,
-  `claActa` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `iteActa` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `numActa` varchar(20) COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecActa` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `proActa` bigint NOT NULL,
+  `recActa` bigint NOT NULL,
   `estActa` int DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -128,8 +129,8 @@ CREATE TABLE `elementos` (
   `gruElemento` bigint NOT NULL,
   `iteElemento` bigint NOT NULL,
   `codElemento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `oriElemento` bigint NOT NULL,
-  `ubiElemento` bigint NOT NULL,
+  `recElemento` bigint NOT NULL,
+  `usoElemento` bigint NOT NULL,
   `desElemento` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `dirElemento` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `latElemento` float(15,2) NOT NULL,
@@ -141,6 +142,16 @@ CREATE TABLE `elementos` (
   `fbaElemento` date DEFAULT NULL,
   `estElemento` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `elementos`
+--
+
+INSERT INTO `elementos` (`idElemento`, `gruElemento`, `iteElemento`, `codElemento`, `recElemento`, `usoElemento`, `desElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `finElemento`, `abaElemento`, `fbaElemento`, `estElemento`) VALUES
+(8, 1, 1, 'LED01002', 2, 3, '', 'Calle prueba', 15.20, 16.22, 'led01001', '001-2022', '2022-01-20', NULL, NULL, 1),
+(9, 1, 1, 'LED01001', 2, 3, '<p>EL DIA 2020-02-25 SE LE CAMBIO EL FILAMENTO</p> <p>EL DIA 2020-2523SD SE LAVO</p>', 'Calle prueba', 15.20, 16.22, 'led01001', '001-2022', '2022-01-20', '009-1520', '2022-02-15', 1),
+(10, 2, 1, 'LED902929', 3, 1, '<p>ESTA DSKSKDSD LSD SDLFS</p> <p>DSLDLDSAF&Ntilde;DSF</p> <p>DKDALKD</p>', 'CARRERA LARTLR', 15.20, 16.22, 'led902929', 'KWEWELLWE', '2022-01-20', NULL, NULL, 1),
+(11, 2, 1, 'LED902929', 3, 1, '<p>ESTA DSKSKDSD LSD SDLFS</p> <p>DSLDLDSAF&Ntilde;DSF</p> <p>DKDALKD</p>', 'CARRERA LARTLR', 15.20, 16.22, 'led902929', 'KWEWELLWE', '2022-01-20', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -260,7 +271,9 @@ CREATE TABLE `imagenes` (
 --
 
 INSERT INTO `imagenes` (`idImagen`, `idElemento`, `nomImagen`) VALUES
-(1, 1, 'pro_fc7d732eb2acba1328d11dbb2fc42739.jpg');
+(1, 1, 'pro_fc7d732eb2acba1328d11dbb2fc42739.jpg'),
+(2, 11, 'pro_989c4abcee9f94324809987176032347.jpg'),
+(3, 11, 'pro_7404c582081c5ebb7268c400c56ceeed.jpg');
 
 -- --------------------------------------------------------
 
@@ -272,7 +285,7 @@ CREATE TABLE `itemsacta` (
   `idItemacta` bigint NOT NULL,
   `codItemacta` varchar(10) NOT NULL,
   `desItemacta` varchar(60) NOT NULL,
-  `actItemacta` bigint NOT NULL,
+  `tipItemacta` bigint NOT NULL,
   `estItemacta` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -280,7 +293,7 @@ CREATE TABLE `itemsacta` (
 -- Volcado de datos para la tabla `itemsacta`
 --
 
-INSERT INTO `itemsacta` (`idItemacta`, `codItemacta`, `desItemacta`, `actItemacta`, `estItemacta`) VALUES
+INSERT INTO `itemsacta` (`idItemacta`, `codItemacta`, `desItemacta`, `tipItemacta`, `estItemacta`) VALUES
 (1, '01', 'EXPANSION', 2, 1),
 (2, '02', 'MODERNIZACION', 2, 1),
 (3, '03', 'REPOSICION', 2, 1),
@@ -500,7 +513,9 @@ INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `frePq
 (47, 'Osvaldo', 'osvicor@hotmail.com', 'taganga magdalena', 'dfsdsdf', '2024-02-10', '2024-02-18', 'Prueba', NULL, NULL, NULL, 2),
 (48, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'asdasdsd', '2024-02-14', '2024-02-19', NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
 (49, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-18', '2024-02-21', 'listo', 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 2),
-(50, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-20', NULL, NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1);
+(50, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-20', NULL, NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
+(51, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, NULL, NULL, 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
+(52, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, '2024-02-24', 'Se cambio', 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 2);
 
 -- --------------------------------------------------------
 
@@ -733,7 +748,8 @@ INSERT INTO `varsalp` (`idVarsalp`, `codVarsalp`, `desVarsalp`, `estVarsalp`) VA
 ALTER TABLE `actas`
   ADD PRIMARY KEY (`idActa`),
   ADD KEY `tipActa` (`tipActa`),
-  ADD KEY `proActa` (`proActa`);
+  ADD KEY `recActa` (`recActa`) USING BTREE,
+  ADD KEY `iteActa` (`iteActa`);
 
 --
 -- Indices de la tabla `capitulos`
@@ -767,8 +783,8 @@ ALTER TABLE `detalleacta`
 ALTER TABLE `elementos`
   ADD PRIMARY KEY (`idElemento`),
   ADD KEY `gruElemento` (`gruElemento`),
-  ADD KEY `oriElemento` (`oriElemento`),
-  ADD KEY `ubiElemento` (`ubiElemento`),
+  ADD KEY `oriElemento` (`recElemento`),
+  ADD KEY `ubiElemento` (`usoElemento`),
   ADD KEY `iteElemento` (`iteElemento`);
 
 --
@@ -811,7 +827,7 @@ ALTER TABLE `imagenes`
 --
 ALTER TABLE `itemsacta`
   ADD PRIMARY KEY (`idItemacta`),
-  ADD KEY `actItemacta` (`actItemacta`);
+  ADD KEY `tipItemacta` (`tipItemacta`);
 
 --
 -- Indices de la tabla `itemsalp`
@@ -946,7 +962,7 @@ ALTER TABLE `detalleacta`
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `estratos`
@@ -976,7 +992,7 @@ ALTER TABLE `gruposalp`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `itemsacta`
@@ -1018,7 +1034,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT de la tabla `pqrs`
 --
 ALTER TABLE `pqrs`
-  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `recursos`
