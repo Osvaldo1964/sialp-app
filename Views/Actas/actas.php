@@ -30,6 +30,7 @@
                                     <th>Número Acta</th>
                                     <th>Fecha Acta</th>
                                     <th>Recurso</th>
+                                    <th>Valor</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>

@@ -38,18 +38,21 @@ class Actas extends Controllers
                 $strnumActa = strClean($_POST['txtnumActa']);
                 $strfecActa = strClean($_POST['txtfecActa']);
                 $intrecActa = intval($_POST['listRecursos']);
+                $fltvalActa = floatval($_POST['fltvalActa']);
                 $intestActa = intval($_POST['listestActa']);
                 $request_Acta = "";
 
                 if ($idActa == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_Acta = $this->model->insertActa($inttipActa, $intiteActa, $strnumActa, $strfecActa, $intrecActa, $intestActa);
+                        $request_Acta = $this->model->insertActa($inttipActa, $intiteActa, $strnumActa, $strfecActa,
+                                                                $intrecActa, $fltvalActa, $intestActa);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_Acta = $this->model->updateActa($idActa, $inttipActa, $intiteActa, $strnumActa, $strfecActa, $intrecActa, $intestActa);
+                        $request_Acta = $this->model->updateActa($idActa, $inttipActa, $intiteActa, $strnumActa,
+                                                                $strfecActa, $intrecActa, $fltvalActa, $intestActa);
                     }
                 }
                 if($request_Acta == 1 || $request_Acta != 'exist')
@@ -92,7 +95,10 @@ class Actas extends Controllers
                 if ($_SESSION['permisosMod']['delPermiso']) {
                     $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idActa'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
-                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
+                if ($_SESSION['permisosMod']['updPermiso']) {
+                    $btnAdd = '<button class="btn btn-primary btn-sm" onClick="fntAddElemento(this,' . $arrData[$i]['idActa'] . ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
+                }
+                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnAdd . $btnDelete . '</div>';
             }
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         }
@@ -104,11 +110,11 @@ class Actas extends Controllers
         if ($_SESSION['permisosMod']['reaPermiso']) {
             $idActa = intval($idActa);
             if ($idActa > 0) {
-                $arrData = $this->model->selectActa($idACta);
+                $arrData = $this->model->selectActa($idActa);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
-                     $arrImg = $this->model->selectImages($idActa);
+                    $arrImg = $this->model->selectImages($idActa);
                     if (count($arrImg) > 0) {
                         for ($i = 0; $i < count($arrImg); $i++) {
                             $arrImg[$i]['url_image'] = media() . '/images/uploads/' . $arrImg[$i]['nomImagen'];
@@ -144,12 +150,12 @@ class Actas extends Controllers
     public function setImage()
     {
         if ($_POST) {
-            if (empty($_POST['idActa'])) {
+            if (empty($_POST['actImagen'])) {
                 $arrResponse = array('status' => false, 'msg' => 'Error de datos.');
             } else {
-                $idActa = intval($_POST['idActa']);
+                $idActa = intval($_POST['actImagen']);
                 $foto = $_FILES['foto'];
-                $imgNombre = 'pro_' . md5(date('Y-m-d H:m:s')) . '.jpg';
+                $imgNombre = 'pro_' . md5(date('Y-m-d H:m:s')) . '.pdf';
                 $request_image = $this->model->insertImage($idActa, $imgNombre);
                 if ($request_image) {
                     $uploadImage = uploadImage($foto, $imgNombre);
@@ -166,11 +172,11 @@ class Actas extends Controllers
     public function delFile()
     {
         if ($_POST) {
-            if (empty($_POST['idActa']) || empty($_POST['file'])) {
+            if (empty($_POST['actImagen']) || empty($_POST['file'])) {
                 $arrResponse = array('status' => false, 'msg' => 'Datos incorrectos.');
             } else {
                 //Eliminar el registro de la tabla imagenes
-                $idActa = intval($_POST['idActa']);
+                $idActa = intval($_POST['actImagen']);
                 $imgNombre = strClean($_POST['file']);
                 $request_image = $this->model->deleteImage($idActa, $imgNombre);
                 if ($request_image) {

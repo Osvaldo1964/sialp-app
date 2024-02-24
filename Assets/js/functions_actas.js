@@ -9,7 +9,6 @@ $(document).on('focusin', function (e) {
 });
 
 window.addEventListener('load', function () {
-
     tableACtas = $('#tableActas').dataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -27,6 +26,7 @@ window.addEventListener('load', function () {
             { "data": "numActa" },
             { "data": "fecActa" },
             { "data": "desRecurso" },
+            { "data": "valActa" },
             { "data": "estActa" },
             { "data": "options" }
         ],
@@ -86,6 +86,7 @@ window.addEventListener('load', function () {
             let strnumActa = document.querySelector('#txtnumActa').value;
             let strfecActa = document.querySelector('#txtfecActa').value;
             let intrecActa = document.querySelector('#listRecursos').value;
+            let flrvalActa = document.querySelector('#fltvalActa').value;
             let intestActa = document.querySelector('#listestActa').value;
             if (strnumActa == '' || strfecActa == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
@@ -115,7 +116,8 @@ window.addEventListener('load', function () {
                             rowTable.cells[3].textContent = numActa;
                             rowTable.cells[4].textContent = fecActa;
                             rowTable.cells[5].textContent = desRecurso;
-                            rowTable.cells[6].innerHTML = htmlStatus;
+                            rowTable.cells[6].textContent = valActa;
+                            rowTable.cells[7].innerHTML = htmlStatus;
                             rowTable = "";
                         }
                     } else {
@@ -156,7 +158,7 @@ function fntInputFile() {
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
     inputUploadfile.forEach(function (inputUploadfile) {
         inputUploadfile.addEventListener('change', function () {
-            let idElemento = document.querySelector("#idActa").value;
+            let idActa = document.querySelector("#idActa").value;
             let parentId = this.parentNode.getAttribute("id");
             let idFile = this.getAttribute("id");
             let uploadFoto = document.querySelector("#" + idFile).value;
@@ -166,7 +168,7 @@ function fntInputFile() {
             if (uploadFoto != '') {
                 let type = fileimg[0].type;
                 let name = fileimg[0].name;
-                if (type != 'image/jpeg' && type != 'image/jpg' && type != 'image/png') {
+                if (type != 'application/pdf' ) { //&& type != 'image/jpg' && type != 'image/png'
                     prevImg.innerHTML = "Archivo no válido";
                     uploadFoto.value = "";
                     return false;
@@ -176,7 +178,7 @@ function fntInputFile() {
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
                     let ajaxUrl = base_url + '/Actas/setImage';
                     let formData = new FormData();
-                    formData.append('idActa', idActa);
+                    formData.append('actImagen', idActa);
                     formData.append("foto", this.files[0]);
                     request.open("POST", ajaxUrl, true);
                     request.send(formData);
@@ -206,7 +208,7 @@ function fntDelItem(element){
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Actas/delFile/';
     let formData = new FormData();
-    formData.append('idActa', idActa);
+    formData.append('actImagen', idActa);
     formData.append('file', nameImg);
     request.open("POST", ajaxUrl, true);
     request.send(formData);
@@ -238,15 +240,17 @@ function fntViewInfo(idActa) {
                 let estadoActa = objActa[0]['estActa'] == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector('#celdesGrupo').innerHTML = objElemento[0]['desGrupo'];
-                document.querySelector('#celcodElemento').innerHTML = objElemento[0]['codElemento'];
-                document.querySelector('#celnomElemento').innerHTML = objElemento[0]['nomElemento'];
-                document.querySelector('#celdesElemento').innerHTML = objElemento[0]['desElemento'];
-                document.querySelector('#celestElemento').innerHTML = estadoElemento;
-                if (objElemento['images'].length > 0) {
+                document.querySelector('#celtipActa').innerHTML = objActa[0]['desTipoacta'];
+                document.querySelector('#celtipActa').innerHTML = objActa[0]['desItemacta'];
+                document.querySelector('#celnumActa').innerHTML = objActa[0]['numActa'];
+                document.querySelector('#celfecActa').innerHTML = objActa[0]['fecActa'];
+                document.querySelector('#celrecActa').innerHTML = objActa[0]['desRecurso'];
+                document.querySelector('#celvalActa').innerHTML = objActa[0]['valActa'];
+                document.querySelector('#celestActa').innerHTML = estadoActa;
+                if (objActa['images'].length > 0) {
                     let objActas = objActa['images'];
                     for (let p = 0; p < objActas.length; p++) {
-                        htmlImage += `<img src="${objActas[p]['url_image']}"></img>`
+                        htmlImage += `<iframe src="${objActas[p]['url_image']}"></iframe>`
                     }
                 }
                 document.querySelector('#celFotos').innerHTML = htmlImage;
@@ -279,18 +283,19 @@ function fntEditInfo(element, idActa) {
                 document.querySelector("#listRecursos").value = objActa[0].recActa;
                 document.querySelector("#txtnumActa").value = objActa[0].numActa;
                 document.querySelector("#txtfecActa").value = objActa[0].fecActa;
+                document.querySelector("#fltvalActa").value = objActa[0].valActa;
                 document.querySelector("#listestActa").value = objActa[0].estActa;
-                tinymce.activeEditor.setContent(objElemento[0].desActa);
                 $('#listClases').selectpicker('render');
                 $('#listRecursos').selectpicker('render');
                 $('#listestActa').selectpicker('render'); 
                 if (objActa.images.length > 0) {
                     let objActas = objActa.images;
+                    alert(objActas);
                     for (let p = 0; p < objActas.length; p++) {
                         let key = Date.now() + p;
                         htmlImage += `<div id="div${key}">
                             <div class="prevImage">
-                            <img src="${objActas[p].url_image}"></img>
+                            <iframe src="${objActas[p].url_image}"></iframe>
                             </div>
                             <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objActas[p].nomImagen}">
                             <i class="fas fa-trash-alt"></i></button></div>`;
@@ -298,7 +303,7 @@ function fntEditInfo(element, idActa) {
                 }
                 document.querySelector("#containerImages").innerHTML = htmlImage;
                 document.querySelector("#containerGallery").classList.remove("notblock");
-                $('#modalFormActa').modal('show');
+                $('#modalFormActas').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
