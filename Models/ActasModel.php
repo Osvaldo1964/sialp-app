@@ -2,7 +2,7 @@
 class ActasModel extends Mysql
 {
     public $intidActa;
-    public $inttipacta;
+    public $inttipActa;
     public $intiteActa;
     public $strnumActa;
     public $strfecActa;
@@ -15,19 +15,20 @@ class ActasModel extends Mysql
         parent::__construct();
     }
 
-    public function insertACta(string $nombre, string $descripcion, string $imagen, string $ruta, int $estado) {
+    public function insertActa($tipo, $clase, $numero, $fecha, $recurso, $estado) {
         $return = 0;
-        $this->strnomCategoria  = $nombre;
-        $this->strdesCategoria  = $descripcion;
-        $this->strimgCategoria  = $imagen;
-        $this->strrutCategoria  = $ruta;
-        $this->intestCategoria  = $estado;
+        $this->inttipActa  = $tipo;
+        $this->intiteActa  = $clase;
+        $this->strnumActa  = $numero;
+        $this->strfecActa  = $fecha;
+        $this->intrecActa  = $recurso;
+        $this->intestActa  = $estado;
 
-        $sql = "SELECT * FROM categorias WHERE nomCategoria = '{$this->strnomCategoria}'";
+        $sql = "SELECT * FROM actas WHERE numActa = '{$this->strnumActa}'";
         $request = $this->select_all($sql);
         if (empty($request)) {
-            $query_insert = "INSERT INTO categorias (nomCategoria, desCategoria, imgCategoria, rutCategoria, estCategoria) VALUES (?,?,?,?,?)";
-            $arrData = array($this->strnomCategoria, $this->strdesCategoria, $this->strimgCategoria, $this->strrutCategoria, $this->intestCategoria);
+            $query_insert = "INSERT INTO actas (tipActa, iteActa, numActa, fecActa, recActa, estActa) VALUES (?,?,?,?,?,?)";
+            $arrData = array($this->inttipActa, $this->intiteActa, $this->strnumActa, $this->strfecActa, $this->intrecActa, $this->intestActa);
             $request_insert = $this->insert($query_insert, $arrData);
             $return = $request_insert;
         } else {
@@ -38,7 +39,7 @@ class ActasModel extends Mysql
 
     public function selectActas()
     {
-        $sql = "SELECT a.idActa, a.tipActa, a.iteActa, a.numActa, a.fecActa, a.recActa, a.estActa,
+        $sql = "SELECT a.idActa, a.tipActa, a.iteActa, a.numActa, DATE_FORMAT(fecActa, '%Y-%m-%d') as fecActa, a.recActa, a.estActa,
                 t.desTipoacta as desTipoacta, i.desItemacta as desItemacta, r.desRecurso as desRecurso
                 FROM actas a
                 INNER JOIN tipoactas t ON t.idTipoacta = 2
@@ -63,21 +64,22 @@ class ActasModel extends Mysql
         return $request;
     }
 
-    public function updateActa(int $idCategoria, string $nombre, string $descripcion, string $portada, string $ruta, int $estado)
+    public function updateActa(int $idActa, $tipo, $clase, $numero, $fecha, $recurso, $estado)
     {
-        $this->intidCategoria   = $idCategoria;
-        $this->strnomCategoria  = $nombre;
-        $this->strdesCategoria  = $descripcion;
-        $this->strimgCategoria  = $portada;
-        $this->strrutCategoria  = $ruta;
-        $this->intestCategoria  = $estado;
+        $this->intidActa   = $idActa;
+        $this->inttipActa  = $tipo;
+        $this->intiteActa  = $clase;
+        $this->strnumActa  = $numero;
+        $this->strfecActa  = $fecha;
+        $this->intrecActa  = $recurso;
+        $this->intestActa  = $estado;
 
-        $sql = "SELECT * FROM categorias WHERE nomCategoria = '{$this->strnomCategoria}' AND idCategoria != $this->intidCategoria";
+        $sql = "SELECT * FROM actas WHERE numActa = '{$this->strnumActa}' AND idActa != $this->intidActa";
         $request = $this->select_all($sql);
         if (empty($request)) {
-            $sql = "UPDATE categorias SET nomCategoria = ?, desCategoria = ?, imgCategoria = ?, rutCategoria = ?, estCategoria = ?
-                    WHERE idCategoria = $this->intidCategoria";
-            $arrData = array($this->strnomCategoria, $this->strdesCategoria, $this->strimgCategoria, $this->strrutCategoria, $this->intestCategoria);
+            $sql = "UPDATE actas SET tipActa = ?, iteActa = ?, numActa = ?, fecActa = ?, recActa = ?, estActa = ?
+                    WHERE idActa = $this->intidActa";
+            $arrData = array($this->inttipActa, $this->intiteActa, $this->strnumActa, $this->strfecActa, $this->intrecActa, $this->intestActa);
             $request = $this->update($sql, $arrData);
         } else {
             $request = "exist";
@@ -85,13 +87,13 @@ class ActasModel extends Mysql
         return $request;
     }
 
-    public function deleteacta(int $idCategoria)
+    public function deleteActa(int $idActa)
     {
-        $this->intidCategoria = $idCategoria;
-        $sql = "SELECT * FROM productos WHERE idCategoria = $this->intidCategoria";
+        $this->intidActa = $idActa;
+        $sql = "SELECT * FROM elementos WHERE numActa = $this->intidActa";
         $request = $this->select_all($sql);
         if (empty($request)){
-            $sql = "UPDATE categorias SET estCategoria = ? WHERE idCategoria = $this->intidCategoria";
+            $sql = "UPDATE actas SET estActa = ? WHERE idActa = $this->intidActa";
             $arrData = array(0);
             $request = $this->update($sql, $arrData);
             if($request){

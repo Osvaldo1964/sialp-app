@@ -21,9 +21,10 @@ window.addEventListener('load', function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "idACta" },
+            { "data": "idActa" },
             { "data": "desTipoacta" },
             { "data": "desItemacta" },
+            { "data": "numActa" },
             { "data": "fecActa" },
             { "data": "desRecurso" },
             { "data": "estActa" },
@@ -80,25 +81,20 @@ window.addEventListener('load', function () {
         let formActa = document.querySelector("#formActa");
         formActa.onsubmit = function (e) {
             e.preventDefault();
-            let strcodElemento = document.querySelector('#txtcodElemento').value;
-            let strdesElemento = document.querySelector('#txtdesElemento').value;
-            let strdirElemento = document.querySelector('#txtdirElemento').value;
-            let fltlatElemento = document.querySelector('#fltlatElemento').value;
-            let fltlonElemento = document.querySelector('#fltlonElemento').value;
-            let intestElemento = document.querySelector('#listestElemento').value;
-            if (strdirElemento == '' || strcodElemento == '') {
+            let inttipActa = 2;
+            let insiteActa = document.querySelector('#listClases').value;
+            let strnumActa = document.querySelector('#txtnumActa').value;
+            let strfecActa = document.querySelector('#txtfecActa').value;
+            let intrecActa = document.querySelector('#listRecursos').value;
+            let intestActa = document.querySelector('#listestActa').value;
+            if (strnumActa == '' || strfecActa == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
-            if (strcodElemento.length < 5) {
-                swal("Atención", "El código debe ser mayor que 5 dígitos.", "error");
-                return false;
-            }
             divLoading.style.display = "flex";
-            tinyMCE.triggerSave();
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Elementos/setElemento/';
-            let formData = new FormData(formElemento);
+            let ajaxUrl = base_url + '/Actas/setActa/';
+            let formData = new FormData(formActa);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
             request.onreadystatechange = function () {
@@ -106,22 +102,24 @@ window.addEventListener('load', function () {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal("", objData.msg, "success");
-                        document.querySelector("#idElemento").value = objData.idElemento;
+                        document.querySelector("#idActa").value = objData.idActa;
                         document.querySelector("#containerGallery").classList.remove("notblock");
                         if (rowTable == "") {
-                            tableElementos.api().ajax.reload();
+                            tableActas.api().ajax.reload();
                         } else {
-                            htmlStatus = intestElemento == 1 ?
+                            htmlStatus = intestActa == 1 ?
                                 '<span class="badge badge-success">Activo</span>' :
                                 '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = desGrupo;
-                            rowTable.cells[2].textContent = desItem;
-                            rowTable.cells[3].textContent = codElemento;
-                            rowTable.cells[4].innerHTML = htmlStatus;
+                            rowTable.cells[1].textContent = desTipoacta;
+                            rowTable.cells[2].textContent = acta;
+                            rowTable.cells[3].textContent = numActa;
+                            rowTable.cells[4].textContent = fecActa;
+                            rowTable.cells[5].textContent = desRecurso;
+                            rowTable.cells[6].innerHTML = htmlStatus;
                             rowTable = "";
                         }
                     } else {
-                        swal("Errorxcxcxc", objData.msg, "error");
+                        swal("Error", objData.msg, "error");
                     }
                 }
                 divLoading.style.display = "none";
@@ -158,7 +156,7 @@ function fntInputFile() {
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
     inputUploadfile.forEach(function (inputUploadfile) {
         inputUploadfile.addEventListener('change', function () {
-            let idElemento = document.querySelector("#idElemento").value;
+            let idElemento = document.querySelector("#idActa").value;
             let parentId = this.parentNode.getAttribute("id");
             let idFile = this.getAttribute("id");
             let uploadFoto = document.querySelector("#" + idFile).value;
@@ -176,9 +174,9 @@ function fntInputFile() {
                     let objeto_url = nav.createObjectURL(this.files[0]);
                     prevImg.innerHTML = `<img class="loading" src="${base_url}/Assets/images/loading.svg" >`;
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                    let ajaxUrl = base_url + '/Elementos/setImage';
+                    let ajaxUrl = base_url + '/Actas/setImage';
                     let formData = new FormData();
-                    formData.append('idElemento', idElemento);
+                    formData.append('idActa', idActa);
                     formData.append("foto", this.files[0]);
                     request.open("POST", ajaxUrl, true);
                     request.send(formData);
@@ -204,11 +202,11 @@ function fntInputFile() {
 
 function fntDelItem(element){
     let nameImg = document.querySelector(element + ' .btnDeleteImage').getAttribute("imgname");
-    let idElemento = document.querySelector("#idElemento").value;
+    let idActa = document.querySelector("#idActa").value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Elementos/delFile/';
+    let ajaxUrl = base_url + '/Actas/delFile/';
     let formData = new FormData();
-    formData.append('idElemento', idElemento);
+    formData.append('idActa', idActa);
     formData.append('file', nameImg);
     request.open("POST", ajaxUrl, true);
     request.send(formData);
@@ -226,9 +224,9 @@ function fntDelItem(element){
     }
 }
 
-function fntViewInfo(idElemento) {
+function fntViewInfo(idActa) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Elementos/getElemento/' + idElemento;
+    let ajaxUrl = base_url + '/Actas/getActa/' + idActa;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -236,8 +234,8 @@ function fntViewInfo(idElemento) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
                 let htmlImage = "";
-                let objElemento = objData.data;
-                let estadoElemento = objElemento[0]['estElemento'] == 1 ?
+                let objActa = objData.data;
+                let estadoActa = objActa[0]['estActa'] == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
                 document.querySelector('#celdesGrupo').innerHTML = objElemento[0]['desGrupo'];
@@ -246,13 +244,13 @@ function fntViewInfo(idElemento) {
                 document.querySelector('#celdesElemento').innerHTML = objElemento[0]['desElemento'];
                 document.querySelector('#celestElemento').innerHTML = estadoElemento;
                 if (objElemento['images'].length > 0) {
-                    let objElementos = objElemento['images'];
-                    for (let p = 0; p < objElementos.length; p++) {
-                        htmlImage += `<img src="${objElementos[p]['url_image']}"></img>`
+                    let objActas = objActa['images'];
+                    for (let p = 0; p < objActas.length; p++) {
+                        htmlImage += `<img src="${objActas[p]['url_image']}"></img>`
                     }
                 }
                 document.querySelector('#celFotos').innerHTML = htmlImage;
-                $('#modalViewElemento').modal('show');
+                $('#modalViewActa').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
@@ -260,14 +258,14 @@ function fntViewInfo(idElemento) {
     }
 }
 
-function fntEditInfo(element, idElemento) {
+function fntEditInfo(element, idActa) {
     rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML = "Actualizar Elemento";
+    document.querySelector('#titleModal').innerHTML = "Actualizar Acta";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Elementos/getElemento/' + idElemento;
+    let ajaxUrl = base_url + '/Actas/getActa/' + idActa;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -275,45 +273,32 @@ function fntEditInfo(element, idElemento) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
                 let htmlImage = "";
-                let objElemento = objData.data;
-                document.querySelector("#idElemento").value = objElemento[0].idElemento;
-                document.querySelector("#listGrupos").value = objElemento[0].gruElemento;
-                document.querySelector("#listItems").value = objElemento[0].iteElemento;
-                document.querySelector("#listRecursos").value = objElemento[0].recElemento;
-                document.querySelector("#listUsos").value = objElemento[0].usoElemento;
-                document.querySelector("#txtcodElemento").value = objElemento[0].codElemento;
-                document.querySelector("#txtdesElemento").value = objElemento[0].desElemento;
-                document.querySelector("#txtdirElemento").value = objElemento[0].dirElemento;
-                document.querySelector("#fltlatElemento").value = objElemento[0].latElemento;
-                document.querySelector("#fltlonElemento").value = objElemento[0].lonElemento;
-                document.querySelector("#txtainElemento").value = objElemento[0].ainElemento;
-                document.querySelector("#txtfinElemento").value = objElemento[0].finElemento;
-                document.querySelector("#txtabaElemento").value = objElemento[0].abaElemento;
-                document.querySelector("#txtfbaElemento").value = objElemento[0].fbaElemento;
-                document.querySelector("#listestElemento").value = objElemento[0].estElemento;
-                tinymce.activeEditor.setContent(objElemento[0].desElemento);
-                $('#listGrupos').selectpicker('render');
-                $('#listItems').selectpicker('render');
+                let objActa = objData.data;
+                document.querySelector("#idActa").value = objActa[0].idActa;
+                document.querySelector("#listClases").value = objActa[0].iteActa;
+                document.querySelector("#listRecursos").value = objActa[0].recActa;
+                document.querySelector("#txtnumActa").value = objActa[0].numActa;
+                document.querySelector("#txtfecActa").value = objActa[0].fecActa;
+                document.querySelector("#listestActa").value = objActa[0].estActa;
+                tinymce.activeEditor.setContent(objElemento[0].desActa);
+                $('#listClases').selectpicker('render');
                 $('#listRecursos').selectpicker('render');
-                $('#listUsos').selectpicker('render');
-                $('#listestElemento').selectpicker('render'); 
-                fntBarcode();
-                if (objElemento.images.length > 0) {
-                    let objElementos = objElemento.images;
-                    for (let p = 0; p < objElementos.length; p++) {
+                $('#listestActa').selectpicker('render'); 
+                if (objActa.images.length > 0) {
+                    let objActas = objActa.images;
+                    for (let p = 0; p < objActas.length; p++) {
                         let key = Date.now() + p;
                         htmlImage += `<div id="div${key}">
                             <div class="prevImage">
-                            <img src="${objElementos[p].url_image}"></img>
+                            <img src="${objActas[p].url_image}"></img>
                             </div>
-                            <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objElementos[p].nomImagen}">
+                            <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objActas[p].nomImagen}">
                             <i class="fas fa-trash-alt"></i></button></div>`;
                     }
                 }
                 document.querySelector("#containerImages").innerHTML = htmlImage;
-                document.querySelector("#divBarCode").classList.remove("notblock");
                 document.querySelector("#containerGallery").classList.remove("notblock");
-                $('#modalFormElemento').modal('show');
+                $('#modalFormActa').modal('show');
             } else {
                 swal("Error", objData.msg, "error");
             }
@@ -321,10 +306,10 @@ function fntEditInfo(element, idElemento) {
     }
 }
 
-function fntDelInfo(idElemento) {
+function fntDelInfo(idActa) {
     swal({
-        title: "Eliminar Elemento",
-        text: "¿Realmente quiere eliminar el Elemento?",
+        title: "Eliminar Acta",
+        text: "¿Realmente quiere eliminar el Acta?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
@@ -334,8 +319,8 @@ function fntDelInfo(idElemento) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Elementos/delElemento/';
-            let strData = "idElemento=" + idElemento;
+            let ajaxUrl = base_url + '/Actas/delActa/';
+            let strData = "idActa=" + idActa;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -344,7 +329,7 @@ function fntDelInfo(idElemento) {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal("Eliminar!", objData.msg, "success");
-                        tableElementos.api().ajax.reload();
+                        tableActas.api().ajax.reload();
                     } else {
                         swal("Atención!", objData.msg, "error");
                     }

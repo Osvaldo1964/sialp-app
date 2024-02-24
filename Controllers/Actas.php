@@ -24,60 +24,43 @@ class Actas extends Controllers
         $this->views->getView($this, "actas", $data);
     }
 
-    public function setElemento()
+    public function setActa()
     {
         if ($_POST) {
-            if (empty($_POST['txtdirElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listGrupos']) 
-            || empty($_POST['listestElemento']))
+            if (empty($_POST['txtnumActa']) || empty($_POST['txtfecActa']) || empty($_POST['listClases']) 
+            || empty($_POST['listestActa']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idElemento     = intval($_POST['idElemento']);
-                $intgruElemento = intval($_POST['listGrupos']);
-                $intiteElemento = intval($_POST['listItems']);
-                $strcodElemento = strClean($_POST['txtcodElemento']);
-                $intrecElemento = intval($_POST['listRecursos']);
-                $intusoElemento = intval($_POST['listUsos']);
-                $strdesElemento = strClean($_POST['txtdesElemento']);
-                $strdirElemento = strClean($_POST['txtdirElemento']);
-                $fltlatElemento = $_POST['fltlatElemento'];
-                $fltlonElemento = $_POST['fltlonElemento'];
-                $strainElemento = strClean($_POST['txtainElemento']);
-                $strfinElemento = strClean($_POST['txtfinElemento']);
-                $strabaElemento = strClean($_POST['txtabaElemento']);
-                $strfbaElemento = strClean($_POST['txtfbaElemento']);
-                $intestElemento = intval($_POST['listestElemento']);
-                $request_Elemento = "";
+                $idActa     = intval($_POST['idActa']);
+                $inttipActa = 2;
+                $intiteActa = intval($_POST['listClases']);
+                $strnumActa = strClean($_POST['txtnumActa']);
+                $strfecActa = strClean($_POST['txtfecActa']);
+                $intrecActa = intval($_POST['listRecursos']);
+                $intestActa = intval($_POST['listestActa']);
+                $request_Acta = "";
 
-                $ruta = strtolower(clear_cadena($strcodElemento));
-                $ruta = str_replace(" ", "-", $ruta);
-
-                if ($idElemento == 0) {
+                if ($idActa == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_Elemento = $this->model->insertElemento(
-                            $intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
-                            $strdesElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                            $strfinElemento, $intestElemento);
+                        $request_Acta = $this->model->insertActa($inttipActa, $intiteActa, $strnumActa, $strfecActa, $intrecActa, $intestActa);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_Elemento = $this->model->updateElemento(
-                            $idElemento, $intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
-                            $strdesElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                            $strfinElemento, $strabaElemento, $strfbaElemento, $intestElemento);
+                        $request_Acta = $this->model->updateActa($idActa, $inttipActa, $intiteActa, $strnumActa, $strfecActa, $intrecActa, $intestActa);
                     }
                 }
-                if($request_Elemento == 1 || $request_Elemento != 'exist')
+                if($request_Acta == 1 || $request_Acta != 'exist')
                 {
                     if($option == 1){
-                        $arrResponse = array('status' => true, 'idElemento' => $request_Elemento, 'msg' => 'Datos guardados correctamente.');
+                        $arrResponse = array('status' => true, 'idActa' => $request_Acta, 'msg' => 'Datos guardados correctamente.');
                     }else{
-                        $arrResponse = array('status' => true, 'idElemento' => $idElemento, 'msg' => 'Datos Actualizados correctamente.');
+                        $arrResponse = array('status' => true, 'idActa' => $idActa, 'msg' => 'Datos Actualizados correctamente.');
                     }
-                }else if($request_Elemento == 'exist'){
-                    $arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un Elemento con el Código Ingresado.');		
+                }else if($request_Acta == 'exist'){
+                    $arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un Acta con el Número Ingresado.');		
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -125,13 +108,13 @@ class Actas extends Controllers
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
-/*                     $arrImg = $this->model->selectImages($idElemento);
+                     $arrImg = $this->model->selectImages($idActa);
                     if (count($arrImg) > 0) {
                         for ($i = 0; $i < count($arrImg); $i++) {
                             $arrImg[$i]['url_image'] = media() . '/images/uploads/' . $arrImg[$i]['nomImagen'];
                         }
                     }
-                    $arrData['images'] = $arrImg; */
+                    $arrData['images'] = $arrImg;
                     $arrResponse = array('status' => true, 'data' => $arrData);
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -161,13 +144,13 @@ class Actas extends Controllers
     public function setImage()
     {
         if ($_POST) {
-            if (empty($_POST['idElemento'])) {
+            if (empty($_POST['idActa'])) {
                 $arrResponse = array('status' => false, 'msg' => 'Error de datos.');
             } else {
-                $idElemento = intval($_POST['idElemento']);
+                $idActa = intval($_POST['idActa']);
                 $foto = $_FILES['foto'];
                 $imgNombre = 'pro_' . md5(date('Y-m-d H:m:s')) . '.jpg';
-                $request_image = $this->model->insertImage($idElemento, $imgNombre);
+                $request_image = $this->model->insertImage($idActa, $imgNombre);
                 if ($request_image) {
                     $uploadImage = uploadImage($foto, $imgNombre);
                     $arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
@@ -183,13 +166,13 @@ class Actas extends Controllers
     public function delFile()
     {
         if ($_POST) {
-            if (empty($_POST['idElemento']) || empty($_POST['file'])) {
+            if (empty($_POST['idActa']) || empty($_POST['file'])) {
                 $arrResponse = array('status' => false, 'msg' => 'Datos incorrectos.');
             } else {
                 //Eliminar el registro de la tabla imagenes
-                $idElemento = intval($_POST['idElemento']);
+                $idActa = intval($_POST['idActa']);
                 $imgNombre = strClean($_POST['file']);
-                $request_image = $this->model->deleteImage($idElemento, $imgNombre);
+                $request_image = $this->model->deleteImage($idActa, $imgNombre);
                 if ($request_image) {
                     $deleteFile = deleteFile($imgNombre);
                     $arrResponse = array('status' => true, 'msg' => 'Archivo eliminado.');

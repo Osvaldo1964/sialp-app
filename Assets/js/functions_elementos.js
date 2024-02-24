@@ -120,7 +120,7 @@ window.addEventListener('load', function () {
                             rowTable = "";
                         }
                     } else {
-                        swal("Errorxcxcxc", objData.msg, "error");
+                        swal("Error", objData.msg, "error");
                     }
                 }
                 divLoading.style.display = "none";

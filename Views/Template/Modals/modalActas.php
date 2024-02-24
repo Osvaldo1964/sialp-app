@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Fecha </label>
-                                    <input class="form-control" id="txtfecActa" name="txtfecActa" type="text" placeholder="" required="">
+                                    <input class="form-control date-picker" id="txtfecActa" name="txtfecActa" type="date" placeholder="" required="">
                                 </div>
                                 <div class="form-group col-md-8">
                                     <label for="listRecursos">Origen Recurso </label>
@@ -38,8 +38,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="listestElemento">Estado</label>
-                                    <select class="form-control selectpicker" id="listestElemento" name="listestElemento" required>
+                                    <label for="listestActa">Estado</label>
+                                    <select class="form-control selectpicker" id="listestActa" name="listestActa" required>
                                         <option value="1">Activo</option>
                                         <option value="2">Inactivo</option>
                                     </select>
