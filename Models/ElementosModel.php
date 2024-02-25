@@ -86,7 +86,7 @@ class ElementosModel extends Mysql
                 e.abaElemento, e.fbaElemento, e.estElemento, r.desRecurso as desRecurso, u.desTipouso
                 FROM elementos e
                 INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
-                INNER JOIN itemsalp i ON e.gruElemento = i.idItem
+                INNER JOIN itemsalp i ON e.iteElemento = i.idItem
                 INNER JOIN recursos r ON e.recElemento = r.idRecurso
                 INNER JOIN tiposuso u ON e.usoElemento = u.idTipouso
                 WHERE idElemento = $this->intidElemento";

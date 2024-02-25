@@ -1,3 +1,4 @@
+document.write(`<script src="${base_url}/Assets/js/plugins/JsBarcode.all.min.js"></script>`);
 let tableActas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
@@ -77,6 +78,18 @@ window.addEventListener('load', function () {
         "order": [[0, "desc"]]
     });
 
+    if (document.querySelector("#txtcodElemento")) {
+        let inputCodigo = document.querySelector("#txtcodElemento");
+        inputCodigo.onkeyup = function () {
+            if (inputCodigo.value.length >= 5) {
+                document.querySelector("#divBarCode").classList.remove("notblock");
+                fntBarcode();
+            } else {
+                document.querySelector("#divBarCode").classList.add("notblock");
+            }
+        }
+    }
+
     if (document.querySelector("#formActa")) {
         let formActa = document.querySelector("#formActa");
         formActa.onsubmit = function (e) {
@@ -146,13 +159,62 @@ window.addEventListener('load', function () {
             fntInputFile();
         }
     }
+    fntRecursos();
     fntInputFile();
+    fntInputPdf();
     fntGrupos();
     fntItems();
     fntUsos();
     fntItemactas()
-    fntRecursos();
 })
+
+function fntInputPdf() {
+    let inputUploadfile = document.querySelectorAll(".inputUploadfile");
+    inputUploadfile.forEach(function (inputUploadfile) {
+        inputUploadfile.addEventListener('change', function () {
+            let idActa = document.querySelector("#idActa").value;
+            let parentId = this.parentNode.getAttribute("id");
+            let idFile = this.getAttribute("id");
+            let uploadFoto = document.querySelector("#" + idFile).value;
+            let fileimg = document.querySelector("#" + idFile).files;
+            let prevImg = document.querySelector("#" + parentId + " .prevImage");
+            let nav = window.URL || window.webkitURL;
+            if (uploadFoto != '') {
+                let type = fileimg[0].type;
+                let name = fileimg[0].name;
+                if (type != 'application/pdf' ) { //&& type != 'image/jpg' && type != 'image/png'
+                    prevImg.innerHTML = "Archivo no válido";
+                    uploadFoto.value = "";
+                    return false;
+                } else {
+                    let objeto_url = nav.createObjectURL(this.files[0]);
+                    prevImg.innerHTML = `<img class="loading" src="${base_url}/Assets/images/loading.svg" >`;
+                    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                    let ajaxUrl = base_url + '/Actas/setPdfacta';
+                    let formData = new FormData();
+                    formData.append('actImagen', idActa);
+                    formData.append("foto", this.files[0]);
+                    request.open("POST", ajaxUrl, true);
+                    request.send(formData);
+                    request.onreadystatechange = function () {
+                        if (request.readyState != 4) return;
+                        if (request.status == 200) {
+                            let objData = JSON.parse(request.responseText);
+                            if (objData.status) {
+                                prevImg.innerHTML = `<img src="${objeto_url}">`;
+                                document.querySelector("#" + parentId + " .btnDeleteImage").setAttribute("imgname", objData.imgname);
+                                document.querySelector("#" + parentId + " .btnUploadfile").classList.add("notblock");
+                                document.querySelector("#" + parentId + " .btnDeleteImage").classList.remove("notblock");
+                            } else {
+                                swal("Error", objData.msg, "error");
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+}
 
 function fntInputFile() {
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
@@ -176,7 +238,7 @@ function fntInputFile() {
                     let objeto_url = nav.createObjectURL(this.files[0]);
                     prevImg.innerHTML = `<img class="loading" src="${base_url}/Assets/images/loading.svg" >`;
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                    let ajaxUrl = base_url + '/Actas/setImage';
+                    let ajaxUrl = base_url + '/Actas/setPdfacta';
                     let formData = new FormData();
                     formData.append('actImagen', idActa);
                     formData.append("foto", this.files[0]);
@@ -206,7 +268,7 @@ function fntDelItem(element){
     let nameImg = document.querySelector(element + ' .btnDeleteImage').getAttribute("imgname");
     let idActa = document.querySelector("#idActa").value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Actas/delFile/';
+    let ajaxUrl = base_url + '/Actas/delPdfacta/';
     let formData = new FormData();
     formData.append('actImagen', idActa);
     formData.append('file', nameImg);
@@ -290,7 +352,6 @@ function fntEditInfo(element, idActa) {
                 $('#listestActa').selectpicker('render'); 
                 if (objActa.images.length > 0) {
                     let objActas = objActa.images;
-                    alert(objActas);
                     for (let p = 0; p < objActas.length; p++) {
                         let key = Date.now() + p;
                         htmlImage += `<div id="div${key}">
@@ -343,6 +404,8 @@ function fntDelInfo(idActa) {
         }
     });
 }
+
+// Registro Elementos al Acta
 
 function fntGrupos() {
     if (document.querySelector('#listGrupos')) {
@@ -417,6 +480,28 @@ function fntRecursos() {
             }
         }
     }
+}
+
+function fntBarcode(e) {
+    let codigo = document.querySelector("#txtcodElemento").value;
+    JsBarcode("#barcode", codigo);
+}
+
+function fntPrintBarcode(area) {
+    let elemntArea = document.querySelector(area);
+    let vprint = window.open(' ', 'popimpr', 'height=400, width=600');
+    vprint.document.write(elemntArea.innerHTML);
+    vprint.document.close();
+    vprint.print();
+    vprint.close();
+}
+
+function fntAddElemento(idActa, numActa, fecActa) {
+    let elenumActa = numActa;
+    let elefecActa = fecActa;
+    document.querySelector('#elenumActa').value = elenumActa;
+    document.querySelector('#elefecActa').value = elefecActa;
+    $('#modalFormElemento').modal('show');
 }
 
 function openModal() {

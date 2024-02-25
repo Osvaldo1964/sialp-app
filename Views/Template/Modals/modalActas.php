@@ -148,8 +148,19 @@
                     <input type="hidden" id="idElemento" name="idElemento" value="">
                     <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">No. de Acta </label>
+                            <input class="form-control" id="elenumActa" name="elenumActa" type="text" placeholder="" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Fecha del Acta </label>
+                            <input class="form-control" id="elefecActa" name="elefecActa" type="date" placeholder="" disabled>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
                                 <label class="control-label">Código </label>
                                 <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código de barra" required="">
                                 <br>
@@ -162,22 +173,24 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
+                                    <label class="control-label">Dirección</label>
+                                    <input type="text" class="form-control" id="txtdirElemento" name="txtdirElemento"></textarea>
+                                </div>
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Latitud </label>
                                     <input class="form-control" id="fltlatElemento" name="fltlatElemento" type="text" placeholder="" required="">
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Longitud </label>
                                     <input class="form-control" id="fltlonElemento" name="fltlonElemento" type="text" placeholder="" required="">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-8">
                                     <label for="listRecursos">Origen Recurso </label>
                                     <select class="form-control" data-live-search="true" id="listRecursos" name="listRecursos" required=""></select>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-4">
                                     <label for="listUsos">Clase de Iluminación </label>
                                     <select class="form-control" data-live-search="true" id="listUsos" name="listUsos" required=""></select>
                                 </div>
@@ -194,6 +207,10 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
+                                    <label for="fltvalElemento">Valor </label>
+                                    <select class="form-control" data-live-search="true" id="fltvalElemento" name="fltvalElemento" required=""></select>
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label for="listestElemento">Estado</label>
                                     <select class="form-control selectpicker" id="listestElemento" name="listestElemento" required>
                                         <option value="1">Activo</option>
@@ -207,38 +224,6 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <button class="btn btn-danger btn-lg btn-block" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label">Descripción Elemento</label>
-                                    <textarea class="form-control" id="txtdesElemento" name="txtdesElemento"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label">Dirección</label>
-                                    <input type="text" class="form-control" id="txtdirElemento" name="txtdirElemento"></textarea>
-                                </div>
-                                <hr>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Acta Ingreso</label>
-                                    <input type="text" class="form-control" id="txtainElemento" name="txtainElemento"></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Fecha Ingreso</label>
-                                    <input type="text" class="form-control" id="txtfinElemento" name="txtfinElemento"></textarea>
-                                </div>
-                                <hr>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Acta de Baja</label>
-                                    <input type="text" class="form-control" id="txtabaElemento" name="txtabaElemento"></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Fecha de Baja</label>
-                                    <input type="text" class="form-control" id="txtfbaElemento" name="txtfbaElemento"></textarea>
                                 </div>
                             </div>
                         </div>

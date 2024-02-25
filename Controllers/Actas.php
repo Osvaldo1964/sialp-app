@@ -96,7 +96,7 @@ class Actas extends Controllers
                     $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idActa'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnAdd = '<button class="btn btn-primary btn-sm" onClick="fntAddElemento(this,' . $arrData[$i]['idActa'] . ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
+                    $btnAdd = '<button class="btn btn-primary btn-sm" onClick="fntAddElemento(' . $arrData[$i]['idActa'] . ',' . $arrData[$i]['numActa'] . ',' . $arrData[$i]['fecActa'] .  ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
                 }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnAdd . $btnDelete . '</div>';
             }
@@ -170,6 +170,51 @@ class Actas extends Controllers
     }
 
     public function delFile()
+    {
+        if ($_POST) {
+            if (empty($_POST['actImagen']) || empty($_POST['file'])) {
+                $arrResponse = array('status' => false, 'msg' => 'Datos incorrectos.');
+            } else {
+                //Eliminar el registro de la tabla imagenes
+                $idActa = intval($_POST['actImagen']);
+                $imgNombre = strClean($_POST['file']);
+                $request_image = $this->model->deleteImage($idActa, $imgNombre);
+                if ($request_image) {
+                    $deleteFile = deleteFile($imgNombre);
+                    $arrResponse = array('status' => true, 'msg' => 'Archivo eliminado.');
+                } else {
+                    $arrResponse = array('status' => false, 'msg' => 'No se pudo eliminar el archivo.');
+                }
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+
+    
+    public function setPdfacta()
+    {
+        if ($_POST) {
+            if (empty($_POST['actImagen'])) {
+                $arrResponse = array('status' => false, 'msg' => 'Error de datos.');
+            } else {
+                $idActa = intval($_POST['actImagen']);
+                $foto = $_FILES['foto'];
+                $imgNombre = 'pro_' . md5(date('Y-m-d H:m:s')) . '.pdf';
+                $request_image = $this->model->insertImage($idActa, $imgNombre);
+                if ($request_image) {
+                    $uploadImage = uploadImage($foto, $imgNombre);
+                    $arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
+                } else {
+                    $arrResponse = array('status' => false, 'msg' => 'Error de carga.');
+                }
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+
+    public function delPdfacta()
     {
         if ($_POST) {
             if (empty($_POST['actImagen']) || empty($_POST['file'])) {

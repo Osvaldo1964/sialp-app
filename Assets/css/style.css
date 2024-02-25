@@ -156,11 +156,12 @@
 #containerImages > div{
     margin-right: 10px;
     margin-bottom: 8px;
+    margin-left: 8px;
 }
 
 .prevImage{
     border: 1px solid #CCC;
-    width: 120px;
+    /*width: 120px;*/
     height: 148px;
     display: flex;
     justify-content: center;
