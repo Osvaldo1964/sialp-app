@@ -147,7 +147,7 @@ class Actas extends Controllers
             header("Location:" . base_url() . '/dashboard');
         }
         $data['page_tag']   = "Actas - Salp - App";
-        $data['page_title'] = "ACTAS <small> SALP - APP </small>";
+        $data['page_title'] = "IMPRIMIR ACTAS <small> SALP - APP </small>";
         $data['page_name']  = "acta";
         $data['arrPedido'] = $this->model->selectActaimp($idacta);
         $this->views->getView($this, "actapdf", $data);

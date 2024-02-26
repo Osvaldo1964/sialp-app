@@ -143,9 +143,9 @@ window.addEventListener('load', function () {
         }
     }
 
-    if (document.querySelector("#formElemento")) {
-        let formElemento = document.querySelector("#formElemento");
-        formElemento.onsubmit = function (e) {
+    if (document.querySelector("#formActaelemento")) {
+        let formActaelemento = document.querySelector("#formActaelemento");
+        formActaelemento.onsubmit = function (e) {
             e.preventDefault();
             let strcodElemento = document.querySelector('#txtcodElemento').value;
             let intrecElemento = document.querySelector('#listRecursos').value;
@@ -167,7 +167,7 @@ window.addEventListener('load', function () {
             tinyMCE.triggerSave();
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url + '/Elementos/setElementoadd/';
-            let formData = new FormData(formElemento);
+            let formData = new FormData(formActaelemento);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
             request.onreadystatechange = function () {
@@ -416,23 +416,6 @@ function fntEditInfo(element, idActa) {
     }
 }
 
-function fntPrintActa(idActa) {
-    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Actas/getActaimp/' + idActa;
-    request.open("GET", ajaxUrl, true);
-    request.send();
-    request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-            let objData = JSON.parse(request.responseText);
-            if (objData.status) {
-                alert('imrprimiendo...');
-            } else {
-                swal("Error", objData.msg, "error");
-            }
-        }
-    }
-}
-
 function fntDelInfo(idActa) {
     swal({
         title: "Eliminar Acta",
@@ -566,7 +549,7 @@ function fntAddElemento(idActa, numActa, fecActa) {
     document.querySelector('#eleactActa').value = eleactActa;
     //document.querySelector('#elenumActa').value = elenumActa;
     //document.querySelector('#elefecActa').value = elefecActa;
-    $('#modalFormElemento').modal('show');
+    $('#modalFormActaelemento').modal('show');
 }
 
 function openModal() {

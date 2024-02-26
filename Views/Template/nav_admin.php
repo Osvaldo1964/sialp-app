@@ -66,19 +66,33 @@
                 </a>
             </li> -->
             <!-- Aqui debo validar Componentes del SALP-->
+
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">Componentes SALP</span>
+                        <span class="app-menu__label">VARIABLES</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <li><a class="treeview-item" href="<?= base_url(); ?>/varsalp"><i class="icon fa fa-circle-o"></i> Variables SALP</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
+                    </ul>
+                </li>
+            <?php } ?>
+
+            <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
+                <li class="treeview">
+                    <a class="app-menu__item" href="#" data-toggle="treeview">
+                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+                        <span class="app-menu__label">INVENTARIO UCAPs</span>
+                        <i class="treeview-indicator fa fa-angle-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
                         <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"><i class="icon fa fa-circle-o"></i> Grupos UCAPs</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/items"><i class="icon fa fa-circle-o"></i> Subgrupos UCAPs</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"><i class="icon fa fa-circle-o"></i> Elementos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/censo"><i class="icon fa fa-circle-o"></i> Censo Valorizado</a></li>
                     </ul>
                 </li>
             <?php } ?>
@@ -93,24 +107,23 @@
                     <ul class="treeview-menu">
                         <li><a class="treeview-item" href="<?= base_url(); ?>/valorvrsalp"><i class="icon fa fa-circle-o"></i> Registo de Valores de variables</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"><i class="icon fa fa-circle-o"></i> Elementos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
                     </ul>
                 </li>
             <?php } ?>
 
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
-                <li class="treeview">
-                    <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">Servicio Energía</span>
-                        <i class="treeview-indicator fa fa-angle-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/facturacion"><i class="icon fa fa-circle-o"></i> Facturación/Recaudos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/cstenergia"><i class="icon fa fa-circle-o"></i> Consumos/Costo</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> ****</a></li>
-                    </ul>
-                </li>
+
+                <a class="app-menu__item" href="<?= base_url(); ?>/facturacion">
+                    <i class="app-menu__icon fa fas fa-globe" aria-hidden="true"></i>
+                    <span class="app-menu__label">Facturación/Recaudos</span>
+                </a>
+            <?php } ?>
+
+            <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
+                <a class="app-menu__item" href="<?= base_url(); ?>/cstenergia"">
+                    <i class="app-menu__icon fa fas fa-globe" aria-hidden="true"></i>
+                    <span class="app-menu__label">Consumos/Costo</span>
+                </a>
             <?php } ?>
 
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>

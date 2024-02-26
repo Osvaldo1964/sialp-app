@@ -105,6 +105,7 @@ class Elementos extends Controllers
                 $fltlatElemento = $_POST['fltlatElemento'];
                 $fltlonElemento = $_POST['fltlonElemento'];
                 $strainElemento = strClean($_POST['eleactActa']);
+                $fltvalElemento = strClean($_POST['fltvalElemento']);
                 $intestElemento = intval($_POST['listestElemento']);
                 $request_Elemento = "";
 
@@ -113,7 +114,7 @@ class Elementos extends Controllers
 
                 $request_Elemento = $this->model->insertElemento($intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
                                                                 $strdesElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                                                                $intestElemento);
+                                                                $fltvalElemento,$intestElemento);
 
                 if($request_Elemento == 1 || $request_Elemento != 'exist')
                 {

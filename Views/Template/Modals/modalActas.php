@@ -134,7 +134,7 @@
 </div>
 
 <!-- Modal para Ver Adicionar Elementos al Acta -->
-<div class="modal fade" id="modalFormElemento" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalFormActaelemento" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header headerRegister">
@@ -144,7 +144,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formElemento" name="formElemento" class="form-horizontal">
+                <form id="formActaelemento" name="formActaelemento" class="form-horizontal">
                     <input type="hidden" id="eleactActa" name="eleactActa">
                     <input type="hidden" id="idElemento" name="idElemento" value="">
                     <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>

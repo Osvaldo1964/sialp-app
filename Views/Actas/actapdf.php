@@ -7,11 +7,11 @@ $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nomb
     <div class="app-title">
         <div>
             <h1><i class="fa fa-file-text-o"></i> <?= $data['page_title'] ?></h1>
-            <p>Formato de Orden Imprimible</p>
+            <p>Formato de Acta Imprimible</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="#">Orden</a></li>
+            <li class="breadcrumb-item"><a href="#">Acta</a></li>
         </ul>
     </div>
     <div class="row">
@@ -23,9 +23,9 @@ $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nomb
                     <p>Datos no encontrados</p>
                 <?php } else {
                     $acta = $data['arrPedido'];
-                    dep($acta);
+                    //dep($acta);
                 ?>
-                    <section id="sPedido" class="invoice">
+                    <section id="sActa" class="invoice">
                         <div class="row mb-4">
                             <div class="wd33">
                                 <img src="<?php echo $imagenBase64 ?>" alt="Logo">
@@ -46,7 +46,7 @@ $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nomb
                             </div>
                             <div class="col-4">
                             </div>
-                            <div class="col-4"><b>Orden No. <?= $acta[0]['numActa']; ?></b><br>
+                            <div class="col-4"><b>Acta No. <?= $acta[0]['numActa']; ?></b><br>
                                 <b>Fecha:</b> <?= $acta[0]['fecActa']; ?><br>
                                 <b>Estado:</b> <?= $acta[0]['estActa']; ?><br>
                                 <b>Total Acta:</b> <?= SMONEY . formatMoney($acta[0]['valActa']); ?><br>
@@ -57,23 +57,25 @@ $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nomb
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Descripción</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
+                                            <th>Grupo</th>
+                                            <th>Subgrupo</th>
+                                            <th>Código</th>
+                                            <th>Dirección</th>
                                             <th>Valor</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         $subtotal = 0;
-                                        if (count($detalle) > 0) {
-                                            foreach ($detalle as $producto) {
+                                        if (count($acta) > 0) {
+                                            foreach ($acta as $elemento) {
                                         ?>
                                                 <tr>
-                                                    <td class="text-left"><?= $producto['nomProducto']; ?></td>
-                                                    <td class="text-right"><?= SMONEY . formatMoney($producto['vtaBody']); ?></td>
-                                                    <td class="text-right"><?= SMONEY . formatMoney($producto['canBody']); ?></td>
-                                                    <td class="text-right"><?= SMONEY . formatMoney($producto['vtaBody'] * $producto['canBody']); ?></td>
+                                                    <td class="text-left"><?= $elemento['desGrupo']; ?></td>
+                                                    <td class="text-left"><?= $elemento['desItem']; ?></td>
+                                                    <td class="text-left"><?= $elemento['codElemento']; ?></td>
+                                                    <td class="text-left"><?= $elemento['dirElemento']; ?></td>
+                                                    <td class="text-right"><?= SMONEY . formatMoney($elemento['valElemento']); ?></td>
                                                 </tr>
                                         <?php
                                             }
@@ -82,23 +84,19 @@ $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nomb
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="3" class="text-right">Sub-Total:</th>
+                                            <th colspan="4" class="text-right">Sub-Total:</th>
                                             <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal) ?></td>
                                         </tr>
                                         <tr>
-                                            <th colspan="3" class="text-right">Envío:</th>
-                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney(COSTOENVIO) ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" class="text-right">Total:</th>
-                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['valPedido']) ?></td>
+                                            <th colspan="4" class="text-right">Total:</th>
+                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($elemento['valActa']) ?></td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
                         <div class="row d-print-none mt-2">
-                            <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print('#sPedido');"><i class="fa fa-print"></i> Imprimir</a></div>
+                            <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print('#sActa');"><i class="fa fa-print"></i> Imprimir</a></div>
                         </div>
                     </section>
                 <?php } ?>
