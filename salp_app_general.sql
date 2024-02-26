@@ -30,13 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `actas` (
   `idActa` bigint NOT NULL,
   `tipActa` bigint NOT NULL,
-  `iteActa` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `numActa` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `iteActa` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `numActa` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `fecActa` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `recActa` bigint NOT NULL,
   `valActa` float(15,2) NOT NULL,
   `estActa` int DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `actas`
@@ -74,14 +74,14 @@ INSERT INTO `capitulos` (`idCapitulo`, `nomCapitulo`, `tipCapitulo`) VALUES
 
 CREATE TABLE `contacto` (
   `idContacto` bigint NOT NULL,
-  `nomContacto` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
-  `emaContacto` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
-  `msgContacto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
-  `ipdContacto` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
-  `disContacto` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
-  `ageContacto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
+  `nomContacto` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `emaContacto` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `msgContacto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ipdContacto` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `disContacto` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ageContacto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `creContacto` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `contacto`
@@ -103,7 +103,7 @@ CREATE TABLE `costoconsumo` (
   `vlrCosto` float(15,2) NOT NULL,
   `totCosto` float(15,2) NOT NULL,
   `estCosto` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `costoconsumo`
@@ -125,7 +125,7 @@ CREATE TABLE `detalleacta` (
   `fecDetalle` date NOT NULL,
   `vlrDetalle` float(15,2) NOT NULL,
   `estDetalle` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -136,8 +136,8 @@ CREATE TABLE `detalleacta` (
 CREATE TABLE `docuactas` (
   `idImagen` bigint NOT NULL,
   `actImagen` bigint NOT NULL,
-  `nomImagen` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+  `nomImagen` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `docuactas`
@@ -186,9 +186,9 @@ INSERT INTO `elementos` (`idElemento`, `gruElemento`, `iteElemento`, `codElement
 
 CREATE TABLE `estratos` (
   `idEstrato` bigint NOT NULL,
-  `desEstrato` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desEstrato` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estEstrato` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `estratos`
@@ -220,13 +220,13 @@ INSERT INTO `estratos` (`idEstrato`, `desEstrato`, `estEstrato`) VALUES
 
 CREATE TABLE `facturacion` (
   `idFactura` bigint NOT NULL,
-  `perFactura` varchar(6) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `perFactura` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `relFactura` bigint NOT NULL,
   `canFactura` int NOT NULL,
   `facFactura` float(15,2) NOT NULL,
   `recFactura` float(15,2) NOT NULL,
   `estFactura` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `facturacion`
@@ -289,7 +289,7 @@ CREATE TABLE `imagenes` (
   `idImagen` bigint NOT NULL,
   `idElemento` bigint NOT NULL,
   `nomImagen` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `imagenes`
@@ -312,7 +312,7 @@ CREATE TABLE `itemsacta` (
   `desItemacta` varchar(60) NOT NULL,
   `tipItemacta` bigint NOT NULL,
   `estItemacta` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `itemsacta`
@@ -335,10 +335,10 @@ INSERT INTO `itemsacta` (`idItemacta`, `codItemacta`, `desItemacta`, `tipItemact
 CREATE TABLE `itemsalp` (
   `idItem` bigint NOT NULL,
   `gruItem` bigint NOT NULL,
-  `desItem` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desItem` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `csmItem` int NOT NULL,
   `estItem` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `itemsalp`
@@ -358,7 +358,7 @@ CREATE TABLE `modulos` (
   `titModulo` varchar(50) NOT NULL,
   `desModulo` text NOT NULL,
   `estModulo` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `modulos`
@@ -390,7 +390,7 @@ CREATE TABLE `parametros` (
   `empParam` varchar(200) NOT NULL,
   `dirParam` varchar(200) NOT NULL,
   `nitParam` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `parametros`
@@ -413,7 +413,7 @@ CREATE TABLE `permisos` (
   `wriPermiso` int NOT NULL,
   `updPermiso` int NOT NULL,
   `delPermiso` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `permisos`
@@ -473,13 +473,13 @@ INSERT INTO `permisos` (`idPermiso`, `idRol`, `idModulo`, `reaPermiso`, `wriPerm
 
 CREATE TABLE `post` (
   `idpost` bigint NOT NULL,
-  `titulo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
-  `contenido` text CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
-  `portada` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci DEFAULT NULL,
+  `titulo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `contenido` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `portada` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `datecreate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ruta` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci NOT NULL,
+  `ruta` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `status` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `post`
@@ -550,9 +550,9 @@ INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `frePq
 
 CREATE TABLE `recursos` (
   `idRecurso` bigint NOT NULL,
-  `desRecurso` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `desRecurso` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estRecurso` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `recursos`
@@ -574,7 +574,7 @@ CREATE TABLE `roles` (
   `nomRol` varchar(50) NOT NULL,
   `desRol` varchar(120) NOT NULL,
   `estRol` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -609,10 +609,10 @@ CREATE TABLE `subgrupos` (
 
 CREATE TABLE `suscripciones` (
   `idSuscripcion` bigint NOT NULL,
-  `nomSuscripcion` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `emaSuscripcion` varchar(120) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nomSuscripcion` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `emaSuscripcion` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `creSuscripcion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -626,7 +626,7 @@ CREATE TABLE `tipoactas` (
   `desTipoacta` varchar(120) NOT NULL,
   `selTipoacta` int DEFAULT '0',
   `estTipoacta` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tipoactas`
@@ -646,10 +646,10 @@ INSERT INTO `tipoactas` (`idTipoacta`, `codTipoacta`, `desTipoacta`, `selTipoact
 
 CREATE TABLE `tiposuso` (
   `idTipouso` bigint NOT NULL,
-  `claTipouso` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `desTipouso` varchar(120) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `claTipouso` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desTipouso` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estTipouso` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tiposuso`
@@ -724,7 +724,7 @@ CREATE TABLE `valorvariablesalp` (
   `tipValorvar` varchar(1) NOT NULL,
   `valValorvar` float(15,2) NOT NULL,
   `estValorvar` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `valorvariablesalp`
@@ -747,7 +747,7 @@ CREATE TABLE `varsalp` (
   `codVarsalp` varchar(10) NOT NULL,
   `desVarsalp` varchar(120) NOT NULL,
   `estVarsalp` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `varsalp`
