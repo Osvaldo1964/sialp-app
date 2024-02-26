@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 24-02-2024 a las 16:25:13
+-- Tiempo de generación: 26-02-2024 a las 03:45:45
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -43,7 +43,8 @@ CREATE TABLE `actas` (
 --
 
 INSERT INTO `actas` (`idActa`, `tipActa`, `iteActa`, `numActa`, `fecActa`, `recActa`, `valActa`, `estActa`) VALUES
-(1, 2, '1', '001030', '2024-02-24 05:00:00', 1, 25000000.00, 1);
+(1, 2, '1', '0393', '2024-02-16 05:00:00', 1, 2500000.00, 1),
+(2, 2, '2', '5656', '2024-02-27 05:00:00', 2, 350000000.00, 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +136,7 @@ CREATE TABLE `detalleacta` (
 CREATE TABLE `docuactas` (
   `idImagen` bigint NOT NULL,
   `actImagen` bigint NOT NULL,
-  `nomImagen` varchar(100) COLLATE utf8mb3_spanish_ci NOT NULL
+  `nomImagen` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
@@ -163,10 +164,9 @@ CREATE TABLE `elementos` (
   `latElemento` float(15,2) NOT NULL,
   `lonElemento` float(15,2) NOT NULL,
   `rutElemento` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `ainElemento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `finElemento` date DEFAULT NULL,
+  `ainElemento` bigint NOT NULL,
   `abaElemento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `fbaElemento` date DEFAULT NULL,
+  `valElemento` float(18,2) NOT NULL,
   `estElemento` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -174,11 +174,9 @@ CREATE TABLE `elementos` (
 -- Volcado de datos para la tabla `elementos`
 --
 
-INSERT INTO `elementos` (`idElemento`, `gruElemento`, `iteElemento`, `codElemento`, `recElemento`, `usoElemento`, `desElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `finElemento`, `abaElemento`, `fbaElemento`, `estElemento`) VALUES
-(8, 1, 1, 'LED01002', 2, 3, '', 'Calle prueba', 15.20, 16.22, 'led01001', '001-2022', '2022-01-20', NULL, NULL, 1),
-(9, 1, 1, 'LED01001', 2, 3, '<p>EL DIA 2020-02-25 SE LE CAMBIO EL FILAMENTO</p> <p>EL DIA 2020-2523SD SE LAVO</p> <ol> <li>se inauguro</li> <li>se lavo</li> <li>se voto</li> </ol>', 'Calle prueba', 15.20, 16.22, 'led01001', '001-2022', '2022-01-20', '009-1520', '2022-02-15', 1),
-(10, 2, 1, 'LED902929', 3, 1, '<p>ESTA DSKSKDSD LSD SDLFS</p> <p>DSLDLDSAF&Ntilde;DSF</p> <p>DKDALKD</p>', 'CARRERA LARTLR', 15.20, 16.22, 'led902929', 'KWEWELLWE', '2022-01-20', NULL, NULL, 1),
-(11, 2, 1, 'LED902929', 3, 1, '<p>ESTA DSKSKDSD LSD SDLFS</p> <p>DSLDLDSAF&Ntilde;DSF</p> <p>DKDALKD</p>', 'CARRERA LARTLR', 15.20, 16.22, 'led902929', 'KWEWELLWE', '2022-01-20', NULL, NULL, 1);
+INSERT INTO `elementos` (`idElemento`, `gruElemento`, `iteElemento`, `codElemento`, `recElemento`, `usoElemento`, `desElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `abaElemento`, `valElemento`, `estElemento`) VALUES
+(12, 1, 1, 'LED02020', 1, 1, '', 'CALLE 20', 15.25, 14.23, 'led02020', 1, NULL, 1050000.00, 1),
+(13, 1, 1, 'LED02020', 1, 1, '', 'CALLE 20', 15.25, 14.23, 'led02020', 1, NULL, 985000.00, 1);
 
 -- --------------------------------------------------------
 
@@ -300,8 +298,7 @@ CREATE TABLE `imagenes` (
 INSERT INTO `imagenes` (`idImagen`, `idElemento`, `nomImagen`) VALUES
 (1, 1, 'pro_fc7d732eb2acba1328d11dbb2fc42739.jpg'),
 (2, 11, 'pro_989c4abcee9f94324809987176032347.jpg'),
-(3, 11, 'pro_7404c582081c5ebb7268c400c56ceeed.jpg'),
-(4, 9, 'pro_118e53fde66f0610b0bb1f22e6c4e165.jpg');
+(3, 11, 'pro_7404c582081c5ebb7268c400c56ceeed.jpg');
 
 -- --------------------------------------------------------
 
@@ -492,8 +489,8 @@ INSERT INTO `post` (`idpost`, `titulo`, `contenido`, `portada`, `datecreate`, `r
 (1, 'Inicio', '<div class=\"p-t-80\"> <h3 class=\"ltext-103 cl5\">Nuestras marcas</h3> </div> <div> <p>Trabajamos con las mejores marcas del mundo ...</p> </div> <div class=\"row\"> <div class=\"col-md-3\"><img src=\"Assets/images/m1.png\" alt=\"Marca 1\" width=\"110\" height=\"110\" /></div> <div class=\"col-md-3\"><img src=\"Assets/images/m2.png\" alt=\"Marca 2\" /></div> <div class=\"col-md-3\"><img src=\"Assets/images/m3.png\" alt=\"Marca 3\" /></div> <div class=\"col-md-3\"><img src=\"Assets/images/m4.png\" alt=\"Marca 4\" /></div> </div>', '', '2021-07-20 02:40:15', 'inicio', 1),
 (2, 'Tienda', '<p>Contenido p&aacute;gina!</p>', '', '2021-08-06 01:21:27', 'tienda', 1),
 (3, 'Carrito', '<p>Contenido p&aacute;gina!</p>', '', '2021-08-06 01:21:52', 'carrito', 1),
-(4, 'Nosotros TRES', '<section class=\"bg0 p-t-75 p-b-120\"> <div class=\"container\"> <div class=\"row p-b-148\"> <div class=\"col-md-7 col-lg-8\"> <div class=\"p-t-7 p-r-85 p-r-15-lg p-r-0-md\"> <h3 class=\"mtext-111 cl2 p-b-16\">Historia</h3> <p class=\"stext-113 cl6 p-b-26\">Esto es uhna priume lsallsdlsdl sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.</p> <p class=\"stext-113 cl6 p-b-26\">Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. PRUEBA 1</p> <p class=\"stext-113 cl6 p-b-26\">Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879</p> </div> </div> <div class=\"col-11 col-md-5 col-lg-4 m-lr-auto\"> <div class=\"how-bor1 \"> <div class=\"hov-img0\"><img src=\"https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg\" alt=\"IMG\" width=\"500\" height=\"333\"></div> </div> </div> </div> <div class=\"row\"> <div class=\"order-md-2 col-md-7 col-lg-8 p-b-30\"> <div class=\"p-t-7 p-l-85 p-l-15-lg p-l-0-md\"> <h2 class=\"mtext-111 cl2 p-b-16\"><span style=\"color: #236fa1;\">Nuestra Misi&oacute;n</span></h2> <p class=\"stext-113 cl6 p-b-26\">Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida. Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.</p> <div class=\"bor16 p-l-29 p-b-9 m-t-22\"> <p class=\"stext-114 cl6 p-r-40 p-b-11\">Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn\'t really do it, they just saw something. It seemed obvious to them after a while. PRUEBA DOS</p> <span class=\"stext-111 cl8\"> - Steve Job&rsquo;s </span></div> </div> </div> <div class=\"order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30\"> <div class=\"how-bor2\"> <div class=\"hov-img0\"><img src=\"https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849822_1280.jpg\" alt=\"IMG\" width=\"500\" height=\"333\"></div> </div> </div> </div> </div> </section>', 'img_b51b41c3cc71af6f5f41ca6a91fca133.jpg', '2021-08-09 03:09:44', 'nosotros', 2),
-(5, 'Contacto', '<div class=\"map\"><iframe style=\"border: 0;\" src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.685802352331!2d-90.73646108521129!3d14.559951589828378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85890e74b3771e19%3A0x68ec9eeea79fd9a7!2sEl%20Arco%20de%20Santa%20Catalina!5e0!3m2!1ses!2sgt!4v1624005005655!5m2!1ses!2sgt\" width=\"100%\" height=\"600\" allowfullscreen=\"allowfullscreen\" loading=\"lazy\"></iframe></div>', 'img_8cef719a778ce34d337d9f7a8cbd420f.jpg', '2021-08-09 03:11:08', 'contacto', 1),
+(4, 'Nosotros TRES', '<section class=\"bg0 p-t-75 p-b-120\"> <div class=\"container\"> <div class=\"row p-b-148\"> <div class=\"col-md-7 col-lg-8\"> <div class=\"p-t-7 p-r-85 p-r-15-lg p-r-0-md\"> <h3 class=\"mtext-111 cl2 p-b-16\">Historia</h3> <p class=\"stext-113 cl6 p-b-26\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.</p> <p class=\"stext-113 cl6 p-b-26\">Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. PRUEBA 1</p> <p class=\"stext-113 cl6 p-b-26\">Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879</p> </div> </div> <div class=\"col-11 col-md-5 col-lg-4 m-lr-auto\"> <div class=\"how-bor1 \"> <div class=\"hov-img0\"><img src=\"https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg\" alt=\"IMG\" width=\"500\" height=\"333\"></div> </div> </div> </div> <div class=\"row\"> <div class=\"order-md-2 col-md-7 col-lg-8 p-b-30\"> <div class=\"p-t-7 p-l-85 p-l-15-lg p-l-0-md\"> <h2 class=\"mtext-111 cl2 p-b-16\"><span style=\"color: #236fa1;\">Nuestra Misi&oacute;n</span></h2> <p class=\"stext-113 cl6 p-b-26\">Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida. Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.</p> <div class=\"bor16 p-l-29 p-b-9 m-t-22\"> <p class=\"stext-114 cl6 p-r-40 p-b-11\">Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn\'t really do it, they just saw something. It seemed obvious to them after a while. PRUEBA DOS</p> <span class=\"stext-111 cl8\"> - Steve Job&rsquo;s </span></div> </div> </div> <div class=\"order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30\"> <div class=\"how-bor2\"> <div class=\"hov-img0\"><img src=\"https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849822_1280.jpg\" alt=\"IMG\" width=\"500\" height=\"333\"></div> </div> </div> </div> </div> </section>', 'img_b51b41c3cc71af6f5f41ca6a91fca133.jpg', '2021-08-09 03:09:44', 'nosotros', 2),
+(5, 'Contacto', '<div class=\"map\"><iframe style=\"border: 0;\" src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.685802352331!2d-90.73646108521129!3d14.559951589828378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85890e74b3771e19%3A0x68ec9eeea79fd9a7!2sEl%20Arco%20de%20Santa%20Catalina!5e0!3m2!1ses!2sgt!4v1624005005655!5m2!1ses!2sgt\" width=\"100%\" height=\"600\" allowfullscreen=\"allowfullscreen\" loading=\"lazy\"></iframe></div>', 'img_a9b3dd88bcde716848c3bf4bcd50f28f.jpg', '2021-08-09 03:11:08', 'contacto', 1),
 (6, 'Preguntas frecuentes', '<ol> <li><strong>&iquest;Cu&aacute;l es el tiempo de entrega de los producto? </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis sunt, corrupti hic aspernatur cumque alias, ipsam omnis iure ipsum, nostrum labore obcaecati natus repellendus consequatur est nemo sapiente dolorem dicta. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, voluptas, consectetur iusto delectus quaerat ullam nesciunt! Quae doloribus deserunt qui fugit illo nobis ipsum, accusamus eius perferendis beatae culpa molestias!</li> <li><strong>&iquest;C&oacute;mo es la forma de env&iacute;o de los productos?</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis sunt, corrupti hic aspernatur cumque alias, ipsam omnis iure ipsum, nostrum labore obcaecati natus repellendus consequatur est nemo sapiente dolorem dicta. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, voluptas, consectetur.</li> <li><strong>&iquest;Cu&aacute;l es el tiempo m&aacute;ximo para solicitar un reembolso?</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis sunt, corrupti hic aspernatur cumque alias, ipsam omnis iure ipsum, nostrum labore obcaecati natus repellendus consequatur est nemo sapiente dolorem dicta. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, voluptas, consectetur iusto delectus quaerat ullam nesciunt!</li> </ol> <p>&nbsp;</p> <p>Otras preguntas</p> <ul> <li><strong>&iquest;Qu&eacute; formas de pago aceptan? </strong><span style=\"color: #666666; font-family: Arial, sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">Corrupti hic aspernatur cumque alias, ipsam omnis iure ipsum, nostrum labore obcaecati natus repellendus consequatur est nemo sapiente dolorem dicta. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, voluptas, consectetur iusto delectus quaerat ullam nesciunt! Quae doloribus deserunt qui fugit illo nobis ipsum, accusamus eius perferendis beatae culpa molestias!</span></li> </ul>', '', '2021-08-11 01:24:19', 'preguntas-frecuentes', 1),
 (7, 'Términos y Condiciones', '<p>A continuaci&oacute;n se describen los t&eacute;rmino y condiciones de la Tienda Virtual!</p> <ol> <li>Pol&iacute;tica uno</li> <li>Termino dos</li> <li>Condici&oacute;n tres</li> </ol> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis sunt, corrupti hic aspernatur cumque alias, ipsam omnis iure ipsum, nostrum labore obcaecati natus repellendus consequatur est nemo sapiente dolorem dicta. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, voluptas, consectetur iusto delectus quaerat ullam nesciunt! Quae doloribus deserunt qui fugit illo nobis ipsum, accusamus eius perferendis beatae culpa molestias!</p>', '', '2021-08-11 01:51:06', 'terminos-y-condiciones', 1),
 (8, 'Sucursales', '<section class=\"py-5 text-center\"> <div class=\"container\"> <p>Visitanos y obten los mejores precios del mercado, cualquier art&iacute;culo que necestas para vivir mejor</p> <a class=\"btn btn-info\" href=\"../../cmrpos/tienda\">VER PRODUCTOS</a></div> </section> <div class=\"py-5 bg-light\"> <div class=\"container\"> <div class=\"row\"> <div class=\"col-md-4\"> <div class=\"card mb-4 box-shadow hov-img0\"><img src=\"https://abelosh.com/tienda_virtual/Assets/images/s1.jpg\" alt=\"Tienda Uno\" width=\"100%\" height=\"100%\"> <div class=\"card-body\"> <p class=\"card-text\">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat necessitatibus eligendi, soluta ipsa natus, at earum qui enim, illum doloremque, accusantium autem nemo est esse nulla neque eaque repellendus amet.</p> <p>Direcci&oacute;n: Antigua Gautemala <br>Tel&eacute;fono: 4654645 <br>Correo: info@abelosh.com</p> </div> </div> </div> <div class=\"col-md-4\"> <div class=\"card mb-4 box-shadow hov-img0\"><img src=\"https://abelosh.com/tienda_virtual/Assets/images/s2.jpg\" alt=\"Sucural dos\" width=\"100%\" height=\"100%\"> <div class=\"card-body\"> <p class=\"card-text\">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat necessitatibus eligendi, soluta ipsa natus, at earum qui enim, illum doloremque, accusantium autem nemo est esse nulla neque eaque repellendus amet.</p> <p>Direcci&oacute;n: Antigua Gautemala <br>Tel&eacute;fono: 4654645 <br>Correo: info@abelosh.com</p> </div> </div> </div> <div class=\"col-md-4\"> <div class=\"card mb-4 box-shadow hov-img0\"><img src=\"https://abelosh.com/tienda_virtual/Assets/images/s3.jpg\" alt=\"Sucural tres\" width=\"100%\" height=\"100%\"> <div class=\"card-body\"> <p class=\"card-text\">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat necessitatibus eligendi, soluta ipsa natus, at earum qui enim, illum doloremque, accusantium autem nemo est esse nulla neque eaque repellendus amet.</p> <p>Direcci&oacute;n: Antigua Gautemala <br>Tel&eacute;fono: 4654645 <br>Correo: info@abelosh.com</p> </div> </div> </div> </div> </div> </div>', 'img_d72cb5712933863e051dc9c7fac5e253.jpg', '2021-08-11 02:26:45', 'sucursales', 1),
@@ -543,9 +540,7 @@ INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `frePq
 (49, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-18', '2024-02-21', 'listo', 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 2),
 (50, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-20', NULL, NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
 (51, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, NULL, NULL, 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
-(52, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, '2024-02-24', 'Se cambio', 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 2),
-(53, 'Elkin', 'elkin@gogg.com', 'carrera 1 calle 15 santa marta colombia', 'luminaria apagada', NULL, NULL, NULL, 11.24810600, -74.21392059, 'Cra. 1, Santa Marta, Magdalena, Colombia', 1),
-(54, 'Elkin', 'elkin@gogg.com', 'carrera 1 calle 15 santa marta colombia', 'luminaria apagada', NULL, '2024-02-25', 'se cambio', 11.24810600, -74.21392059, 'Cra. 1, Santa Marta, Magdalena, Colombia', 2);
+(52, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, '2024-02-24', 'Se cambio', 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 2);
 
 -- --------------------------------------------------------
 
@@ -808,13 +803,6 @@ ALTER TABLE `detalleacta`
   ADD KEY `eleDetalle` (`eleDetalle`);
 
 --
--- Indices de la tabla `docuactas`
---
-ALTER TABLE `docuactas`
-  ADD PRIMARY KEY (`idImagen`),
-  ADD KEY `actImagen` (`actImagen`);
-
---
 -- Indices de la tabla `elementos`
 --
 ALTER TABLE `elementos`
@@ -822,7 +810,9 @@ ALTER TABLE `elementos`
   ADD KEY `gruElemento` (`gruElemento`),
   ADD KEY `oriElemento` (`recElemento`),
   ADD KEY `ubiElemento` (`usoElemento`),
-  ADD KEY `iteElemento` (`iteElemento`);
+  ADD KEY `iteElemento` (`iteElemento`),
+  ADD KEY `ainElemento` (`ainElemento`),
+  ADD KEY `abaElemento` (`abaElemento`);
 
 --
 -- Indices de la tabla `estratos`
@@ -969,7 +959,7 @@ ALTER TABLE `varsalp`
 -- AUTO_INCREMENT de la tabla `actas`
 --
 ALTER TABLE `actas`
-  MODIFY `idActa` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idActa` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `capitulos`
@@ -996,16 +986,10 @@ ALTER TABLE `detalleacta`
   MODIFY `idDetalle` bigint NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `docuactas`
---
-ALTER TABLE `docuactas`
-  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `estratos`
@@ -1035,7 +1019,7 @@ ALTER TABLE `gruposalp`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `itemsacta`
@@ -1077,7 +1061,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT de la tabla `pqrs`
 --
 ALTER TABLE `pqrs`
-  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `recursos`
