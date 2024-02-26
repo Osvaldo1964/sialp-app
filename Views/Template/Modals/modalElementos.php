@@ -157,13 +157,33 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
+                            <td>Acta Ingreso:</td>
+                            <td id="celactElemento">73111404</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha Ingreso:</td>
+                            <td id="celingElemento">73111404</td>
+                        </tr>
+                        <tr>
+                            <td>Grupo:</td>
+                            <td id="celgruElemento">73111404</td>
+                        </tr>
+                        <tr>
+                            <td>Item:</td>
+                            <td id="celiteElemento">73111404</td>
+                        </tr>
+                        <tr>
                             <td>Código:</td>
                             <td id="celcodElemento">73111404</td>
                         </tr>
                         <tr>
-                            <td>Nombre:</td>
-                            <td id="celnomElemento">73111404</td>
+                            <td>Detalles:</td>
+                            <td id="celdesElemento">73111404</td>
                         </tr>
+                        <tr>
+                            <td>Dirección:</td>
+                            <td id="celdirElemento">73111404</td>
+                        </tr
                         <tr>
                             <td>Latitud:</td>
                             <td id="cellatElemento">73111404</td>
@@ -173,16 +193,12 @@
                             <td id="cellonElemento">73111404</td>
                         </tr>
                         <tr>
-                            <td>Grupo:</td>
-                            <td id="celdesGrupo">73111404</td>
+                            <td>Valor:</td>
+                            <td id="celvalElemento">73111404</td>
                         </tr>
                         <tr>
                             <td>Estado:</td>
                             <td id="celestElemento">73111404</td>
-                        </tr>
-                        <tr>
-                            <td>Descripción:</td>
-                            <td id="celdesElemento">73111404</td>
                         </tr>
                         <tr>
                             <td>Fotos del Elemento:</td>

@@ -81,6 +81,8 @@ class Actas extends Controllers
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
+                $btnAdd = '';
+                $btnPrint = '';
                 if ($arrData[$i]['estActa'] == 1) {
                     $arrData[$i]['estActa'] = '<span class="badge badge-success">Activo</span>';
                 } else {
@@ -92,18 +94,24 @@ class Actas extends Controllers
                 if ($_SESSION['permisosMod']['updPermiso']) {
                     $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idActa'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
+                if ($_SESSION['permisosMod']['updPermiso']) {
+                    $btnAdd = '<button class="btn btn-secondary btn-sm" onClick="fntAddElemento(' . $arrData[$i]['idActa'] . ',' . $arrData[$i]['numActa'] . ',' . $arrData[$i]['fecActa'] .  ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
+                }
+                if ($_SESSION['permisosMod']['updPermiso']) {
+                    $btnPrint = '<a title="Imprimir Acta" href="'. base_url() . '/actas/imprimir/' . $arrData[$i]['idActa'] . '" target="_blank"
+                                class="btn btn-warning btn-sm"> <i class="fas fa-file-pdf"></i></a> ';
+                }               
                 if ($_SESSION['permisosMod']['delPermiso']) {
                     $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idActa'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
-                if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnAdd = '<button class="btn btn-primary btn-sm" onClick="fntAddElemento(' . $arrData[$i]['idActa'] . ',' . $arrData[$i]['numActa'] . ',' . $arrData[$i]['fecActa'] .  ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
-                }
-                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnAdd . $btnDelete . '</div>';
+                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnAdd  . ' ' .  $btnPrint . ' ' . $btnDelete . '</div>';
             }
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         }
         die();
     }
+
+    //'<button class="btn btn-primary btn-sm" onClick="fntPrintActa(' . $arrData[$i]['idActa'] . ')" title="Imprimir Acta"><i class="fas fa-print"></i></button>';
 
     public function getActa($idActa)
     {
@@ -130,6 +138,20 @@ class Actas extends Controllers
         die();
     }
 
+    
+    public function imprimir($idacta) {
+        if (!is_numeric($idacta)){
+            header("Location:" . base_url() . '/actas');
+        }
+        if (empty($_SESSION['permisosMod']['reaPermiso'])) {
+            header("Location:" . base_url() . '/dashboard');
+        }
+        $data['page_tag']   = "Actas - Salp - App";
+        $data['page_title'] = "ACTAS <small> SALP - APP </small>";
+        $data['page_name']  = "acta";
+        $data['arrPedido'] = $this->model->selectActaimp($idacta);
+        $this->views->getView($this, "actapdf", $data);
+    }
     public function delActa()
     {
         if ($_POST) {

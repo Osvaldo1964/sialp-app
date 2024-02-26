@@ -28,6 +28,8 @@
                                     <th>Grupo</th>
                                     <th>Subgrupo</th>
                                     <th>Código</th>
+                                    <th>Acta Ingreso</th>
+                                    <th>Fecha Ingreso</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>

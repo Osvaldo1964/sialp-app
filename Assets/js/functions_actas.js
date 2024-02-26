@@ -143,6 +143,50 @@ window.addEventListener('load', function () {
         }
     }
 
+    if (document.querySelector("#formElemento")) {
+        let formElemento = document.querySelector("#formElemento");
+        formElemento.onsubmit = function (e) {
+            e.preventDefault();
+            let strcodElemento = document.querySelector('#txtcodElemento').value;
+            let intrecElemento = document.querySelector('#listRecursos').value;
+            let intusoElemento = document.querySelector('#listUsos').value;
+            let strdesElemento = '';
+            let strdirElemento = document.querySelector('#txtdirElemento').value;
+            let fltlatElemento = document.querySelector('#fltlatElemento').value;
+            let fltlonElemento = document.querySelector('#fltlonElemento').value;
+            let intestElemento = document.querySelector('#listestElemento').value;
+            if (strdirElemento == '' || strcodElemento == '') {
+                swal("Atención", "Todos los campos son obligatorios.", "error");
+                return false;
+            }
+            if (strcodElemento.length < 5) {
+                swal("Atención", "El código debe ser mayor que 5 dígitos.", "error");
+                return false;
+            }
+            divLoading.style.display = "flex";
+            tinyMCE.triggerSave();
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Elementos/setElementoadd/';
+            let formData = new FormData(formElemento);
+            request.open("POST", ajaxUrl, true);
+            request.send(formData);
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    let objData = JSON.parse(request.responseText);
+                    if (objData.status) {
+                        swal("", objData.msg, "success");
+                        document.querySelector("#idElemento").value = objData.idElemento;
+                        document.querySelector("#containerGallery").classList.remove("notblock");
+                    } else {
+                        swal("Error", objData.msg, "error");
+                    }
+                }
+                divLoading.style.display = "none";
+                return false;
+            }
+        }
+    }
+
     if (document.querySelector(".btnAddImage")) {
         let btnAddImage = document.querySelector(".btnAddImage");
         btnAddImage.onclick = function (e) {
@@ -372,6 +416,23 @@ function fntEditInfo(element, idActa) {
     }
 }
 
+function fntPrintActa(idActa) {
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Actas/getActaimp/' + idActa;
+    request.open("GET", ajaxUrl, true);
+    request.send();
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            let objData = JSON.parse(request.responseText);
+            if (objData.status) {
+                alert('imrprimiendo...');
+            } else {
+                swal("Error", objData.msg, "error");
+            }
+        }
+    }
+}
+
 function fntDelInfo(idActa) {
     swal({
         title: "Eliminar Acta",
@@ -477,6 +538,8 @@ function fntRecursos() {
             if (request.readyState == 4 && request.status == 200) {
                 document.querySelector('#listRecursos').innerHTML = request.responseText;
                 $('#listRecursos').selectpicker('render');
+                document.querySelector('#listRecursosadd').innerHTML = request.responseText;
+                $('#listRecursosadd').selectpicker('render');
             }
         }
     }
@@ -497,10 +560,12 @@ function fntPrintBarcode(area) {
 }
 
 function fntAddElemento(idActa, numActa, fecActa) {
+    let eleactActa = idActa;
     let elenumActa = numActa;
     let elefecActa = fecActa;
-    document.querySelector('#elenumActa').value = elenumActa;
-    document.querySelector('#elefecActa').value = elefecActa;
+    document.querySelector('#eleactActa').value = eleactActa;
+    //document.querySelector('#elenumActa').value = elenumActa;
+    //document.querySelector('#elefecActa').value = elefecActa;
     $('#modalFormElemento').modal('show');
 }
 

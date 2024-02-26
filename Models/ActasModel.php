@@ -58,7 +58,7 @@ class ActasModel extends Mysql
     public function selectActa(int $idActa)
     {
         $this->intidActa = $idActa;
-        $sql = "SELECT a.idActa, a.tipActa, a.iteActa, a.numActa, a.fecActa, a.recActa, a.valActa, a.estActa,
+        $sql = "SELECT a.idActa, a.tipActa, a.iteActa, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa, a.recActa, a.valActa, a.estActa,
                 t.desTipoacta as desTipoacta, i.desItemacta as desItemacta, r.desRecurso as desRecurso 
                 FROM actas a
                 INNER JOIN tipoactas t ON t.idTipoacta = 2
@@ -68,6 +68,25 @@ class ActasModel extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
+
+    public function selectActaimp(int $idActa)
+    {
+        $this->intidActa = $idActa;
+        $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento,  e.codElemento, e.recElemento, e.usoElemento, e.desElemento,
+                g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.latElemento, e.lonElemento, e.ainElemento, 
+                e.abaElemento, e.valElemento, e.estElemento, r.desRecurso as desRecurso, u.desTipouso, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa,
+                a.valActa, a.estActa
+                FROM elementos e
+                INNER JOIN actas a ON e.ainElemento = a.idActa
+                INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
+                INNER JOIN itemsalp i ON e.iteElemento = i.idItem
+                INNER JOIN recursos r ON e.recElemento = r.idRecurso
+                INNER JOIN tiposuso u ON e.usoElemento = u.idTipouso
+                WHERE idActa = $this->intidActa";
+        $request = $this->select_all($sql);
+        return $request;
+    }
+
 
     public function updateActa(int $idActa, $tipo, $clase, $numero, $fecha, $recurso, $valor, $estado)
     {

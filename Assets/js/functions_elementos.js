@@ -25,6 +25,8 @@ window.addEventListener('load', function () {
             { "data": "desGrupo" },
             { "data": "desItem" },
             { "data": "codElemento" },
+            { "data": "numActa" },
+            { "data": "fecActa" },
             { "data": "estElemento" },
             { "data": "options" }
         ],
@@ -270,10 +272,16 @@ function fntViewInfo(idElemento) {
                 let estadoElemento = objElemento[0]['estElemento'] == 1 ?
                     '<span class="badge badge-success">Activo</span>' :
                     '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector('#celdesGrupo').innerHTML = objElemento[0]['desGrupo'];
+                document.querySelector('#celactElemento').innerHTML = objElemento[0]['numActa'];
+                document.querySelector('#celingElemento').innerHTML = objElemento[0]['fecActa'];    
+                document.querySelector('#celgruElemento').innerHTML = objElemento[0]['desGrupo'];
+                document.querySelector('#celiteElemento').innerHTML = objElemento[0]['desItem'];
                 document.querySelector('#celcodElemento').innerHTML = objElemento[0]['codElemento'];
-                document.querySelector('#celnomElemento').innerHTML = objElemento[0]['nomElemento'];
                 document.querySelector('#celdesElemento').innerHTML = objElemento[0]['desElemento'];
+                document.querySelector('#celdirElemento').innerHTML = objElemento[0]['dirElemento'];
+                document.querySelector('#cellatElemento').innerHTML = objElemento[0]['latElemento'];
+                document.querySelector('#cellonElemento').innerHTML = objElemento[0]['lonElemento'];
+                document.querySelector('#celvalElemento').innerHTML = objElemento[0]['valElemento'];
                 document.querySelector('#celestElemento').innerHTML = estadoElemento;
                 if (objElemento['images'].length > 0) {
                     let objElementos = objElemento['images'];

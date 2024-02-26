@@ -87,6 +87,49 @@ class Elementos extends Controllers
         die();
     }
 
+    public function setElementoadd()
+    {
+        if ($_POST) {
+            if (empty($_POST['txtdirElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listGrupos']) 
+            || empty($_POST['listestElemento']))
+            {
+                $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+            } else {
+                $intgruElemento = intval($_POST['listGrupos']);
+                $intiteElemento = intval($_POST['listItems']);
+                $strcodElemento = strClean($_POST['txtcodElemento']);
+                $intrecElemento = intval($_POST['listRecursosadd']);
+                $intusoElemento = intval($_POST['listUsos']);
+                $strdesElemento = '';
+                $strdirElemento = strClean($_POST['txtdirElemento']);
+                $fltlatElemento = $_POST['fltlatElemento'];
+                $fltlonElemento = $_POST['fltlonElemento'];
+                $strainElemento = strClean($_POST['eleactActa']);
+                $intestElemento = intval($_POST['listestElemento']);
+                $request_Elemento = "";
+
+                $ruta = strtolower(clear_cadena($strcodElemento));
+                $ruta = str_replace(" ", "-", $ruta);
+
+                $request_Elemento = $this->model->insertElemento($intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
+                                                                $strdesElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
+                                                                $intestElemento);
+
+                if($request_Elemento == 1 || $request_Elemento != 'exist')
+                {
+                        $arrResponse = array('status' => true, 'idElemento' => $request_Elemento, 'msg' => 'Datos guardados correctamente.');
+
+                }else if($request_Elemento == 'exist'){
+                    $arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un Elemento con el Código Ingresado.');		
+                }else{
+                    $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+                }
+        }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+
     public function getElementos()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {

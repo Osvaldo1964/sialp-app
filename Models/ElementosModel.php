@@ -26,7 +26,7 @@ class ElementosModel extends Mysql
 
     public function insertElemento(int $grupo, int $item, string $codigo, int $recurso, int $uso, string $descripcion,
                                     string $direccion, float $latitud, float $longitud, string $ruta, string $actaini,
-                                    string $factaini, int $estado)
+                                    int $estado)
     {
         $return = 0;
         $this->intgruElemento = $grupo;
@@ -40,7 +40,6 @@ class ElementosModel extends Mysql
         $this->fltlonElemento = $longitud;
         $this->strrutElemento = $ruta;
         $this->strainElemento = $actaini;
-        $this->strfinElemento = $factaini;
         $this->intestElemento = $estado;
 
         $sql = "SELECT * FROM elementos WHERE codElemento = '{$this->strcodElemento}'";
@@ -48,13 +47,12 @@ class ElementosModel extends Mysql
         $request = $this->select_all($sql);
         if (empty($request)) {
             $query_insert = "INSERT INTO elementos (gruElemento, iteElemento, codElemento, recElemento, usoElemento,
-                            desElemento, dirElemento, latElemento, lonElemento, rutElemento, ainElemento, finElemento,
-                            estElemento)
-                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                            desElemento, dirElemento, latElemento, lonElemento, rutElemento, ainElemento, estElemento)
+                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             $arrData = array(
                 $this->intgruElemento, $this->intiteElemento, $this->strcodElemento, $this->intrecElemento, $this->intusoElemento,
                 $this->strdesElemento, $this->strdirElemento, $this->fltlatElemento, $this->fltlonElemento, $this->strrutElemento,
-                $this->strainElemento, $this->strfinElemento, $this->intestElemento
+                $this->strainElemento, $this->intestElemento
             );
             $this->insert($query_insert, $arrData); 
             $request_insert = $this->insert($query_insert, $arrData);
@@ -69,8 +67,9 @@ class ElementosModel extends Mysql
     {
         $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento, e.codElemento, e.recElemento, e.usoElemento, e.desElemento,
                 g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.latElemento, e.lonElemento, e.ainElemento,
-                e.finElemento, e.abaElemento, e.fbaElemento, e.estElemento
+                e.abaElemento, e.estElemento, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa
                 FROM elementos e
+                INNER JOIN actas a ON e.ainElemento = a.idActa
                 INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
                 INNER JOIN itemsalp i ON e.iteElemento = i.idItem
                 WHERE estElemento != 0";
@@ -82,9 +81,10 @@ class ElementosModel extends Mysql
     {
         $this->intidElemento = $idElemento;
         $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento,  e.codElemento, e.recElemento, e.usoElemento, e.desElemento,
-                g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.latElemento, e.lonElemento, e.ainElemento, e.finElemento,
-                e.abaElemento, e.fbaElemento, e.estElemento, r.desRecurso as desRecurso, u.desTipouso
+                g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.latElemento, e.lonElemento, e.ainElemento, 
+                e.abaElemento, e.valElemento, e.estElemento, r.desRecurso as desRecurso, u.desTipouso, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa
                 FROM elementos e
+                INNER JOIN actas a ON e.ainElemento = a.idActa
                 INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
                 INNER JOIN itemsalp i ON e.iteElemento = i.idItem
                 INNER JOIN recursos r ON e.recElemento = r.idRecurso

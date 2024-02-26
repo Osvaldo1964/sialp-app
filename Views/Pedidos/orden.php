@@ -22,7 +22,7 @@
                     $orden = $data['arrPedido']['orden'];
                     $detalle = $data['arrPedido']['detalle'];
                     $transaccion =  $cliente['dirUsuario'] != "" ? 
-                                    $orden['trapedido'] :
+                                    $orden['refpedido'] :
                                     $orden['refPedido'];
                 ?>
                 <section id="sPedido" class="invoice">

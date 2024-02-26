@@ -28,7 +28,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Fecha </label>
+                                    <label for="txtfecActa" class="control-label">Fecha </label>
                                     <input class="form-control date-picker" id="txtfecActa" name="txtfecActa" type="date" placeholder="" required="">
                                 </div>
                                 <div class="form-group col-md-8">
@@ -145,9 +145,10 @@
             </div>
             <div class="modal-body">
                 <form id="formElemento" name="formElemento" class="form-horizontal">
+                    <input type="hidden" id="eleactActa" name="eleactActa">
                     <input type="hidden" id="idElemento" name="idElemento" value="">
                     <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>
-                    <div class="row">
+<!--                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label">No. de Acta </label>
                             <input class="form-control" id="elenumActa" name="elenumActa" type="text" placeholder="" disabled>
@@ -157,10 +158,10 @@
                             <input class="form-control" id="elefecActa" name="elefecActa" type="date" placeholder="" disabled>
                         </div>
                     </div>
-                    <hr>
+                    <hr> -->
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group col-md-6">
+                            <div class="form-group">
                                 <label class="control-label">Código </label>
                                 <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código de barra" required="">
                                 <br>
@@ -187,8 +188,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-8">
-                                    <label for="listRecursos">Origen Recurso </label>
-                                    <select class="form-control" data-live-search="true" id="listRecursos" name="listRecursos" required=""></select>
+                                    <label for="listRecursosadd">Origen Recurso </label>
+                                    <select class="form-control" data-live-search="true" id="listRecursosadd" name="listRecursosadd" required=""></select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="listUsos">Clase de Iluminación </label>
@@ -207,8 +208,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="fltvalElemento">Valor </label>
-                                    <select class="form-control" data-live-search="true" id="fltvalElemento" name="fltvalElemento" required=""></select>
+                                    <label class="control-label">Valor </label>
+                                    <input class="form-control" id="fltvalElemento" name="fltvalElemento" type="number" required="">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="listestElemento">Estado</label>
