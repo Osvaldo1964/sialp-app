@@ -207,7 +207,7 @@ window.addEventListener('load', function () {
     fntInputFile();
     fntInputPdf();
     fntGrupos();
-    fntItems();
+    fntItems(1);
     fntUsos();
     fntItemactas()
 })
@@ -466,9 +466,10 @@ function fntGrupos() {
     }
 }
 
-function fntItems() {
+function fntItems(idgrupo) {
     if (document.querySelector('#listItems')) {
-        let ajaxUrl = base_url + '/Items/getSelectItems';
+        formData.append('grupo', $grupo);
+        let ajaxUrl = base_url + '/Items/getSelectItems' + idgrupo;
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();

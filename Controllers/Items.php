@@ -131,10 +131,11 @@ class Items extends Controllers
         die();
     }
 
-    public function getSelectItems()
+    public function getSelectItems($idgrupo)
     {
+        $idgrupo = intval($idgrupo);
         $htmlOptions = "";
-        $arrData = $this->model->selectItems();
+        $arrData = $this->model->selectItems($idgrupo);
         if (count($arrData) > 0) {
             for ($i = 0; $i < count($arrData); $i++) {
                 $htmlOptions .= '<option value="' . $arrData[$i]['idItem'] . '">' .

@@ -26,12 +26,12 @@ class ItemsModel extends Mysql
         return $return;
     }
 
-    public function selectItems()
+    public function selectItems(int $grupo)
     {
         $sql = "SELECT i.idItem, i.gruItem, g.desGruposalp as desGruposalp, i.desItem,  i.csmItem, i.estItem
                 FROM itemsalp i 
                 INNER JOIN gruposalp g ON i.gruItem = g.idGruposalp
-                WHERE i.estItem != 0";
+                WHERE i.estItem != 0 AND i.gruItem = $grupo";
         $request = $this->select_all($sql);
         return $request;
     }
