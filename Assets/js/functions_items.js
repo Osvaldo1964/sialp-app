@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             htmlStatus = intestItem == 1 ? 
                             '<span class="badge badge-success">Activo</span>' :
                             '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = document.querySelector("#listGrupos").selectedOptions[0].text;;;
+                            rowTable.cells[1].textContent = document.querySelector("#listGrupos").selectedOptions[0].text;
                             rowTable.cells[2].textContent = strdesItem;
                             rowTable.cells[3].textContent = intcsmItem;
                             rowTable.cells[4].innerHTML = htmlStatus;

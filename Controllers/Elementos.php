@@ -18,7 +18,7 @@ class Elementos extends Controllers
             header("Location:" . base_url() . '/dashboard');
         }
         $data['page_tag']   = "Elementos";
-        $data['page_title'] = "ELEMENTOS <small> Cmr Pos Facturación </small>";
+        $data['page_title'] = "ELEMENTOS <small> SALP - APP </small>";
         $data['page_name']  = "elementos";
         $data['page_functions_js'] = "functions_elementos.js";
         $this->views->getView($this, "elementos", $data);

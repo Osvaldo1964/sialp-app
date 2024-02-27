@@ -18,7 +18,7 @@ class Actas extends Controllers
             header("Location:" . base_url() . '/dashboard');
         }
         $data['page_tag']   = "Actas";
-        $data['page_title'] = "ACTAS <small> SALP - APP</small>";
+        $data['page_title'] = "INVERSIONES <small> SALP - APP</small>";
         $data['page_name']  = "actas";
         $data['page_functions_js'] = "functions_actas.js";
         $this->views->getView($this, "actas", $data);

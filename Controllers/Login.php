@@ -16,8 +16,8 @@
 
         public function login()
         {
-            $data['page_tag'] = "Ingreso - CMR pos facturación";
-            $data['page_title'] = "<small> CMR Pos Facturación</small> - Acceso";
+            $data['page_tag'] = "Ingreso - SALP - APP";
+            $data['page_title'] = "<small> SALP - APP </small> - Acceso";
             $data['page_name'] = "login";
             $data['page_functions_js'] = "functions_login.js";
             $this->views->getView($this, "login", $data);

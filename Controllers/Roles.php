@@ -21,7 +21,7 @@ class Roles extends Controllers
 		}
 		$data['page_id'] = 3;
 		$data['page_tag'] = "Roles Usuario";
-		$data['page_title'] = "Roles Usuario <small> Cmr Pos Facturación</small>";
+		$data['page_title'] = "Roles Usuario <small> SALP - APP </small>";
 		$data['page_name'] = "rol_usuario";
 		$data['page_functions_js'] = "functions_roles.js";
 		$this->views->getView($this, "roles", $data);

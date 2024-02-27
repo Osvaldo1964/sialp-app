@@ -32,7 +32,7 @@ window.addEventListener('load', function () {
             { "data": "options" }
         ],
         "columnDefs": [
-            { 'className': "textleft", "targets": [1,2] },
+            { 'className': "textleft", "targets": [1, 2] },
             { 'className': "textright", "targets": [0] },
             { 'className': "textcenter", "targets": [3] },
         ],
@@ -203,6 +203,8 @@ window.addEventListener('load', function () {
             fntInputFile();
         }
     }
+
+
     fntRecursos();
     fntInputFile();
     fntInputPdf();
@@ -211,6 +213,13 @@ window.addEventListener('load', function () {
     fntUsos();
     fntItemactas()
 })
+
+function cambioGrupo(event){
+    var selectedOption = event.target.options[event.target.selectedIndex];
+    grupo = selectedOption.value;
+    fntItems(grupo);
+    $('#listItems').selectpicker('render');
+}
 
 function fntInputPdf() {
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
@@ -226,7 +235,7 @@ function fntInputPdf() {
             if (uploadFoto != '') {
                 let type = fileimg[0].type;
                 let name = fileimg[0].name;
-                if (type != 'application/pdf' ) { //&& type != 'image/jpg' && type != 'image/png'
+                if (type != 'application/pdf') { //&& type != 'image/jpg' && type != 'image/png'
                     prevImg.innerHTML = "Archivo no válido";
                     uploadFoto.value = "";
                     return false;
@@ -274,7 +283,7 @@ function fntInputFile() {
             if (uploadFoto != '') {
                 let type = fileimg[0].type;
                 let name = fileimg[0].name;
-                if (type != 'application/pdf' ) { //&& type != 'image/jpg' && type != 'image/png'
+                if (type != 'application/pdf') { //&& type != 'image/jpg' && type != 'image/png'
                     prevImg.innerHTML = "Archivo no válido";
                     uploadFoto.value = "";
                     return false;
@@ -308,7 +317,7 @@ function fntInputFile() {
     });
 }
 
-function fntDelItem(element){
+function fntDelItem(element) {
     let nameImg = document.querySelector(element + ' .btnDeleteImage').getAttribute("imgname");
     let idActa = document.querySelector("#idActa").value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -322,10 +331,10 @@ function fntDelItem(element){
         if (request.readyState != 4) return;
         if (request.status == 200) {
             let objData = JSON.parse(request.responseText);
-            if (objData.status){
+            if (objData.status) {
                 let itemRemove = document.querySelector(element);
                 itemRemove.parentNode.removeChild(itemRemove);
-            }else{
+            } else {
                 swal("", objData.msg, "error");
             }
         }
@@ -393,7 +402,7 @@ function fntEditInfo(element, idActa) {
                 document.querySelector("#listestActa").value = objActa[0].estActa;
                 $('#listClases').selectpicker('render');
                 $('#listRecursos').selectpicker('render');
-                $('#listestActa').selectpicker('render'); 
+                $('#listestActa').selectpicker('render');
                 if (objActa.images.length > 0) {
                     let objActas = objActa.images;
                     for (let p = 0; p < objActas.length; p++) {
@@ -450,7 +459,6 @@ function fntDelInfo(idActa) {
 }
 
 // Registro Elementos al Acta
-
 function fntGrupos() {
     if (document.querySelector('#listGrupos')) {
         let ajaxUrl = base_url + '/Grupossalp/getSelectGruposalp';
@@ -460,6 +468,7 @@ function fntGrupos() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 document.querySelector('#listGrupos').innerHTML = request.responseText;
+                
                 $('#listGrupos').selectpicker('render');
             }
         }
@@ -468,14 +477,17 @@ function fntGrupos() {
 
 function fntItems(idgrupo) {
     if (document.querySelector('#listItems')) {
-        formData.append('grupo', $grupo);
-        let ajaxUrl = base_url + '/Items/getSelectItems' + idgrupo;
+        let ajaxUrl = base_url + '/Items/getSelectItems/' + idgrupo;
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
+                itemtemp = request.responseText;
+                console.log(request.responseText);
                 document.querySelector('#listItems').innerHTML = request.responseText;
+                console.log(document.querySelector("#listItems").selectedOption);
+                //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listItems').selectpicker('render');
             }
         }

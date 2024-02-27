@@ -16,8 +16,27 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/pqrs"><i class="icon fa fa-circle-o"></i> Registro PQRs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/controlpqr"><i class="icon fa fa-circle-o"></i> Seguimiento PQRs</a></li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+                                <span class="app-menu__label">VARIABLES</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/cuadrillas"> Cuadrillas</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+                                <span class="app-menu__label">MOVIMIENTOS</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/pqrs"> Registro PQRs</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/controlpqr"> Seguimiento PQRs</a></li>
+                            </ul>
+                        </li>
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
@@ -25,8 +44,8 @@
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a class="treeview-item" href="<?= base_url(); ?>/informepqrs01"><i class="icon fa fa-circle-o"></i> Reporte PQRs por Rango de Fechas</a></li>
-                                <!-- <li><a class="treeview-item" href="<?= base_url(); ?>/controlpqr"><i class="icon fa fa-circle-o"></i> Seguimiento PQRs</a></li> -->
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/informepqrs01"> Reporte PQRs por Rango de Fechas</a></li>
+                                <!-- <li><a class="treeview-item" href="<?= base_url(); ?>/controlpqr"> Seguimiento PQRs</a></li> -->
                             </ul>
                         </li>
                     </ul>
@@ -41,11 +60,11 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"><i class="icon fa fa-circle-o"></i> Grupos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/items"><i class="icon fa fa-circle-o"></i> Subgrupos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"><i class="icon fa fa-circle-o"></i> Elementos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"><i class="icon fa fa-circle-o"></i> Tipos de Actas</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/censo"><i class="icon fa fa-circle-o"></i> Censo Valorizado</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"> Grupos UCAPs</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/items"> Subgrupos UCAPs</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Elementos UCAPs</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"> Tipos de Actas</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/censo"> Censo Valorizado</a></li>
                     </ul>
                 </li>
             <?php } ?>
@@ -54,13 +73,13 @@
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">COSTOS Y PAGOS ENERGIA</span>
+                        <span class="app-menu__label">COSTOS/PAGOS ENERGIA</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/comercializadores"><i class="icon fa fa-circle-o"></i> comercializadores</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/cstenergia"><i class="icon fa fa-circle-o"></i> Registro Consumo Energia </a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/"><i class="icon fa fa-circle-o"></i> Informe de Consumos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/comercializadores"> comercializadores</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/cstenergia"> Registro Consumo Energia </a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/"> Informe de Consumos</a></li>
                     </ul>
                 </li>
             <?php } ?>
@@ -69,13 +88,13 @@
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
-                        <span class="app-menu__label">FACTURACION Y RECAUDOS</span>
+                        <span class="app-menu__label">FACTURACION/RECAUDOS</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/cargafacturacion"><i class="icon fa fa-circle-o"></i> Carga Facturación</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/facturacion"><i class="icon fa fa-circle-o"></i> Carga Manual</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/"><i class="icon fa fa-circle-o"></i> Informe de Facturación/Recaudos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/cargafacturacion"> Carga Facturación</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/facturacion"> Carga Manual</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/"> Informe de Facturación/Recaudos</a></li>
                     </ul>
                 </li>
             <?php } ?>
@@ -88,8 +107,8 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/varsalp"><i class="icon fa fa-circle-o"></i> Variables SALP</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/valorvrsalp"><i class="icon fa fa-circle-o"></i> Registo de Valores de variables</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/varsalp"> Variables SALP</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/valorvrsalp"> Registo de Valores de variables</a></li>
                     </ul>
                 </li>
             <?php } ?>
@@ -104,8 +123,7 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/actas"><i class="icon fa fa-circle-o"></i> Registro Inversiones</a></li>1
-                        <!-- <li><a class="treeview-item" href="<?= base_url(); ?>/"><i class="icon fa fa-circle-o"></i> ****</a></li> -->
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/actas"> Registro Inversiones</a></li>
                     </ul>
                 </li>
             <?php } ?>
@@ -118,11 +136,11 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/capitulos"><i class="icon fa fa-circle-o"></i> Capítulos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupos"><i class="icon fa fa-circle-o"></i> Grupos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/subgrupos"><i class="icon fa fa-circle-o"></i> SubGrupos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/conceptos"><i class="icon fa fa-circle-o"></i> Conceptos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/auxiliares"><i class="icon fa fa-circle-o"></i> Auxiliares</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/capitulos"> Capítulos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupos"> Grupos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/subgrupos"> SubGrupos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/conceptos"> Conceptos</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/auxiliares"> Auxiliares</a></li>
                     </ul>
                 </li>
             <?php } ?>
@@ -135,9 +153,9 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/parametros"><i class="icon fa fa-circle-o"></i> Configuración</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/usuarios"><i class="icon fa fa-circle-o"></i> Usuarios</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/roles"><i class="icon fa fa-circle-o"></i> Roles</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/parametros"> Configuración</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/usuarios"> Usuarios</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/roles"> Roles</a></li>
                     </ul>
                 </li>
             <?php } ?>
