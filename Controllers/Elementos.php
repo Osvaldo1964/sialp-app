@@ -39,13 +39,12 @@ class Elementos extends Controllers
                 $intrecElemento = intval($_POST['listRecursos']);
                 $intusoElemento = intval($_POST['listUsos']);
                 $strdesElemento = strClean($_POST['txtdesElemento']);
+                $strdetElemento = strClean($_POST['txtdetElemento']);
                 $strdirElemento = strClean($_POST['txtdirElemento']);
                 $fltlatElemento = $_POST['fltlatElemento'];
                 $fltlonElemento = $_POST['fltlonElemento'];
                 $strainElemento = strClean($_POST['txtainElemento']);
-                $strfinElemento = strClean($_POST['txtfinElemento']);
                 $strabaElemento = strClean($_POST['txtabaElemento']);
-                $strfbaElemento = strClean($_POST['txtfbaElemento']);
                 $intestElemento = intval($_POST['listestElemento']);
                 $request_Elemento = "";
 
@@ -57,16 +56,16 @@ class Elementos extends Controllers
                     if ($_SESSION['permisosMod']['wriPermiso']) {
                         $request_Elemento = $this->model->insertElemento(
                             $intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
-                            $strdesElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                            $strfinElemento, $intestElemento);
+                            $strdesElemento, $strdetElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
+                            $strdetElemento, $intestElemento);
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
                         $request_Elemento = $this->model->updateElemento(
                             $idElemento, $intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
-                            $strdesElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                            $strfinElemento, $strabaElemento, $strfbaElemento, $intestElemento);
+                            $strdesElemento, $strdetElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
+                            $strabaElemento, $intestElemento);
                     }
                 }
                 if($request_Elemento == 1 || $request_Elemento != 'exist')
@@ -101,6 +100,7 @@ class Elementos extends Controllers
                 $intrecElemento = intval($_POST['listRecursosadd']);
                 $intusoElemento = intval($_POST['listUsos']);
                 $strdesElemento = '';
+                $strdetElemento = strClean($_POST['txtdetElemento']);
                 $strdirElemento = strClean($_POST['txtdirElemento']);
                 $fltlatElemento = $_POST['fltlatElemento'];
                 $fltlonElemento = $_POST['fltlonElemento'];
@@ -113,8 +113,8 @@ class Elementos extends Controllers
                 $ruta = str_replace(" ", "-", $ruta);
 
                 $request_Elemento = $this->model->insertElemento($intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
-                                                                $strdesElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                                                                $fltvalElemento,$intestElemento);
+                                                                $strdesElemento, $strdetElemento, $strdirElemento, $fltlatElemento, $fltlonElemento,
+                                                                $ruta, $strainElemento, $fltvalElemento,$intestElemento);
 
                 if($request_Elemento == 1 || $request_Elemento != 'exist')
                 {

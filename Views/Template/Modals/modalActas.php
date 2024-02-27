@@ -148,22 +148,21 @@
                     <input type="hidden" id="eleactActa" name="eleactActa">
                     <input type="hidden" id="idElemento" name="idElemento" value="">
                     <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>
-<!--                     <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label">No. de Acta </label>
-                            <input class="form-control" id="elenumActa" name="elenumActa" type="text" placeholder="" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Fecha del Acta </label>
-                            <input class="form-control" id="elefecActa" name="elefecActa" type="date" placeholder="" disabled>
-                        </div>
-                    </div>
-                    <hr> -->
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="listGrupos">Grupo </label>
+                                    <select class="form-control" data-live-search="true" id="listGrupos" name="listGrupos" required=""></select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="listItems">SubGrupo </label>
+                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label">Código </label>
-                                <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código de barra" required="">
+                                <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código" required="">
                                 <br>
                                 <div id="divBarCode" class="notblock textcenter">
                                     <div id="printCode">
@@ -173,6 +172,10 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Descripción</label>
+                                    <input type="text" class="form-control" id="txtdetElemento" name="txtdetElemento"></textarea>
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Dirección</label>
                                     <input type="text" class="form-control" id="txtdirElemento" name="txtdirElemento"></textarea>
@@ -194,16 +197,6 @@
                                 <div class="form-group col-md-4">
                                     <label for="listUsos">Clase de Iluminación </label>
                                     <select class="form-control" data-live-search="true" id="listUsos" name="listUsos" required=""></select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="listGrupos">Grupo </label>
-                                    <select class="form-control" data-live-search="true" id="listGrupos" name="listGrupos" required=""></select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="listItems">SubGrupo </label>
-                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
                                 </div>
                             </div>
                             <div class="row">
