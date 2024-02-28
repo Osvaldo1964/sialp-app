@@ -11,14 +11,14 @@
             <?php if (!empty($_SESSION['permisos'][MPQRS]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                         <span class="app-menu__label">CONTROL PQRs</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
-                                <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+<!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                                 <span class="app-menu__label">VARIABLES</span>
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
@@ -28,7 +28,7 @@
                         </li>
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
-                                <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+<!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                                 <span class="app-menu__label">MOVIMIENTOS</span>
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
@@ -39,7 +39,7 @@
                         </li>
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
-                                <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+<!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                                 <span class="app-menu__label">REPORTES</span>
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
@@ -55,7 +55,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">INVENTARIO UCAPs</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -72,7 +72,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">COSTOS/PAGOS ENERGIA</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -87,7 +87,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">FACTURACION/RECAUDOS</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -102,7 +102,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label"> COSTOS MAXIMOS</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -118,7 +118,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">INVERSIONES</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -131,7 +131,7 @@
             <?php if (!empty($_SESSION['permisos'][MESTRUCTURA]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">MODELACION FINANCIERA</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -148,7 +148,7 @@
             <?php if (!empty($_SESSION['permisos'][MGENERALES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+<!--                         <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                         <span class="app-menu__label">PARAMETROS GENERALES</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -162,7 +162,7 @@
 
             <li>
                 <a class="app-menu__item" href="<?= base_url(); ?>/logout">
-                    <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>
+<!--                     <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i> -->
                     <span class="app-menu__label">CERRAR SESION</span>
                 </a>
             </li>

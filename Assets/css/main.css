@@ -63,7 +63,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0;
   font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -10612,9 +10612,13 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+table.dataTable td {
+  font-size: .8em;
+}
+
 table.dataTable {
   clear: both;
-  margin-top: 6px !important;
+  margin-top: 4px !important;
   margin-bottom: 6px !important;
   max-width: none !important;
 }
@@ -15157,7 +15161,7 @@ be a descendant of the grid when it is being dragged.
   bottom: 0;
   left: 0;
   padding-top: 70px;
-  width: 250px;
+  width: 230px;
   overflow: auto;
   z-index: 10;
   background-color: #222d32;
@@ -15306,8 +15310,8 @@ be a descendant of the grid when it is being dragged.
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 5px 5px 5px 20px;
-  font-size: .90em;
+  padding: 5px 5px 5px 30px;
+  font-size: .80em;
   color: #fff;
 }
 
@@ -16057,7 +16061,7 @@ be a descendant of the grid when it is being dragged.
   margin: 0;
   margin-bottom: 5px;
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: .8rem;
 }
 
 .widget-small .info p {

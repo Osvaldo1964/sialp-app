@@ -21,19 +21,19 @@ window.addEventListener('load', function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "idActa" },
-            { "data": "desTipoacta" },
-            { "data": "desItemacta" },
-            { "data": "numActa" },
-            { "data": "fecActa" },
-            { "data": "desRecurso" },
-            { "data": "valActa" },
-            { "data": "estActa" },
+            { "data": "idActa", "width": "2%" },
+            { "data": "desTipoacta", "width": "15%" },
+            { "data": "desItemacta", "width": "5%" },
+            { "data": "numActa", "width": "5%" },
+            { "data": "fecActa", "width": "8%" },
+            { "data": "desRecurso", "width": "12%" },
+            { "data": "valActa", "width": "5%" },
+            { "data": "estActa", "width": "5%" },
             { "data": "options" }
         ],
         "columnDefs": [
             { 'className': "textleft", "targets": [1, 2] },
-            { 'className': "textright", "targets": [0] },
+            { 'className': "textright", "targets": [0,6] },
             { 'className': "textcenter", "targets": [3] },
         ],
         'dom': 'lBfrtip',

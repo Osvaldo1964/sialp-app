@@ -25,10 +25,10 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tipo Acta</th>
-                                    <th>Clase Acta</th>
-                                    <th>Número Acta</th>
-                                    <th>Fecha Acta</th>
+                                    <th>Tipo</th>
+                                    <th>Clase</th>
+                                    <th>Número</th>
+                                    <th>Fecha</th>
                                     <th>Recurso</th>
                                     <th>Valor</th>
                                     <th>Estado</th>
