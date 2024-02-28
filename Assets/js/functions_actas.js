@@ -204,6 +204,23 @@ window.addEventListener('load', function () {
         }
     }
 
+    if (document.querySelector(".btnAddPdf")) {
+        let btnAddPdf = document.querySelector(".btnAddPdf");
+        btnAddPdf.onclick = function (e) {
+            let key = Date.now();
+            let newElement = document.createElement("div");
+            newElement.id = "div" + key;
+            newElement.innerHTML = `
+            <div class="prevImage"></div>
+            <input type="file" name="foto" id="img${key}" class="inputUploadfile">
+            <label for="img${key}" class="btnUploadfile"><i class="fas fa-upload"></i></label>
+            <button class="btnDeletePdf notblock" type="button" onclick="fntDelPdf('#div${key}')"><i class="fas fa-trash-alt"></i></button>`;
+            document.querySelector("#containerImages").appendChild(newElement);
+            document.querySelector("#div" + key + " .btnUploadfile").click();
+            fntInputPdf();
+        }
+    }
+
 
     fntRecursos();
     fntInputFile();
@@ -291,7 +308,7 @@ function fntInputFile() {
                     let objeto_url = nav.createObjectURL(this.files[0]);
                     prevImg.innerHTML = `<img class="loading" src="${base_url}/Assets/images/loading.svg" >`;
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                    let ajaxUrl = base_url + '/Actas/setPdfacta';
+                    let ajaxUrl = base_url + '/Actas/setImage';
                     let formData = new FormData();
                     formData.append('actImagen', idActa);
                     formData.append("foto", this.files[0]);
@@ -341,6 +358,30 @@ function fntDelItem(element) {
     }
 }
 
+function fntDelPdf(element) {
+    let nameImg = document.querySelector(element + ' .btnDeletePdf').getAttribute("imgname");
+    let idActa = document.querySelector("#idActa").value;
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Actas/delPdfacta/';
+    let formData = new FormData();
+    formData.append('actImagen', idActa);
+    formData.append('file', nameImg);
+    request.open("POST", ajaxUrl, true);
+    request.send(formData);
+    request.onreadystatechange = function () {
+        if (request.readyState != 4) return;
+        if (request.status == 200) {
+            let objData = JSON.parse(request.responseText);
+            if (objData.status) {
+                let itemRemove = document.querySelector(element);
+                itemRemove.parentNode.removeChild(itemRemove);
+            } else {
+                swal("", objData.msg, "error");
+            }
+        }
+    }
+}
+
 function fntViewInfo(idActa) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Actas/getActa/' + idActa;
@@ -362,8 +403,8 @@ function fntViewInfo(idActa) {
                 document.querySelector('#celrecActa').innerHTML = objActa[0]['desRecurso'];
                 document.querySelector('#celvalActa').innerHTML = objActa[0]['valActa'];
                 document.querySelector('#celestActa').innerHTML = estadoActa;
-                if (objActa['images'].length > 0) {
-                    let objActas = objActa['images'];
+                if (objActa['pdfs'].length > 0) {
+                    let objActas = objActa['pdfs'];
                     for (let p = 0; p < objActas.length; p++) {
                         htmlImage += `<iframe src="${objActas[p]['url_image']}"></iframe>`
                     }
@@ -403,15 +444,15 @@ function fntEditInfo(element, idActa) {
                 $('#listClases').selectpicker('render');
                 $('#listRecursos').selectpicker('render');
                 $('#listestActa').selectpicker('render');
-                if (objActa.images.length > 0) {
-                    let objActas = objActa.images;
+                if (objActa.pdfs.length > 0) {
+                    let objActas = objActa.pdfs;
                     for (let p = 0; p < objActas.length; p++) {
                         let key = Date.now() + p;
                         htmlImage += `<div id="div${key}">
                             <div class="prevImage">
                             <iframe src="${objActas[p].url_image}"></iframe>
                             </div>
-                            <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objActas[p].nomImagen}">
+                            <button type="button" class="btnDeletePdf" onclick="fntDelPdf('#div${key}')" imgname="${objActas[p].nomImagen}">
                             <i class="fas fa-trash-alt"></i></button></div>`;
                     }
                 }
@@ -486,7 +527,6 @@ function fntItems(idgrupo) {
                 itemtemp = request.responseText;
                 console.log(request.responseText);
                 document.querySelector('#listItems').innerHTML = request.responseText;
-                console.log(document.querySelector("#listItems").selectedOption);
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listItems').selectpicker('render');
             }

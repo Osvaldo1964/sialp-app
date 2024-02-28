@@ -63,7 +63,7 @@
                         <div class="form-group col-md-12">
                             <div id="containerGallery">
                                 <span>Agregar PDF</span>
-                                <button class="btnAddImage btn btn-info btn-sm" type="button">
+                                <button class="btnAddPdf btn btn-info btn-sm" type="button">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>

@@ -6,7 +6,7 @@ class ActasModel extends Mysql
     public $intiteActa;
     public $strnumActa;
     public $strfecActa;
-    public $strimgActa;
+    public $strpdfActa;
     public $intrecActa;
     public $fltvalActa;
     public $intestActa;
@@ -134,10 +134,34 @@ class ActasModel extends Mysql
         return $request;
     }
 
-    public function insertImage(int $idActa, string $imagen){
+    public function insertPdf(int $idActa, string $pdf){
         $this->intidActa = $idActa;
-        $this->strImagen = $imagen;
+        $this->strpdfActa = $pdf;
         $query_insert = "INSERT INTO docuactas (actImagen, nomImagen) VALUES (?,?)";
+        $arrData = array($this->intidActa, $this->strpdfActa);
+        $request_insert = $this->insert($query_insert, $arrData);
+        return $request_insert;
+    }
+
+    public function selectPdf(int $idActa){
+        $this->intidActa = $idActa;
+        $sql = "SELECT actImagen, nomImagen FROM docuactas WHERE actImagen = $this->intidActa";
+        $request = $this->select_all($sql);
+        return $request;
+    }
+
+    public function deletePdf(int $idActa, string $pdf){
+        $this->intidActa = $idActa;
+        $this->strpdfActa = $pdf;
+        $query = "DELETE FROM docuactas WHERE idImagen = $this->intidActa AND nomImagen = '{$this->strpdfActa}'";
+        $request_delete = $this->delete($query);
+        return $request_delete;
+    }
+
+    public function insertImage(int $idImagen, string $imagen){
+        $this->intidImagen = $idImagen;
+        $this->strImagen = $imagen;
+        $query_insert = "INSERT INTO imagenes (idElemento, nomImagen) VALUES (?,?)";
         $arrData = array($this->intidActa, $this->strImagen);
         $request_insert = $this->insert($query_insert, $arrData);
         return $request_insert;

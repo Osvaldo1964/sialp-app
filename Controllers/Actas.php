@@ -122,13 +122,13 @@ class Actas extends Controllers
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
-                    $arrImg = $this->model->selectImages($idActa);
+                    $arrImg = $this->model->selectPdf($idActa);
                     if (count($arrImg) > 0) {
                         for ($i = 0; $i < count($arrImg); $i++) {
                             $arrImg[$i]['url_image'] = media() . '/images/uploads/' . $arrImg[$i]['nomImagen'];
                         }
                     }
-                    $arrData['images'] = $arrImg;
+                    $arrData['pdfs'] = $arrImg;
                     $arrResponse = array('status' => true, 'data' => $arrData);
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -137,7 +137,6 @@ class Actas extends Controllers
         }
         die();
     }
-
     
     public function imprimir($idacta) {
         if (!is_numeric($idacta)){
@@ -223,7 +222,7 @@ class Actas extends Controllers
                 $idActa = intval($_POST['actImagen']);
                 $foto = $_FILES['foto'];
                 $imgNombre = 'pro_' . md5(date('Y-m-d H:m:s')) . '.pdf';
-                $request_image = $this->model->insertImage($idActa, $imgNombre);
+                $request_image = $this->model->insertPdf($idActa, $imgNombre);
                 if ($request_image) {
                     $uploadImage = uploadImage($foto, $imgNombre);
                     $arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
