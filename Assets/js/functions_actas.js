@@ -188,7 +188,6 @@ window.addEventListener('load', function () {
     }
 
     if (document.querySelector(".btnAddImage")) {
-        this.alert("imagen");
         let btnAddImage = document.querySelector(".btnAddImage");
         btnAddImage.onclick = function (e) {
             let key = Date.now();
@@ -240,9 +239,9 @@ function cambioGrupo(event){
 }
 
 function fntInputPdf() {
-    let inputUploadfile = document.querySelectorAll(".inputUploadfile");
-    inputUploadfile.forEach(function (inputUploadfile) {
-        inputUploadfile.addEventListener('change', function () {
+    let inputUploadpdf = document.querySelectorAll(".inputUploadpdf");
+    inputUploadpdf.forEach(function (inputUploadpdf) {
+        inputUploadpdf.addEventListener('change', function () {
             let idActa = document.querySelector("#idActa").value;
             let parentId = this.parentNode.getAttribute("id");
             let idFile = this.getAttribute("id");
@@ -271,12 +270,11 @@ function fntInputPdf() {
                         if (request.readyState != 4) return;
                         if (request.status == 200) {
                             let objData = JSON.parse(request.responseText);
-                            alert(objData.imgname);
                             console.log(objData);
                             if (objData.status) {
                                 prevImg.innerHTML = `<img src="${objeto_url}">`;
                                 document.querySelector("#" + parentId + " .btnDeletePdf").setAttribute("imgname", objData.imgname);
-                                document.querySelector("#" + parentId + " .btnUploadfile").classList.add("notblock");
+                                document.querySelector("#" + parentId + " .btnUploadPdf").classList.add("notblock");
                                 document.querySelector("#" + parentId + " .btnDeletePdf").classList.remove("notblock");
                             } else {
                                 swal("Error", objData.msg, "error");
