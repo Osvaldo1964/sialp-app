@@ -176,7 +176,7 @@ window.addEventListener('load', function () {
                     if (objData.status) {
                         swal("", objData.msg, "success");
                         document.querySelector("#idElemento").value = objData.idElemento;
-                        document.querySelector("#containerGallery").classList.remove("notblock");
+                        document.querySelector("#containerGallery2").classList.remove("notblock");
                     } else {
                         swal("Error", objData.msg, "error");
                     }
@@ -188,6 +188,7 @@ window.addEventListener('load', function () {
     }
 
     if (document.querySelector(".btnAddImage")) {
+        this.alert("imagen");
         let btnAddImage = document.querySelector(".btnAddImage");
         btnAddImage.onclick = function (e) {
             let key = Date.now();
@@ -198,7 +199,7 @@ window.addEventListener('load', function () {
             <input type="file" name="foto" id="img${key}" class="inputUploadfile">
             <label for="img${key}" class="btnUploadfile"><i class="fas fa-upload"></i></label>
             <button class="btnDeleteImage notblock" type="button" onclick="fntDelItem('#div${key}')"><i class="fas fa-trash-alt"></i></button>`;
-            document.querySelector("#containerImages").appendChild(newElement);
+            document.querySelector("#containerImages2").appendChild(newElement);
             document.querySelector("#div" + key + " .btnUploadfile").click();
             fntInputFile();
         }
@@ -270,11 +271,13 @@ function fntInputPdf() {
                         if (request.readyState != 4) return;
                         if (request.status == 200) {
                             let objData = JSON.parse(request.responseText);
+                            alert(objData.imgname);
+                            console.log(objData);
                             if (objData.status) {
                                 prevImg.innerHTML = `<img src="${objeto_url}">`;
-                                document.querySelector("#" + parentId + " .btnDeleteImage").setAttribute("imgname", objData.imgname);
+                                document.querySelector("#" + parentId + " .btnDeletePdf").setAttribute("imgname", objData.imgname);
                                 document.querySelector("#" + parentId + " .btnUploadfile").classList.add("notblock");
-                                document.querySelector("#" + parentId + " .btnDeleteImage").classList.remove("notblock");
+                                document.querySelector("#" + parentId + " .btnDeletePdf").classList.remove("notblock");
                             } else {
                                 swal("Error", objData.msg, "error");
                             }
@@ -525,7 +528,6 @@ function fntItems(idgrupo) {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
-                console.log(request.responseText);
                 document.querySelector('#listItems').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listItems').selectpicker('render');

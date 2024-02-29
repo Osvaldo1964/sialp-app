@@ -244,7 +244,7 @@ class Actas extends Controllers
                 //Eliminar el registro de la tabla imagenes
                 $idActa = intval($_POST['actImagen']);
                 $imgNombre = strClean($_POST['file']);
-                $request_image = $this->model->deleteImage($idActa, $imgNombre);
+                $request_image = $this->model->deletePdf($idActa, $imgNombre);
                 if ($request_image) {
                     $deleteFile = deleteFile($imgNombre);
                     $arrResponse = array('status' => true, 'msg' => 'Archivo eliminado.');

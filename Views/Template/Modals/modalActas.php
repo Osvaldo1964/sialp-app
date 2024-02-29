@@ -226,14 +226,14 @@
                     </div>
                     <div class="tile-footer">
                         <div class="form-group col-md-12">
-                            <div id="containerGallery">
+                            <div id="containerGallery2">
                                 <span>Agregar Fotos (440 x 545)</span>
                                 <button class="btnAddImage btn btn-info btn-sm" type="button">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
                             <hr>
-                            <div id="containerImages">
+                            <div id="containerImages2">
                                 <!--                                 <div id="div24">
                                     <div class="prevImage">
                                         <img class="loading" src="<?= media(); ?>/images/loading.svg">
