@@ -270,7 +270,6 @@ function fntInputPdf() {
                         if (request.readyState != 4) return;
                         if (request.status == 200) {
                             let objData = JSON.parse(request.responseText);
-                            console.log(objData);
                             if (objData.status) {
                                 prevImg.innerHTML = `<img src="${objeto_url}">`;
                                 document.querySelector("#" + parentId + " .btnDeletePdf").setAttribute("imgname", objData.imgname);
@@ -301,7 +300,7 @@ function fntInputFile() {
             if (uploadFoto != '') {
                 let type = fileimg[0].type;
                 let name = fileimg[0].name;
-                if (type != 'application/pdf') { //&& type != 'image/jpg' && type != 'image/png'
+                if (type != 'image/jpeg' && type != 'image/jpg' && type != 'image/png') {
                     prevImg.innerHTML = "Archivo no válido";
                     uploadFoto.value = "";
                     return false;

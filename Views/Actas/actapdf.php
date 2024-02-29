@@ -66,30 +66,48 @@ $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nomb
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $subtotal = 0;
+                                        $subtotal01 = 0;
+                                        $total01 = 0;
+                                        $grupo01 = '';
                                         if (count($acta) > 0) {
                                             foreach ($acta as $elemento) {
+                                                if ($grupo01 == '' || $grupo01 != '' & $grupo01 != $elemento['desGrupo']) {
+                                                    if ($grupo01 != '') {
                                         ?>
+                                                        <th colspan="4" class="text-right">Sub-Total: <?= $grupo01; ?> </th>
+                                                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal01) ?></td>
+                                                    <?php }
+                                                    $grupo01 = $elemento['desGrupo'];
+                                                    $subtotal01 = 0;
+
+                                                    ?>
+                                                    <tr>
+                                                        <th colspan="5" class="text-left"><?= $elemento['desGrupo']; ?></th>
+                                                    </tr>
+                                                <?php }
+                                                ?>
                                                 <tr>
-                                                    <td class="text-left"><?= $elemento['desGrupo']; ?></td>
-                                                    <td class="text-left"><?= $elemento['desItem']; ?></td>
                                                     <td class="text-left"><?= $elemento['codElemento']; ?></td>
+                                                    <td class="text-left"><?= $elemento['detElemento']; ?></td>
+                                                    <td class="text-left"><?= $elemento['desItem']; ?></td>
                                                     <td class="text-left"><?= $elemento['dirElemento']; ?></td>
                                                     <td class="text-right"><?= SMONEY . formatMoney($elemento['valElemento']); ?></td>
                                                 </tr>
                                         <?php
+                                                $subtotal01 += $elemento['valElemento'];
+                                                $total01 += $elemento['valElemento'];
                                             }
                                         }
                                         ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4" class="text-right">Sub-Total:</th>
-                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal) ?></td>
+                                            <th colspan="4" class="text-right">Sub-Total: <?= $elemento['desGrupo']; ?></th>
+                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal01) ?></td>
                                         </tr>
                                         <tr>
                                             <th colspan="4" class="text-right">Total:</th>
-                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($elemento['valActa']) ?></td>
+                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($total01) ?></td>
                                         </tr>
                                     </tfoot>
                                 </table>

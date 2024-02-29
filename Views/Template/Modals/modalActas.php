@@ -149,14 +149,22 @@
                     <input type="hidden" id="idElemento" name="idElemento" value="">
                     <!--                     <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p> -->
                     <div class="row">
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <label for="listMaterial">Material</label>
+                                <select class="form-control selectpicker" id="listMaterial" name="listMaterial" required>
+                                    <option value="1">Concreto</option>
+                                    <option value="2">Madera</option>
+                                    <option value="3">Aluminio</option>
+                                </select>
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Código </label>
                                     <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código" required="">
                                     <br>
                                 </div>
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-md-6">
                                     <div id="divBarCode" class="notblock textcenter">
                                         <div id="printCode">
                                             <svg id="barcode"></svg>
@@ -194,12 +202,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label for="listGrupos">Grupo </label>
-                                    <select class="form-control" data-live-search="true" id="listGrupos" name="listGrupos" required=""></select>
+                                <div class="form-group col-md-2">
+                                    <label for="listItems">Tecnologia </label>
+                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="listItems">SubGrupo </label>
+                                <div class="form-group col-md-2">
+                                    <label for="listItems">Potencia </label>
+                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="listMaterial">Material</label>
+                                    <select class="form-control selectpicker" id="listMaterial" name="listMaterial" required>
+                                        <option value="1">Concreto</option>
+                                        <option value="2">Madera</option>
+                                        <option value="3">Aluminio</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-">
+                                    <label for="listItems">Altura </label>
                                     <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
                                 </div>
                                 <div class="form-group col-md-4">

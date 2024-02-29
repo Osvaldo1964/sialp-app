@@ -11,14 +11,14 @@
             <?php if (!empty($_SESSION['permisos'][MPQRS]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                         <span class="app-menu__label">CONTROL PQRs</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                                 <span class="app-menu__label">VARIABLES</span>
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
@@ -28,7 +28,7 @@
                         </li>
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                                 <span class="app-menu__label">MOVIMIENTOS</span>
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
@@ -39,7 +39,7 @@
                         </li>
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                                 <span class="app-menu__label">REPORTES</span>
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
@@ -55,16 +55,54 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">INVENTARIO UCAPs</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"> Grupos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/items"> Subgrupos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Elementos UCAPs</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"> Tipos de Actas</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/censo"> Censo Valorizado</a></li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <span class="app-menu__label">VARIABLES</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"> Grupos UCAPs</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/items"> Subgrupos UCAPs</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <span class="app-menu__label">MOVIMIENTOS</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                            <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <span class="app-menu__label">ENTRADAS</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                               <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Carga por Lotes</a></li>
+                               <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Carga Manual</a></li>
+                            </ul>
+                        </li>
+                               <!--  <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Hoja de Vida UCAPs</a></li> -->
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <span class="app-menu__label">REPORTES</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/censo"> Censo Valorizado</a></li>
+                            </ul>
+                        </li>
+                        <!--                         <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"> Tipos de Actas</a></li> -->
                     </ul>
                 </li>
             <?php } ?>
@@ -72,7 +110,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">COSTOS/PAGOS ENERGIA</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -87,7 +125,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">FACTURACION/RECAUDOS</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -102,7 +140,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label"> COSTOS MAXIMOS</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -118,7 +156,7 @@
             <?php if (!empty($_SESSION['permisos'][MCOMPONENTES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">INVERSIONES</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -131,16 +169,56 @@
             <?php if (!empty($_SESSION['permisos'][MESTRUCTURA]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa-solid fa-building-circle-check" aria-hidden="true"></i> -->
                         <span class="app-menu__label">MODELACION FINANCIERA</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/capitulos"> Capítulos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/grupos"> Grupos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/subgrupos"> SubGrupos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/conceptos"> Conceptos</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/auxiliares"> Auxiliares</a></li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <span class="app-menu__label">VARIABLES</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/capitulos"> Capítulos</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/grupos"> Grupos</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/subgrupos"> SubGrupos</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/conceptos"> Conceptos</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/auxiliares"> Auxiliares</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <span class="app-menu__label">MOVIMIENTOS</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/"> Carga Modelo Inicial</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/"> Registro Ejecucion</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview">
+                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                <span class="app-menu__label">REPORTES</span>
+                                <i class="treeview-indicator fa fa-angle-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                            <li><a class="treeview-item" href="<?= base_url(); ?>/"> Modelo Inicial por Rangos</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/"> Ejecucion por Rangos</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/"> Modelo Vs Ejecucion</a></li>
+                            </ul>
+                        </li>
+                        <!--                         <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"> Tipos de Actas</a></li> -->
+                    </ul>
+
+
+
+
+                    <ul class="treeview-menu">
+
                     </ul>
                 </li>
             <?php } ?>
@@ -148,7 +226,7 @@
             <?php if (!empty($_SESSION['permisos'][MGENERALES]['reaPermiso'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-<!--                         <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                        <!--                         <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
                         <span class="app-menu__label">PARAMETROS GENERALES</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -162,7 +240,7 @@
 
             <li>
                 <a class="app-menu__item" href="<?= base_url(); ?>/logout">
-<!--                     <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i> -->
+                    <!--                     <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i> -->
                     <span class="app-menu__label">CERRAR SESION</span>
                 </a>
             </li>
