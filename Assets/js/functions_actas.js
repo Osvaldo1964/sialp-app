@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
         ],
         "columnDefs": [
             { 'className': "textleft", "targets": [1, 2] },
-            { 'className': "textright", "targets": [0,6] },
+            { 'className': "textright", "targets": [0, 6] },
             { 'className': "textcenter", "targets": [3] },
         ],
         'dom': 'lBfrtip',
@@ -221,16 +221,32 @@ window.addEventListener('load', function () {
         }
     }
 
+    /*     var select = document.getElementById("listClase");
+    
+        select.addEventListener("change", function () {
+            alert('sasas');
+            var selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.value == 1) {
+                alert('sasas');
+                document.getElementById("listMaterial").prop("disabled", true);
+            } else if (selectedOption.value == 2) {
+                document.getElementById("listMaterial").prop("disabled", false);
+            }
+        });
+     */
     var select = document.getElementById("listClase");
- 
-    select.addEventListener("blur", function(){
-      var selectedOption = this.options[this.selectedIndex];
-      if (selectedOption.value == 1) {
-        alert('sasas');
-        document.querySelector("#listMaterial").disabled = true;
-      }else if (selectedOption.value == 3) {
-        document.querySelector("#listMaterial").disabled = false;
-      }
+
+    select.addEventListener("change", function () {
+        var selectedOption = this.options[this.selectedIndex];
+        var material = document.querySelector("listMaterial");
+        if (selectedOption.value == 1) {
+            alert('sasas');
+            material.removeAttribute("disabled", "false");
+            alert(material);
+        } else if (selectedOption.value == 2) {
+            material.setAttribute("disabled", "false");
+        }
+        console.log("Option selected: " + selectedOption.value);
     });
 
     fntRecursos();
@@ -242,7 +258,7 @@ window.addEventListener('load', function () {
     fntItemactas()
 })
 
-function cambioGrupo(event){
+function cambioGrupo(event) {
     var selectedOption = event.target.options[event.target.selectedIndex];
     grupo = selectedOption.value;
     fntItems(grupo);
@@ -520,7 +536,7 @@ function fntGrupos() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 document.querySelector('#listGrupos').innerHTML = request.responseText;
-                
+
                 $('#listGrupos').selectpicker('render');
             }
         }

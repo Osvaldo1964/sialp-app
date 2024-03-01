@@ -224,7 +224,7 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="listMaterial">Material</label>
-                                    <select class="form-control selectpicker" id="listMaterial" name="listMaterial">
+                                    <select class="form-control selectpicker" id="listMaterial" name="listMaterial" enabled>
                                         <option value="1">Concreto</option>
                                         <option value="2">Madera</option>
                                         <option value="3">Aluminio</option>
