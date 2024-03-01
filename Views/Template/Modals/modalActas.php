@@ -153,12 +153,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <label for="listMaterial">Material</label>
-                                <select class="form-control selectpicker" id="listMaterial" name="listMaterial" required>
-                                    <option value="1">Concreto</option>
-                                    <option value="2">Madera</option>
-                                    <option value="3">Aluminio</option>
-                                </select>
+                                <div class="form-group col-md-3">
+                                    <label for="listClase">Clase UCAP</label>
+                                    <select class="form-control selectpicker" id="listClase" name="listClase" required>
+                                        <option value="1">Luminaria</option>
+                                        <option value="2">Postes</option>
+                                        <option value="3">Transformador</option>
+                                        <option value="4">Red</option>
+                                    </select>
+                                </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Código </label>
                                     <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código" required="">
@@ -203,24 +206,38 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-2">
-                                    <label for="listItems">Tecnologia </label>
-                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
+                                    <label for="listTecno">Tecnología</label>
+                                    <select class="form-control selectpicker" id="listTecno" name="listTecno" required>
+                                        <option value="1">SODIO</option>
+                                        <option value="2">LED</option>
+                                        <option value="3">OTRO</option>
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="listItems">Potencia </label>
-                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
+                                    <label for="listPotencia">Potencia</label>
+                                    <select class="form-control selectpicker" id="listPotencia" name="listPotencia" required>
+                                        <option value="1">40w</option>
+                                        <option value="2">60w</option>
+                                        <option value="3">110w</option>
+                                    </select>
+
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="listMaterial">Material</label>
-                                    <select class="form-control selectpicker" id="listMaterial" name="listMaterial" required>
+                                    <select class="form-control selectpicker" id="listMaterial" name="listMaterial">
                                         <option value="1">Concreto</option>
                                         <option value="2">Madera</option>
                                         <option value="3">Aluminio</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-">
-                                    <label for="listItems">Altura </label>
-                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
+                                    <label for="listAltura">Altura</label>
+                                    <select class="form-control selectpicker" id="listAltura" name="listAltura" required>
+                                        <option value="1">4 Mts</option>
+                                        <option value="2">5 Mts</option>
+                                        <option value="3">6 Mts</option>
+                                    </select>
+
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="control-label">Valor </label>

@@ -221,6 +221,17 @@ window.addEventListener('load', function () {
         }
     }
 
+    var select = document.getElementById("listClase");
+ 
+    select.addEventListener("blur", function(){
+      var selectedOption = this.options[this.selectedIndex];
+      if (selectedOption.value == 1) {
+        alert('sasas');
+        document.querySelector("#listMaterial").disabled = true;
+      }else if (selectedOption.value == 3) {
+        document.querySelector("#listMaterial").disabled = false;
+      }
+    });
 
     fntRecursos();
     fntInputFile();
