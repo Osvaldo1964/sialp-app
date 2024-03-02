@@ -234,20 +234,23 @@ window.addEventListener('load', function () {
             }
         });
      */
-    var select = document.getElementById("listClase");
-
-    select.addEventListener("change", function () {
+/*     var selectClase = document.getElementById("listClase");
+    //var selectMaterial = document.getElementsByClassName("listMaterial");
+    var selectMaterial = document.getElementById("listMaterial");
+    selectClase.addEventListener("change", function () {
         var selectedOption = this.options[this.selectedIndex];
-        var material = document.querySelector("listMaterial");
         if (selectedOption.value == 1) {
-            alert('sasas');
-            material.removeAttribute("disabled", "false");
-            alert(material);
+            alert('apagado');
+            selectMaterial.setAttribute("disabled");
         } else if (selectedOption.value == 2) {
-            material.setAttribute("disabled", "false");
+            alert('libre');
+            selectMaterial.removeAttribute("disabled");
+            selectMaterial.selectedIndex = 0;
+            selectMaterial.value = 0;
         }
+
         console.log("Option selected: " + selectedOption.value);
-    });
+    }); */
 
     fntRecursos();
     fntInputFile();
@@ -257,6 +260,27 @@ window.addEventListener('load', function () {
     fntUsos();
     fntItemactas()
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+    var selectElement = document.getElementById('listClase');
+    selectElement.addEventListener('change', function() {
+        var selectedValue = selectElement.value;
+        if(selectedValue == 1){
+            document.getElementById('listTecno').setAttribute('disabled', 'false;');
+            document.getElementById('listPotencia').setAttribute('disabled', 'false;');
+            document.getElementById('listMaterial').setAttribute('disabled', 'true;');
+            document.getElementById('listAltura').setAttribute('disabled', 'true;');
+        }if(selectedValue == 2){
+            document.getElementById('listTecno').setAttribute('disabled', 'true;');
+            document.getElementById('listPotencia').setAttribute('disabled', 'true;');
+            document.getElementById('listMaterial').setAttribute('disabled', 'false;');
+            document.getElementById('listAltura').removeAttribute('disabled', 'false;');
+        }if(selectedValue == 3){
+/*             document.getElementById('Evento2').setAttribute('disabled', 'true;');
+            document.getElementById('Evento3').removeAttribute('disabled', 'true;');
+ */        }
+    });
+});
 
 function cambioGrupo(event) {
     var selectedOption = event.target.options[event.target.selectedIndex];
