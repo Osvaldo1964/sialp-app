@@ -265,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var selectElement = document.getElementById('listClase');
     selectElement.addEventListener('change', function() {
         var selectedValue = selectElement.value;
+        alert(selectedValue);
         if(selectedValue == 1){
             document.getElementById('listTecno').setAttribute('disabled', 'false;');
             document.getElementById('listPotencia').setAttribute('disabled', 'false;');
