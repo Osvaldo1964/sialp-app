@@ -2,14 +2,16 @@
 class ElementosModel extends Mysql
 {
     private $intidElemento;
-    private $intgruElemento;
-    private $intiteElemento;
+    private $intclaElemento;
     private $strcodElemento;
+    private $strdetElemento;
+    private $strdesElemento;
+    private $strdirElemento;
     private $intrecElemento;
     private $intusoElemento;
-    private $strdesElemento;
-    private $strdetElemento;
-    private $strdirElemento;
+    private $inttecElemento;
+    private $intmatElemento;
+    private $intaltElemento;
     private $fltlatElemento;
     private $fltlonElemento;
     private $strrutElemento;
@@ -24,19 +26,21 @@ class ElementosModel extends Mysql
         parent::__construct();
     }
 
-    public function insertElemento(int $grupo, int $item, string $codigo, int $recurso, int $uso, string $descripcion,
-                                   string $detalle, string $direccion, float $latitud, float $longitud, string $ruta,
-                                   string $actaini, float $valor, int $estado)
+    public function insertElemento(int $clase, string $codigo, string $detalle, string $descripcion, string $direccion,
+                                   int $recurso, int $uso, int $tecnologia, int $material, int $altura, float $latitud,
+                                   float $longitud, string $ruta, string $actaini, float $valor, int $estado)
     {
         $return = 0;
-        $this->intgruElemento = $grupo;
-        $this->intiteElemento = $item;
+        $this->intclaElemento = $clase;
         $this->strcodElemento = $codigo;
+        $this->strdetElemento = $detalle;
+        $this->strdesElemento = $descripcion;
+        $this->strdirElemento = $direccion;
         $this->intrecElemento = $recurso;
         $this->intusoElemento = $uso;
-        $this->strdesElemento = $descripcion;
-        $this->strdetElemento = $detalle;
-        $this->strdirElemento = $direccion;
+        $this->inttecElemento = $tecnologia;
+        $this->intmatElemento = $material;
+        $this->intaltElemento = $altura;
         $this->fltlatElemento = $latitud;
         $this->fltlonElemento = $longitud;
         $this->strrutElemento = $ruta;
@@ -49,12 +53,12 @@ class ElementosModel extends Mysql
         $this->select_all($sql);
         $request = $this->select_all($sql);
         if (empty($request)) {
-            $query_insert = "INSERT INTO elementos (gruElemento, iteElemento, codElemento, recElemento, usoElemento,
-                            desElemento, detElemento, dirElemento, latElemento, lonElemento, rutElemento, ainElemento, valElemento, estElemento)
-                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $query_insert = "INSERT INTO elementos (claElemento, codElemento, detElemento, desElemento, dirElemento, recElemento, usoElemento,
+                            tecElemento, matElemento, altElemento, latElemento, lonElemento, rutElemento, ainElemento, valElemento, estElemento)
+                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $arrData = array(
-                $this->intgruElemento, $this->intiteElemento, $this->strcodElemento, $this->intrecElemento, $this->intusoElemento,
-                $this->strdesElemento, $this->strdirElemento, $this->strdetElemento, $this->fltlatElemento, $this->fltlonElemento,
+                $this->intclaElemento, $this->strcodElemento, $this->strdetElemento, $this->strdesElemento, $this->strdirElemento, $this->intrecElemento,
+                $this->intusoElemento, $this->inttecElemento, $this->intmatElemento, $this->intaltElemento, $this->fltlatElemento, $this->fltlonElemento,
                 $this->strrutElemento, $this->strainElemento, $this->fltvalElemento, $this->intestElemento
             );
             $request_insert = $this->insert($query_insert, $arrData);
@@ -67,13 +71,17 @@ class ElementosModel extends Mysql
 
     public function selectElementos()
     {
-        $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento, e.codElemento, e.recElemento, e.usoElemento, e.desElemento,
-                g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.detElemento, e.latElemento, e.lonElemento,
-                e.ainElemento, e.abaElemento, e.valElemento, e.estElemento, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa
+        $sql = "SELECT e.idElemento, e.claElemento, e.codElemento, e.detElemento, e.desElemento, e.dirElemento, e.recElemento, r.desRecurso as desRecurso, e.usoElemento, u.desTipouso as desTipouso,
+                c.desClase as desClase, e.tecElemento, t.desTecno as desTecno, e.matElemento, m.desMaterial as desMaterial, e.altElemento, l.desAltura as desAltura, 
+                e.latElemento, e.lonElemento, e.ainElemento, e.abaElemento, e.valElemento, e.estElemento, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa
                 FROM elementos e
                 INNER JOIN actas a ON e.ainElemento = a.idActa
-                INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
-                INNER JOIN itemsalp i ON e.iteElemento = i.idItem
+                INNER JOIN clases c ON e.claElemento = c.idClase
+                LEFT JOIN tecnologias t ON e.tecElemento = t.idTecno
+                LEFT JOIN materiales m ON e.matElemento = m.idMaterial
+                LEFT JOIN alturas l ON e.altElemento = l.idAltura
+                LEFT JOIN recursos r ON e.recElemento = r.idRecurso
+                LEFT JOIN tiposuso u ON e.usoElemento = u.idTipouso
                 WHERE estElemento != 0";
         $request = $this->select_all($sql);
         return $request;
@@ -82,33 +90,37 @@ class ElementosModel extends Mysql
     public function selectElemento(int $idElemento)
     {
         $this->intidElemento = $idElemento;
-        $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento,  e.codElemento, e.recElemento, e.usoElemento, e.desElemento,
-                g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.detElemento, e.latElemento, e.lonElemento, e.ainElemento, 
-                e.abaElemento, e.valElemento, e.estElemento, r.desRecurso as desRecurso, u.desTipouso, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa
+        $sql = "SELECT e.idElemento, e.claElemento, e.codElemento, e.detElemento, e.desElemento, e.dirElemento, e.recElemento, r.desRecurso as desRecurso, e.usoElemento, u.desTipouso as desTipouso,
+                c.desClase as desClase, e.tecElemento, t.desTecno as desTecno, e.matElemento, m.desMaterial as desMaterial, e.altElemento, l.desAltura as desAltura, 
+                e.latElemento, e.lonElemento, e.ainElemento, e.abaElemento, e.valElemento, e.estElemento, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa
                 FROM elementos e
                 INNER JOIN actas a ON e.ainElemento = a.idActa
-                INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
-                INNER JOIN itemsalp i ON e.iteElemento = i.idItem
-                INNER JOIN recursos r ON e.recElemento = r.idRecurso
-                INNER JOIN tiposuso u ON e.usoElemento = u.idTipouso
+                INNER JOIN clases c ON e.claElemento = c.idClase
+                LEFT JOIN tecnologias t ON e.tecElemento = t.idTecno
+                LEFT JOIN materiales m ON e.matElemento = m.idMaterial
+                LEFT JOIN alturas l ON e.altElemento = l.idAltura
+                LEFT JOIN recursos r ON e.recElemento = r.idRecurso
+                LEFT JOIN tiposuso u ON e.usoElemento = u.idTipouso
                 WHERE idElemento = $this->intidElemento";
         $request = $this->select_all($sql);
         return $request;
     }
 
-    public function updateElemento(int $idElemento, int $grupo, int $item, string $codigo, int $recurso, int $uso,
-                                    string $descripcion, string $detalle, string $direccion, float $latitud, float $longitud, string $ruta,
-                                    string $actaini, string $factaini, string $actafin, string $factaffi, float $valor, int $estado)
+    public function updateElemento(int $idElemento, int $clase, string $codigo, string $detalle, string $descripcion, string $direccion,
+                                    int $recurso, int $uso, int $tecnologia, int $material, int $altura, float $latitud, float $longitud,
+                                    string $ruta, string $actaini, string $actafin, float $valor, int $estado)
     {
         $this->intidElemento  = $idElemento;
-        $this->intgruElemento = $grupo;
-        $this->intiteElemento = $item;
+        $this->intclaElemento = $clase;
         $this->strcodElemento = $codigo;
+        $this->strdetElemento = $detalle;
+        $this->strdesElemento = $descripcion;
+        $this->strdirElemento = $direccion;
         $this->intrecElemento = $recurso;
         $this->intusoElemento = $uso;
-        $this->strdesElemento = $descripcion;
-        $this->strdetElemento = $detalle;
-        $this->strdirElemento = $direccion;
+        $this->inttecElemento = $tecnologia;
+        $this->intmatElemento = $material;
+        $this->intaltElemento = $altura;
         $this->fltlatElemento = $latitud;
         $this->fltlonElemento = $longitud;
         $this->strrutElemento = $ruta;
@@ -120,15 +132,13 @@ class ElementosModel extends Mysql
         $sql = "SELECT * FROM elementos WHERE codElemento = '{$this->strcodElemento}' AND idElemento != $this->intidElemento";
         $request = $this->select_all($sql);
         if (empty($request)) {
-            $sql = "UPDATE elementos SET gruElemento = ?, iteElemento = ?, codElemento = ?, recElemento = ?, usoElemento = ?,
-                    desElemento = ?, detElemento = ?, dirElemento = ?, latElemento = ?, lonElemento = ?, rutElemento = ?, ainElemento = ?,
-                    finElemento = abaElemento = ?,  valElemento = ?, estElemento = ?
+            $sql = "UPDATE elementos SET claElemento = ?,  codElemento = ?, detElemento = ?, desElemento = ?, dirElemento = ?, recElemento = ?, usoElemento = ?,
+                    tecElemento = ?, matElemento = ?, altElemento = ?, latElemento = ?, lonElemento = ?, rutElemento = ?, ainElemento = ?,
+                    abaElemento = ?,  valElemento = ?, estElemento = ?
                     WHERE idElemento = $this->intidElemento";
-            $arrData = array(
-                $this->intgruElemento, $this->intiteElemento, $this->strcodElemento, $this->intrecElemento, $this->intusoElemento,
-                $this->strdesElemento, $this->strdetElemento, $this->strdirElemento, $this->fltlatElemento, $this->fltlonElemento,
-                $this->strrutElemento, $this->strainElemento, $this->strabaElemento, $this->fltvalElemento, $this->intestElemento
-            );
+            $arrData = array($this->intclaElemento, $this->strcodElemento, $this->strdetElemento, $this->strdesElemento, $this->strdirElemento, $this->intrecElemento,
+                $this->intusoElemento, $this->inttecElemento, $this->intmatElemento, $this->intaltElemento, $this->fltlatElemento, $this->fltlonElemento,
+                $this->strrutElemento, $this->strainElemento, $this->strabaElemento, $this->fltvalElemento, $this->intestElemento);
             $request = $this->update($sql, $arrData);
             $return = $request;
         } else {

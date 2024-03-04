@@ -26,11 +26,11 @@
 			$total = $request['total']; 
 			return $total;
 		}
-		public function cantElementosGrupo(){
-			$sql = "SELECT e.gruElemento, g.desGruposalp, COUNT(e.gruElemento) as total
+		public function cantElementosClase(){
+			$sql = "SELECT e.claElemento, c.desClase, COUNT(e.claElemento) as total
 			FROM elementos e
-			INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
-			WHERE estElemento != 0 GROUP BY e.gruElemento, g.desGruposalp";
+			INNER JOIN clases c ON e.claElemento = c.idClase
+			WHERE estElemento != 0 GROUP BY e.claElemento, c.desClase";
 			$ucaps = $this->select_all($sql);
 			//$arrData = array('grafica' => 'ucapsGrupo', 'grupos' => $ucaps);
 			return $ucaps;

@@ -155,35 +155,31 @@
             </div>
             <div class="modal-body">
                 <table class="table table-bordered">
-                    <tbody>
+                    <tbody style="text-align: left;">
                         <tr>
-                            <td>Acta Ingreso:</td>
+                            <td class="col-md-3">Acta Ingreso:</td>
                             <td id="celactElemento">73111404</td>
                         </tr>
                         <tr>
-                            <td>Fecha Ingreso:</td>
+                            <td class="col-md-3">Fecha Ingreso:</td>
                             <td id="celingElemento">73111404</td>
                         </tr>
                         <tr>
-                            <td>Grupo:</td>
-                            <td id="celgruElemento">73111404</td>
-                        </tr>
-                        <tr>
-                            <td>Item:</td>
-                            <td id="celiteElemento">73111404</td>
+                            <td>Clase UCAP:</td>
+                            <td id="celclaElemento">73111404</td>
                         </tr>
                         <tr>
                             <td>Código:</td>
                             <td id="celcodElemento">73111404</td>
                         </tr>
                         <tr>
-                            <td>Detalles:</td>
-                            <td id="celdesElemento">73111404</td>
+                            <td>Descripción:</td>
+                            <td id="celdetElemento">73111404</td>
                         </tr>
                         <tr>
                             <td>Dirección:</td>
                             <td id="celdirElemento">73111404</td>
-                        </tr
+                        </tr>
                         <tr>
                             <td>Latitud:</td>
                             <td id="cellatElemento">73111404</td>

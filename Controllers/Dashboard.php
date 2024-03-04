@@ -21,7 +21,7 @@
             $data['page_functions_js'] = "functions_dashboard.js";
 			$data['usuarios'] = $this->model->cantUsuarios();
 			$data['elementos'] = $this->model->cantElementos();
-			$data['grupos'] = $this->model->cantElementosGrupo();
+			$data['clases'] = $this->model->cantElementosClase();
 			$anio = date('Y');
 			$mes = date('m');
 			$data['pqrs'] = $this->model->cantPqrs($anio,$mes);

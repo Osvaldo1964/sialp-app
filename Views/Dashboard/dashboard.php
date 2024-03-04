@@ -147,8 +147,8 @@ Highcharts.chart('cantPqrs', {
       colorByPoint: true,
       data: [
         <?php
-        foreach ($data['grupos'] as $pagos) {
-          echo "{name:'" . $pagos['desGruposalp'] . "',y:" . $pagos['total'] . "},";
+        foreach ($data['clases'] as $pagos) {
+          echo "{name:'" . $pagos['desClase'] . "',y:" . $pagos['total'] . "},";
         }
         ?>
       ]

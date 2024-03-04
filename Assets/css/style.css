@@ -161,7 +161,7 @@
 
 .prevImage{
     border: 1px solid #CCC;
-    /*width: 120px;*/
+    width: 120px;
     height: 148px;
     display: flex;
     justify-content: center;

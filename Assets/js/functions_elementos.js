@@ -22,9 +22,9 @@ window.addEventListener('load', function () {
         },
         "columns": [
             { "data": "idElemento" },
-            { "data": "desGrupo" },
-            { "data": "desItem" },
+            { "data": "desClase" },
             { "data": "codElemento" },
+            { "data": "detElemento" },
             { "data": "numActa" },
             { "data": "fecActa" },
             { "data": "estElemento" },
@@ -219,7 +219,7 @@ function fntInputFile() {
                         if (request.status == 200) {
                             let objData = JSON.parse(request.responseText);
                             if (objData.status) {
-                                prevImg.innerHTML = `<img src="${objeto_url}">`;
+                                prevImg.innerHTML = `<img src="${objeto_url}"> clases="prvImage"`;
                                 document.querySelector("#" + parentId + " .btnDeleteImage").setAttribute("imgname", objData.imgname);
                                 document.querySelector("#" + parentId + " .btnUploadfile").classList.add("notblock");
                                 document.querySelector("#" + parentId + " .btnDeleteImage").classList.remove("notblock");
@@ -274,10 +274,9 @@ function fntViewInfo(idElemento) {
                     '<span class="badge badge-danger">Inactivo</span>';
                 document.querySelector('#celactElemento').innerHTML = objElemento[0]['numActa'];
                 document.querySelector('#celingElemento').innerHTML = objElemento[0]['fecActa'];    
-                document.querySelector('#celgruElemento').innerHTML = objElemento[0]['desGrupo'];
-                document.querySelector('#celiteElemento').innerHTML = objElemento[0]['desItem'];
+                document.querySelector('#celclaElemento').innerHTML = objElemento[0]['desClase'];
                 document.querySelector('#celcodElemento').innerHTML = objElemento[0]['codElemento'];
-                document.querySelector('#celdesElemento').innerHTML = objElemento[0]['desElemento'];
+                document.querySelector('#celdetElemento').innerHTML = objElemento[0]['detElemento'];
                 document.querySelector('#celdirElemento').innerHTML = objElemento[0]['dirElemento'];
                 document.querySelector('#cellatElemento').innerHTML = objElemento[0]['latElemento'];
                 document.querySelector('#cellonElemento').innerHTML = objElemento[0]['lonElemento'];
@@ -315,8 +314,7 @@ function fntEditInfo(element, idElemento) {
                 let htmlImage = "";
                 let objElemento = objData.data;
                 document.querySelector("#idElemento").value = objElemento[0].idElemento;
-                document.querySelector("#listGrupos").value = objElemento[0].gruElemento;
-                document.querySelector("#listItems").value = objElemento[0].iteElemento;
+                document.querySelector("#listClase").value = objElemento[0].claElemento;
                 document.querySelector("#listRecursos").value = objElemento[0].recElemento;
                 document.querySelector("#listUsos").value = objElemento[0].usoElemento;
                 document.querySelector("#txtcodElemento").value = objElemento[0].codElemento;

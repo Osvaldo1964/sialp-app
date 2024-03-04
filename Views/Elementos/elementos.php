@@ -25,9 +25,9 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Grupo</th>
-                                    <th>Subgrupo</th>
+                                    <th>Clase</th>
                                     <th>Código</th>
+                                    <th>Descripción</th>
                                     <th>Acta Ingreso</th>
                                     <th>Fecha Ingreso</th>
                                     <th>Estado</th>

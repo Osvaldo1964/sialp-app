@@ -67,8 +67,7 @@
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a class="treeview-item" href="<?= base_url(); ?>/grupossalp"> Grupos UCAPs</a></li>
-                                <li><a class="treeview-item" href="<?= base_url(); ?>/items"> Subgrupos UCAPs</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Elementos UCAPs</a></li>
                             </ul>
                         </li>
                         <li class="treeview">

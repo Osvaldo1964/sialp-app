@@ -221,65 +221,35 @@ window.addEventListener('load', function () {
         }
     }
 
-    /*     var select = document.getElementById("listClase");
-    
-        select.addEventListener("change", function () {
-            alert('sasas');
-            var selectedOption = this.options[this.selectedIndex];
-            if (selectedOption.value == 1) {
-                alert('sasas');
-                document.getElementById("listMaterial").prop("disabled", true);
-            } else if (selectedOption.value == 2) {
-                document.getElementById("listMaterial").prop("disabled", false);
-            }
-        });
-     */
-/*     var selectClase = document.getElementById("listClase");
-    //var selectMaterial = document.getElementsByClassName("listMaterial");
-    var selectMaterial = document.getElementById("listMaterial");
-    selectClase.addEventListener("change", function () {
-        var selectedOption = this.options[this.selectedIndex];
-        if (selectedOption.value == 1) {
-            alert('apagado');
-            selectMaterial.setAttribute("disabled");
-        } else if (selectedOption.value == 2) {
-            alert('libre');
-            selectMaterial.removeAttribute("disabled");
-            selectMaterial.selectedIndex = 0;
-            selectMaterial.value = 0;
-        }
-
-        console.log("Option selected: " + selectedOption.value);
-    }); */
-
     fntRecursos();
     fntInputFile();
     fntInputPdf();
-    fntGrupos();
-    fntItems(1);
+    fntClases();
+    fntPotencias();
+    fntMateriales();
+    fntAlturas();
     fntUsos();
     fntItemactas()
 })
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var selectElement = document.getElementById('listClase');
-    selectElement.addEventListener('change', function() {
+    selectElement.addEventListener('change', function () {
         var selectedValue = selectElement.value;
-        alert(selectedValue);
-        if(selectedValue == 1){
-            document.getElementById('listTecno').setAttribute('disabled', 'false;');
-            document.getElementById('listPotencia').setAttribute('disabled', 'false;');
-            document.getElementById('listMaterial').setAttribute('disabled', 'true;');
-            document.getElementById('listAltura').setAttribute('disabled', 'true;');
-        }if(selectedValue == 2){
-            document.getElementById('listTecno').setAttribute('disabled', 'true;');
-            document.getElementById('listPotencia').setAttribute('disabled', 'true;');
-            document.getElementById('listMaterial').setAttribute('disabled', 'false;');
-            document.getElementById('listAltura').removeAttribute('disabled', 'false;');
-        }if(selectedValue == 3){
-/*             document.getElementById('Evento2').setAttribute('disabled', 'true;');
-            document.getElementById('Evento3').removeAttribute('disabled', 'true;');
- */        }
+
+        if (selectedValue == 1) {
+            document.querySelector("#divTecno").classList.remove("notblock");
+            document.querySelector("#divPotencia").classList.remove("notblock");
+            document.querySelector("#divMaterial").classList.add("notblock");
+            document.querySelector("#divAltura").classList.add("notblock");
+        }
+        if(selectedValue == 2){
+            document.querySelector("#divTecno").classList.add("notblock");
+            document.querySelector("#divPotencia").classList.add("notblock");
+            document.querySelector("#divMaterial").classList.remove("notblock");
+            document.querySelector("#divAltura").classList.remove("notblock");
+        } if (selectedValue == 3) {
+        }
     });
 });
 
@@ -552,17 +522,17 @@ function fntDelInfo(idActa) {
 }
 
 // Registro Elementos al Acta
-function fntGrupos() {
-    if (document.querySelector('#listGrupos')) {
-        let ajaxUrl = base_url + '/Grupossalp/getSelectGruposalp';
+function fntClases() {
+    if (document.querySelector('#listClase')) {
+        let ajaxUrl = base_url + '/Clases/getSelectClases';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listGrupos').innerHTML = request.responseText;
-
-                $('#listGrupos').selectpicker('render');
+                document.querySelector('#listClase').innerHTML = request.responseText;
+                //document.querySelector("#listClase").selectElement.value = 1;
+                $('#listClase').selectpicker('render');
             }
         }
     }

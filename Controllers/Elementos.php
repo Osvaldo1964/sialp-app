@@ -89,13 +89,13 @@ class Elementos extends Controllers
     public function setElementoadd()
     {
         if ($_POST) {
-            if (empty($_POST['txtdirElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listGrupos']) 
+            if (empty($_POST['txtdirElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listClase']) 
             || empty($_POST['listestElemento']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $intgruElemento = intval($_POST['listGrupos']);
-                $intiteElemento = intval($_POST['listItems']);
+                $intgruElemento = intval($_POST['listClase']);
+                $intiteElemento = intval($_POST['listPotencia']);
                 $strcodElemento = strClean($_POST['txtcodElemento']);
                 $intrecElemento = intval($_POST['listRecursosadd']);
                 $intusoElemento = intval($_POST['listUsos']);

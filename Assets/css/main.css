@@ -16738,3 +16738,5 @@ be a descendant of the grid when it is being dragged.
 .user .user-settings label {
   color: #666;
 }
+
+#prvimg { width: 500px; height: 300px; }
