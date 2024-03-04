@@ -10,7 +10,7 @@ $(document).on('focusin', function (e) {
 });
 
 window.addEventListener('load', function () {
-    tableACtas = $('#tableActas').dataTable({
+    tableActas = $('#tableActas').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
@@ -225,11 +225,12 @@ window.addEventListener('load', function () {
     fntInputFile();
     fntInputPdf();
     fntClases();
+    fntTecnologias();
     fntPotencias();
     fntMateriales();
     fntAlturas();
     fntUsos();
-    fntItemactas()
+    fntItemactas();
 })
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -312,7 +313,7 @@ function fntInputFile() {
     let inputUploadfile = document.querySelectorAll(".inputUploadfile");
     inputUploadfile.forEach(function (inputUploadfile) {
         inputUploadfile.addEventListener('change', function () {
-            let idActa = document.querySelector("#idActa").value;
+            let idElemento = document.querySelector("#idElemento").value;
             let parentId = this.parentNode.getAttribute("id");
             let idFile = this.getAttribute("id");
             let uploadFoto = document.querySelector("#" + idFile).value;
@@ -330,9 +331,9 @@ function fntInputFile() {
                     let objeto_url = nav.createObjectURL(this.files[0]);
                     prevImg.innerHTML = `<img class="loading" src="${base_url}/Assets/images/loading.svg" >`;
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                    let ajaxUrl = base_url + '/Actas/setImage';
+                    let ajaxUrl = base_url + '/Elementos/setImage';
                     let formData = new FormData();
-                    formData.append('actImagen', idActa);
+                    formData.append('idElemento', idElemento);
                     formData.append("foto", this.files[0]);
                     request.open("POST", ajaxUrl, true);
                     request.send(formData);
@@ -530,26 +531,76 @@ function fntClases() {
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listClase').innerHTML = request.responseText;
-                //document.querySelector("#listClase").selectElement.value = 1;
+                document.querySelector('#listClase').innerHTML = '<option value="0" selected>Seleccione</option>';
+                document.querySelector('#listClase').innerHTML += request.responseText;
                 $('#listClase').selectpicker('render');
             }
         }
     }
 }
 
-function fntItems(idgrupo) {
-    if (document.querySelector('#listItems')) {
-        let ajaxUrl = base_url + '/Items/getSelectItems/' + idgrupo;
+function fntTecnologias() {
+    if (document.querySelector('#listTecno')) {
+        let ajaxUrl = base_url + '/Tecnologias/getSelectTecnologias/';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
-                document.querySelector('#listItems').innerHTML = request.responseText;
+                document.querySelector('#listTecno').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
-                $('#listItems').selectpicker('render');
+                $('#listTecno').selectpicker('render');
+            }
+        }
+    }
+}
+
+function fntPotencias() {
+    if (document.querySelector('#listPotencia')) {
+        let ajaxUrl = base_url + '/Potencias/getSelectPotencias/';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                itemtemp = request.responseText;
+                document.querySelector('#listPotencia').innerHTML = request.responseText;
+                $('#listPotencia').selectpicker('render');
+            }
+        }
+    }
+}
+
+function fntMateriales() {
+    if (document.querySelector('#listMaterial')) {
+        let ajaxUrl = base_url + '/Materiales/getSelectMateriales/';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                itemtemp = request.responseText;
+                document.querySelector('#listMaterial').innerHTML = request.responseText;
+                //document.querySelector("#listItems").value = selectedOptions[0].text;
+                $('#listMaterial').selectpicker('render');
+            }
+        }
+    }
+}
+
+function fntAlturas() {
+    if (document.querySelector('#listAltura')) {
+        let ajaxUrl = base_url + '/Alturas/getSelectAlturas/';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                itemtemp = request.responseText;
+                document.querySelector('#listAltura').innerHTML = request.responseText;
+                //document.querySelector("#listItems").value = selectedOptions[0].text;
+                $('#listAltura').selectpicker('render');
             }
         }
     }

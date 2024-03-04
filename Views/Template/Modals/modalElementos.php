@@ -10,99 +10,94 @@
             <div class="modal-body">
                 <form id="formElemento" name="formElemento" class="form-horizontal">
                     <input type="hidden" id="idElemento" name="idElemento" value="">
-                    <p class="text-primary">Todos los campos con (<span class="required">*</span>) son obligatorios</p>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label">Código </label>
-                                <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código de barra" required="">
-                                <br>
-                                <div id="divBarCode" class="notblock textcenter">
-                                    <div id="printCode">
-                                        <svg id="barcode"></svg>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="listClase">Clase </label>
+                                    <select class="form-control" data-live-search="true" id="listClase" name="listClase" disabled></select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Código </label>
+                                    <input class="form-control" id="txtcodElemento" name="txtcodElemento" type="text" placeholder="Código" disabled>
+                                    <br>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div id="divBarCode" class="notblock textcenter">
+                                        <div id="printCode">
+                                            <svg id="barcode"></svg>
+                                        </div>
+                                        <button class="btn btn-success btn-sm" type="button" onClick="fntPrintBarcode('#printCode')"><i class="fas fa-print"></i> Imprimir</button>
                                     </div>
-                                    <button class="btn btn-success btn-sm" type="button" onClick="fntPrintBarcode('#printCode')"><i class="fas fa-print"></i> Imprimir</button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Latitud </label>
-                                    <input class="form-control" id="fltlatElemento" name="fltlatElemento" type="text" placeholder="" required="">
+                                    <label class="control-label">Descripción</label>
+                                    <input type="text" class="form-control" id="txtdetElemento" name="txtdetElemento" disabled></textarea>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Longitud </label>
-                                    <input class="form-control" id="fltlonElemento" name="fltlonElemento" type="text" placeholder="" required="">
+                                    <label class="control-label">Dirección</label>
+                                    <input type="text" class="form-control" id="txtdirElemento" name="txtdirElemento" disabled></textarea>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label for="listRecursos">Origen Recurso </label>
-                                    <select class="form-control" data-live-search="true" id="listRecursos" name="listRecursos" required=""></select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label for="listUsos">Clase de Iluminación </label>
-                                    <select class="form-control" data-live-search="true" id="listUsos" name="listUsos" required=""></select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="listGrupos">Grupo </label>
-                                    <select class="form-control" data-live-search="true" id="listGrupos" name="listGrupos" required=""></select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="listItems">SubGrupo </label>
-                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="listestElemento">Estado</label>
-                                    <select class="form-control selectpicker" id="listestElemento" name="listestElemento" required>
-                                        <option value="1">Activo</option>
-                                        <option value="2">Inactivo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <button id="btnActionForm" class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <button class="btn btn-danger btn-lg btn-block" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Descripción Elemento</label>
                                     <textarea class="form-control" id="txtdesElemento" name="txtdesElemento"></textarea>
                                 </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Latitud </label>
+                                    <input class="form-control" id="fltlatElemento" name="fltlatElemento" type="text" placeholder="" disabled>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Longitud </label>
+                                    <input class="form-control" id="fltlonElemento" name="fltlonElemento" type="text" placeholder="" disabled>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label">Dirección</label>
-                                    <input type="text" class="form-control" id="txtdirElemento" name="txtdirElemento"></textarea>
-                                </div>
-                                <hr>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Acta Ingreso</label>
-                                    <input type="text" class="form-control" id="txtainElemento" name="txtainElemento"></textarea>
+                                    <label for="listRecursos">Origen Recurso </label>
+                                    <select class="form-control" data-live-search="true" id="listRecursos" name="listRecursos" disabled></select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Fecha Ingreso</label>
-                                    <input type="text" class="form-control" id="txtfinElemento" name="txtfinElemento"></textarea>
+                                    <label for="listUsos">Clase de Iluminación </label>
+                                    <select class="form-control" data-live-search="true" id="listUsos" name="listUsos" disabled></select>
                                 </div>
-                                <hr>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Acta de Baja</label>
-                                    <input type="text" class="form-control" id="txtabaElemento" name="txtabaElemento"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-2 notblock" id="divTecno">
+                                    <label for="listTecno">Tecnología</label>
+                                    <select class="form-control" data-live-search="true" id="listTecno" name="listTecno" disabled></select>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label">Fecha de Baja</label>
-                                    <input type="text" class="form-control" id="txtfbaElemento" name="txtfbaElemento"></textarea>
+                                <div class="form-group col-md-2 notblock" id="divPotencia">
+                                    <label for="listPotencia">Potencia</label>
+                                    <select class="form-control" data-live-search="true" id="listPotencia" name="listPotencia" disabled></select>
+                                </div>
+                                <div class="form-group col-md-2 Material notblock" id="divMaterial">
+                                    <label for="listMaterial">Material</label>
+                                    <select class="form-control" data-live-search="true" id="listMaterial" name="listMaterial" disabled></select>
+                                </div>
+                                <div class="form-group col-md-2 notblock" id="divAltura">
+                                    <label for="listAltura">Altura</label>
+                                    <select class="form-control" data-live-search="true" id="listAltura" name="listAltura" disabled></select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Valor </label>
+                                    <input class="form-control" id="fltvalElemento" name="fltvalElemento" type="number" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="listestElemento">Estado</label>
+                                    <select class="form-control selectpicker" id="listestElemento" name="listestElemento">
+                                        <option value="1">Activo</option>
+                                        <option value="2">Inactivo</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4 mt-4">
+                                    <button id="btnActionForm" class="btn btn-primary btn-md btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+                                </div>
+                                <div class="form-group col-md-4 mt-4">
+                                    <button class="btn btn-danger btn-md btn-block" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                                 </div>
                             </div>
                         </div>
@@ -117,23 +112,6 @@
                             </div>
                             <hr>
                             <div id="containerImages">
-                                <!--                                 <div id="div24">
-                                    <div class="prevImage">
-                                        <img class="loading" src="<?= media(); ?>/images/loading.svg">
-                                    </div>
-                                    <input type="file" name="foto" id="img1" class="inputUploadfile">
-                                    <label for="img1" class="btnUploadfile"><i class="fas fa-upload"></i></label>
-                                    <button class="btnDeleteImage" type="button" onclick="fntDelItem('div24')"><i class="fas fa-trash-alt"></i></button>
-                                </div>
-                                <div id="div24">
-                                    <div class="prevImage">
-                                        <img src="<?= media(); ?>/images/uploads/baseimagen.jpg">
-                                    </div>
-                                    <input type="file" name="foto" id="img1" class="inputUploadfile">
-                                    <label for="img1" class="btnUploadfile"><i class="fas fa-upload"></i></label>
-                                    <button class="btnDeleteImage" type="button" onclick="fntDelItem('div24')"><i class="fas fa-trash-alt"></i></button>
-                                </div>
- -->
                             </div>
                         </div>
                     </div>
@@ -143,6 +121,28 @@
     </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.getElementById('listClase');
+    selectElement.addEventListener('change', function () {
+        var selectedValue = selectElement.value;
+
+        if (selectedValue == 1) {
+            document.querySelector("#divTecno").classList.remove("notblock");
+            document.querySelector("#divPotencia").classList.remove("notblock");
+            document.querySelector("#divMaterial").classList.add("notblock");
+            document.querySelector("#divAltura").classList.add("notblock");
+        }
+        if(selectedValue == 2){
+            document.querySelector("#divTecno").classList.add("notblock");
+            document.querySelector("#divPotencia").classList.add("notblock");
+            document.querySelector("#divMaterial").classList.remove("notblock");
+            document.querySelector("#divAltura").classList.remove("notblock");
+        } if (selectedValue == 3) {
+        }
+    });
+});
+</script>
 <!-- Modal para Ver información de Categorías -->
 <div class="modal fade" id="modalViewElemento" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl">

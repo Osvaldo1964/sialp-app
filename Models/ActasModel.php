@@ -10,6 +10,7 @@ class ActasModel extends Mysql
     public $intrecActa;
     public $fltvalActa;
     public $intestActa;
+    private $strImagen;
 
     public function __construct()
     {
@@ -41,8 +42,9 @@ class ActasModel extends Mysql
         return $return;
     }
 
-    public function selectActas()
+    public function selectActas(int $claActa)
     {
+        $this->inttipActa = $claActa;
         $sql = "SELECT a.idActa, a.tipActa, a.iteActa, a.numActa, DATE_FORMAT(fecActa, '%Y-%m-%d') as fecActa,
                 a.recActa, a.valActa, a.estActa,
                 t.desTipoacta as desTipoacta, i.desItemacta as desItemacta, r.desRecurso as desRecurso
@@ -50,7 +52,7 @@ class ActasModel extends Mysql
                 INNER JOIN tipoactas t ON t.idTipoacta = 2
                 INNER JOIN itemsacta i ON a.iteActa = i.idItemacta
                 INNER JOIN recursos r ON a.recActa = r.idRecurso
-                 WHERE estActa != 0";
+                WHERE estActa != 0 AND a.tipActa = $this->inttipActa";
         $request = $this->select_all($sql);
         return $request;
     }
@@ -72,17 +74,22 @@ class ActasModel extends Mysql
     public function selectActaimp(int $idActa)
     {
         $this->intidActa = $idActa;
-        $sql = "SELECT e.idElemento, e.gruElemento, e.iteElemento,  e.codElemento, e.recElemento, e.usoElemento, e.desElemento,
-                e.detElemento, g.desGruposalp as desGrupo, i.desItem as desItem, e.dirElemento, e.latElemento, e.lonElemento, e.ainElemento, 
-                e.abaElemento, e.valElemento, e.estElemento, r.desRecurso as desRecurso, u.desTipouso, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa,
-                a.valActa, a.estActa
-                FROM elementos e
-                INNER JOIN actas a ON e.ainElemento = a.idActa
-                INNER JOIN gruposalp g ON e.gruElemento = g.idGruposalp
-                INNER JOIN itemsalp i ON e.iteElemento = i.idItem
-                INNER JOIN recursos r ON e.recElemento = r.idRecurso
-                INNER JOIN tiposuso u ON e.usoElemento = u.idTipouso
-                WHERE idActa = $this->intidActa";
+        $sql = "SELECT e.idElemento, e.claElemento, e.codElemento, e.detElemento, e.desElemento, e.dirElemento,
+        e.recElemento, r.desRecurso as desRecurso, e.usoElemento, u.desTipouso as desTipouso, 
+        c.desClase as desClase, e.tecElemento, t.desTecno as desTecno, e.matElemento, e.potElemento,
+        p.desPotencia as desPotencia, m.desMaterial as desMaterial, e.altElemento, l.desAltura as desAltura, 
+        e.latElemento, e.lonElemento, e.ainElemento, e.abaElemento, e.valElemento, e.estElemento,
+        a.numActa, a.estActa, a.valActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa
+        FROM elementos e
+        INNER JOIN actas a ON e.ainElemento = a.idActa
+        INNER JOIN clases c ON e.claElemento = c.idClase
+        LEFT JOIN tecnologias t ON e.tecElemento = t.idTecno
+        LEFT JOIN potencias p ON e.potElemento = p.idPotencia
+        LEFT JOIN materiales m ON e.matElemento = m.idMaterial
+        LEFT JOIN alturas l ON e.altElemento = l.idAltura
+        LEFT JOIN recursos r ON e.recElemento = r.idRecurso
+        LEFT JOIN tiposuso u ON e.usoElemento = u.idTipouso
+        WHERE estElemento != 0 AND a.idActa = $this->intidActa ORDER BY e.claElemento, e.codElemento";
         $request = $this->select_all($sql);
         return $request;
     }
@@ -158,8 +165,8 @@ class ActasModel extends Mysql
         return $request_delete;
     }
 
-    public function insertImage(int $idImagen, string $imagen){
-        $this->intidImagen = $idImagen;
+    public function insertImage(int $idActa, string $imagen){
+        $this->intidActa = $idActa;
         $this->strImagen = $imagen;
         $query_insert = "INSERT INTO imagenes (idElemento, nomImagen) VALUES (?,?)";
         $arrData = array($this->intidActa, $this->strImagen);

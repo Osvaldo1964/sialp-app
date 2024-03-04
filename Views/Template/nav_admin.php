@@ -84,8 +84,8 @@
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Carga por Lotes</a></li>
-                               <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Carga Manual</a></li>
+                               <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Inv. Inicial Lote</a></li>
+                               <li><a class="treeview-item" href="<?= base_url(); ?>/invinicial"> Inv. Inicial Manual</a></li>
                             </ul>
                         </li>
                                <!--  <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Hoja de Vida UCAPs</a></li> -->

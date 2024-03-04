@@ -148,11 +148,36 @@ window.addEventListener('load', function () {
         }
     }
     fntInputFile();
-    fntGrupos();
-    fntItems();
-    fntUsos();
     fntRecursos();
+    fntUsos();
+    fntClases();
+    fntTecnologias();
+    fntPotencias();
+    fntMateriales();
+    fntAlturas();
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.getElementById('listClase');
+    selectElement.addEventListener('change', function () {
+        var selectedValue = selectElement.value;
+
+        if (selectedValue == 1) {
+            document.querySelector("#divTecno").classList.remove("notblock");
+            document.querySelector("#divPotencia").classList.remove("notblock");
+            document.querySelector("#divMaterial").classList.add("notblock");
+            document.querySelector("#divAltura").classList.add("notblock");
+        }
+        if(selectedValue == 2){
+            document.querySelector("#divTecno").classList.add("notblock");
+            document.querySelector("#divPotencia").classList.add("notblock");
+            document.querySelector("#divMaterial").classList.remove("notblock");
+            document.querySelector("#divAltura").classList.remove("notblock");
+        }
+        if (selectedValue == 3) {
+        }
+    });
+});
 
 if (document.querySelector("#txtcodElemento")) {
     let inputCodigo = document.querySelector("#txtcodElemento");
@@ -191,6 +216,7 @@ function fntInputFile() {
     inputUploadfile.forEach(function (inputUploadfile) {
         inputUploadfile.addEventListener('change', function () {
             let idElemento = document.querySelector("#idElemento").value;
+            alert(idElemento);
             let parentId = this.parentNode.getAttribute("id");
             let idFile = this.getAttribute("id");
             let uploadFoto = document.querySelector("#" + idFile).value;
@@ -318,18 +344,39 @@ function fntEditInfo(element, idElemento) {
                 document.querySelector("#listRecursos").value = objElemento[0].recElemento;
                 document.querySelector("#listUsos").value = objElemento[0].usoElemento;
                 document.querySelector("#txtcodElemento").value = objElemento[0].codElemento;
+                document.querySelector("#txtdetElemento").value = objElemento[0].detElemento;
                 document.querySelector("#txtdesElemento").value = objElemento[0].desElemento;
                 document.querySelector("#txtdirElemento").value = objElemento[0].dirElemento;
+                document.querySelector("#listMaterial").value = objElemento[0].matElemento;
+                document.querySelector("#listPotencia").value = objElemento[0].potElemento;
+                document.querySelector("#listAltura").value = objElemento[0].altElemento;
+                document.querySelector("#listTecno").value = objElemento[0].tecElemento;
                 document.querySelector("#fltlatElemento").value = objElemento[0].latElemento;
                 document.querySelector("#fltlonElemento").value = objElemento[0].lonElemento;
-                document.querySelector("#txtainElemento").value = objElemento[0].ainElemento;
+/*                 document.querySelector("#txtainElemento").value = objElemento[0].ainElemento;
                 document.querySelector("#txtfinElemento").value = objElemento[0].finElemento;
                 document.querySelector("#txtabaElemento").value = objElemento[0].abaElemento;
-                document.querySelector("#txtfbaElemento").value = objElemento[0].fbaElemento;
+                document.querySelector("#txtfbaElemento").value = objElemento[0].fbaElemento;*/
+                document.querySelector("#fltvalElemento").value = objElemento[0].valElemento;
                 document.querySelector("#listestElemento").value = objElemento[0].estElemento;
                 tinymce.activeEditor.setContent(objElemento[0].desElemento);
-                $('#listGrupos').selectpicker('render');
-                $('#listItems').selectpicker('render');
+                if (objElemento[0].claElemento == 1) {
+                    document.querySelector("#divTecno").classList.remove("notblock");
+                    document.querySelector("#divPotencia").classList.remove("notblock");
+                    document.querySelector("#divMaterial").classList.add("notblock");
+                    document.querySelector("#divAltura").classList.add("notblock");
+                }
+                if (objElemento[0].claElemento == 2) {
+                    document.querySelector("#divTecno").classList.add("notblock");
+                    document.querySelector("#divPotencia").classList.add("notblock");
+                    document.querySelector("#divMaterial").classList.remove("notblock");
+                    document.querySelector("#divAltura").classList.remove("notblock");
+                }
+                $('#listClase').selectpicker('render');
+                $('#listTecno').selectpicker('render');
+                $('#listMaterial').selectpicker('render');
+                $('#listPotencia').selectpicker('render');
+                $('#listAltura').selectpicker('render');
                 $('#listRecursos').selectpicker('render');
                 $('#listUsos').selectpicker('render');
                 $('#listestElemento').selectpicker('render'); 
@@ -390,35 +437,90 @@ function fntDelInfo(idElemento) {
     });
 }
 
-function fntGrupos() {
-    if (document.querySelector('#listGrupos')) {
-        let ajaxUrl = base_url + '/Grupossalp/getSelectGruposalp';
+
+function fntClases() {
+    if (document.querySelector('#listClase')) {
+        let ajaxUrl = base_url + '/Clases/getSelectClases';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listGrupos').innerHTML = request.responseText;
-                $('#listGrupos').selectpicker('render');
+                document.querySelector('#listClase').innerHTML = '<option value="0" selected>Seleccione</option>';
+                document.querySelector('#listClase').innerHTML += request.responseText;
+                $('#listClase').selectpicker('render');
             }
         }
     }
 }
 
-function fntItems() {
-    if (document.querySelector('#listItems')) {
-        let ajaxUrl = base_url + '/Items/getSelectItems';
+function fntTecnologias() {
+    if (document.querySelector('#listTecno')) {
+        let ajaxUrl = base_url + '/Tecnologias/getSelectTecnologias/';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listItems').innerHTML = request.responseText;
-                $('#listItems').selectpicker('render');
+                itemtemp = request.responseText;
+                document.querySelector('#listTecno').innerHTML = request.responseText;
+                //document.querySelector("#listItems").value = selectedOptions[0].text;
+                $('#listTecno').selectpicker('render');
             }
         }
     }
 }
+
+function fntPotencias() {
+    if (document.querySelector('#listPotencia')) {
+        let ajaxUrl = base_url + '/Potencias/getSelectPotencias/';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                itemtemp = request.responseText;
+                document.querySelector('#listPotencia').innerHTML = request.responseText;
+                $('#listPotencia').selectpicker('render');
+            }
+        }
+    }
+}
+
+function fntMateriales() {
+    if (document.querySelector('#listMaterial')) {
+        let ajaxUrl = base_url + '/Materiales/getSelectMateriales/';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                itemtemp = request.responseText;
+                document.querySelector('#listMaterial').innerHTML = request.responseText;
+                //document.querySelector("#listItems").value = selectedOptions[0].text;
+                $('#listMaterial').selectpicker('render');
+            }
+        }
+    }
+}
+
+function fntAlturas() {
+    if (document.querySelector('#listAltura')) {
+        let ajaxUrl = base_url + '/Alturas/getSelectAlturas/';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                itemtemp = request.responseText;
+                document.querySelector('#listAltura').innerHTML = request.responseText;
+                //document.querySelector("#listItems").value = selectedOptions[0].text;
+                $('#listAltura').selectpicker('render');
+            }
+        }
+    }
+}
+
 
 function fntUsos() {
     if (document.querySelector('#listUsos')) {

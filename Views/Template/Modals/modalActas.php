@@ -153,7 +153,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                            <div class="form-group col-md-3">
+                                <div class="form-group col-md-3">
                                     <label for="listClase">Clase </label>
                                     <select class="form-control" data-live-search="true" id="listClase" name="listClase" required=""></select>
                                 </div>
@@ -202,37 +202,19 @@
                             <div class="row">
                                 <div class="form-group col-md-2 notblock" id="divTecno">
                                     <label for="listTecno">Tecnología</label>
-                                    <select class="form-control selectpicker" id="listTecno" name="listTecno" required>
-                                        <option value="1">SODIO</option>
-                                        <option value="2">LED</option>
-                                        <option value="3">OTRO</option>
-                                    </select>
+                                    <select class="form-control" data-live-search="true" id="listTecno" name="listTecno" required=""></select>
                                 </div>
                                 <div class="form-group col-md-2 notblock" id="divPotencia">
                                     <label for="listPotencia">Potencia</label>
-                                    <select class="form-control selectpicker" id="listPotencia" name="listPotencia" required>
-                                        <option value="1">40w</option>
-                                        <option value="2">60w</option>
-                                        <option value="3">110w</option>
-                                    </select>
-
+                                    <select class="form-control" data-live-search="true" id="listPotencia" name="listPotencia" required=""></select>
                                 </div>
                                 <div class="form-group col-md-2 Material notblock" id="divMaterial">
                                     <label for="listMaterial">Material</label>
-                                    <select class="form-control selectpicker" id="listMaterial" name="listMaterial">
-                                        <option value="1">Concreto</option>
-                                        <option value="2">Madera</option>
-                                        <option value="3">Aluminio</option>
-                                    </select>
+                                    <select class="form-control" data-live-search="true" id="listMaterial" name="listMaterial" required=""></select>
                                 </div>
                                 <div class="form-group col-md-2 notblock" id="divAltura">
                                     <label for="listAltura">Altura</label>
-                                    <select class="form-control selectpicker" id="listAltura" name="listAltura" required>
-                                        <option value="1">4 Mts</option>
-                                        <option value="2">5 Mts</option>
-                                        <option value="3">6 Mts</option>
-                                    </select>
-
+                                    <select class="form-control" data-live-search="true" id="listAltura" name="listAltura" required=""></select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="control-label">Valor </label>

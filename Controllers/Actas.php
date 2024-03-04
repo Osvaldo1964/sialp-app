@@ -76,7 +76,7 @@ class Actas extends Controllers
     public function getActas()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectActas();
+            $arrData = $this->model->selectActas(ACTINVERSIONES);
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
@@ -172,7 +172,7 @@ class Actas extends Controllers
     {
         if ($_POST) {
             if (empty($_POST['actImagen'])) {
-                $arrResponse = array('status' => false, 'msg' => 'Error de datos.');
+                $arrResponse = array('status' => false, 'msg' => 'dfdfError de datos.');
             } else {
                 $idActa = intval($_POST['actImagen']);
                 $foto = $_FILES['foto'];

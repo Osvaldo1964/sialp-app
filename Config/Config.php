@@ -97,6 +97,11 @@
 	const PERROR = 9;
 	const PPQRS = 10;
 
+	// TIPOS DE ACTAS
+	const ACTINICIAL = 1;
+	const ACTINVERSIONES = 2;
+	const ACTBAJA = 3;
+
 	// Constantes Cartera
 	const IDCARTERA = 5;
 	const FACTURADORES = "1,3";

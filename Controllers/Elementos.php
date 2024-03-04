@@ -27,45 +27,28 @@ class Elementos extends Controllers
     public function setElemento()
     {
         if ($_POST) {
-            if (empty($_POST['txtdirElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listGrupos']) 
-            || empty($_POST['listestElemento']))
+            if (empty($_POST['txtdesElemento']) || empty($_POST['listestElemento']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idElemento     = intval($_POST['idElemento']);
-                $intgruElemento = intval($_POST['listGrupos']);
-                $intiteElemento = intval($_POST['listItems']);
-                $strcodElemento = strClean($_POST['txtcodElemento']);
-                $intrecElemento = intval($_POST['listRecursos']);
-                $intusoElemento = intval($_POST['listUsos']);
                 $strdesElemento = strClean($_POST['txtdesElemento']);
-                $strdetElemento = strClean($_POST['txtdetElemento']);
-                $strdirElemento = strClean($_POST['txtdirElemento']);
-                $fltlatElemento = $_POST['fltlatElemento'];
-                $fltlonElemento = $_POST['fltlonElemento'];
-                $strainElemento = strClean($_POST['txtainElemento']);
-                $strabaElemento = strClean($_POST['txtabaElemento']);
                 $intestElemento = intval($_POST['listestElemento']);
                 $request_Elemento = "";
-
-                $ruta = strtolower(clear_cadena($strcodElemento));
-                $ruta = str_replace(" ", "-", $ruta);
 
                 if ($idElemento == 0) {
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_Elemento = $this->model->insertElemento(
+/*                         $request_Elemento = $this->model->insertElemento(
                             $intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
                             $strdesElemento, $strdetElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                            $strdetElemento, $intestElemento);
+                            $strdetElemento, $intestElemento); */
                     }
                 } else {
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
                         $request_Elemento = $this->model->updateElemento(
-                            $idElemento, $intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
-                            $strdesElemento, $strdetElemento, $strdirElemento, $fltlatElemento, $fltlonElemento, $ruta, $strainElemento,
-                            $strabaElemento, $intestElemento);
+                            $idElemento, $strdesElemento, $intestElemento);
                     }
                 }
                 if($request_Elemento == 1 || $request_Elemento != 'exist')
@@ -94,14 +77,17 @@ class Elementos extends Controllers
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $intgruElemento = intval($_POST['listClase']);
-                $intiteElemento = intval($_POST['listPotencia']);
+                $intclaElemento = intval($_POST['listClase']);
                 $strcodElemento = strClean($_POST['txtcodElemento']);
+                $strdetElemento = strClean($_POST['txtdetElemento']);
+                $strdesElemento = '';
+                $strdirElemento = strClean($_POST['txtdirElemento']);
                 $intrecElemento = intval($_POST['listRecursosadd']);
                 $intusoElemento = intval($_POST['listUsos']);
-                $strdesElemento = '';
-                $strdetElemento = strClean($_POST['txtdetElemento']);
-                $strdirElemento = strClean($_POST['txtdirElemento']);
+                $inttecElemento = intval($_POST['listTecno']);
+                $intpotElemento = intval($_POST['listPotencia']);
+                $intmatElemento = intval($_POST['listMaterial']);
+                $intaltElemento = intval($_POST['listAltura']);
                 $fltlatElemento = $_POST['fltlatElemento'];
                 $fltlonElemento = $_POST['fltlonElemento'];
                 $strainElemento = strClean($_POST['eleactActa']);
@@ -112,9 +98,12 @@ class Elementos extends Controllers
                 $ruta = strtolower(clear_cadena($strcodElemento));
                 $ruta = str_replace(" ", "-", $ruta);
 
-                $request_Elemento = $this->model->insertElemento($intgruElemento, $intiteElemento, $strcodElemento, $intrecElemento, $intusoElemento,
-                                                                $strdesElemento, $strdetElemento, $strdirElemento, $fltlatElemento, $fltlonElemento,
-                                                                $ruta, $strainElemento, $fltvalElemento,$intestElemento);
+                $request_Elemento = $this->model->insertElemento($intclaElemento, $strcodElemento, $strdetElemento,
+                                                                $strdesElemento, $strdirElemento, $intrecElemento,
+                                                                $intusoElemento, $inttecElemento, $intpotElemento,
+                                                                $intmatElemento, $intaltElemento, $fltlatElemento,
+                                                                $fltlonElemento, $ruta, $strainElemento,
+                                                                $fltvalElemento,$intestElemento);
 
                 if($request_Elemento == 1 || $request_Elemento != 'exist')
                 {
