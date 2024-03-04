@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 27-02-2024 a las 02:46:05
+-- Tiempo de generación: 04-03-2024 a las 01:11:50
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -49,6 +49,26 @@ INSERT INTO `actas` (`idActa`, `tipActa`, `iteActa`, `numActa`, `fecActa`, `recA
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `alturas`
+--
+
+CREATE TABLE `alturas` (
+  `idAltura` bigint NOT NULL,
+  `desAltura` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `estAltura` int DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `alturas`
+--
+
+INSERT INTO `alturas` (`idAltura`, `desAltura`, `estAltura`) VALUES
+(1, '9 mts', 1),
+(2, '10 mts', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `capitulos`
 --
 
@@ -65,6 +85,28 @@ CREATE TABLE `capitulos` (
 INSERT INTO `capitulos` (`idCapitulo`, `nomCapitulo`, `tipCapitulo`) VALUES
 (1, 'Ingresos', 1),
 (2, 'Costos y Gastos', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases`
+--
+
+CREATE TABLE `clases` (
+  `idClase` bigint NOT NULL,
+  `desClase` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `estClase` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `clases`
+--
+
+INSERT INTO `clases` (`idClase`, `desClase`, `estClase`) VALUES
+(1, 'Luminarias', 1),
+(2, 'Postes', 1),
+(3, 'Transformadores', 1),
+(4, 'Redes', 1);
 
 -- --------------------------------------------------------
 
@@ -154,14 +196,16 @@ INSERT INTO `docuactas` (`idImagen`, `actImagen`, `nomImagen`) VALUES
 
 CREATE TABLE `elementos` (
   `idElemento` bigint NOT NULL,
-  `gruElemento` bigint NOT NULL,
-  `iteElemento` bigint NOT NULL,
+  `claElemento` bigint NOT NULL,
   `codElemento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `detElemento` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `desElemento` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `dirElemento` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `recElemento` bigint NOT NULL,
   `usoElemento` bigint NOT NULL,
-  `desElemento` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `detElemento` varchar(200) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `dirElemento` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `tecElemento` bigint NOT NULL,
+  `matElemento` bigint NOT NULL,
+  `altElemento` bigint NOT NULL,
   `latElemento` float(15,2) NOT NULL,
   `lonElemento` float(15,2) NOT NULL,
   `rutElemento` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
@@ -175,14 +219,12 @@ CREATE TABLE `elementos` (
 -- Volcado de datos para la tabla `elementos`
 --
 
-INSERT INTO `elementos` (`idElemento`, `gruElemento`, `iteElemento`, `codElemento`, `recElemento`, `usoElemento`, `desElemento`, `detElemento`, `dirElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `abaElemento`, `valElemento`, `estElemento`) VALUES
-(12, 2, 1, 'LED02030', 1, 1, '', NULL, 'CALLE 45', 11.45, 14.23, 'led02030', 1, NULL, 1050000.00, 1),
-(13, 2, 1, 'LED02020', 1, 1, '', NULL, 'CALLE 20', 15.25, 14.23, 'led02020', 1, NULL, 985000.00, 1),
-(14, 1, 1, 'SODIO0126', 1, 1, '', NULL, 'CENTRO', 22.25, 33.25, 'sodio0126', 1, NULL, 560000.00, 1),
-(17, 1, 1, 'SODIO0128', 1, 6, '', NULL, 'LAUREL', 1525.00, 235252.00, 'sodio0128', 1, NULL, 250000.00, 1),
-(18, 1, 1, 'prueba02', 1, 1, '', NULL, 'otra', 2323.00, 2323.00, 'prueba02', 1, NULL, 145222.00, 1),
-(19, 1, 1, 'prueba02', 1, 1, '', NULL, 'otra', 2323.00, 2323.00, 'prueba02', 1, NULL, 145222.00, 1),
-(20, 2, 2, 'pruebaee', 1, 1, '', NULL, 'yuvacl', 4535.00, 53453.00, 'pruebaee', 1, NULL, 45000.00, 1);
+INSERT INTO `elementos` (`idElemento`, `claElemento`, `codElemento`, `detElemento`, `desElemento`, `dirElemento`, `recElemento`, `usoElemento`, `tecElemento`, `matElemento`, `altElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `abaElemento`, `valElemento`, `estElemento`) VALUES
+(12, 2, 'LED02030', 'LUMINARIA HITACHI', '', 'CALLE 45', 1, 1, 1, 1, 0, 11.45, 14.23, 'led02030', 1, NULL, 1050000.00, 1),
+(13, 2, 'LED02020', NULL, '', 'CALLE 20', 1, 1, 1, 1, 0, 15.25, 14.23, 'led02020', 1, NULL, 985000.00, 1),
+(14, 1, 'SODIO0126', 'BOMBILLA DE SODIO MARCA ACME', '', 'CENTRO', 1, 1, 1, 0, 0, 22.25, 33.25, 'sodio0126', 1, NULL, 560000.00, 1),
+(17, 1, 'SODIO0128', NULL, '', 'LAUREL', 1, 6, 1, 0, 0, 1525.00, 235252.00, 'sodio0128', 1, NULL, 250000.00, 1),
+(18, 1, 'prueba02', NULL, '', 'otra', 1, 1, 1, 0, 0, 2323.00, 2323.00, 'prueba02', 1, NULL, 145222.00, 1);
 
 -- --------------------------------------------------------
 
@@ -304,7 +346,9 @@ CREATE TABLE `imagenes` (
 INSERT INTO `imagenes` (`idImagen`, `idElemento`, `nomImagen`) VALUES
 (1, 1, 'pro_fc7d732eb2acba1328d11dbb2fc42739.jpg'),
 (2, 11, 'pro_989c4abcee9f94324809987176032347.jpg'),
-(3, 11, 'pro_7404c582081c5ebb7268c400c56ceeed.jpg');
+(3, 11, 'pro_7404c582081c5ebb7268c400c56ceeed.jpg'),
+(6, 14, 'pro_55c71dcea952c95b8cfacc21502e00b0.jpg'),
+(7, 19, 'pro_0e59d1f9528056efd7e9136c32254bc4.jpg');
 
 -- --------------------------------------------------------
 
@@ -353,6 +397,27 @@ CREATE TABLE `itemsalp` (
 INSERT INTO `itemsalp` (`idItem`, `gruItem`, `desItem`, `csmItem`, `estItem`) VALUES
 (1, 1, '40w', 30, 1),
 (2, 2, '75w', 65, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materiales`
+--
+
+CREATE TABLE `materiales` (
+  `idMaterial` bigint NOT NULL,
+  `desMaterial` varchar(60) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `estMaterial` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `materiales`
+--
+
+INSERT INTO `materiales` (`idMaterial`, `desMaterial`, `estMaterial`) VALUES
+(1, 'Concreto', 1),
+(2, 'Madera', 1),
+(3, 'Aluminio', 1);
 
 -- --------------------------------------------------------
 
@@ -507,6 +572,28 @@ INSERT INTO `post` (`idpost`, `titulo`, `contenido`, `portada`, `datecreate`, `r
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `potencias`
+--
+
+CREATE TABLE `potencias` (
+  `idPotencia` bigint NOT NULL,
+  `desPotencia` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `estPotencia` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `potencias`
+--
+
+INSERT INTO `potencias` (`idPotencia`, `desPotencia`, `estPotencia`) VALUES
+(1, '60w', 1),
+(2, '80w', 1),
+(3, '90w', 1),
+(4, '120w', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pqrs`
 --
 
@@ -620,6 +707,26 @@ CREATE TABLE `suscripciones` (
   `emaSuscripcion` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `creSuscripcion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tecnologias`
+--
+
+CREATE TABLE `tecnologias` (
+  `idTecno` bigint NOT NULL,
+  `desTecno` varchar(60) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `estTecno` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tecnologias`
+--
+
+INSERT INTO `tecnologias` (`idTecno`, `desTecno`, `estTecno`) VALUES
+(1, 'SODIO', 1),
+(2, 'LED', 1);
 
 -- --------------------------------------------------------
 
@@ -784,10 +891,22 @@ ALTER TABLE `actas`
   ADD KEY `iteActa` (`iteActa`);
 
 --
+-- Indices de la tabla `alturas`
+--
+ALTER TABLE `alturas`
+  ADD PRIMARY KEY (`idAltura`);
+
+--
 -- Indices de la tabla `capitulos`
 --
 ALTER TABLE `capitulos`
   ADD PRIMARY KEY (`idCapitulo`);
+
+--
+-- Indices de la tabla `clases`
+--
+ALTER TABLE `clases`
+  ADD PRIMARY KEY (`idClase`);
 
 --
 -- Indices de la tabla `contacto`
@@ -814,12 +933,14 @@ ALTER TABLE `detalleacta`
 --
 ALTER TABLE `elementos`
   ADD PRIMARY KEY (`idElemento`),
-  ADD KEY `gruElemento` (`gruElemento`),
+  ADD KEY `gruElemento` (`claElemento`),
   ADD KEY `oriElemento` (`recElemento`),
   ADD KEY `ubiElemento` (`usoElemento`),
-  ADD KEY `iteElemento` (`iteElemento`),
+  ADD KEY `iteElemento` (`tecElemento`),
   ADD KEY `ainElemento` (`ainElemento`),
-  ADD KEY `abaElemento` (`abaElemento`);
+  ADD KEY `abaElemento` (`abaElemento`),
+  ADD KEY `matElemento` (`matElemento`),
+  ADD KEY `altElemento` (`altElemento`);
 
 --
 -- Indices de la tabla `estratos`
@@ -871,6 +992,12 @@ ALTER TABLE `itemsalp`
   ADD KEY `gruItem` (`gruItem`);
 
 --
+-- Indices de la tabla `materiales`
+--
+ALTER TABLE `materiales`
+  ADD PRIMARY KEY (`idMaterial`);
+
+--
 -- Indices de la tabla `modulos`
 --
 ALTER TABLE `modulos`
@@ -895,6 +1022,12 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`idpost`);
+
+--
+-- Indices de la tabla `potencias`
+--
+ALTER TABLE `potencias`
+  ADD PRIMARY KEY (`idPotencia`);
 
 --
 -- Indices de la tabla `pqrs`
@@ -926,6 +1059,12 @@ ALTER TABLE `subgrupos`
 --
 ALTER TABLE `suscripciones`
   ADD PRIMARY KEY (`idSuscripcion`);
+
+--
+-- Indices de la tabla `tecnologias`
+--
+ALTER TABLE `tecnologias`
+  ADD PRIMARY KEY (`idTecno`);
 
 --
 -- Indices de la tabla `tipoactas`
@@ -969,10 +1108,22 @@ ALTER TABLE `actas`
   MODIFY `idActa` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `alturas`
+--
+ALTER TABLE `alturas`
+  MODIFY `idAltura` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `capitulos`
 --
 ALTER TABLE `capitulos`
   MODIFY `idCapitulo` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `clases`
+--
+ALTER TABLE `clases`
+  MODIFY `idClase` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
@@ -996,7 +1147,7 @@ ALTER TABLE `detalleacta`
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `estratos`
@@ -1026,7 +1177,7 @@ ALTER TABLE `gruposalp`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `itemsacta`
@@ -1039,6 +1190,12 @@ ALTER TABLE `itemsacta`
 --
 ALTER TABLE `itemsalp`
   MODIFY `idItem` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `materiales`
+--
+ALTER TABLE `materiales`
+  MODIFY `idMaterial` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `modulos`
@@ -1063,6 +1220,12 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `post`
   MODIFY `idpost` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `potencias`
+--
+ALTER TABLE `potencias`
+  MODIFY `idPotencia` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pqrs`
@@ -1093,6 +1256,12 @@ ALTER TABLE `subgrupos`
 --
 ALTER TABLE `suscripciones`
   MODIFY `idSuscripcion` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tecnologias`
+--
+ALTER TABLE `tecnologias`
+  MODIFY `idTecno` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipoactas`
