@@ -114,7 +114,7 @@
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/comercializadores"> comercializadores</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/comerciales"> comercializadores</a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/cstenergia"> Registro Consumo Energia </a></li>
                         <li><a class="treeview-item" href="<?= base_url(); ?>/"> Informe de Consumos</a></li>
                     </ul>

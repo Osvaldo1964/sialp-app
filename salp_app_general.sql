@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-03-2024 a las 03:23:48
+-- Tiempo de generación: 05-03-2024 a las 20:25:45
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -36,7 +36,7 @@ CREATE TABLE `actas` (
   `recActa` bigint NOT NULL,
   `valActa` float(15,2) NOT NULL,
   `estActa` int DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `actas`
@@ -55,7 +55,7 @@ INSERT INTO `actas` (`idActa`, `tipActa`, `iteActa`, `numActa`, `fecActa`, `recA
 
 CREATE TABLE `alturas` (
   `idAltura` bigint NOT NULL,
-  `desAltura` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desAltura` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estAltura` int DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -96,6 +96,7 @@ INSERT INTO `capitulos` (`idCapitulo`, `nomCapitulo`, `tipCapitulo`) VALUES
 CREATE TABLE `clases` (
   `idClase` bigint NOT NULL,
   `desClase` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `vidClase` float(10,2) NOT NULL,
   `estClase` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -103,11 +104,36 @@ CREATE TABLE `clases` (
 -- Volcado de datos para la tabla `clases`
 --
 
-INSERT INTO `clases` (`idClase`, `desClase`, `estClase`) VALUES
-(1, 'Luminarias', 1),
-(2, 'Postes', 1),
-(3, 'Transformadores', 1),
-(4, 'Redes', 1);
+INSERT INTO `clases` (`idClase`, `desClase`, `vidClase`, `estClase`) VALUES
+(1, 'Luminarias', 15.00, 1),
+(2, 'Postes', 20.00, 1),
+(3, 'Transformadores', 30.00, 1),
+(4, 'Redes', 5.00, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comerciales`
+--
+
+CREATE TABLE `comerciales` (
+  `idComercial` bigint NOT NULL,
+  `nomComercial` varchar(120) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `cntComercial` varchar(15) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `valComercial` float(15,2) NOT NULL,
+  `estComercial` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `comerciales`
+--
+
+INSERT INTO `comerciales` (`idComercial`, `nomComercial`, `cntComercial`, `valComercial`, `estComercial`) VALUES
+(1, 'AIRE', '0020-2024', 15000000.00, 1),
+(2, 'otro aires', '0020-2025', 120.00, 1),
+(3, 'otro airesdga', '0020-2024', 120.00, 1),
+(4, 'AIREddd', 'wewewe', 344.00, 1),
+(5, 'sczxczx dos', 'zxcz tres', 4455.00, 1);
 
 -- --------------------------------------------------------
 
@@ -124,7 +150,7 @@ CREATE TABLE `contacto` (
   `disContacto` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `ageContacto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `creContacto` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `contacto`
@@ -142,18 +168,41 @@ INSERT INTO `contacto` (`idContacto`, `nomContacto`, `emaContacto`, `msgContacto
 CREATE TABLE `costoconsumo` (
   `idCosto` bigint NOT NULL,
   `perCosto` int NOT NULL,
+  `entCosto` bigint NOT NULL,
   `csmCosto` float(15,2) NOT NULL,
   `vlrCosto` float(15,2) NOT NULL,
   `totCosto` float(15,2) NOT NULL,
   `estCosto` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `costoconsumo`
 --
 
-INSERT INTO `costoconsumo` (`idCosto`, `perCosto`, `csmCosto`, `vlrCosto`, `totCosto`, `estCosto`) VALUES
-(1, 202403, 3000.00, 200.00, 7000.00, 1);
+INSERT INTO `costoconsumo` (`idCosto`, `perCosto`, `entCosto`, `csmCosto`, `vlrCosto`, `totCosto`, `estCosto`) VALUES
+(1, 202403, 0, 3000.00, 200.00, 7000.00, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuadrillas`
+--
+
+CREATE TABLE `cuadrillas` (
+  `idCuadrilla` bigint NOT NULL,
+  `desCuadrilla` varchar(120) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `conCuadrilla` varchar(120) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `tecCuadrilla` varchar(120) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ayuCuadrilla` varchar(120) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `estCuadrilla` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cuadrillas`
+--
+
+INSERT INTO `cuadrillas` (`idCuadrilla`, `desCuadrilla`, `conCuadrilla`, `tecCuadrilla`, `ayuCuadrilla`, `estCuadrilla`) VALUES
+(1, 'CUADRILLA No. 1', 'PEDRO UNO', 'JUAN DOS', 'CARLOS TRES', 1);
 
 -- --------------------------------------------------------
 
@@ -168,7 +217,7 @@ CREATE TABLE `detalleacta` (
   `fecDetalle` date NOT NULL,
   `vlrDetalle` float(15,2) NOT NULL,
   `estDetalle` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -180,7 +229,7 @@ CREATE TABLE `docuactas` (
   `idImagen` bigint NOT NULL,
   `actImagen` bigint NOT NULL,
   `nomImagen` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `docuactas`
@@ -226,7 +275,9 @@ INSERT INTO `elementos` (`idElemento`, `claElemento`, `codElemento`, `detElement
 (13, 2, 'LED02020', NULL, '', 'CALLE 20', 1, 1, 0, 0, 1, 2, 15.25, 14.23, 'led02020', 1, NULL, 985000.00, 1),
 (14, 1, 'SODIO0126', 'BOMBILLA DE SODIO MARCA ACME', '', 'CENTRO', 1, 1, 1, 1, 0, 0, 22.25, 33.25, 'sodio0126', 1, NULL, 560000.00, 1),
 (17, 1, 'SODIO0128', NULL, '', 'LAUREL', 1, 6, 1, 2, 0, 0, 1525.00, 235252.00, 'sodio0128', 1, NULL, 250000.00, 1),
-(18, 1, 'prueba02', NULL, '', 'otra', 1, 1, 1, 3, 0, 0, 2323.00, 2323.00, 'prueba02', 1, NULL, 145222.00, 1);
+(18, 1, 'prueba02', NULL, '', 'otra', 1, 1, 1, 3, 0, 0, 2323.00, 2323.00, 'prueba02', 1, NULL, 145222.00, 1),
+(23, 2, 'POS2514', 'POSTE 4 MTS CONCRETO MARCA EL POSTE', '', 'CENTRO EJECUTIVO', 1, 1, 1, 1, 2, 2, 15.20, 16.22, 'pos2514', 4, NULL, 25.00, 1),
+(24, 2, 'POS9829', 'POSTE 4 MTS CONCRETO', '<ol> <li>SE LAVO EL DIA TAL</li> </ol> <p>KASKSLALASL</p> <ol> <li>KSALALSA</li> <li>AKLSSALS</li> </ol>', 'CARRERA LARTLR', 1, 4, 1, 1, 3, 2, 15.20, 16.22, 'pos9829', 4, NULL, 26.00, 1);
 
 -- --------------------------------------------------------
 
@@ -238,7 +289,7 @@ CREATE TABLE `estratos` (
   `idEstrato` bigint NOT NULL,
   `desEstrato` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estEstrato` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `estratos`
@@ -276,7 +327,7 @@ CREATE TABLE `facturacion` (
   `facFactura` float(15,2) NOT NULL,
   `recFactura` float(15,2) NOT NULL,
   `estFactura` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `facturacion`
@@ -339,7 +390,7 @@ CREATE TABLE `imagenes` (
   `idImagen` bigint NOT NULL,
   `idElemento` bigint NOT NULL,
   `nomImagen` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `imagenes`
@@ -350,7 +401,9 @@ INSERT INTO `imagenes` (`idImagen`, `idElemento`, `nomImagen`) VALUES
 (2, 11, 'pro_989c4abcee9f94324809987176032347.jpg'),
 (3, 11, 'pro_7404c582081c5ebb7268c400c56ceeed.jpg'),
 (6, 14, 'pro_55c71dcea952c95b8cfacc21502e00b0.jpg'),
-(7, 19, 'pro_0e59d1f9528056efd7e9136c32254bc4.jpg');
+(7, 19, 'pro_0e59d1f9528056efd7e9136c32254bc4.jpg'),
+(8, 23, 'pro_7c6efb89e3b5151edaa53f2bcd8cec38.jpg'),
+(9, 24, 'pro_63c2575fee8e45194fdd7a9b51564ab2.jpg');
 
 -- --------------------------------------------------------
 
@@ -364,7 +417,7 @@ CREATE TABLE `itemsacta` (
   `desItemacta` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `tipItemacta` bigint NOT NULL,
   `estItemacta` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `itemsacta`
@@ -392,7 +445,7 @@ CREATE TABLE `itemsalp` (
   `desItem` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `csmItem` int NOT NULL,
   `estItem` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `itemsalp`
@@ -410,7 +463,7 @@ INSERT INTO `itemsalp` (`idItem`, `gruItem`, `desItem`, `csmItem`, `estItem`) VA
 
 CREATE TABLE `materiales` (
   `idMaterial` bigint NOT NULL,
-  `desMaterial` varchar(60) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desMaterial` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estMaterial` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -434,7 +487,7 @@ CREATE TABLE `modulos` (
   `titModulo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `desModulo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estModulo` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `modulos`
@@ -466,7 +519,7 @@ CREATE TABLE `parametros` (
   `empParam` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `dirParam` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `nitParam` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `parametros`
@@ -489,7 +542,7 @@ CREATE TABLE `permisos` (
   `wriPermiso` int NOT NULL,
   `updPermiso` int NOT NULL,
   `delPermiso` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `permisos`
@@ -555,7 +608,7 @@ CREATE TABLE `post` (
   `datecreate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ruta` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `status` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `post`
@@ -581,7 +634,7 @@ INSERT INTO `post` (`idpost`, `titulo`, `contenido`, `portada`, `datecreate`, `r
 
 CREATE TABLE `potencias` (
   `idPotencia` bigint NOT NULL,
-  `desPotencia` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desPotencia` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estPotencia` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -607,6 +660,8 @@ CREATE TABLE `pqrs` (
   `emaPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `dirPqrs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `msgPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `asiPqrs` date DEFAULT NULL,
+  `cuaPqrs` bigint DEFAULT NULL,
   `frePqrs` date DEFAULT NULL,
   `fsoPqrs` date DEFAULT NULL,
   `dsoPqrs` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci,
@@ -620,25 +675,27 @@ CREATE TABLE `pqrs` (
 -- Volcado de datos para la tabla `pqrs`
 --
 
-INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `frePqrs`, `fsoPqrs`, `dsoPqrs`, `latPqrs`, `lonPqrs`, `ndiPqrs`, `estPqrs`) VALUES
-(1, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fgsdfgsdf', NULL, NULL, '', NULL, NULL, NULL, 1),
-(12, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta colombia', 'dfdssd', NULL, NULL, '', NULL, NULL, NULL, 1),
-(13, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17a, santa marta colombia', 'dfdssd', NULL, NULL, '', NULL, NULL, NULL, 1),
-(14, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sadcvasdasd', NULL, NULL, '', NULL, NULL, NULL, 1),
-(15, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsadsfv', NULL, NULL, '', NULL, NULL, NULL, 1),
-(40, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 15-20, santa marta colombia', 'sdfsdfsdf', NULL, NULL, '', NULL, NULL, NULL, 1),
-(41, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf', NULL, NULL, '', NULL, NULL, NULL, 1),
-(42, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf', NULL, NULL, '', NULL, NULL, NULL, 1),
-(43, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fghfghg', NULL, NULL, '', NULL, NULL, NULL, 1),
-(44, 'Osvaldo', 'osvicor@hotmail.com', 'calle 11 carrera 5', 'fghfghg', NULL, NULL, '', NULL, NULL, NULL, 1),
-(45, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 calle 14 santa marta colombia', 'gdfghdfg', NULL, NULL, '', NULL, NULL, NULL, 1),
-(46, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 22 santa marta, colombia', 'gdfghdfg', '2024-02-05', NULL, '', NULL, NULL, NULL, 1),
-(47, 'Osvaldo', 'osvicor@hotmail.com', 'taganga magdalena', 'dfsdsdf', '2024-02-10', '2024-02-18', 'Prueba', NULL, NULL, NULL, 2),
-(48, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'asdasdsd', '2024-02-14', '2024-02-19', NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
-(49, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-18', '2024-02-21', 'listo', 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 2),
-(50, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', '2024-02-20', NULL, NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
-(51, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, NULL, NULL, 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
-(52, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, '2024-02-24', 'Se cambio', 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 2);
+INSERT INTO `pqrs` (`idPqrs`, `nomPqrs`, `emaPqrs`, `dirPqrs`, `msgPqrs`, `asiPqrs`, `cuaPqrs`, `frePqrs`, `fsoPqrs`, `dsoPqrs`, `latPqrs`, `lonPqrs`, `ndiPqrs`, `estPqrs`) VALUES
+(1, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 6 calle 11, santa marta colombia', 'fgsdfgsdf', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(12, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta colombia', 'dfdssd', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(13, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17a, santa marta colombia', 'dfdssd', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(14, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'sadcvasdasd', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(15, 'Oswaldo', 'osvicor@ghotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'adsadsfv', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(40, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 15-20, santa marta colombia', 'sdfsdfsdf', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(41, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(42, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 15 santa marta colombia', 'sdfsdfsdf', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(43, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 11 calle 17, santa marta, colombia', 'fghfghg', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(44, 'Osvaldo', 'osvicor@hotmail.com', 'calle 11 carrera 5', 'fghfghg', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(45, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 5 calle 14 santa marta colombia', 'gdfghdfg', NULL, 0, NULL, NULL, '', NULL, NULL, NULL, 1),
+(46, 'Osvaldo', 'osvicor@hotmail.com', 'carrera 1 calle 22 santa marta, colombia', 'gdfghdfg', NULL, 0, '2024-02-05', NULL, '', NULL, NULL, NULL, 1),
+(47, 'Osvaldo', 'osvicor@hotmail.com', 'taganga magdalena', 'dfsdsdf', NULL, 0, '2024-02-10', '2024-02-18', 'Prueba', NULL, NULL, NULL, 2),
+(48, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'asdasdsd', NULL, 0, '2024-02-14', '2024-02-19', NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
+(49, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', NULL, 0, '2024-02-18', '2024-02-21', 'listo', 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 2),
+(50, 'Nueva Prueba', 'osvicor@hotmail.com', 'carrera 19 22-10 santa marta colombia', 'FFGFGTHFGGH', NULL, 0, '2024-02-20', NULL, NULL, 11.23633003, -74.19480896, 'Cra. 19 #22-10, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
+(51, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, 0, NULL, NULL, NULL, 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 1),
+(52, 'William Gomez', 'wilimdl@correo.com', 'carrera 19 calle 22 santa marta colombia', 'se apago', NULL, 0, NULL, '2024-02-24', 'Se cambio', 11.23639870, -74.19480133, 'Cl. 22 & Cra. 19, Comuna 4, Santa Marta, Magdalena, Colombia', 2),
+(53, 'William Gomez', 'wilimdl@correo.com', 'calle 17 carrera 8 santa marta colombia', 'la lampara esta apagada', NULL, 0, NULL, NULL, NULL, 11.24090481, -74.20751190, 'Cra. 8, Santa Marta, Magdalena, Colombia', 1),
+(54, 'William Gomez', 'wilimdl@correo.com', 'calle 17 carrera 8 santa marta colombia', 'la lampara esta apagada', NULL, 0, NULL, '2024-03-06', 'Se cambio', 11.24090481, -74.20751190, 'Cra. 8, Santa Marta, Magdalena, Colombia', 2);
 
 -- --------------------------------------------------------
 
@@ -650,7 +707,7 @@ CREATE TABLE `recursos` (
   `idRecurso` bigint NOT NULL,
   `desRecurso` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estRecurso` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `recursos`
@@ -672,7 +729,7 @@ CREATE TABLE `roles` (
   `nomRol` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `desRol` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estRol` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -710,7 +767,7 @@ CREATE TABLE `suscripciones` (
   `nomSuscripcion` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `emaSuscripcion` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `creSuscripcion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -720,7 +777,7 @@ CREATE TABLE `suscripciones` (
 
 CREATE TABLE `tecnologias` (
   `idTecno` bigint NOT NULL,
-  `desTecno` varchar(60) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `desTecno` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estTecno` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -744,7 +801,7 @@ CREATE TABLE `tipoactas` (
   `desTipoacta` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `selTipoacta` int DEFAULT '0',
   `estTipoacta` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tipoactas`
@@ -767,7 +824,7 @@ CREATE TABLE `tiposuso` (
   `claTipouso` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `desTipouso` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estTipouso` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tiposuso`
@@ -842,7 +899,7 @@ CREATE TABLE `valorvariablesalp` (
   `tipValorvar` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `valValorvar` float(15,2) NOT NULL,
   `estValorvar` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `valorvariablesalp`
@@ -865,7 +922,7 @@ CREATE TABLE `varsalp` (
   `codVarsalp` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `desVarsalp` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `estVarsalp` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `varsalp`
@@ -913,6 +970,12 @@ ALTER TABLE `clases`
   ADD PRIMARY KEY (`idClase`);
 
 --
+-- Indices de la tabla `comerciales`
+--
+ALTER TABLE `comerciales`
+  ADD PRIMARY KEY (`idComercial`);
+
+--
 -- Indices de la tabla `contacto`
 --
 ALTER TABLE `contacto`
@@ -922,7 +985,14 @@ ALTER TABLE `contacto`
 -- Indices de la tabla `costoconsumo`
 --
 ALTER TABLE `costoconsumo`
-  ADD PRIMARY KEY (`idCosto`);
+  ADD PRIMARY KEY (`idCosto`),
+  ADD KEY `entCosto` (`entCosto`);
+
+--
+-- Indices de la tabla `cuadrillas`
+--
+ALTER TABLE `cuadrillas`
+  ADD PRIMARY KEY (`idCuadrilla`);
 
 --
 -- Indices de la tabla `detalleacta`
@@ -1038,7 +1108,8 @@ ALTER TABLE `potencias`
 -- Indices de la tabla `pqrs`
 --
 ALTER TABLE `pqrs`
-  ADD PRIMARY KEY (`idPqrs`);
+  ADD PRIMARY KEY (`idPqrs`),
+  ADD KEY `cuaPqrs` (`cuaPqrs`);
 
 --
 -- Indices de la tabla `recursos`
@@ -1131,6 +1202,12 @@ ALTER TABLE `clases`
   MODIFY `idClase` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `comerciales`
+--
+ALTER TABLE `comerciales`
+  MODIFY `idComercial` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
@@ -1143,6 +1220,12 @@ ALTER TABLE `costoconsumo`
   MODIFY `idCosto` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `cuadrillas`
+--
+ALTER TABLE `cuadrillas`
+  MODIFY `idCuadrilla` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `detalleacta`
 --
 ALTER TABLE `detalleacta`
@@ -1152,7 +1235,7 @@ ALTER TABLE `detalleacta`
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idElemento` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `estratos`
@@ -1182,7 +1265,7 @@ ALTER TABLE `gruposalp`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idImagen` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `itemsacta`
@@ -1236,7 +1319,7 @@ ALTER TABLE `potencias`
 -- AUTO_INCREMENT de la tabla `pqrs`
 --
 ALTER TABLE `pqrs`
-  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `idPqrs` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `recursos`
