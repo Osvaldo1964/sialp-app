@@ -18,8 +18,8 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="listClases">Clase de Acta </label>
-                                    <select class="form-control" data-live-search="true" id="listClases" name="listClases" required=""></select>
+                                    <label for="listItems">Clase de Acta </label>
+                                    <select class="form-control" data-live-search="true" id="listItems" name="listItems" required=""></select>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Número Acta </label>
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="fltvalActa">Valor Acta </label>
-                                    <input type="text" class="form-control valid validEmail" id="fltvalActa" name="fltvalActa">
+                                    <input type="number" class="form-control valid validNumber" id="fltvalActa" name="fltvalActa">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="listestActa">Estado</label>

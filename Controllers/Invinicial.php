@@ -1,5 +1,5 @@
 <?php
-class invinicial extends Controllers
+class Invinicial extends Controllers
 {
     public function __construct()
     {
@@ -17,7 +17,7 @@ class invinicial extends Controllers
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "invinicial";
+        $data['page_tag']   = "Invinicial";
         $data['page_title'] = "INV. INICIAL <small> SALP - APP</small>";
         $data['page_name']  = "invinicial";
         $data['page_functions_js'] = "functions_invinicial.js";
@@ -27,14 +27,14 @@ class invinicial extends Controllers
     public function setActa()
     {
         if ($_POST) {
-            if (empty($_POST['txtnumActa']) || empty($_POST['txtfecActa']) || empty($_POST['listClases']) 
+            if (empty($_POST['txtnumActa']) || empty($_POST['txtfecActa']) || empty($_POST['listItems']) 
             || empty($_POST['listestActa']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idActa     = intval($_POST['idActa']);
                 $inttipActa = 2;
-                $intiteActa = intval($_POST['listClases']);
+                $intiteActa = intval($_POST['listItems']);
                 $strnumActa = strClean($_POST['txtnumActa']);
                 $strfecActa = strClean($_POST['txtfecActa']);
                 $intrecActa = intval($_POST['listRecursos']);

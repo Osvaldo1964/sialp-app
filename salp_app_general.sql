@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-03-2024 a las 01:11:50
+-- Tiempo de generación: 05-03-2024 a las 03:23:48
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -43,8 +43,9 @@ CREATE TABLE `actas` (
 --
 
 INSERT INTO `actas` (`idActa`, `tipActa`, `iteActa`, `numActa`, `fecActa`, `recActa`, `valActa`, `estActa`) VALUES
-(1, 2, '1', '0393', '2024-02-16 05:00:00', 1, 2500000.00, 1),
-(2, 2, '2', '5656', '2024-02-27 05:00:00', 2, 350000000.00, 1);
+(1, 2, '3', '0393', '2024-02-16 05:00:00', 1, 2500000.00, 1),
+(2, 2, '2', '5656', '2024-02-27 05:00:00', 2, 350000000.00, 1),
+(4, 1, '1', '00125', '2024-03-01 05:00:00', 1, 350000000.00, 1);
 
 -- --------------------------------------------------------
 
@@ -204,6 +205,7 @@ CREATE TABLE `elementos` (
   `recElemento` bigint NOT NULL,
   `usoElemento` bigint NOT NULL,
   `tecElemento` bigint NOT NULL,
+  `potElemento` bigint NOT NULL,
   `matElemento` bigint NOT NULL,
   `altElemento` bigint NOT NULL,
   `latElemento` float(15,2) NOT NULL,
@@ -219,12 +221,12 @@ CREATE TABLE `elementos` (
 -- Volcado de datos para la tabla `elementos`
 --
 
-INSERT INTO `elementos` (`idElemento`, `claElemento`, `codElemento`, `detElemento`, `desElemento`, `dirElemento`, `recElemento`, `usoElemento`, `tecElemento`, `matElemento`, `altElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `abaElemento`, `valElemento`, `estElemento`) VALUES
-(12, 2, 'LED02030', 'LUMINARIA HITACHI', '', 'CALLE 45', 1, 1, 1, 1, 0, 11.45, 14.23, 'led02030', 1, NULL, 1050000.00, 1),
-(13, 2, 'LED02020', NULL, '', 'CALLE 20', 1, 1, 1, 1, 0, 15.25, 14.23, 'led02020', 1, NULL, 985000.00, 1),
-(14, 1, 'SODIO0126', 'BOMBILLA DE SODIO MARCA ACME', '', 'CENTRO', 1, 1, 1, 0, 0, 22.25, 33.25, 'sodio0126', 1, NULL, 560000.00, 1),
-(17, 1, 'SODIO0128', NULL, '', 'LAUREL', 1, 6, 1, 0, 0, 1525.00, 235252.00, 'sodio0128', 1, NULL, 250000.00, 1),
-(18, 1, 'prueba02', NULL, '', 'otra', 1, 1, 1, 0, 0, 2323.00, 2323.00, 'prueba02', 1, NULL, 145222.00, 1);
+INSERT INTO `elementos` (`idElemento`, `claElemento`, `codElemento`, `detElemento`, `desElemento`, `dirElemento`, `recElemento`, `usoElemento`, `tecElemento`, `potElemento`, `matElemento`, `altElemento`, `latElemento`, `lonElemento`, `rutElemento`, `ainElemento`, `abaElemento`, `valElemento`, `estElemento`) VALUES
+(12, 2, 'LED02030', 'LUMINARIA HITACHI', '', 'CALLE 45', 1, 1, 0, 0, 1, 1, 11.45, 14.23, 'led02030', 1, NULL, 1050000.00, 1),
+(13, 2, 'LED02020', NULL, '', 'CALLE 20', 1, 1, 0, 0, 1, 2, 15.25, 14.23, 'led02020', 1, NULL, 985000.00, 1),
+(14, 1, 'SODIO0126', 'BOMBILLA DE SODIO MARCA ACME', '', 'CENTRO', 1, 1, 1, 1, 0, 0, 22.25, 33.25, 'sodio0126', 1, NULL, 560000.00, 1),
+(17, 1, 'SODIO0128', NULL, '', 'LAUREL', 1, 6, 1, 2, 0, 0, 1525.00, 235252.00, 'sodio0128', 1, NULL, 250000.00, 1),
+(18, 1, 'prueba02', NULL, '', 'otra', 1, 1, 1, 3, 0, 0, 2323.00, 2323.00, 'prueba02', 1, NULL, 145222.00, 1);
 
 -- --------------------------------------------------------
 
@@ -369,12 +371,14 @@ CREATE TABLE `itemsacta` (
 --
 
 INSERT INTO `itemsacta` (`idItemacta`, `codItemacta`, `desItemacta`, `tipItemacta`, `estItemacta`) VALUES
-(1, '01', 'EXPANSION', 2, 1),
-(2, '02', 'MODERNIZACION', 2, 1),
-(3, '03', 'REPOSICION', 2, 1),
-(4, '04', 'HURTO', 4, 1),
-(5, '05', 'DAÑO', 4, 1),
-(6, '06', 'OBSOLESCENCIA  ', 4, 1);
+(1, '01', 'INICIAL', 1, 1),
+(2, '02', 'EXPANSION', 2, 1),
+(3, '03', 'MODERNIZACION', 2, 1),
+(4, '04', 'REPOSICION', 2, 1),
+(5, '05', 'TERCEROS', 3, 1),
+(6, '06', 'HURTO', 4, 1),
+(7, '07', 'DAÑO', 4, 1),
+(8, '08', 'OBSOLESCENCIA', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -747,9 +751,9 @@ CREATE TABLE `tipoactas` (
 --
 
 INSERT INTO `tipoactas` (`idTipoacta`, `codTipoacta`, `desTipoacta`, `selTipoacta`, `estTipoacta`) VALUES
-(1, '01', 'INVENTARIO INICIAL', 0, 1),
+(1, '01', 'INVENTARIO INICIAL', 1, 1),
 (2, '02', 'ACTAS DE INVERSION', 1, 1),
-(3, '03', 'RECIBO INFRAESTRUCTURA DE TERCEROS   ', 0, 1),
+(3, '03', 'RECIBO INFRAESTRUCTURA DE TERCEROS   ', 1, 1),
 (4, '04', 'BAJA DE INVENTARIO       ', 1, 1);
 
 -- --------------------------------------------------------
@@ -940,7 +944,8 @@ ALTER TABLE `elementos`
   ADD KEY `ainElemento` (`ainElemento`),
   ADD KEY `abaElemento` (`abaElemento`),
   ADD KEY `matElemento` (`matElemento`),
-  ADD KEY `altElemento` (`altElemento`);
+  ADD KEY `altElemento` (`altElemento`),
+  ADD KEY `potElemento` (`potElemento`);
 
 --
 -- Indices de la tabla `estratos`
@@ -1105,7 +1110,7 @@ ALTER TABLE `varsalp`
 -- AUTO_INCREMENT de la tabla `actas`
 --
 ALTER TABLE `actas`
-  MODIFY `idActa` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idActa` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `alturas`
@@ -1183,7 +1188,7 @@ ALTER TABLE `imagenes`
 -- AUTO_INCREMENT de la tabla `itemsacta`
 --
 ALTER TABLE `itemsacta`
-  MODIFY `idItemacta` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idItemacta` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `itemsalp`

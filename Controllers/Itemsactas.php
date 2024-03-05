@@ -128,10 +128,11 @@ class Itemsactas extends Controllers
         die();
     }
 
-    public function getSelectItemsactas()
+    public function getSelectItemsactas($idItemacta)
     {
+        $idItemacta = intval($idItemacta);
         $htmlOptions = "";
-        $arrData = $this->model->selectItemsactas();
+        $arrData = $this->model->selectItemsactas($idItemacta);
         if (count($arrData) > 0) {
             for ($i = 0; $i < count($arrData); $i++) {
                 $htmlOptions .= '<option value="' . $arrData[$i]['idItemacta'] . '">' .

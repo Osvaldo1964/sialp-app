@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Actas/getActas",
+            "url": " " + base_url + "/Actas/getActas/2",
             "dataSrc": ""
         },
         "columns": [
@@ -95,7 +95,7 @@ window.addEventListener('load', function () {
         formActa.onsubmit = function (e) {
             e.preventDefault();
             let inttipActa = 2;
-            let insiteActa = document.querySelector('#listClases').value;
+            let insiteActa = document.querySelector('#listItems').value;
             let strnumActa = document.querySelector('#txtnumActa').value;
             let strfecActa = document.querySelector('#txtfecActa').value;
             let intrecActa = document.querySelector('#listRecursos').value;
@@ -458,13 +458,13 @@ function fntEditInfo(element, idActa) {
                 let htmlImage = "";
                 let objActa = objData.data;
                 document.querySelector("#idActa").value = objActa[0].idActa;
-                document.querySelector("#listClases").value = objActa[0].iteActa;
+                document.querySelector("#listItems").value = objActa[0].iteActa;
                 document.querySelector("#listRecursos").value = objActa[0].recActa;
                 document.querySelector("#txtnumActa").value = objActa[0].numActa;
                 document.querySelector("#txtfecActa").value = objActa[0].fecActa;
                 document.querySelector("#fltvalActa").value = objActa[0].valActa;
                 document.querySelector("#listestActa").value = objActa[0].estActa;
-                $('#listClases').selectpicker('render');
+                $('#listItems').selectpicker('render');
                 $('#listRecursos').selectpicker('render');
                 $('#listestActa').selectpicker('render');
                 if (objActa.pdfs.length > 0) {
@@ -622,15 +622,15 @@ function fntUsos() {
 }
 
 function fntItemactas() {
-    if (document.querySelector('#listClases')) {
-        let ajaxUrl = base_url + '/Itemsactas/getSelectItemsactas';
+    if (document.querySelector('#listItems')) {
+        let ajaxUrl = base_url + '/Itemsactas/getSelectItemsactas/2';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listClases').innerHTML = request.responseText;
-                $('#listClases').selectpicker('render');
+                document.querySelector('#listItems').innerHTML = request.responseText;
+                $('#listItems').selectpicker('render');
             }
         }
     }

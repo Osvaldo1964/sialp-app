@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
             { "data": "options" }
         ],
         "columnDefs": [
-            { 'className': "textleft", "targets": [1,2] },
+            { 'className': "textleft", "targets": [1,2,3] },
             { 'className': "textright", "targets": [0] },
             { 'className': "textcenter", "targets": [3] },
         ],
