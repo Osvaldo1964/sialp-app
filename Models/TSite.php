@@ -80,7 +80,6 @@ trait TSite
         $query_insert  = "INSERT INTO pqrs (nomPqrs, emaPqrs, dirPqrs, msgPqrs, latPqrs, lonPqrs, ndiPqrs) 
                           VALUES(?,?,?,?,?,?,?)";
         $arrData = array($nombre, $email, $direccion, $mensaje, $latitud, $longitud, $newdireccion);
-        $this->con->insert($query_insert,$arrData);
 		$request_insert = $this->con->insert($query_insert,$arrData);
 		return $request_insert;
 	}

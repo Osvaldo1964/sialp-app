@@ -18,13 +18,13 @@ $('.date-picker').datepicker( {
 
 
 function fntSearchPqrs(){
-    let fecha = document.querySelector(".pagoMes").value;
+    let fecha = document.querySelector(".pqrsMes").value;
     if(fecha == ""){
         swal("", "Seleccione mes y año" , "error");
         return false;
     }else{
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Dashboard/tipoPagoMes';
+        let ajaxUrl = base_url+'/Dashboard/pqrsMes';
         divLoading.style.display = "flex";
         let formData = new FormData();
         formData.append('fecha',fecha);
@@ -33,7 +33,7 @@ function fntSearchPqrs(){
         request.onreadystatechange = function(){
             if(request.readyState != 4) return;
             if(request.status == 200){
-                $("#pagosMesAnio").html(request.responseText);
+                $("#cantPqrs").html(request.responseText);
                 divLoading.style.display = "none";
                 return false;
             }

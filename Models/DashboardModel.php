@@ -41,7 +41,7 @@
 					WHERE MONTH(frePqrs) = $mes AND YEAR(frePqrs) = $anio GROUP BY estPqrs";
 			$cantpqrs = $this->select_all($sql);
 			$meses = Meses();
-			$arrData = array('grafica' => 'tipoPagoMes', 'anio' => $anio, 'mes' => $meses[intval($mes-1)], 'pqrs' => $cantpqrs );
+			$arrData = array('anio' => $anio, 'mes' => $meses[intval($mes-1)], 'pqrs' => $cantpqrs );
 			return $arrData;
 		}
 		public function productosTen(){

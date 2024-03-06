@@ -28,15 +28,15 @@
 			$this->views->getView($this,"dashboard",$data);
   		}
 
-          public function tipoPagoMes(){
+          public function pqrsMes(){
 			if($_POST){
 				$grafica = "tipoPagoMes";
 				$nFecha = str_replace(" ","",$_POST['fecha']);
 				$arrFecha = explode('-',$nFecha);
 				$mes = $arrFecha[0];
 				$anio = $arrFecha[1];
-				$pagos = $this->model->selectPagosMes($anio,$mes);
-				$script = getFile("Template/Modals/graficas",$pagos);
+				$pagos = $this->model->cantPqrs($anio,$mes);
+				$script = getFile("Template/Modals/grafpqrs",$pagos);
 				echo $script;
 				die();
 			}

@@ -106,7 +106,10 @@ Highcharts.chart('cantPqrs', {
       data: [
         <?php
         foreach ($data['pqrs']['pqrs'] as $pagos) {
-          $nombre = $pagos['estPqrs'] == 1 ? 'Pendiente' : 'Resuelta';
+          $nombre = '';
+          $nombre = $pagos['estPqrs'] == 1 ? 'Pendiente' : $nombre;
+          $nombre = $pagos['estPqrs'] == 2 ? 'Asignada' : $nombre;
+          $nombre = $pagos['estPqrs'] == 3 ? 'Resuelta' : $nombre;
           echo "{name:'" . $nombre . "',y:" . $pagos['total'] . "},";
         }
         ?>

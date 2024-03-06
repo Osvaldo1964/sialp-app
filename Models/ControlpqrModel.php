@@ -59,7 +59,7 @@ class ControlpqrModel extends Mysql
         $this->intidPqrs  = $idPqrs;
         $this->strfsoPqrs = $fecha;
         $this->strdsoPqrs = $descripcion;
-        $this->intestPqrs = $estado;
+        $this->intestPqrs = 3;
 
         $sql = "UPDATE pqrs SET fsoPqrs = ?, dsoPqrs = ?, estPqrs = ? WHERE idPqrs = $this->intidPqrs";
         $arrData = array($this->strfsoPqrs, $this->strdsoPqrs, $this->intestPqrs);

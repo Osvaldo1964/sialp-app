@@ -41,15 +41,6 @@
               <input type="text" class="form-control valid validText" id="txtdsoPqrs" name="txtdsoPqrs" required="">
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="listestPqrs">Estado</label>
-              <select class="form-control selectpicker" id="listestPqrs" name="listestPqrs" required>
-                <option value="1">Activo</option>
-                <option value="2">Inactivo</option>
-              </select>
-            </div>
-          </div>
           <div class="tile-footer">
             <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
             <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>

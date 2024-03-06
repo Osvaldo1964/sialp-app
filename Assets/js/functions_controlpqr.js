@@ -216,11 +216,13 @@ function fntEditInfo(element, idPqrs) {
                 document.querySelector("#txtdirPqrs").value = objData.data[0].dirPqrs;
                 document.querySelector("#txtmsgPqrs").value = objData.data[0].msgPqrs;
                 document.querySelector("#txtfsoPqrs").value = objData.data[0].fsoPqrs;
-                if (objData.data[0].estPqrs == 1) {
+                document.querySelector("#txtdsoPqrs").value = objData.data[0].dsoPqrs;
+                document.querySelector("#listCuadrillas").value = objData.data[0].cuaPqrs;
+/*                 if (objData.data[0].estPqrs == 1) {
                     document.querySelector("#listestPqrs").value = 1;
                 } else {
                     document.querySelector("#listestPqrs").value = 2;
-                }
+                } */
                 $('#listestPqrs').selectpicker('render');
             }
         }
