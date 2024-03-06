@@ -24,7 +24,7 @@ function fntSearchPqrs(){
         return false;
     }else{
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Dashboard/pqrsMes';
+        let ajaxUrl = base_url+'/Dashboard/pqrsMes'; 
         divLoading.style.display = "flex";
         let formData = new FormData();
         formData.append('fecha',fecha);
@@ -33,6 +33,7 @@ function fntSearchPqrs(){
         request.onreadystatechange = function(){
             if(request.readyState != 4) return;
             if(request.status == 200){
+                console.log(request.responseText);
                 $("#cantPqrs").html(request.responseText);
                 divLoading.style.display = "none";
                 return false;

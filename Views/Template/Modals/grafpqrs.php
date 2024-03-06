@@ -32,7 +32,7 @@ Highcharts.chart('cantPqrs', {
       colorByPoint: true,
       data: [
         <?php
-        foreach ($data['pqrs']['pqrs'] as $pagos) {
+        foreach ($data['pqrs'] as $pagos) {
           $nombre = '';
           $nombre = $pagos['estPqrs'] == 1 ? 'Pendiente' : $nombre;
           $nombre = $pagos['estPqrs'] == 2 ? 'Asignada' : $nombre;

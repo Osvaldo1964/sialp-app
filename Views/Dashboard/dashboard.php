@@ -45,8 +45,8 @@ headerAdmin($data);
       <div class="tile">
         <div class="container-title">
           <h3 class="tile-title">PQRS por Estado</h3>
-          <div class="dflex">
-            <input class="date-picker pagoMes" name="pqrsMes" placeholder="Mes y Año" autocomplete="off">
+          <div class="dflex"> 
+            <input class="date-picker pqrsMes" name="pqrsMes" placeholder="Mes y Año" autocomplete="off">
             <button type="button" class="btnTipoVentaMes btn btn-info btn-sm" onclick="fntSearchPqrs()"> <i class="fas fa-search"></i> </button>
           </div>
         </div>
@@ -105,7 +105,7 @@ Highcharts.chart('cantPqrs', {
       colorByPoint: true,
       data: [
         <?php
-        foreach ($data['pqrs']['pqrs'] as $pagos) {
+        foreach ($data['pqrs'] as $pagos) {
           $nombre = '';
           $nombre = $pagos['estPqrs'] == 1 ? 'Pendiente' : $nombre;
           $nombre = $pagos['estPqrs'] == 2 ? 'Asignada' : $nombre;

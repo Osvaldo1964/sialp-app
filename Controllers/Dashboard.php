@@ -24,13 +24,15 @@
 			$data['clases'] = $this->model->cantElementosClase();
 			$anio = date('Y');
 			$mes = date('m');
-			$data['pqrs'] = $this->model->cantPqrs($anio,$mes);
+			$data['pqrs2'] = $this->model->cantPqrs($anio,$mes);
+			$data['pqrs'] = $data['pqrs2']['pqrs'];
+			//dep($data);exit;
 			$this->views->getView($this,"dashboard",$data);
   		}
 
           public function pqrsMes(){
 			if($_POST){
-				$grafica = "tipoPagoMes";
+				$grafica = "pqrMes";
 				$nFecha = str_replace(" ","",$_POST['fecha']);
 				$arrFecha = explode('-',$nFecha);
 				$mes = $arrFecha[0];
