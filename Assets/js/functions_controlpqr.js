@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "desc"]]
     });
 
-    //Crear Empresa
+    //Solucion PQR
     if (document.querySelector('#formPqrs')) {
         let formPqrs = document.querySelector('#formPqrs');
         formPqrs.onsubmit = function (e) {
@@ -109,7 +109,63 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-    //fntCapitulos();
+
+        //Solucion PQR
+        if (document.querySelector('#formCuadrilla')) {
+            let formCuadrilla = document.querySelector('#formCuadrilla');
+            formCuadrilla.onsubmit = function (e) {
+                e.preventDefault();
+                let intidPqrs = document.querySelector('#txtidPqrs').value;
+                let strasiPqrs = document.querySelector('#txtasiPqrs').value;
+                let intcuaPqrs = document.querySelector('#listCuadrillas').value;
+                //let intestPqrs = document.querySelector('#listestPqrs').value;
+                if (strasiPqrs == '' || intcuaPqrs == '') {
+                    swal("Atención", "Todos los campos son obligatorios.", "error");
+                    return false;
+                }
+                let elementsValid = document.getElementsByClassName("valid");
+                for (let i = 0; i < elementsValid.length; i++) {
+                    if (elementsValid[i].classList.contains('is-invalid')) {
+                        swal("Atención", "Por favor verifique los campos en rojo.", "error");
+                        return false;
+                    }
+                }
+                divLoading.style.display = "flex";
+                let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                let ajaxUrl = base_url + '/Controlpqr/setCuadrilla/' + intidPqrs;
+                let formData = new FormData(formCuadrilla);
+                request.open("POST", ajaxUrl, true);
+                request.send(formData);
+                request.onreadystatechange = function () {
+                    if (request.readyState == 4 && request.status == 200) {
+                        let objData = JSON.parse(request.responseText);
+                        if (objData.status) {
+                            tableControlPqr.api().ajax.reload();    
+    /*                         if (rowTable == ""){
+                                tableControlPqr.api().ajax.reload();    
+                            }else{
+                                 htmlStatus = intestPqrs == 1 ? 
+                                '<span class="badge badge-success">Activo</span>' :
+                                '<span class="badge badge-danger">Inactivo</span>';
+                                rowTable.cells[1].textContent = strnomPqrs;
+                                rowTable.cells[2].textContent = strdirPqrs;
+                                rowTable.cells[3].textContent = strfrePqrs;
+                                rowTable.cells[4].innerHTML = htmlStatus;
+                                rowTable = ""; 
+                            } */
+                            $('#modalFormCuadarilla').modal("hide");
+                            formCuadrilla.reset();
+                            swal("Cuadrillas", objData.msg, "success");
+                        }
+                    }
+                    divLoading.style.display = "none";
+                    return false;
+                }
+            }
+        }
+    
+
+    fntCuadrillas();
 }, false);
 
 function fntViewInfo(idpqrs) {
@@ -172,6 +228,41 @@ function fntEditInfo(element, idPqrs) {
     }
 }
 
+function fntCuadrilla(element, idPqrs) {
+    rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML = "Asignar Cuadrilla al PQR";
+    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnText').innerHTML = "Asignar";
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Controlpqr/getPqr/' + idPqrs;
+    request.open("GET", ajaxUrl, true);
+    request.send();
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            let objData = JSON.parse(request.responseText);
+            if (objData.status) {
+                document.querySelector("#idPqrs").value = objData.data[0].idPqrs;
+                document.querySelector("#txtidPqrs").value = objData.data[0].idPqrs;
+                document.querySelector("#txtnomPqrs").value = objData.data[0].nomPqrs;
+                document.querySelector("#txtemaPqrs").value = objData.data[0].emaPqrs;
+                document.querySelector("#txtdirPqrs").value = objData.data[0].dirPqrs;
+                document.querySelector("#txtmsgPqrs").value = objData.data[0].msgPqrs;
+                document.querySelector("#txtasiPqrs").value = objData.data[0].asiPqrs;
+                document.querySelector("#listCuadrillas").value = objData.data[0].cuaPqrs;
+/*                 if (objData.data[0].estPqrs == 1) {
+                    document.querySelector("#listestPqrs").value = 1;
+                } else {
+                    document.querySelector("#listestPqrs").value = 2;
+                }
+                $('#listestPqrs').selectpicker('render'); */
+                $('#listCuadrillas').selectpicker('render');
+            }
+        }
+        $('#modalFormCuadrilla').modal('show');
+    }
+}
+
 function fntDelInfo(idPqrs) {
     swal({
         title: "Eliminar PQR",
@@ -203,6 +294,21 @@ function fntDelInfo(idPqrs) {
             }
         }
     });
+}
+
+function fntCuadrillas() {
+    if (document.querySelector('#listCuadrillas')) {
+        let ajaxUrl = base_url + '/Cuadrillas/getSelectCuadrillas';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listCuadrillas').innerHTML = request.responseText;
+                $('#listCuadrillas').selectpicker('render');
+            }
+        }
+    }
 }
 
 function openModal() {

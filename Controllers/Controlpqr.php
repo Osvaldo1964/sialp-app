@@ -3,7 +3,7 @@ class Controlpqr extends Controllers
 {
     public function __construct()
     {
-		sessionStart();
+        sessionStart();
         parent::__construct();
         if (empty($_SESSION['login'])) {
             header('location: ' . base_url() . '/login');
@@ -26,9 +26,10 @@ class Controlpqr extends Controllers
     public function setPqrs()
     {
         if ($_POST) {
-            if (empty($_POST['txtfsoPqrs']) || empty($_POST['txtdsoPqrs']) ||
-                empty($_POST['listestPqrs']))
-            {
+            if (
+                empty($_POST['txtfsoPqrs']) || empty($_POST['txtdsoPqrs']) ||
+                empty($_POST['listestPqrs'])
+            ) {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idPqrs = intval($_POST['idPqrs']);
@@ -52,12 +53,12 @@ class Controlpqr extends Controllers
                 if ($request_pqrs > 0) {
                     if ($option == 1) {
                         $arrResponse = array("status" => true, "msg" => 'Datos guardados correctamente.');
-                    }else{
+                    } else {
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
                     }
-                }else if ($request_pqrs == 'exist') {
+                } else if ($request_pqrs == 'exist') {
                     $arrResponse = array("status" => false, "msg" => '¡Atención! la Categoría ya existe, ingrese otro.');
-                }else{
+                } else {
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
             }
@@ -66,29 +67,68 @@ class Controlpqr extends Controllers
         die();
     }
 
+    public function setCuadrilla($idPqrs)
+    {
+        if ($_POST) {
+            if (empty($_POST['txtasiPqrs']) || empty($_POST['listCuadrillas'])) {
+                $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+            } else {
+                $idPqrs     = $idPqrs;
+                $strasiPqrs = $_POST['txtasiPqrs'];
+                $intcuaPqrs = strClean($_POST['listCuadrillas']);
+                $intestPqrs = 2;
+
+                if ($_SESSION['permisosMod']['updPermiso']) {
+                    $request_cuadrilla = $this->model->updateCuapqr($idPqrs, $strasiPqrs, $intcuaPqrs, $intestPqrs);
+                }
+                if ($request_cuadrilla > 0) {
+                    $arrResponse = array("status" => true, "msg" => 'Datos guardados correctamente.');
+                } else {
+                    $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+                }
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+
+
     public function getPqrs()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
             $arrData = $this->model->selectPqrs();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
+                $btnCuadrilla = '';
                 $btnEdit = '';
                 $btnDelete = '';
-                if ($arrData[$i]['estPqrs'] == 1) {
-                    $arrData[$i]['estPqrs'] = '<span class="badge badge-success">Activo</span>';
-                } else {
-                    $arrData[$i]['estPqrs'] = '<span class="badge badge-danger">Inactivo</span>';
+                switch ($arrData[$i]['estPqrs']) {
+                    case 0:
+                        $arrData[$i]['estPqrs'] = '<span class="badge badge-danger">Anulada</span>';
+                        break;
+                    case 1:
+                        $arrData[$i]['estPqrs'] = '<span class="badge badge-primary">Pendiente</span>';
+                        break;
+                    case 2:
+                        $arrData[$i]['estPqrs'] = '<span class="badge badge-warning">Asignada</span>';
+                        break;
+                    case 3:
+                        $arrData[$i]['estPqrs'] = '<span class="badge badge-success">Resuelta</span>';
+                        break;
+                    default:
+                        echo "Error";
                 }
                 if ($_SESSION['permisosMod']['reaPermiso']) {
                     $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idPqrs'] . ')" title="Ver PQR"><i class="far fa-eye"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
                     $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idPqrs'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnCuadrilla = '<button class="btn btn-warning btn-sm" onClick="fntCuadrilla(this,' . $arrData[$i]['idPqrs'] . ')" title="Asignar"><i class="fa fa-users"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['delPermiso']) {
                     $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idPqrs'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
-                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
+                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnCuadrilla . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         }
@@ -120,9 +160,9 @@ class Controlpqr extends Controllers
                 $requestDelete = $this->model->deletePqr($intidPqr);
                 if ($requestDelete == 'ok') {
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Categoría.');
-                } else if ($requestDelete == 'exist'){
+                } else if ($requestDelete == 'exist') {
                     $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una Categoría con Productos asociados.');
-                }else{
+                } else {
                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Categoría.');
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -131,4 +171,3 @@ class Controlpqr extends Controllers
         die();
     }
 }
-?>

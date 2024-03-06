@@ -6,6 +6,8 @@ class ControlpqrModel extends Mysql
     public $stremaPqrs;
     public $strdirPqrs;
     public $strmsgPqrs;
+    public $strasiPqrs;
+    public $intcuaPqrs;
     public $strfrePqrs;
     public $strfsoPqrs;
     public $strdsoPqrs;
@@ -59,9 +61,21 @@ class ControlpqrModel extends Mysql
         $this->strdsoPqrs = $descripcion;
         $this->intestPqrs = $estado;
 
-        $sql = "UPDATE pqrs SET fsoPqrs = ?, dsoPqrs = ?, estPqrs = ?
-                WHERE idPqrs = $this->intidPqrs";
+        $sql = "UPDATE pqrs SET fsoPqrs = ?, dsoPqrs = ?, estPqrs = ? WHERE idPqrs = $this->intidPqrs";
         $arrData = array($this->strfsoPqrs, $this->strdsoPqrs, $this->intestPqrs);
+        $request = $this->update($sql, $arrData);
+        return $request;
+    }
+
+    
+    public function updateCuapqr(int $idPqrs, string $fecha, int $cuadrilla, int $estado)
+    {
+        $this->intidPqrs  = $idPqrs;
+        $this->strasiPqrs = $fecha;
+        $this->intcuaPqrs = $cuadrilla;
+        $this->intestPqrs = $estado;
+        $sql = "UPDATE pqrs SET asiPqrs = ?, cuaPqrs = ?, estPqrs = ? WHERE idPqrs = $this->intidPqrs";
+        $arrData = array($this->strasiPqrs, $this->intcuaPqrs, $this->intestPqrs);
         $request = $this->update($sql, $arrData);
         return $request;
     }

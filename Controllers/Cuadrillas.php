@@ -134,9 +134,9 @@ class Cuadrillas extends Controllers
         die();
     }
 
-    public function getSelectCuadrilla(){
+    public function getSelectCuadrillas(){
         $htmlOptions = "";
-        $arrData = $this->model->selectCuadrilla();
+        $arrData = $this->model->selectCuadrillas();
         if (count($arrData) > 0){
             for ($i=0; $i < count($arrData); $i++){
                 if ($arrData[$i]['estCuadrilla'] == 1){
