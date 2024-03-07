@@ -57,7 +57,7 @@ headerAdmin($data);
     <div class="col-md-6">
       <div class="tile">
         <div class="container-title">
-          <h3 class="tile-title">UCAPs por Grupo</h3>
+          <h3 class="tile-title">UCAPs por Clase</h3>
           <!--               <div class="dflex">
                 <input class="date-picker pagoMes" name="pagoMes" placeholder="Mes y Año" autocomplete="off">
                 <button type="button" class="btnTipoVentaMes btn btn-info btn-sm" onclick="fntSearchPagos()"> <i class="fas fa-search"></i> </button>
@@ -80,7 +80,7 @@ Highcharts.chart('cantPqrs', {
       type: 'pie'
     },
     title: {
-      text: 'PQRs POR CONCEPTOS'
+      text: ''
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -125,7 +125,7 @@ Highcharts.chart('cantPqrs', {
       type: 'pie'
     },
     title: {
-      text: 'PQRs por Estado'
+      text: ''
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

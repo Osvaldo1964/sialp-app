@@ -27,15 +27,14 @@ class Controlpqr extends Controllers
     {
         if ($_POST) {
             if (
-                empty($_POST['txtfsoPqrs']) || empty($_POST['txtdsoPqrs']) ||
-                empty($_POST['listestPqrs'])
-            ) {
+                empty($_POST['txtfsoPqrs']) || empty($_POST['txtdsoPqrs']))
+            {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idPqrs = intval($_POST['idPqrs']);
                 $strfsoPqrs  = $_POST['txtfsoPqrs'];
                 $strdsoPqrs  = strClean($_POST['txtdsoPqrs']);
-                $intestPqrs  = intval($_POST['listestPqrs']);
+                //$intestPqrs  = intval($_POST['listestPqrs']);
 
                 if ($idPqrs == 0) {
                     //CREAR
@@ -47,7 +46,7 @@ class Controlpqr extends Controllers
                     //ACTUALIZAR
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_pqrs = $this->model->updatePqrs($idPqrs, $strfsoPqrs, $strdsoPqrs, $intestPqrs);
+                        $request_pqrs = $this->model->updatePqrs($idPqrs, $strfsoPqrs, $strdsoPqrs);
                     }
                 }
                 if ($request_pqrs > 0) {
@@ -169,5 +168,21 @@ class Controlpqr extends Controllers
             }
         }
         die();
+    }
+
+    public function impAsignacion($idPqrs) {
+        $idPqrs = intval($idPqrs);
+        if (!is_numeric($idPqrs)){
+            header("Location:" . base_url() . '/controlpqr');
+        }
+        if (empty($_SESSION['permisosMod']['reaPermiso'])) {
+            header("Location:" . base_url() . '/dashboard');
+        }
+        $data['page_tag']   = "Asignar Pqrs - Salp - App";
+        $data['page_title'] = "IMPRIMIR ASIGNACION <small> SALP - APP </small>";
+        $data['page_name']  = "imprasignacion";
+        $data['pqrs'] = $this->model->selectPqrCuadrilla($idPqrs);
+        dep($data);exit;
+        $this->views->getView($this, "imprasignacionpdf", $data);
     }
 }

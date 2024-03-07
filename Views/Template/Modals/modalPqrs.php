@@ -142,7 +142,7 @@
           <div class="form-row">
             <div class="tile-footer">
               <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-              <button id="btnImprimir" class="btn btn-success" type="button"><i class="fa fa-fw fa-lg fa-print"></i><span id="btnPrint">Imprimir</span></button>&nbsp;&nbsp;&nbsp;
+              <button id="btnImprimir" class="btn btn-success" type="button" onclick="imprimirPqrs(<? echo $idPqrs; ?>)"><i class="fa fa-f fa-lg fa-print"></i><span id="btnPrint">Imprimir</span></button>&nbsp;&nbsp;&nbsp;
               <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
             </div>
           </div>

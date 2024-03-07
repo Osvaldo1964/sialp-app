@@ -54,7 +54,17 @@ class ControlpqrModel extends Mysql
         return $request;
     }
 
-    public function updatePqrs(int $idPqrs, string $fecha, string $descripcion, int $estado)
+    public function selectPqrCuadrilla(int $idPqrs)
+    {
+        $this->intidPqrs = $idPqrs;
+        $sql = "SELECT * FROM pqrs p
+        INNER JOIN cuadrillas c ON p.cuaPqrs = c.idCuadrilla
+        WHERE idPqrs = $this->intidPqrs";
+        $request = $this->select_all($sql);
+        return $request;
+    }
+
+    public function updatePqrs(int $idPqrs, string $fecha, string $descripcion)
     {
         $this->intidPqrs  = $idPqrs;
         $this->strfsoPqrs = $fecha;
