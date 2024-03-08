@@ -182,7 +182,6 @@ class Controlpqr extends Controllers
         $data['page_title'] = "IMPRIMIR ASIGNACION <small> SALP - APP </small>";
         $data['page_name']  = "imprasignacion";
         $data['pqrs'] = $this->model->selectPqrCuadrilla($idPqrs);
-        dep($data);exit;
         $this->views->getView($this, "imprasignacionpdf", $data);
     }
 }

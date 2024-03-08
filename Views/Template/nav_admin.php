@@ -77,20 +77,21 @@
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                            <li class="treeview">
-                            <a class="app-menu__item" href="#" data-toggle="treeview">
-                                <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
-                                <span class="app-menu__label">ENTRADAS</span>
-                                <i class="treeview-indicator fa fa-angle-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                               <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Inv. Inicial Lote</a></li>
-                               <li><a class="treeview-item" href="<?= base_url(); ?>/invinicial"> Inv. Inicial Manual</a></li>
+                                <li class="treeview">
+                                    <a class="app-menu__item" href="#" data-toggle="treeview">
+                                        <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
+                                        <span class="app-menu__label">ENTRADAS</span>
+                                        <i class="treeview-indicator fa fa-angle-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Inv. Inicial Lote</a></li>
+                                        <li><a class="treeview-item" href="<?= base_url(); ?>/invinicial"> Inv. Inicial Manual</a></li>
+                                    </ul>
+                                </li>
+                                <!--  <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Hoja de Vida UCAPs</a></li> -->
                             </ul>
                         </li>
-                               <!--  <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Hoja de Vida UCAPs</a></li> -->
-                            </ul>
-                        </li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/bajas"> BAJA DE INVENTARIO</a></li>
                         <li class="treeview">
                             <a class="app-menu__item" href="#" data-toggle="treeview">
                                 <!--                                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i> -->
@@ -205,19 +206,14 @@
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                            <li><a class="treeview-item" href="<?= base_url(); ?>/"> Modelo Inicial por Rangos</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/"> Modelo Inicial por Rangos</a></li>
                                 <li><a class="treeview-item" href="<?= base_url(); ?>/"> Ejecucion por Rangos</a></li>
                                 <li><a class="treeview-item" href="<?= base_url(); ?>/"> Modelo Vs Ejecucion</a></li>
                             </ul>
                         </li>
                         <!--                         <li><a class="treeview-item" href="<?= base_url(); ?>/tipoactas"> Tipos de Actas</a></li> -->
                     </ul>
-
-
-
-
                     <ul class="treeview-menu">
-
                     </ul>
                 </li>
             <?php } ?>

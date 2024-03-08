@@ -2,7 +2,6 @@
     headerAdmin($data);
     $nombreImagen =  media() . '/site/images/icons/logo_icaruscol.jpg';
     $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen));
-    dep($data);exit;
 ?>
 <main class="app-content">
     <div class="app-title">

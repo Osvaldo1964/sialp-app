@@ -238,7 +238,7 @@ function fntCuadrilla(element, idPqrs) {
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Asignar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Controlpqr/getPqr/' + idPqrs;
+    let ajaxUrl = base_url + '/Controlpqr/getPqr/' + idPqrs ;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -271,15 +271,11 @@ function imprimirPqrs() {
     let strasiPqrs = document.querySelector('#txtasiPqrs').value;
     let intcuaPqrs = document.querySelector('#listCuadrillas').value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Controlpqr/impAsignacion/' + intidPqrs;
+    let ajaxUrl = base_url + '/Controlpqr/impAsignacion/' + intidPqrs + '?target?_blank' ;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
-            let objData = JSON.parse(request.responseText);
-            if (objData.status) {
-                alert('OK');
-            }
         }
     }
 }
