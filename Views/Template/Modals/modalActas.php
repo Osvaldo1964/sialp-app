@@ -222,13 +222,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label for="listestElemento">Estado</label>
-                                    <select class="form-control selectpicker" id="listestElemento" name="listestElemento" required>
-                                        <option value="1">Activo</option>
-                                        <option value="2">Inactivo</option>
-                                    </select>
-                                </div>
                                 <div class="form-group col-md-4 mt-4">
                                     <button id="btnActionForm" class="btn btn-primary btn-md btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
                                 </div>

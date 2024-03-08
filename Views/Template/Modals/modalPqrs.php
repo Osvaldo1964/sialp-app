@@ -37,6 +37,10 @@
               <input type="date" class="date-picker form-control" id="txtfsoPqrs" name="txtfsoPqrs" required="">
             </div>
             <div class="form-group col-md-6">
+              <label for="listUcaps">UCAPs</label>
+              <select class="form-control" data-live-search="true" id="listUcaps" name="listUcaps" required=""></select>
+            </div>
+            <div class="form-group col-md-12">
               <label for="txtdsoPqrs">Observaciones</label>
               <input type="text" class="form-control valid validText" id="txtdsoPqrs" name="txtdsoPqrs" required="">
             </div>
@@ -134,6 +138,10 @@
               <label for="txtasiPqrs">Fecha</label>
               <input type="date" class="form-control valid validFecha" id="txtasiPqrs" name="txtasiPqrs" required="">
             </div>
+            <div class="form-group col-md-4">
+              <label for="listUcaps">UCAPs</label>
+              <select class="form-control" data-live-search="true" id="listUcaps" name="listUcaps" required=""></select>
+            </div>
             <div class="form-group col-md-3">
               <label for="listCuadrillas">Cuadrilla</label>
               <select class="form-control" data-live-search="true" id="listCuadrillas" name="listCuadrillas" required></select>
@@ -142,7 +150,7 @@
           <div class="form-row">
             <div class="tile-footer">
               <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-              <button id="btnImprimir" class="btn btn-success" type="button" onclick="imprimirPqrs()"> <i class="fa fa-f fa-lg fa-print"></i><span id="btnPrint">Imprimir</span></button>&nbsp;&nbsp;&nbsp; 
+              <button id="btnImprimir" class="btn btn-success" type="button" onclick="imprimirPqrs()"> <i class="fa fa-f fa-lg fa-print"></i><span id="btnPrint">Imprimir</span></button>&nbsp;&nbsp;&nbsp;
               <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
             </div>
           </div>

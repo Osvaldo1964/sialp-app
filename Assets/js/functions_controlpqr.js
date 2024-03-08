@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-
+    fntUcaps();
     fntCuadrillas();
 }, false);
 
@@ -218,12 +218,14 @@ function fntEditInfo(element, idPqrs) {
                 document.querySelector("#txtmsgPqrs").value = objData.data[0].msgPqrs;
                 document.querySelector("#txtfsoPqrs").value = objData.data[0].fsoPqrs;
                 document.querySelector("#txtdsoPqrs").value = objData.data[0].dsoPqrs;
+                document.querySelector("#listUcaps").value = objData.data[0].ucaPqrs;
                 document.querySelector("#listCuadrillas").value = objData.data[0].cuaPqrs;
                 /*                 if (objData.data[0].estPqrs == 1) {
                                     document.querySelector("#listestPqrs").value = 1;
                                 } else {
                                     document.querySelector("#listestPqrs").value = 2;
                                 } */
+                $('#listUcaps').selectpicker('render');
                 $('#listestPqrs').selectpicker('render');
             }
         }
@@ -238,7 +240,7 @@ function fntCuadrilla(element, idPqrs) {
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Asignar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Controlpqr/getPqr/' + idPqrs ;
+    let ajaxUrl = base_url + '/Controlpqr/getPqr/' + idPqrs;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -252,13 +254,9 @@ function fntCuadrilla(element, idPqrs) {
                 document.querySelector("#txtdirPqrs").value = objData.data[0].dirPqrs;
                 document.querySelector("#txtmsgPqrs").value = objData.data[0].msgPqrs;
                 document.querySelector("#txtasiPqrs").value = objData.data[0].asiPqrs;
+                document.querySelector("#listUcaps").value = objData.data[0].ucaPqrs;
                 document.querySelector("#listCuadrillas").value = objData.data[0].cuaPqrs;
-                /*                 if (objData.data[0].estPqrs == 1) {
-                                    document.querySelector("#listestPqrs").value = 1;
-                                } else {
-                                    document.querySelector("#listestPqrs").value = 2;
-                                }
-                                $('#listestPqrs').selectpicker('render'); */
+                $('#listUcaps').selectpicker('render');
                 $('#listCuadrillas').selectpicker('render');
             }
         }
@@ -271,7 +269,7 @@ function imprimirPqrs() {
     let strasiPqrs = document.querySelector('#txtasiPqrs').value;
     let intcuaPqrs = document.querySelector('#listCuadrillas').value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Controlpqr/impAsignacion/' + intidPqrs + '?target?_blank' ;
+    let ajaxUrl = base_url + '/Controlpqr/impAsignacion/' + intidPqrs + '?target?_blank';
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -323,6 +321,21 @@ function fntCuadrillas() {
             if (request.readyState == 4 && request.status == 200) {
                 document.querySelector('#listCuadrillas').innerHTML = request.responseText;
                 $('#listCuadrillas').selectpicker('render');
+            }
+        }
+    }
+}
+
+function fntUcaps() {
+    if (document.querySelector('#listUcaps')) {
+        let ajaxUrl = base_url + '/Elementos/getSelectUcaps';
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listUcaps').innerHTML = request.responseText;
+                $('#listUcaps').selectpicker('render');
             }
         }
     }

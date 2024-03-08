@@ -1,5 +1,5 @@
 document.write(`<script src="${base_url}/Assets/js/plugins/JsBarcode.all.min.js"></script>`);
-let tableActas;
+let tableBajas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -10,14 +10,14 @@ $(document).on('focusin', function (e) {
 });
 
 window.addEventListener('load', function () {
-    tableActas = $('#tableActas').dataTable({
+    tableBajas = $('#tableBajas').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Actas/getActas/2",
+            "url": " " + base_url + "/Bajas/getActas/4",
             "dataSrc": ""
         },
         "columns": [
@@ -94,7 +94,7 @@ window.addEventListener('load', function () {
         let formActa = document.querySelector("#formActa");
         formActa.onsubmit = function (e) {
             e.preventDefault();
-            let inttipActa = 2;
+            let inttipActa = 1;
             let insiteActa = document.querySelector('#listItems').value;
             let strnumActa = document.querySelector('#txtnumActa').value;
             let strfecActa = document.querySelector('#txtfecActa').value;
@@ -107,7 +107,7 @@ window.addEventListener('load', function () {
             }
             divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Actas/setActa/';
+            let ajaxUrl = base_url + '/Bajas/setActa/';
             let formData = new FormData(formActa);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
@@ -119,7 +119,7 @@ window.addEventListener('load', function () {
                         document.querySelector("#idActa").value = objData.idActa;
                         document.querySelector("#containerGallery").classList.remove("notblock");
                         if (rowTable == "") {
-                            tableActas.api().ajax.reload();
+                            tableBajas.api().ajax.reload();
                         } else {
                             htmlStatus = intestActa == 1 ?
                                 '<span class="badge badge-success">Activo</span>' :
@@ -283,7 +283,7 @@ function fntInputPdf() {
                     let objeto_url = nav.createObjectURL(this.files[0]);
                     prevImg.innerHTML = `<img class="loading" src="${base_url}/Assets/images/loading.svg" >`;
                     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                    let ajaxUrl = base_url + '/Actas/setPdfacta';
+                    let ajaxUrl = base_url + '/Bajas/setPdfacta';
                     let formData = new FormData();
                     formData.append('actImagen', idActa);
                     formData.append("foto", this.files[0]);
@@ -361,7 +361,7 @@ function fntDelItem(element) {
     let nameImg = document.querySelector(element + ' .btnDeleteImage').getAttribute("imgname");
     let idActa = document.querySelector("#idActa").value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Actas/delPdfacta/';
+    let ajaxUrl = base_url + '/Bajas/delPdfacta/';
     let formData = new FormData();
     formData.append('actImagen', idActa);
     formData.append('file', nameImg);
@@ -385,7 +385,7 @@ function fntDelPdf(element) {
     let nameImg = document.querySelector(element + ' .btnDeletePdf').getAttribute("imgname");
     let idActa = document.querySelector("#idActa").value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Actas/delPdfacta/';
+    let ajaxUrl = base_url + '/Bajas/delPdfacta/';
     let formData = new FormData();
     formData.append('actImagen', idActa);
     formData.append('file', nameImg);
@@ -407,7 +407,7 @@ function fntDelPdf(element) {
 
 function fntViewInfo(idActa) {
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Actas/getActa/' + idActa;
+    let ajaxUrl = base_url + '/Bajas/getActa/' + idActa;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -448,7 +448,7 @@ function fntEditInfo(element, idActa) {
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnText').innerHTML = "Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Actas/getActa/' + idActa;
+    let ajaxUrl = base_url + '/Bajas/getActa/' + idActa;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -502,7 +502,7 @@ function fntDelInfo(idActa) {
     }, function (isConfirm) {
         if (isConfirm) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/Actas/delActa/';
+            let ajaxUrl = base_url + '/Bajas/delActa/';
             let strData = "idActa=" + idActa;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -548,7 +548,6 @@ function fntTecnologias() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
-                document.querySelector('#listTecno').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listTecno').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listTecno').selectpicker('render');
@@ -566,7 +565,6 @@ function fntPotencias() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
-                document.querySelector('#listPotencia').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listPotencia').innerHTML = request.responseText;
                 $('#listPotencia').selectpicker('render');
             }
@@ -583,7 +581,6 @@ function fntMateriales() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
-                document.querySelector('#listMaterial').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listMaterial').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listMaterial').selectpicker('render');
@@ -601,7 +598,6 @@ function fntAlturas() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
-                document.querySelector('#listAltura').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listAltura').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listAltura').selectpicker('render');
@@ -618,7 +614,6 @@ function fntUsos() {
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listUsos').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listUsos').innerHTML = request.responseText;
                 $('#listUsos').selectpicker('render');
             }
@@ -628,13 +623,12 @@ function fntUsos() {
 
 function fntItemactas() {
     if (document.querySelector('#listItems')) {
-        let ajaxUrl = base_url + '/Itemsactas/getSelectItemsactas/2';
+        let ajaxUrl = base_url + '/Itemsactas/getSelectItemsactas/4';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrl, true);
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listItems').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listItems').innerHTML = request.responseText;
                 $('#listItems').selectpicker('render');
             }
@@ -650,10 +644,8 @@ function fntRecursos() {
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
-                document.querySelector('#listRecursos').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listRecursos').innerHTML = request.responseText;
                 $('#listRecursos').selectpicker('render');
-                document.querySelector('#listRecursosadd').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listRecursosadd').innerHTML = request.responseText;
                 $('#listRecursosadd').selectpicker('render');
             }
@@ -675,10 +667,15 @@ function fntPrintBarcode(area) {
     vprint.close();
 }
 
-function fntAddElemento(idActa, numActa, fecActa) {
-    let eleactActa = idActa;
-    let elenumActa = numActa;
-    let elefecActa = fecActa;
+function fntAddElementoj(element, idActa) {
+    rowTable = element.parentNode.parentNode.parentNode;
+    alert(rowTable.cells[3].textContent);
+    let eleactActa = rowTable.cells[0].textContent;
+    let elenumActa = rowTable.cells[3].textContent;
+    let elefecActa = rowTable.cells[4].textContent;
+    alert(rowTable.cells[0].textContent);
+    alert(rowTable.cells[3].textContent);
+    alert(rowTable.cells[4].textContent);
     document.querySelector('#eleactActa').value = eleactActa;
     //document.querySelector('#elenumActa').value = elenumActa;
     //document.querySelector('#elefecActa').value = elefecActa;

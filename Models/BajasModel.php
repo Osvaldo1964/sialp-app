@@ -1,5 +1,5 @@
 <?php
-class ActasModel extends Mysql
+class BajasModel extends Mysql
 {
     public $intidActa;
     public $inttipActa;
@@ -42,14 +42,14 @@ class ActasModel extends Mysql
         return $return;
     }
 
-    public function selectActas(int $claActa)
+    public function selectActas(int $tipActa)
     {
-        $this->inttipActa = $claActa;
+        $this->inttipActa = $tipActa;
         $sql = "SELECT a.idActa, a.tipActa, a.iteActa, a.numActa, DATE_FORMAT(fecActa, '%Y-%m-%d') as fecActa,
                 a.recActa, a.valActa, a.estActa,
                 t.desTipoacta as desTipoacta, i.desItemacta as desItemacta, r.desRecurso as desRecurso
                 FROM actas a
-                INNER JOIN tipoactas t ON t.idTipoacta = 2
+                INNER JOIN tipoactas t ON a.tipActa = t.idTipoacta 
                 INNER JOIN itemsacta i ON a.iteActa = i.idItemacta
                 INNER JOIN recursos r ON a.recActa = r.idRecurso
                 WHERE estActa != 0 AND a.tipActa = $this->inttipActa";
@@ -63,19 +63,10 @@ class ActasModel extends Mysql
         $sql = "SELECT a.idActa, a.tipActa, a.iteActa, a.numActa, DATE_FORMAT(a.fecActa, '%Y-%m-%d') as fecActa, a.recActa, a.valActa, a.estActa,
                 t.desTipoacta as desTipoacta, i.desItemacta as desItemacta, r.desRecurso as desRecurso 
                 FROM actas a
-                INNER JOIN tipoactas t ON t.idTipoacta = 2
+                INNER JOIN tipoactas t ON t.idTipoacta = 4
                 INNER JOIN itemsacta i ON a.iteActa = i.idItemacta
                 INNER JOIN recursos r ON a.recActa = r.idRecurso
                 WHERE idActa = $this->intidActa";
-        $request = $this->select_all($sql);
-        return $request;
-    }
-
-    
-    public function selectActavalor(int $idActa)
-    {
-        $this->intidActa = $idActa;
-        $sql = "SELECT idActa, valActa FROM actas WHERE idActa = $this->intidActa";
         $request = $this->select_all($sql);
         return $request;
     }

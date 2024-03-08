@@ -1,5 +1,5 @@
 <?php
-class Actas extends Controllers
+class Bajas extends Controllers
 {
     public function __construct()
     {
@@ -12,33 +12,34 @@ class Actas extends Controllers
         getPermisos(MCOMPONENTES);
     }
 
-    public function actas()
+    public function bajas()
     {
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "Actas";
-        $data['page_title'] = "INVERSIONES <small> SALP - APP</small>";
-        $data['page_name']  = "actas";
-        $data['page_functions_js'] = "functions_actas.js";
-        $this->views->getView($this, "actas", $data);
+        $data['page_tag']   = "Bajas";
+        $data['page_title'] = "BAJAS INVENTARIO <small> SALP - APP</small>";
+        $data['page_name']  = "bajas";
+        $data['page_functions_js'] = "functions_bajas.js";
+        $this->views->getView($this, "bajas", $data);
     }
 
     public function setActa()
     {
         if ($_POST) {
-            if (empty($_POST['txtnumActa']) || empty($_POST['txtfecActa']) || empty($_POST['listClases']))
+            if (empty($_POST['txtnumActa']) || empty($_POST['txtfecActa']) || empty($_POST['listItems']) 
+            || empty($_POST['listestActa']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idActa     = intval($_POST['idActa']);
-                $inttipActa = ACTINVERSIONES;
-                $intiteActa = intval($_POST['listClases']);
+                $inttipActa = ACTBAJA;
+                $intiteActa = intval($_POST['listItems']);
                 $strnumActa = strClean($_POST['txtnumActa']);
                 $strfecActa = strClean($_POST['txtfecActa']);
                 $intrecActa = intval($_POST['listRecursos']);
-                $fltvalActa = 0;
-                $intestActa = 1;
+                $fltvalActa = floatval($_POST['fltvalActa']);
+                $intestActa = intval($_POST['listestActa']);
                 $request_Acta = "";
 
                 if ($idActa == 0) {
@@ -75,7 +76,7 @@ class Actas extends Controllers
     public function getActas()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectActas(ACTINVERSIONES);
+            $arrData = $this->model->selectActas(ACTBAJA);
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
@@ -94,10 +95,10 @@ class Actas extends Controllers
                     $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idActa'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnAdd = '<button class="btn btn-secondary btn-sm" onClick="fntAddElemento(' . $arrData[$i]['idActa'] . ',' . $arrData[$i]['numActa'] . ',' . $arrData[$i]['fecActa'] .  ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
+                    $btnAdd = '<button class="btn btn-secondary btn-sm" onClick="fntAddElementoj(this,' . $arrData[$i]['idActa'] . ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnPrint = '<a title="Imprimir Acta" href="'. base_url() . '/actas/imprimir/' . $arrData[$i]['idActa'] . '" target="_blank"
+                    $btnPrint = '<a title="Imprimir Acta" href="'. base_url() . '/bajas/imprimir/' . $arrData[$i]['idActa'] . '" target="_blank"
                                 class="btn btn-warning btn-sm"> <i class="fas fa-file-pdf"></i></a> ';
                 }               
                 if ($_SESSION['permisosMod']['delPermiso']) {
@@ -109,8 +110,6 @@ class Actas extends Controllers
         }
         die();
     }
-
-    //'<button class="btn btn-primary btn-sm" onClick="fntPrintActa(' . $arrData[$i]['idActa'] . ')" title="Imprimir Acta"><i class="fas fa-print"></i></button>';
 
     public function getActa($idActa)
     {
@@ -139,14 +138,14 @@ class Actas extends Controllers
     
     public function imprimir($idacta) {
         if (!is_numeric($idacta)){
-            header("Location:" . base_url() . '/actas');
+            header("Location:" . base_url() . '/bajas');
         }
         if (empty($_SESSION['permisosMod']['reaPermiso'])) {
             header("Location:" . base_url() . '/dashboard');
         }
-        $data['page_tag']   = "Actas - Salp - App";
+        $data['page_tag']   = "Bajas - Salp - App";
         $data['page_title'] = "IMPRIMIR ACTAS <small> SALP - APP </small>";
-        $data['page_name']  = "acta";
+        $data['page_name']  = "baja";
         $data['arrPedido'] = $this->model->selectActaimp($idacta);
         $this->views->getView($this, "actapdf", $data);
     }
@@ -171,7 +170,7 @@ class Actas extends Controllers
     {
         if ($_POST) {
             if (empty($_POST['actImagen'])) {
-                $arrResponse = array('status' => false, 'msg' => 'dfdfError de datos.');
+                $arrResponse = array('status' => false, 'msg' => 'Error de datos.');
             } else {
                 $idActa = intval($_POST['actImagen']);
                 $foto = $_FILES['foto'];

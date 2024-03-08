@@ -23,10 +23,10 @@ class ItemsactasModel extends Mysql
         return $request_insert;
     }
 
-    public function selectItemsactas(int $intidItemacta)
+    public function selectItemsactas(int $intidItemacta) 
     {
         $this->intidItemacta = $intidItemacta;
-        $sql = "SELECT * FROM Itemsacta WHERE estItemacta != 0 AND tipItemacta = $this->intidItemacta";
+        $sql = "SELECT * FROM itemsacta WHERE estItemacta != 0 AND tipItemacta = $this->intidItemacta";
         $request = $this->select_all($sql);
         return $request;
     }

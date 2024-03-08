@@ -38,6 +38,19 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
+                                    <label for="fltvalActa">Valor Acta </label>
+                                    <input type="number" class="form-control valid validNumber" id="fltvalActa" name="fltvalActa">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="listestActa">Estado</label>
+                                    <select class="form-control selectpicker" id="listestActa" name="listestActa" required>
+                                        <option value="1">Activo</option>
+                                        <option value="2">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
                                     <button id="btnActionForm" class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
                                 </div>
                                 <div class="form-group col-md-6">
@@ -209,6 +222,13 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="listestElemento">Estado</label>
+                                    <select class="form-control selectpicker" id="listestElemento" name="listestElemento" required>
+                                        <option value="1">Activo</option>
+                                        <option value="2">Inactivo</option>
+                                    </select>
+                                </div>
                                 <div class="form-group col-md-4 mt-4">
                                     <button id="btnActionForm" class="btn btn-primary btn-md btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
                                 </div>

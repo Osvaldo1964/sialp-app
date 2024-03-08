@@ -68,6 +68,16 @@ class ElementosModel extends Mysql
                 $this->intestElemento
             );
             $request_insert = $this->insert($query_insert, $arrData);
+            // Actualizo el valor del Acta
+            $sql = "SELECT * FROM actas WHERE idActa = $this->strainElemento";
+            $request_acta = $this->selectActavalor($sql);
+            $valActa = 
+
+            $sql = "UPDATE actas SET valActa = ? WHERE idActa = $this->strainElemento";
+            $arrData = array($this->inttipActa, $this->intiteActa, $this->strnumActa, $this->strfecActa,
+                            $this->intrecActa, $this->fltvalActa, $this->intestActa);
+            $request = $this->update($sql, $arrData);
+            // Finalizo Actualizar valor Acta
             $return = $request_insert;
         } else {
             $return = 'exist';

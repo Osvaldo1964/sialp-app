@@ -27,19 +27,18 @@ class Invinicial extends Controllers
     public function setActa()
     {
         if ($_POST) {
-            if (empty($_POST['txtnumActa']) || empty($_POST['txtfecActa']) || empty($_POST['listItems']) 
-            || empty($_POST['listestActa']))
+            if (empty($_POST['txtnumActa']) || empty($_POST['txtfecActa']) || empty($_POST['listItems']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idActa     = intval($_POST['idActa']);
-                $inttipActa = 2;
+                $inttipActa = ACTINICIAL;
                 $intiteActa = intval($_POST['listItems']);
                 $strnumActa = strClean($_POST['txtnumActa']);
                 $strfecActa = strClean($_POST['txtfecActa']);
                 $intrecActa = intval($_POST['listRecursos']);
                 $fltvalActa = floatval($_POST['fltvalActa']);
-                $intestActa = intval($_POST['listestActa']);
+                $intestActa = 1;
                 $request_Acta = "";
 
                 if ($idActa == 0) {

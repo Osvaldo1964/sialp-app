@@ -92,7 +92,7 @@ class Elementos extends Controllers
                 $fltlonElemento = $_POST['fltlonElemento'];
                 $strainElemento = strClean($_POST['eleactActa']);
                 $fltvalElemento = strClean($_POST['fltvalElemento']);
-                $intestElemento = intval($_POST['listestElemento']);
+                $intestElemento = 1;
                 $request_Elemento = "";
 
                 $ruta = strtolower(clear_cadena($strcodElemento));
@@ -232,6 +232,21 @@ class Elementos extends Controllers
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }
+        die();
+    }
+
+    public function getSelectUcaps(){
+        $htmlOptions = "";
+        $arrData = $this->model->selectElementos();
+        if (count($arrData) > 0){
+            for ($i=0; $i < count($arrData); $i++){
+                if ($arrData[$i]['estElemento'] == 1){
+                    $htmlOptions .= '<option value="' . $arrData[$i]['idElemento'] . '">' .
+                                    $arrData[$i]['codElemento'] . $arrData[$i]['detElemento'] . '</option>';
+                }
+            }
+        }
+        echo $htmlOptions;
         die();
     }
 }

@@ -548,6 +548,7 @@ function fntTecnologias() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
+                document.querySelector('#listTecno').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listTecno').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listTecno').selectpicker('render');
@@ -565,6 +566,7 @@ function fntPotencias() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
+                document.querySelector('#listPotencia').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listPotencia').innerHTML = request.responseText;
                 $('#listPotencia').selectpicker('render');
             }
@@ -581,6 +583,7 @@ function fntMateriales() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
+                document.querySelector('#listMaterial').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listMaterial').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listMaterial').selectpicker('render');
@@ -598,6 +601,7 @@ function fntAlturas() {
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
                 itemtemp = request.responseText;
+                document.querySelector('#listAltura').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listAltura').innerHTML = request.responseText;
                 //document.querySelector("#listItems").value = selectedOptions[0].text;
                 $('#listAltura').selectpicker('render');
@@ -614,6 +618,7 @@ function fntUsos() {
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listUsos').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listUsos').innerHTML = request.responseText;
                 $('#listUsos').selectpicker('render');
             }
@@ -629,6 +634,7 @@ function fntItemactas() {
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listItems').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listItems').innerHTML = request.responseText;
                 $('#listItems').selectpicker('render');
             }
@@ -644,8 +650,10 @@ function fntRecursos() {
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listRecursos').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listRecursos').innerHTML = request.responseText;
                 $('#listRecursos').selectpicker('render');
+                document.querySelector('#listRecursosadd').innerHTML = '<option value="0" selected>Seleccione</option>';
                 document.querySelector('#listRecursosadd').innerHTML = request.responseText;
                 $('#listRecursosadd').selectpicker('render');
             }
@@ -667,13 +675,16 @@ function fntPrintBarcode(area) {
     vprint.close();
 }
 
-function fntAddElemento(idActa, numActa, fecActa) {
-    let eleactActa = idActa;
-    let elenumActa = numActa;
-    let elefecActa = fecActa;
+function fntAddElemento(element, idActa) {
+    rowTable = element.parentNode.parentNode.parentNode;
+    alert(rowTable.cells[3].textContent);
+    let eleactActa = rowTable.cells[0].textContent;
+    let elenumActa = rowTable.cells[3].textContent;
+    let elefecActa = rowTable.cells[4].textContent;
+    alert(rowTable.cells[0].textContent);
+    alert(rowTable.cells[3].textContent);
+    alert(rowTable.cells[4].textContent);
     document.querySelector('#eleactActa').value = eleactActa;
-    //document.querySelector('#elenumActa').value = elenumActa;
-    //document.querySelector('#elefecActa').value = elefecActa;
     $('#modalFormActaelemento').modal('show');
 }
 

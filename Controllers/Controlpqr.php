@@ -73,12 +73,13 @@ class Controlpqr extends Controllers
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idPqrs     = $idPqrs;
+                $intucaPqrs = strClean($_POST['listUcaps']);
                 $strasiPqrs = $_POST['txtasiPqrs'];
                 $intcuaPqrs = strClean($_POST['listCuadrillas']);
                 $intestPqrs = 2;
 
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $request_cuadrilla = $this->model->updateCuapqr($idPqrs, $strasiPqrs, $intcuaPqrs, $intestPqrs);
+                    $request_cuadrilla = $this->model->updateCuapqr($idPqrs, $intucaPqrs, $strasiPqrs, $intcuaPqrs, $intestPqrs);
                 }
                 if ($request_cuadrilla > 0) {
                     $arrResponse = array("status" => true, "msg" => 'Datos guardados correctamente.');
@@ -170,7 +171,9 @@ class Controlpqr extends Controllers
         die();
     }
 
-    public function impAsignacion($idPqrs) {
+    public function impAsignacion() {
+        dep($_POST);
+        dep($_GET);exit;
         $idPqrs = intval($idPqrs);
         if (!is_numeric($idPqrs)){
             header("Location:" . base_url() . '/controlpqr');

@@ -100,7 +100,8 @@
 	// TIPOS DE ACTAS
 	const ACTINICIAL = 1;
 	const ACTINVERSIONES = 2;
-	const ACTBAJA = 3;
+	const ACTERCEROS = 3;
+	const ACTBAJA = 4;
 
 	// Constantes Cartera
 	const IDCARTERA = 5;
