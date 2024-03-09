@@ -73,9 +73,9 @@ class Controlpqr extends Controllers
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
                 $idPqrs     = $idPqrs;
-                $intucaPqrs = strClean($_POST['listUcaps']);
+                $intucaPqrs = intval($_POST['listUcapsCuadrilla']);
                 $strasiPqrs = $_POST['txtasiPqrs'];
-                $intcuaPqrs = strClean($_POST['listCuadrillas']);
+                $intcuaPqrs = intval($_POST['listCuadrillas']);
                 $intestPqrs = 2;
 
                 if ($_SESSION['permisosMod']['updPermiso']) {
@@ -171,9 +171,7 @@ class Controlpqr extends Controllers
         die();
     }
 
-    public function impAsignacion() {
-        dep($_POST);
-        dep($_GET);exit;
+    public function impAsignacion($idPqrs) {
         $idPqrs = intval($idPqrs);
         if (!is_numeric($idPqrs)){
             header("Location:" . base_url() . '/controlpqr');

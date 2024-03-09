@@ -59,7 +59,8 @@ class ControlpqrModel extends Mysql
     {
         $this->intidPqrs = $idPqrs;
         $sql = "SELECT * FROM pqrs p
-        INNER JOIN cuadrillas c ON p.cuaPqrs = c.idCuadrilla
+        LEFT JOIN cuadrillas c ON p.cuaPqrs = c.idCuadrilla
+        LEFT JOIN elementos e ON p.ucaPqrs = e.idElemento
         WHERE idPqrs = $this->intidPqrs";
         $request = $this->select_all($sql);
         return $request;

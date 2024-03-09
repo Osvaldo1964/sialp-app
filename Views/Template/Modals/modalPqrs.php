@@ -139,8 +139,8 @@
               <input type="date" class="form-control valid validFecha" id="txtasiPqrs" name="txtasiPqrs" required="">
             </div>
             <div class="form-group col-md-4">
-              <label for="listUcaps">UCAPs</label>
-              <select class="form-control" data-live-search="true" id="listUcaps" name="listUcaps" required=""></select>
+              <label for="listUcapsCuadrilla">UCAPs</label>
+              <select class="form-control" data-live-search="true" id="listUcapsCuadrilla" name="listUcapsCuadrilla" required=""></select>
             </div>
             <div class="form-group col-md-3">
               <label for="listCuadrillas">Cuadrilla</label>

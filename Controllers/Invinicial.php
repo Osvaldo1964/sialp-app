@@ -94,7 +94,7 @@ class Invinicial extends Controllers
                     $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idActa'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnAdd = '<button class="btn btn-secondary btn-sm" onClick="fntAddElemento(' . $arrData[$i]['idActa'] . ',' . $arrData[$i]['numActa'] . ',' . $arrData[$i]['fecActa'] .  ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
+                    $btnAdd = '<button class="btn btn-secondary btn-sm" onClick="fntAddElemento(this,' . $arrData[$i]['idActa'] . ')" title="Agregar Elemento"><i class="fas fa-location"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
                     $btnPrint = '<a title="Imprimir Acta" href="'. base_url() . '/actas/imprimir/' . $arrData[$i]['idActa'] . '" target="_blank"

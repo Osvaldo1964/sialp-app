@@ -141,19 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         tableControlPqr.api().ajax.reload();
-                        /*                         if (rowTable == ""){
-                                                    tableControlPqr.api().ajax.reload();    
-                                                }else{
-                                                     htmlStatus = intestPqrs == 1 ? 
-                                                    '<span class="badge badge-success">Activo</span>' :
-                                                    '<span class="badge badge-danger">Inactivo</span>';
-                                                    rowTable.cells[1].textContent = strnomPqrs;
-                                                    rowTable.cells[2].textContent = strdirPqrs;
-                                                    rowTable.cells[3].textContent = strfrePqrs;
-                                                    rowTable.cells[4].innerHTML = htmlStatus;
-                                                    rowTable = ""; 
-                                                } */
-                        $('#modalFormCuadarilla').modal("hide");
+                        $('#modalFormCuadrilla').modal("hide");
                         formCuadrilla.reset();
                         swal("Cuadrillas", objData.msg, "success");
                     }
@@ -163,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-
 
     fntUcaps();
     fntCuadrillas();
@@ -255,8 +242,11 @@ function fntCuadrilla(element, idPqrs) {
                 document.querySelector("#txtmsgPqrs").value = objData.data[0].msgPqrs;
                 document.querySelector("#txtasiPqrs").value = objData.data[0].asiPqrs;
                 document.querySelector("#listUcaps").value = objData.data[0].ucaPqrs;
+                document.querySelector("#listUcapsCuadrilla").value = objData.data[0].ucaPqrs;
+
                 document.querySelector("#listCuadrillas").value = objData.data[0].cuaPqrs;
                 $('#listUcaps').selectpicker('render');
+                $('#listUcapsCuadrilla').selectpicker('render');
                 $('#listCuadrillas').selectpicker('render');
             }
         }
@@ -269,7 +259,7 @@ function imprimirPqrs() {
     let strasiPqrs = document.querySelector('#txtasiPqrs').value;
     let intcuaPqrs = document.querySelector('#listCuadrillas').value;
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Controlpqr/impAsignacion/' + intidPqrs + '?target?_blank';
+    let ajaxUrl = window.open(base_url + '/Controlpqr/impAsignacion/' + intidPqrs , '_blank');
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -334,8 +324,10 @@ function fntUcaps() {
         request.send();
         request.onreadystatechange = function () {
             if (request.readyState == 4 && request.status == 200) {
+                document.querySelector('#listUcapsCuadrilla').innerHTML = request.responseText;
                 document.querySelector('#listUcaps').innerHTML = request.responseText;
                 $('#listUcaps').selectpicker('render');
+                $('#listUcapsCuadrilla').selectpicker('render');
             }
         }
     }

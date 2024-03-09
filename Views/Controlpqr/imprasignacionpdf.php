@@ -1,7 +1,7 @@
 <?php
-    headerAdmin($data);
-    $nombreImagen =  media() . '/site/images/icons/logo_icaruscol.jpg';
-    $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen));
+headerAdmin($data);
+$nombreImagen =  media() . '/site/images/icons/logo_icaruscol.jpg';
+$imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen));
 ?>
 <main class="app-content">
     <div class="app-title">
@@ -57,24 +57,37 @@
                                         <tr>
                                             <th>Código UCAP</th>
                                             <th>Descripción</th>
-                                            <th>Tec/Mat</th>
-                                            <th>Pot/Alt</th>
                                             <th>Dirección</th>
-                                            <th>Valor</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <tr>
+                                            <td><?= $asignacion[0]['codElemento'] ?></td>
+                                            <td><?= $asignacion[0]['detElemento'] ?></td>
+                                            <td><?= $asignacion[0]['dirElemento'] ?></td>
+                                        </tr>
                                     </tbody>
                                     <tfoot>
-<!--                                         <tr>
-                                            <th colspan="5" class="text-right">Sub-Total: <?= $elemento['desClase']; ?></th>
-                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal01) ?></td>
+                                        <tr>
+                                            <th colspan="1" class="text-left">Nombre Conductor: </th>
+                                            <td colspan="2" class="text-left"><?= $asignacion[0]['conCuadrilla']; ?></td>
                                         </tr>
                                         <tr>
-                                            <th colspan="5" class="text-right">Total:</th>
-                                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($total01) ?></td>
-                                        </tr> -->
+                                            <th colspan="1" class="text-left">Nombre Técnico: </th>
+                                            <td colspan="2" class="text-left"><?= $asignacion[0]['tecCuadrilla']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="1" class="text-left">Nombre Ayudante: </th>
+                                            <td colspan="2" class="text-left"><?= $asignacion[0]['ayuCuadrilla']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="1" class="text-left">Fecha Reparación: </th>
+                                            <td colspan="2" class="text-left">_________________________</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="1" class="text-left">Observaciones: </th>
+                                            <td colspan="2" class="text-left">__________________________________</td>
+                                        </tr>
                                     </tfoot>
                                 </table>
                             </div>
