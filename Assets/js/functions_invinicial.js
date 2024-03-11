@@ -1,5 +1,5 @@
 document.write(`<script src="${base_url}/Assets/js/plugins/JsBarcode.all.min.js"></script>`);
-let tableActas;
+let tableInicial;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -10,7 +10,7 @@ $(document).on('focusin', function (e) {
 });
 
 window.addEventListener('load', function () {
-    tableActas = $('#tableActas').dataTable({
+    tableInicial = $('#tableInicial').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
@@ -99,8 +99,8 @@ window.addEventListener('load', function () {
             let strnumActa = document.querySelector('#txtnumActa').value;
             let strfecActa = document.querySelector('#txtfecActa').value;
             let intrecActa = document.querySelector('#listRecursos').value;
-            let flrvalActa = document.querySelector('#fltvalActa').value;
-            let intestActa = document.querySelector('#listestActa').value;
+            //let flrvalActa = document.querySelector('#fltvalActa').value;
+            //let intestActa = document.querySelector('#listestActa').value;
             if (strnumActa == '' || strfecActa == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
@@ -119,18 +119,18 @@ window.addEventListener('load', function () {
                         document.querySelector("#idActa").value = objData.idActa;
                         document.querySelector("#containerGallery").classList.remove("notblock");
                         if (rowTable == "") {
-                            tableActas.api().ajax.reload();
+                            tableInicial.api().ajax.reload();
                         } else {
-                            htmlStatus = intestActa == 1 ?
+/*                             htmlStatus = intestActa == 1 ?
                                 '<span class="badge badge-success">Activo</span>' :
-                                '<span class="badge badge-danger">Inactivo</span>';
+                                '<span class="badge badge-danger">Inactivo</span>'; */
                             rowTable.cells[1].textContent = desTipoacta;
                             rowTable.cells[2].textContent = acta;
                             rowTable.cells[3].textContent = numActa;
                             rowTable.cells[4].textContent = fecActa;
                             rowTable.cells[5].textContent = desRecurso;
                             rowTable.cells[6].textContent = valActa;
-                            rowTable.cells[7].innerHTML = htmlStatus;
+                            //rowTable.cells[7].innerHTML = htmlStatus;
                             rowTable = "";
                         }
                     } else {
@@ -154,7 +154,7 @@ window.addEventListener('load', function () {
             let strdirElemento = document.querySelector('#txtdirElemento').value;
             let fltlatElemento = document.querySelector('#fltlatElemento').value;
             let fltlonElemento = document.querySelector('#fltlonElemento').value;
-            let intestElemento = document.querySelector('#listestElemento').value;
+            //let intestElemento = document.querySelector('#listestElemento').value;
             if (strdirElemento == '' || strcodElemento == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
@@ -462,11 +462,11 @@ function fntEditInfo(element, idActa) {
                 document.querySelector("#listRecursos").value = objActa[0].recActa;
                 document.querySelector("#txtnumActa").value = objActa[0].numActa;
                 document.querySelector("#txtfecActa").value = objActa[0].fecActa;
-                document.querySelector("#fltvalActa").value = objActa[0].valActa;
-                document.querySelector("#listestActa").value = objActa[0].estActa;
+                //document.querySelector("#fltvalActa").value = objActa[0].valActa;
+                //document.querySelector("#listestActa").value = objActa[0].estActa;
                 $('#listItems').selectpicker('render');
                 $('#listRecursos').selectpicker('render');
-                $('#listestActa').selectpicker('render');
+                //$('#listestActa').selectpicker('render');
                 if (objActa.pdfs.length > 0) {
                     let objActas = objActa.pdfs;
                     for (let p = 0; p < objActas.length; p++) {
@@ -681,7 +681,7 @@ function fntAddElemento(element, idActa) {
     let elenumActa = rowTable.cells[3].textContent;
     let elefecActa = rowTable.cells[4].textContent;
     document.querySelector('#eleactActa').value = eleactActa;
-    document.querySelector("#modalFormActaelemento").reset();
+    //document.querySelector("#modalFormActaelemento").reset();
     $('#modalFormActaelemento').modal('show');
 }
 

@@ -19,7 +19,7 @@
         <div class="cover"></div>
     </section>
     <section class="login-content">
-        <div class="logo">
+        <div class="">
             <h1><?= $data['page_title']; ?></h1>
         </div>
         <div class="login-box">

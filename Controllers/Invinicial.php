@@ -37,7 +37,7 @@ class Invinicial extends Controllers
                 $strnumActa = strClean($_POST['txtnumActa']);
                 $strfecActa = strClean($_POST['txtfecActa']);
                 $intrecActa = intval($_POST['listRecursos']);
-                $fltvalActa = floatval($_POST['fltvalActa']);
+                $fltvalActa = 0;
                 $intestActa = 1;
                 $request_Acta = "";
 

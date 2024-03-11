@@ -17,7 +17,7 @@ class TecnologiasModel extends Mysql
         $sql = "SELECT * FROM tecnologias WHERE desTecno = '{$this->strdesTecno}'";
         $request = $this->select_all($sql);
         if (empty($request)) { 
-            $query_insert = "INSERT INTO Tecnologias (destecno, estTecno) VALUES (?,?)";
+            $query_insert = "INSERT INTO tecnologias (destecno, estTecno) VALUES (?,?)";
             $arrData = array($this->strdesTecno, $this->intestTecno);
             $request_insert = $this->insert($query_insert, $arrData);
             $return = $request_insert;

@@ -1,4 +1,4 @@
-let tableCuadrillas;
+//let tableCuadrillas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let strtecCuadrilla = document.querySelector('#txttecCuadrilla').value;
             let strayuCuadrilla = document.querySelector('#txtayuCuadrilla').value;
             let intestCuadrilla = document.querySelector('#listestCuadrilla').value;
-            if (strdesCuadrilla == '' || strconCuadrilla == '' || txttecCuadrilla == "") {
+            if (strdesCuadrilla == '' || strconCuadrilla == '' || strtecCuadrilla == "") {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return false;
                 }
             }
-            divLoading.style.display = "flex";
+            //divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url + '/Cuadrillas/setCuadrilla';
             let formData = new FormData(formCuadrilla);
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         swal("Cuadrillas", objData.msg, "success");
                     }
                 }
-                divLoading.style.display = "none";
+                //divLoading.style.display = "none";
                 return false;
             }
         }
@@ -165,7 +165,7 @@ function fntEditInfo(element, idCuadrilla) {
                 } else {
                     document.querySelector("#listestCuadrilla").value = 2;
                 }
-                $('#listestCuadrilla').selectpicker('render');
+                //$('#listestCuadrilla').selectpicker('render');
             }
         }
         $('#modalFormCuadrilla').modal('show');

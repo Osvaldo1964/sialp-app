@@ -17,21 +17,21 @@
                             <input type="text" class="form-control" id="txtdesCuadrilla" name="txtdesCuadrilla" required="">
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="control-label">Conductor</label>
+                            <label class="control-label">Nombre Conductor</label>
                             <input type="text" class="form-control" id="txtconCuadrilla" name="txtconCuadrilla" required=""></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="control-label">Técnico</label>
+                            <label class="control-label">Nombre Técnico</label>
                             <input type="text" class="form-control" id="txttecCuadrilla" name="txttecCuadrilla" required=""></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="control-label">Ayudante</label>
+                            <label class="control-label">Nombre Ayudante</label>
                             <input type="text" class="form-control" id="txtayuCuadrilla" name="txtayuCuadrilla" required=""></textarea>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="listestCuadrilla">Estado</label>
-                        <select class="form-control selectpicker" id="listestCuadrilla" name="listestCuadrilla" required>
+                        <select class="form-control select2" id="listestCuadrilla" name="listestCuadrilla" required>
                             <option value="1">Activo</option>
                             <option value="2">Inactivo</option>
                         </select>
