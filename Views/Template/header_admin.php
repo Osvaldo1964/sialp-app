@@ -13,7 +13,7 @@
   <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/bootstrap-select.min.css">
-  <link rel="stylesheet" type="text/css" href="<?= media();?>/js/datepicker/jquery-ui.min.css"> 
+  <link rel="stylesheet" type="text/css" href="<?= media(); ?>/js/datepicker/jquery-ui.min.css">
   <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/style.css">
 </head>
 
@@ -26,7 +26,8 @@
   <!-- Navbar-->
   <header class="app-header"><a class="app-header__logo" href="<?= base_url(); ?>/dashboard">SALP APP</a>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"><i class="fas fa-bars"></i></a>
-    <!-- Navbar Right Menu-->
+    
+    <!-- Navbar Right Menu-->    
     <ul class="app-nav">
       <!-- User Menu-->
       <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>

@@ -57,7 +57,6 @@
             return $resExecute;
         }
 
-        //Eliminar un registro
         public function delete(string $query)
         {
             $this->strquery = $query;

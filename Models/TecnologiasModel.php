@@ -47,7 +47,6 @@ class TecnologiasModel extends Mysql
         $this->intidTecno   = $idTecno;
         $this->strdesTecno  = $descripcion;
         $this->intestTecno  = $estado;
-
         $sql = "SELECT * FROM tecnologias WHERE desTecno = '{$this->strdesTecno}' AND idTecno != $this->intidTecno";
         $request = $this->select_all($sql);
         if (empty($request)) {

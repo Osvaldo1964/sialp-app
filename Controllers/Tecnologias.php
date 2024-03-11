@@ -23,37 +23,37 @@ class Tecnologias extends Controllers
         $this->views->getView($this, "tecnologias", $data);
     }
 
-    public function setTecnologias()
+    public function setTecnologia()
     {
         if ($_POST) {
-            if (empty($_POST['txtdesClase']) || empty($_POST['listestClase']))
+            if (empty($_POST['txtdesTecno']) || empty($_POST['listestTecno']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idClase = intval($_POST['idClase']);
-                $strdesClase  = strClean($_POST['txtdesClase']);
-                $intestClase  = intval($_POST['listestClase']);
-                if ($idClase == 0) {
+                $idTecno = intval($_POST['idTecno']);
+                $strdesTecno  = strClean($_POST['txtdesTecno']);
+                $intestTecno  = intval($_POST['listestTecno']);
+                if ($idTecno == 0) {
                     //CREAR
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_clase = $this->model->insertClase($strdesClase, $intestClase);
+                        $request_tecno = $this->model->insertTecnologia($strdesTecno, $intestTecno);
                     }
                 } else {
                     //ACTUALIZAR
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_clase = $this->model->updateClase($idClase, $strdesClase, $intestClase);
+                        $request_tecno = $this->model->updateTecnologia($idTecno, $strdesTecno, $intestTecno);
                     }
                 }
-                if ($request_clase > 0) {
+                if ($request_tecno > 0) {
                     if ($option == 1) {
                         $arrResponse = array("status" => true, "msg" => 'Datos guardados correctamente.');
                     }else{
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
                     }
-                }else if ($request_clase == 'exist') {
-                    $arrResponse = array("status" => false, "msg" => '¡Atención! la Clase ya existe, ingrese otro.');
+                }else if ($request_tecno == 'exist') {
+                    $arrResponse = array("status" => false, "msg" => '¡Atención! la Tecnologia ya existe, ingrese otro.');
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -66,24 +66,24 @@ class Tecnologias extends Controllers
     public function getTecnologias()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectClases();
+            $arrData = $this->model->selectTecnologias();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
-                if ($arrData[$i]['estClase'] == 1) {
-                    $arrData[$i]['estClase'] = '<span class="badge badge-success">Activo</span>';
+                if ($arrData[$i]['estTecno'] == 1) {
+                    $arrData[$i]['estTecno'] = '<span class="badge badge-success">Activo</span>';
                 } else {
-                    $arrData[$i]['estClase'] = '<span class="badge badge-danger">Inactivo</span>';
+                    $arrData[$i]['estTecno'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
                 if ($_SESSION['permisosMod']['reaPermiso']) {
-                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idClase'] . ')" title="Ver Clase"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idTecno'] . ')" title="Ver Clase"><i class="far fa-eye"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idClase'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idTecno'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['delPermiso']) {
-                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idClase'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idTecno'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
@@ -92,12 +92,12 @@ class Tecnologias extends Controllers
         die();
     }
 
-    public function getTecnologia($idclase)
+    public function getTecnologia($idtecno)
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $idclase = intval($idclase);
-            if ($idclase > 0) {
-                $arrData = $this->model->selectClase($idclase);
+            $idtecno = intval($idtecno);
+            if ($idtecno > 0) {
+                $arrData = $this->model->selectTecnologia($idtecno);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
@@ -113,12 +113,12 @@ class Tecnologias extends Controllers
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['delPermiso']) {
-                $intidGruposalp = intval($_POST['idGruposalp']);
-                $requestDelete = $this->model->deleteClase($intidClase);
+                $intidTecno = intval($_POST['idTecno']);
+                $requestDelete = $this->model->deleteTecnologia($intidTecno);
                 if ($requestDelete == 'ok') {
-                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Clase.');
+                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Tecnologia.');
                 } else if ($requestDelete == 'exist'){
-                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una Clase con Elementos asociados.');
+                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una Tecnologia con Elementos asociados.');
                 }else{
                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Clase.');
                 }

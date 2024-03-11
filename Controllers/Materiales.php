@@ -26,34 +26,34 @@ class Materiales extends Controllers
     public function setMaterial()
     {
         if ($_POST) {
-            if (empty($_POST['txtdesClase']) || empty($_POST['listestClase']))
+            if (empty($_POST['txtdesMaterial']) || empty($_POST['listestMaterial']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idClase = intval($_POST['idClase']);
-                $strdesClase  = strClean($_POST['txtdesClase']);
-                $intestClase  = intval($_POST['listestClase']);
-                if ($idClase == 0) {
+                $idMaterial = intval($_POST['idMaterial']);
+                $strdesMaterial  = strClean($_POST['txtdesMaterial']);
+                $intestMaterial  = intval($_POST['listestMaterial']);
+                if ($idMaterial == 0) {
                     //CREAR
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_clase = $this->model->insertClase($strdesClase, $intestClase);
+                        $request_Material = $this->model->insertMaterial($strdesMaterial, $intestMaterial);
                     }
                 } else {
                     //ACTUALIZAR
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_clase = $this->model->updateClase($idClase, $strdesClase, $intestClase);
+                        $request_Material = $this->model->updateMaterial($idMaterial, $strdesMaterial, $intestMaterial);
                     }
                 }
-                if ($request_clase > 0) {
+                if ($request_Material > 0) {
                     if ($option == 1) {
                         $arrResponse = array("status" => true, "msg" => 'Datos guardados correctamente.');
                     }else{
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
                     }
-                }else if ($request_clase == 'exist') {
-                    $arrResponse = array("status" => false, "msg" => '¡Atención! la Clase ya existe, ingrese otro.');
+                }else if ($request_Material == 'exist') {
+                    $arrResponse = array("status" => false, "msg" => '¡Atención! el Material ya existe, ingrese otro.');
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -66,24 +66,24 @@ class Materiales extends Controllers
     public function getMateriales()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectClases();
+            $arrData = $this->model->selectMateriales();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
-                if ($arrData[$i]['estClase'] == 1) {
-                    $arrData[$i]['estClase'] = '<span class="badge badge-success">Activo</span>';
+                if ($arrData[$i]['estMaterial'] == 1) {
+                    $arrData[$i]['estMaterial'] = '<span class="badge badge-success">Activo</span>';
                 } else {
-                    $arrData[$i]['estClase'] = '<span class="badge badge-danger">Inactivo</span>';
+                    $arrData[$i]['estMaterial'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
                 if ($_SESSION['permisosMod']['reaPermiso']) {
-                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idClase'] . ')" title="Ver Clase"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idMaterial'] . ')" title="Ver Material"><i class="far fa-eye"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idClase'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idMaterial'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['delPermiso']) {
-                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idClase'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idMaterial'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
@@ -92,12 +92,12 @@ class Materiales extends Controllers
         die();
     }
 
-    public function getMaterial($idclase)
+    public function getMaterial($idMaterial)
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $idclase = intval($idclase);
-            if ($idclase > 0) {
-                $arrData = $this->model->selectClase($idclase);
+            $idMaterial = intval($idMaterial);
+            if ($idMaterial > 0) {
+                $arrData = $this->model->selectMaterial($idMaterial);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
@@ -113,14 +113,14 @@ class Materiales extends Controllers
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['delPermiso']) {
-                $intidGruposalp = intval($_POST['idGruposalp']);
-                $requestDelete = $this->model->deleteClase($intidClase);
+                $intidMaterial = intval($_POST['idMaterial']);
+                $requestDelete = $this->model->deleteMaterial($intidMaterial);
                 if ($requestDelete == 'ok') {
-                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Clase.');
+                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Material.');
                 } else if ($requestDelete == 'exist'){
-                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una Clase con Elementos asociados.');
+                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una Material con Elementos asociados.');
                 }else{
-                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Clase.');
+                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Material.');
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             }

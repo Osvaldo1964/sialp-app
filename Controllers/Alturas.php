@@ -23,7 +23,7 @@ class Alturas extends Controllers
         $this->views->getView($this, "alturas", $data);
     }
 
-    public function setAlturas()
+    public function setAltura()
     {
         if ($_POST) {
             if (empty($_POST['txtdesAltura']) || empty($_POST['listestAltura']))
@@ -43,7 +43,7 @@ class Alturas extends Controllers
                     //ACTUALIZAR
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_altura = $this->model->updateClase($idAltura, $strdesAltura, $intestAltura);
+                        $request_altura = $this->model->updateAltura($idAltura, $strdesAltura, $intestAltura);
                     }
                 }
                 if ($request_altura > 0) {
@@ -53,7 +53,7 @@ class Alturas extends Controllers
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
                     }
                 }else if ($request_altura == 'exist') {
-                    $arrResponse = array("status" => false, "msg" => '¡Atención! la Clase ya existe, ingrese otro.');
+                    $arrResponse = array("status" => false, "msg" => '¡Atención! la Altura ya existe, ingrese otro.');
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -97,7 +97,7 @@ class Alturas extends Controllers
         if ($_SESSION['permisosMod']['reaPermiso']) {
             $idaltura = intval($idaltura);
             if ($idaltura > 0) {
-                $arrData = $this->model->selecAltura($idaltura);
+                $arrData = $this->model->selectAltura($idaltura);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {

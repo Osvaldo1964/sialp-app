@@ -16,10 +16,11 @@ class ElementosModel extends Mysql
     private $fltlatElemento;
     private $fltlonElemento;
     private $strrutElemento;
-    private $strainElemento;
+    private $intainElemento;
     private $strabaElemento;
     private $fltvalElemento;
     private $intestElemento;
+    private $fltvalActa;
     private $strImagen;
 
     public function __construct()
@@ -27,11 +28,25 @@ class ElementosModel extends Mysql
         parent::__construct();
     }
 
-    public function insertElemento(int $clase, string $codigo, string $detalle, string $descripcion, string $direccion,
-                                   int $recurso, int $uso, int $tecnologia, int $potencia, int $material, int $altura,
-                                   float $latitud, float $longitud, string $ruta, string $actaini, float $valor,
-                                   int $estado)
-    {
+    public function insertElemento(
+        int $clase,
+        string $codigo,
+        string $detalle,
+        string $descripcion,
+        string $direccion,
+        int $recurso,
+        int $uso,
+        int $tecnologia,
+        int $potencia,
+        int $material,
+        int $altura,
+        float $latitud,
+        float $longitud,
+        string $ruta,
+        string $actaini,
+        float $valor,
+        int $estado
+    ) {
         $return = 0;
         $this->intclaElemento = $clase;
         $this->strcodElemento = $codigo;
@@ -47,8 +62,7 @@ class ElementosModel extends Mysql
         $this->fltlatElemento = $latitud;
         $this->fltlonElemento = $longitud;
         $this->strrutElemento = $ruta;
-        $this->strainElemento = $actaini;
-        $this->strainElemento = $actaini;
+        $this->intainElemento = $actaini;
         $this->fltvalElemento = $valor;
         $this->intestElemento = $estado;
 
@@ -64,21 +78,19 @@ class ElementosModel extends Mysql
                 $this->intclaElemento, $this->strcodElemento, $this->strdetElemento, $this->strdesElemento,
                 $this->strdirElemento, $this->intrecElemento, $this->intusoElemento, $this->inttecElemento,
                 $this->intpotElemento, $this->intmatElemento, $this->intaltElemento, $this->fltlatElemento,
-                $this->fltlonElemento, $this->strrutElemento, $this->strainElemento, $this->fltvalElemento,
+                $this->fltlonElemento, $this->strrutElemento, $this->intainElemento, $this->fltvalElemento,
                 $this->intestElemento
             );
             $request_insert = $this->insert($query_insert, $arrData);
-            // Actualizo el valor del Acta
-            $sql = "SELECT * FROM actas WHERE idActa = $this->strainElemento";
-            $request_acta = $this->selectActavalor($sql);
-            $valActa = 
-
-            $sql = "UPDATE actas SET valActa = ? WHERE idActa = $this->strainElemento";
-            $arrData = array($this->inttipActa, $this->intiteActa, $this->strnumActa, $this->strfecActa,
-                            $this->intrecActa, $this->fltvalActa, $this->intestActa);
-            $request = $this->update($sql, $arrData);
-            // Finalizo Actualizar valor Acta
             $return = $request_insert;
+            // Actualizo valor acta
+            $query_selActa = "SELECT idActa, valActa FROM actas WHERE idActa = $this->intainElemento";
+            $request_selActa = $this->select_all($query_selActa);
+            //dep($request_selActa);exit;
+            $this->fltvalActa = $request_selActa[0]['valActa'] + $this->fltvalElemento;
+            $query_valActa = "UPDATE actas SET valActa = ? WHERE idActa = $this->intainElemento";
+            $arrData = array($this->fltvalActa);
+            $this->insert($query_valActa, $arrData);
         } else {
             $return = 'exist';
         }

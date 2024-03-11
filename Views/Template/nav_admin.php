@@ -67,6 +67,10 @@
                                 <i class="treeview-indicator fa fa-angle-right"></i>
                             </a>
                             <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/tecnologias"> Tecnologias</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/potencias"> Potencias</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/materiales"> Materiales</a></li>
+                                <li><a class="treeview-item" href="<?= base_url(); ?>/alturas"> Alturas</a></li>
                                 <li><a class="treeview-item" href="<?= base_url(); ?>/elementos"> Elementos UCAPs</a></li>
                             </ul>
                         </li>

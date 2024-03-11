@@ -72,8 +72,7 @@ class Elementos extends Controllers
     public function setElementoadd()
     {
         if ($_POST) {
-            if (empty($_POST['txtdirElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listClase']) 
-            || empty($_POST['listestElemento']))
+            if (empty($_POST['txtdirElemento']) || empty($_POST['txtcodElemento']) || empty($_POST['listClase']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
@@ -90,7 +89,7 @@ class Elementos extends Controllers
                 $intaltElemento = intval($_POST['listAltura']);
                 $fltlatElemento = $_POST['fltlatElemento'];
                 $fltlonElemento = $_POST['fltlonElemento'];
-                $strainElemento = strClean($_POST['eleactActa']);
+                $intainElemento = strClean($_POST['eleactActa']);
                 $fltvalElemento = strClean($_POST['fltvalElemento']);
                 $intestElemento = 1;
                 $request_Elemento = "";
@@ -102,13 +101,12 @@ class Elementos extends Controllers
                                                                 $strdesElemento, $strdirElemento, $intrecElemento,
                                                                 $intusoElemento, $inttecElemento, $intpotElemento,
                                                                 $intmatElemento, $intaltElemento, $fltlatElemento,
-                                                                $fltlonElemento, $ruta, $strainElemento,
+                                                                $fltlonElemento, $ruta, $intainElemento,
                                                                 $fltvalElemento,$intestElemento);
 
                 if($request_Elemento == 1 || $request_Elemento != 'exist')
                 {
                         $arrResponse = array('status' => true, 'idElemento' => $request_Elemento, 'msg' => 'Datos guardados correctamente.');
-
                 }else if($request_Elemento == 'exist'){
                     $arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un Elemento con el Código Ingresado.');		
                 }else{

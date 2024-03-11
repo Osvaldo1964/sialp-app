@@ -23,37 +23,37 @@ class Potencias extends Controllers
         $this->views->getView($this, "potencias", $data);
     }
 
-    public function setPotencias()
+    public function setPotencia()
     {
         if ($_POST) {
-            if (empty($_POST['txtdesClase']) || empty($_POST['listestClase']))
+            if (empty($_POST['txtdesPotencia']) || empty($_POST['listestPotencia']))
             {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             } else {
-                $idClase = intval($_POST['idClase']);
-                $strdesClase  = strClean($_POST['txtdesClase']);
-                $intestClase  = intval($_POST['listestClase']);
-                if ($idClase == 0) {
+                $idPotencia = intval($_POST['idPotencia']);
+                $strdesPotencia  = strClean($_POST['txtdesPotencia']);
+                $intestPotencia  = intval($_POST['listestPotencia']);
+                if ($idPotencia == 0) {
                     //CREAR
                     $option = 1;
                     if ($_SESSION['permisosMod']['wriPermiso']) {
-                        $request_clase = $this->model->insertClase($strdesClase, $intestClase);
+                        $request_Potencia = $this->model->insertPotencia($strdesPotencia, $intestPotencia);
                     }
                 } else {
                     //ACTUALIZAR
                     $option = 2;
                     if ($_SESSION['permisosMod']['updPermiso']) {
-                        $request_clase = $this->model->updateClase($idClase, $strdesClase, $intestClase);
+                        $request_Potencia = $this->model->updatePotencia($idPotencia, $strdesPotencia, $intestPotencia);
                     }
                 }
-                if ($request_clase > 0) {
+                if ($request_Potencia > 0) {
                     if ($option == 1) {
                         $arrResponse = array("status" => true, "msg" => 'Datos guardados correctamente.');
                     }else{
                         $arrResponse = array("status" => true, "msg" => 'Datos Actualizados correctamente.');
                     }
-                }else if ($request_clase == 'exist') {
-                    $arrResponse = array("status" => false, "msg" => '¡Atención! la Clase ya existe, ingrese otro.');
+                }else if ($request_Potencia == 'exist') {
+                    $arrResponse = array("status" => false, "msg" => '¡Atención! la Potencia ya existe, ingrese otro.');
                 }else{
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
@@ -66,24 +66,24 @@ class Potencias extends Controllers
     public function getPotencias()
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $arrData = $this->model->selectClases();
+            $arrData = $this->model->selectPotencias();
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
-                if ($arrData[$i]['estClase'] == 1) {
-                    $arrData[$i]['estClase'] = '<span class="badge badge-success">Activo</span>';
+                if ($arrData[$i]['estPotencia'] == 1) {
+                    $arrData[$i]['estPotencia'] = '<span class="badge badge-success">Activo</span>';
                 } else {
-                    $arrData[$i]['estClase'] = '<span class="badge badge-danger">Inactivo</span>';
+                    $arrData[$i]['estPotencia'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
                 if ($_SESSION['permisosMod']['reaPermiso']) {
-                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idClase'] . ')" title="Ver Clase"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['idPotencia'] . ')" title="Ver Potencia"><i class="far fa-eye"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['updPermiso']) {
-                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idClase'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-primary btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['idPotencia'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['delPermiso']) {
-                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idClase'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['idPotencia'] . ')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
                 $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
             }
@@ -92,12 +92,12 @@ class Potencias extends Controllers
         die();
     }
 
-    public function getPotencia($idclase)
+    public function getPotencia($idPotencia)
     {
         if ($_SESSION['permisosMod']['reaPermiso']) {
-            $idclase = intval($idclase);
-            if ($idclase > 0) {
-                $arrData = $this->model->selectClase($idclase);
+            $idPotencia = intval($idPotencia);
+            if ($idPotencia > 0) {
+                $arrData = $this->model->selectPotencia($idPotencia);
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {
@@ -113,14 +113,14 @@ class Potencias extends Controllers
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['delPermiso']) {
-                $intidGruposalp = intval($_POST['idGruposalp']);
-                $requestDelete = $this->model->deleteClase($intidClase);
+                $intidPotencia = intval($_POST['idPotencia']);
+                $requestDelete = $this->model->deletePotencia($intidPotencia);
                 if ($requestDelete == 'ok') {
-                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Clase.');
+                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Potencia.');
                 } else if ($requestDelete == 'exist'){
-                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una Clase con Elementos asociados.');
+                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una Potencia con Elementos asociados.');
                 }else{
-                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Clase.');
+                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Potencia.');
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             }

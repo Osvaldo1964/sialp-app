@@ -15,7 +15,7 @@ class MaterialesModel extends Mysql
         $this->strdesMaterial  = $descripcion;
         $this->intestMaterial  = $estado;
 
-        $sql = "SELECT * FROM mteriales WHERE desMaterial = '{$this->strdesMaterial}'";
+        $sql = "SELECT * FROM materiales WHERE desMaterial = '{$this->strdesMaterial}'";
         $request = $this->select_all($sql);
         if (empty($request)) {
             $query_insert = "INSERT INTO materiales (desMaterial, estMaterial) VALUES (?,?)";
