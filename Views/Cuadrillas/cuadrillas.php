@@ -25,7 +25,30 @@ getModal('modalCuadrillas', $data);
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-
+                <div class="col-md-12">
+                    <div class="tile">
+                        <div class="tile-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered" id="tableCuadrillas">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Descripción</th>
+                                            <th>Conductor</th>
+                                            <th>Técnico</th>
+                                            <th>Ayudante</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- /.content -->
