@@ -1,7 +1,7 @@
 <?php
-	headerSite($data);
-	$banner = $data['page']['portada'];
-	$idpagina = $data['page']['idpost'];
+headerSite($data);
+$banner = $data['page']['portada'];
+$idpagina = $data['page']['idpost'];
 ?>
 <script>
 	document.querySelector('header').classList.add('header-v4');
@@ -11,10 +11,7 @@
 		type="text/javascript">
 </script>
  -->
- <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDTJ5uq4WEhP4noQ6DKM7aFVUYwGabdu8&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1"
-      defer
-    ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDTJ5uq4WEhP4noQ6DKM7aFVUYwGabdu8&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1" defer></script>
 
 <script src="<?= media() ?>/js/functions_map.js"></script>
 <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url(<?= $banner ?>);">
@@ -23,61 +20,58 @@
 	</h2>
 </section>
 <!-- Content page -->
-<?php
-	if(viewPage($idpagina)){	
- ?>
+
 <!-- Content page -->
 <section class="bg0 p-t-90 p-b-116">
 	<div class="container">
 		<div class="flex-w flex-tr">
-			<div class="size-210 bor8 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-				<form id="frmPqrs">
-					<h4 class="mtext-105 cl2 txt-center p-b-30">
-						Registro de PQR
-					</h4>
-					<div class="bor8 m-b-20 how-pos4-parent">
-						<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="nombrePqr" name="nombrePqr" placeholder="Nombre completo">
-						<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-name.png" alt="ICON" style="width: 28px;">
-					</div>
-
-					<div class="bor8 m-b-20 how-pos4-parent">
-						<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="emailPqr" name="emailPqr" placeholder="Correo electrónico">
-						<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-email.png" alt="ICON">
-					</div>
-
-					<div class="bor8 m-b-20 how-pos4-parent">
-						<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="direccionPqr" name="direccionPqr" placeholder="Dirección de Reporte">
-						<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-email.png" alt="ICON">
-					</div>
-
-					<div class="bor8 m-b-30">
-						<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" id="mensajePqr" name="mensajePqr" placeholder="Registre una breve descripción del problema"></textarea>
-					</div>
-
-					<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-						Enviar
-					</button>
-				</form>
+			<div class="row">
+				<div class="size-210 bor8 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+					<form id="frmPqrs">
+						<div class="card">
+							<div class="card-body row">
+								<div class="col-5 text-center d-flex align-items-center justify-content-center">
+									<div class="">
+										<h2>MUNICIPIO DE <strong>PLATO</strong></h2>
+										<p class="lead mb-5">Dirección del Municipio<br>
+											Telefono: +57 302 3023895
+										</p>
+									</div>
+								</div>
+								<div class="col-7">
+									<div class="form-group">
+										<label for="nombrePqr">Nombres:</label>
+										<input type="text" id="nombrePqr" name="nombrePqr" class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="emailPqr">E-Mail</label>
+										<input type="email" id="emailPqr" name="emailPqr" class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="direccionPqr">Dirección</label>
+										<input type="text" id="direccionPqr" name="direccionPqr" class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="mensajePqr">Detalle del Reporte</label>
+										<textarea id="mensajePqr" name="mensajePqr" class="form-control" rows="4"></textarea>
+									</div>
+									<div class="form-group">
+										<input type="submit" class="btn btn-primary" value="Enviar">
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
-
-			<div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
-				<div id="map"></div>
+			<div class="row">
+				<div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+					<div id="map"></div>
+				</div>
 			</div>
 		</div>
 	</div>
-</section>	
-<?php 
-		echo $data['page']['contenido'];
-	}else{
-?>
-
-	<div>
-		<div class="container-fluid py-5 text-center">
-			<img src="<?= media() ?>/images/construction.png" alt="En construcción">
-			<h3>Estamos trabajando para usted.</h3>
-		</div>
-	</div>
+</section>
 <?php
-	}
-	footerSite($data);
+footerSite($data);
 ?>

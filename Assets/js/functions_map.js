@@ -1,5 +1,5 @@
 // Initialize and add the map
-let map;
+//let map;
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -72,7 +72,6 @@ function repMap($latitude, $longitude){
 }; 
  */
  function initMap(latitude, longitude) {
-    //alert('asasasaasas');
     if(latitude === undefined || longitude === undefined)
     {
         latitude = 11.2084292;
@@ -88,11 +87,11 @@ function repMap($latitude, $longitude){
       //center: myLatLng,
     });
   
-    new google.maps.Marker({
+/*     new google.maps.Marker({
       position: new google.maps.LatLng(latitude, longitude),
       map,
       title: "Hello World!",
-    });
+    }); */
   }
   
   /* window.initMap = initMap;  */
@@ -122,4 +121,4 @@ function repMap($latitude, $longitude){
   });
 }
  */
-//initMap();
+initMap();

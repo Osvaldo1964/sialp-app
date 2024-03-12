@@ -1,77 +1,76 @@
 <?php
 headerAdmin($data);
 ?>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDTJ5uq4WEhP4noQ6DKM7aFVUYwGabdu8&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1" defer></script>
+
+<script src="<?= media() ?>/js/functions_map.js"></script>
 <!-- Content Wrapper. Contains page content -->
-<br>
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
-	<script src="<?= media() ?>/js/functions_map.js"></script>
-	<div class="app-title">
-		<div>
-			<h2 style="padding-left: .5cm;"><i class="fa-solid fa-people-group"></i> <?= $data['page_title'] ?>
-				<?php if ($_SESSION['permisosMod']['wriPermiso']) { ?>
-					<button class="btn btn-primary" type="button" onclick="openModal();"><i class="fa-solid fa-circle-plus"></i> Nueva Cuadrilla</button>
-				<?php } ?>
-			</h2>
-		</div>
-		<ul class="app-breadcrumb breadcrumb">
-			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item"><a href="<?= base_url(); ?>/cuadrillas"><?php echo $data['page_title'] ?></a></li>
-		</ul>
-	</div>
-	<!-- /.content-header -->
+	<section class="content-header">
+
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Contact us</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item active">Contact us</li>
+					</ol>
+				</div>
+			</div>
+		</div><!-- /.container-fluid -->
+	</section>
 
 	<!-- Main content -->
 	<section class="content">
-		<div class="container-fluid">
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDTJ5uq4WEhP4noQ6DKM7aFVUYwGabdu8&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1" defer></script>
 
-			
-
-			<!-- Content page -->
-			<section class="bg0 p-t-90 p-b-116">
-				<div class="container">
-					<div class="flex-w flex-tr">
-						<div class="size-210 bor8 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-							<form id="frmPqrs">
-								<h4 class="mtext-105 cl2 txt-center p-b-30">
-									Registro de PQR
-								</h4>
-								<div class="bor8 m-b-20 how-pos4-parent">
-									<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="nombrePqr" name="nombrePqr" placeholder="Nombre completo">
-									<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-name.png" alt="ICON" style="width: 28px;">
-								</div>
-
-								<div class="bor8 m-b-20 how-pos4-parent">
-									<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="emailPqr" name="emailPqr" placeholder="Correo electrónico">
-									<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-email.png" alt="ICON">
-								</div>
-
-								<div class="bor8 m-b-20 how-pos4-parent">
-									<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" id="direccionPqr" name="direccionPqr" placeholder="Dirección de Reporte">
-									<img class="how-pos4 pointer-none" src="<?= media() ?>/site/images/icons/icon-email.png" alt="ICON">
-								</div>
-
-								<div class="bor8 m-b-30">
-									<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" id="mensajePqr" name="mensajePqr" placeholder="Registre una breve descripción del problema"></textarea>
-								</div>
-
-								<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-									Enviar
-								</button>
-							</form>
-						</div>
-
-						<div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
-							<div id="map"></div>
-						</div>
+		<!-- Default box -->
+		<div class="card">
+			<div class="card-body row">
+				<div class="col-5 text-center d-flex align-items-center justify-content-center">
+					<div class="">
+						<h2>Admin<strong>LTE</strong></h2>
+						<p class="lead mb-5">123 Testing Ave, Testtown, 9876 NA<br>
+							Phone: +1 234 56789012
+						</p>
 					</div>
 				</div>
-			</section>
-
+				<div class="col-7">
+					<div class="form-group">
+						<label for="inputName">Name</label>
+						<input type="text" id="inputName" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="inputEmail">E-Mail</label>
+						<input type="email" id="inputEmail" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="inputSubject">Subject</label>
+						<input type="text" id="inputSubject" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="inputMessage">Message</label>
+						<textarea id="inputMessage" class="form-control" rows="4"></textarea>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="Send message">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-body row">
+				<div class="col-7">
+					<div class="map"></div>
+				</div>
+			</div>
 		</div>
 	</section>
-	<!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+
 <?php footerAdmin($data); ?>
