@@ -38,7 +38,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="listUcaps">UCAPs</label>
-              <select class="form-control" data-live-search="true" id="listUcaps" name="listUcaps" required=""></select>
+              <select class="form-control select2" id="listUcaps" name="listUcaps" required=""></select>
             </div>
             <div class="form-group col-md-12">
               <label for="txtdsoPqrs">Observaciones</label>
@@ -140,7 +140,8 @@
             </div>
             <div class="form-group col-md-4">
               <label for="listUcapsCuadrilla">UCAPs</label>
-              <select class="form-control" data-live-search="true" id="listUcapsCuadrilla" name="listUcapsCuadrilla" required=""></select>
+              <select class="form-control select2" id="listUcapsCuadrilla" name="listUcapsCuadrilla" required>
+              </select>
             </div>
             <div class="form-group col-md-3">
               <label for="listCuadrillas">Cuadrilla</label>

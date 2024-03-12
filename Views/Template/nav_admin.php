@@ -79,7 +79,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url(); ?>/controlpqr" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Seguimiento PQRS</p>
                     </a>
@@ -137,31 +137,31 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url(); ?>/tecnologias" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Tecnologias</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url(); ?>/potencias" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Potencias</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url(); ?>/materiales" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Materiales</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url(); ?>/alturas" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Alturas</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url(); ?>/elementos" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Elementos UCAPs</p>
                     </a>

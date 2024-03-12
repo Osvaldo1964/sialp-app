@@ -326,9 +326,9 @@ function fntUcaps() {
             if (request.readyState == 4 && request.status == 200) {
                 document.querySelector('#listUcapsCuadrilla').innerHTML = request.responseText;
                 document.querySelector('#listUcaps').innerHTML = request.responseText;
-                $('#listUcaps').selectpicker('render');
+/*                 $('#listUcaps').selectpicker('render');
                 $('#listUcapsCuadrilla').selectpicker('render');
-            }
+ */            }
         }
     }
 }

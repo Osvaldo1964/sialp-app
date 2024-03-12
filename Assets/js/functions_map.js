@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 swal("", "Por favor escribe el mensaje." ,"error");
                 return false;
             }	
-            divLoading.style.display = "flex";
+            //divLoading.style.display = "flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url+'/Site/pqrs';
             let formData = new FormData(frmPqrs);
@@ -47,31 +47,33 @@ document.addEventListener('DOMContentLoaded', function () {
                         swal("", objData.msg , "error");
                     }
                 }
-                divLoading.style.display = "none";
+                //divLoading.style.display = "none";
                 return false;
             }
         },false);
     }
 
+    initMap();
+
 }, false);
  
-/* function initMap(){
-    let santamarta = { lat: 11.2084292, lng: -74.2237886 };
-    map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
-        center: santamarta,
-    })
-};
 
-function repMap($latitude, $longitude){
-    let santamarta = { lat: $latitude, lng: $longitude };
-    map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
-        center: santamarta,
-    })
-}; 
- */
- function initMap(latitude, longitude) {
+/* async function initMap(latitude, longitude) {
+    const { Map } = await google.maps.importLibrary("maps");
+    if(latitude === undefined || longitude === undefined)
+    {
+        latitude = 11.2084292;
+        longitude = -74.2237886;
+    }
+  
+    map = new Map(document.getElementById("map"), {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 8,
+    });
+  } */
+
+  function initMap(latitude, longitude) {
+    //alert('asasasaasas');
     if(latitude === undefined || longitude === undefined)
     {
         latitude = 11.2084292;
@@ -81,44 +83,15 @@ function repMap($latitude, $longitude){
     //alert(longitude);
     const myLatLng = { lat: latitude, lng: longitude };
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 18,
+      zoom: 16,
       center: new google.maps.LatLng(latitude, longitude),
       mapTypeId: google.maps.MapTypeId.ROADMAP
       //center: myLatLng,
     });
   
-/*     new google.maps.Marker({
+    new google.maps.Marker({
       position: new google.maps.LatLng(latitude, longitude),
       map,
       title: "Hello World!",
-    }); */
+    });
   }
-  
-  /* window.initMap = initMap;  */
-
-  // Initialize and add the map
-
-/* async function initMap() {
-  // The location of Uluru
-  const position = { lat: 11.2084292, lng: -74.2237886 };
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
-
-  // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
-    zoom: 18,
-    center: position,
-    mapId: "DEMO_MAP_ID",
-  });
-
-  // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerView({
-    map: map,
-    position: position,
-    title: "Uluru",
-  });
-}
- */
-initMap();
